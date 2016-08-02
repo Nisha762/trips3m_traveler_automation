@@ -1,6 +1,7 @@
 package com.auto.solution.TestInterpretor;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public interface ICompiler {
 
@@ -16,6 +17,10 @@ public interface ICompiler {
 	
 	public String getSubTestCaseInvockedInTestStep();
 	
-	public String getIterations();	
+	public String getIterations();
 	
-}
+	public String getConditionForConditionalTestStep();
+	
+	public ArrayList<Integer> parseAndGetTheListOfIterationIndexForSubTest(String iterationContent)throws Exception;
+	
+	}

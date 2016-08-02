@@ -1,11 +1,13 @@
 package com.auto.solution.TestInterpretor;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.auto.solution.Common.Property;
+import com.auto.solution.Common.Property.ERROR_MESSAGES;
 import com.auto.solution.Common.Property.STRATEGY_KEYWORD;
 import com.auto.solution.Common.ResourceManager;
 import com.auto.solution.TestLearn.*;
@@ -53,6 +55,22 @@ public class Compiler implements ICompiler{
 		
 	}
 	
+	@Override
+	public String getConditionForConditionalTestStep() {
+		String conditionAttachedToTestStep = "";
+		try{
+			p = Pattern.compile("(?<=@C | @c)[^;]+");
+			Matcher m = p.matcher(testStepDefenition);
+			if(m.find()){
+				conditionAttachedToTestStep = m.group();
+				conditionAttachedToTestStep = conditionAttachedToTestStep.trim();
+			}
+		}
+		catch(Exception e){
+			
+		}		
+		return conditionAttachedToTestStep;
+	}
 	@Override
 	public String getStepAction() throws FileNotFoundException {
 		String stepAction = "";
@@ -114,24 +132,6 @@ public class Compiler implements ICompiler{
 		return testData;
 	}
 
-	public String getStepCondition(){
-		String condition = "";
-		try{
-			p = Pattern.compile("(?<=@C | @c)[^;]+");
-			Matcher m = p.matcher(testStepDefenition);
-			if(m.find()){
-				condition =  m.group();
-				condition =  condition.trim();
-				condition = condition.replaceAll(" ", "");
-				condition = condition.toLowerCase();
-				
-			}
-		}catch(Exception e){
-			
-		}
-		return condition;
-	}
-	
 	@Override
 	public String getStrategyApplied() {
 		String strategy = "";
@@ -173,7 +173,7 @@ public class Compiler implements ICompiler{
 
 	@Override
 	/**
-	 * @author Rahul
+	 * 
 	 * @return : String in the form of "TestScenario:TestCaseID"
 	 **/
 	public String getSubTestCaseInvockedInTestStep() {
@@ -208,4 +208,57 @@ public class Compiler implements ICompiler{
 			}
 		return iteration;
 	}
+
+	@Override
+	public ArrayList<Integer> parseAndGetTheListOfIterationIndexForSubTest(String iterationContent) throws Exception{
+		
+		ArrayList<Integer> lstIteration = new ArrayList<Integer>();
+		
+		try{
+			if(iterationContent == ""){
+				return lstIteration;
+			}
+			if(!iterationContent.contains("{") || !iterationContent.contains("}")){
+				throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_ITERATION_CONTENT.getErrorMessage());
+			}
+			int openCurlyIndex = iterationContent.indexOf("{");
+			int closingCurlyIndex = iterationContent.lastIndexOf("}");
+			
+			String actualContent = iterationContent.substring(openCurlyIndex + 1, closingCurlyIndex);
+			
+			if(actualContent.contains(",")){
+			String[] iterationIndexes = actualContent.split(",");
+			
+			for (String index : iterationIndexes) {
+				if(!index.isEmpty()){
+				lstIteration.add(Integer.parseInt(index));}
+			}
+			}
+			else if(actualContent.contains("to")){
+				
+				String[] iterationRange = actualContent.split("to");
+				
+				int iterationIndexStart = Integer.parseInt(iterationRange[0].trim());
+				
+				int iterationIndexEnd = Integer.parseInt(iterationRange[1].trim());
+				
+				for(int iterationIndex = iterationIndexStart;iterationIndex <= iterationIndexEnd;iterationIndex++){
+					lstIteration.add(iterationIndex);
+				}
+				
+			}
+			else if(actualContent != ""){
+				lstIteration.add(Integer.parseInt(actualContent));
+			}
+		}
+		catch(Exception e){
+			throw e;
+		}
+		return lstIteration;
+	}
+
+
+	
+	
+
 }
