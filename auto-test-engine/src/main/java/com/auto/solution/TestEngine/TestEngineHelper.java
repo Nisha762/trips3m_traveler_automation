@@ -31,6 +31,9 @@ public class TestEngineHelper {
 		Property.DEBUG_MODE = Utility.getValueForKeyFromGlobalVarMap("execution.debugmode").trim().toLowerCase();
 		
 		Property.TEST_EXECUTION_GROUP  = Utility.getValueForKeyFromGlobalVarMap("execution.group").trim().toLowerCase();
+		
+		Property.Logger_Level = (Utility.getValueForKeyFromGlobalVarMap("execution.logger.level") == null ? "" : Utility.getValueForKeyFromGlobalVarMap("execution.logger.level").trim());
+		
 		}
 		catch(Exception e){
 		

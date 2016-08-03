@@ -13,6 +13,7 @@ import com.auto.solution.Common.*;
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
 import com.auto.solution.TestInterpretor.CompilerFactory;
 import com.auto.solution.TestInterpretor.ICompiler;
+import com.auto.solution.TestLogging.TestLogger;
 import com.auto.solution.TestManager.*;
 
 
@@ -37,16 +38,24 @@ public class TestEngine {
     public static ArrayList<String> TestCaseIDsForExecution = new ArrayList<String>();
     
     boolean IsWriteStep = false;
-
-    private ArrayList<ArrayList<String>> testStepsDetailsForATestCase = new ArrayList<ArrayList<String>>();
+    
+    private String testExecutionLogFileName;
+    
+	private ArrayList<ArrayList<String>> testStepsDetailsForATestCase = new ArrayList<ArrayList<String>>();
     
     private HashMap<String, ArrayList<ArrayList<String>>> testCasesWithTestStepDetails = new HashMap<String, ArrayList<ArrayList<String>>>();
+    
+    public static TestLogger logger = null;
     
     public TestEngine(TestEngineHelper engineHelper) {
 		this.engineHelper = engineHelper;
 	}
     
     private void ExecuteTestCase(String TestCaseIDToExecute,String testScenarioForTestCase, ArrayList<Integer> testIterationValueForTestCase,boolean isTestCaseInvockedAsSubTestCase) throws Exception{
+		
+    	boolean isCurrentTestCaseFailed = false;
+		
+    	String currentTestCaseRemarks = "";
     	
     	try{
 		 
@@ -61,6 +70,8 @@ public class TestEngine {
 			CompilerFactory factoryInstanceToGetCompilerForTestStep = new CompilerFactory(Property.STRATEGY_TO_USE_COMPILER,rManager);
 			
 			ICompiler testStepCompiler = factoryInstanceToGetCompilerForTestStep.getCompiler();
+			
+			ArrayList<String> listOfVariableUsedForSpecifyingConditionalTestStep = new ArrayList<String>();
 			
 			
 			
@@ -82,8 +93,15 @@ public class TestEngine {
 				
 				String testData = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testStepCompiler.getTestData());
 				
+				String conditionSpecifiedForTestStep = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testStepCompiler.getConditionForConditionalTestStep());
+				
+				Boolean executeTestStep = Utility.decideToExecuteTestStepOnTheBasisOfConditionSpecifiedForTestStep(conditionSpecifiedForTestStep, listOfVariableUsedForSpecifyingConditionalTestStep); 
+				
 				String  subTestCaseInvocked = testStepCompiler.getSubTestCaseInvockedInTestStep();				
 				
+				if(!executeTestStep){
+					continue;
+				}
 				if(subTestCaseInvocked != ""){
 					
 					String testSuiteForSubTestCase = "";
@@ -100,7 +118,18 @@ public class TestEngine {
 						testSuiteForSubTestCase = parsedTestCaseDetailsInCurrentTestStep[0].trim();
 						
 						subTestCaseID = parsedTestCaseDetailsInCurrentTestStep[1].trim();
+						
+						/*
+						 * parse the content to populate the iterationList.
+						 * So Key points - 
+						 * Main test case must mention the test data iterations in curly braces in sequential order.
+						 * For example - If we want to invoke a test case having 5 test data (D1,D2,D3,D4,D5). Then mention @I {1,2,1,6,5};
+						 *  where numbers denotes the row number from where the data would be picked.
+						*/
+						
+						String iterationContentsSpecifiedForSubTestCase =  Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testStepCompiler.getIterations()); //Collect the iteration content from main test case.
 												
+						listOfIterationsForSubTestCaseInvocked = testStepCompiler.parseAndGetTheListOfIterationIndexForSubTest(iterationContentsSpecifiedForSubTestCase);
 					}
 					catch(ArrayIndexOutOfBoundsException ae){
 						throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTCASE_TO_INVOKE.getErrorMessage());
@@ -124,9 +153,67 @@ public class TestEngine {
 					}
 					
 				}
+					
+				/*
+				 * Prepare Test Data.
+				 */
+				List<Integer> lstOfIterationIndexes = new ArrayList<Integer>();
+				
+				String IterationContentSpecifiedForTestStep = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testStepCompiler.getIterations());
+				
+				lstOfIterationIndexes = testStepCompiler.parseAndGetTheListOfIterationIndexForSubTest(IterationContentSpecifiedForTestStep);
+				
+				//Get test data
+				if(testData == ""){
+									
+					/*If Iteration is empty that means take the data from first row only (ie index = 1) .
+					 * If iteration has only single value take the data from specified row.
+					 * If iteration is specified in range like [1 to 5] then iterate that particular test step with different test data taken from the rows in range sequentially.
+					*/
+					if(lstOfIterationIndexes.isEmpty()){
+						lstOfIterationIndexes.add(1);
+					}
+					
+					
+					for (Integer rowIndexInTestDataRepository : lstOfIterationIndexes) {
+						
+						Utility.setKeyValueToGlobalVarMap("iteration_index", String.valueOf(rowIndexInTestDataRepository));
+						
+						testData = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testExecutionManager.fetchTestDataRepositoryContent(rowIndexInTestDataRepository.toString() + ":" + testObjectToBeUsedForTestStep));
+						
+						if(testData != "" && testIterationValueForTestCase != null && !testIterationValueForTestCase.isEmpty()){
+							// IF user mentioned the iteration like {2,3,4} then test data would be picked (in reusable test case) from specified rows ie. from 2nd row for first test data and so on.
+							
+							String rowIndexTestData = testIterationValueForTestCase.get(0).toString();
+							
+							testData = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testExecutionManager.fetchTestDataRepositoryContent(rowIndexTestData + ":" + testObjectToBeUsedForTestStep));
+						}
+						
+					}
+					
+				}
+				else{
+					if(!lstOfIterationIndexes.isEmpty()){
+						for(Integer iterationIndex : lstOfIterationIndexes){
+							Utility.setKeyValueToGlobalVarMap("iteration_index", String.valueOf(iterationIndex));
+							}
+					}
+					}
+				
+				if(conditionSpecifiedForTestStep.contains(Property.CONDITIONAL_KEYWORD_SEPERATOR)){
+					
+					String[] conditionalVariables = conditionSpecifiedForTestStep.split("\\" + Property.CONDITIONAL_KEYWORD_SEPERATOR);
+					
+					if(Property.StepStatus == Property.PASS)
+							listOfVariableUsedForSpecifyingConditionalTestStep.add(conditionalVariables[0].trim());
+					else
+							listOfVariableUsedForSpecifyingConditionalTestStep.add(conditionalVariables[1].trim());
+					
+					Property.StepStatus = Property.PASS;
+				}
 				
 				if(Property.StepStatus == Property.FAIL) { 
-					IsAnyTestStepFailedDuringExecution = true; 
+					IsAnyTestStepFailedDuringExecution = true; isCurrentTestCaseFailed = true; currentTestCaseRemarks = Property.Remarks;
 					}				
 				//Prepare step execution detail list.
 				
@@ -138,13 +225,21 @@ public class TestEngine {
 				
 				lstTestStepExecutionDetails.add(testData);
 				
-				lstTestStepExecutionDetails.add(testStepAction);
-				
 				lstTestStepExecutionDetails.add(Property.Remarks);
 				
 				lstTestStepExecutionDetails.add(Property.StepDescription);
-		
+				
+				lstTestStepExecutionDetails.add(Property.StepSnapShot);
+				
+				if(!testStepAction.equals(Property.INTERNAL_TESTSTEP_KEYWORD))
 				testStepsDetailsForATestCase.add(lstTestStepExecutionDetails);				
+				
+				String teststep_details = Utility.getTestStepDetailsString(testStepAction, Property.StepStatus, Property.Remarks, testObjectToBeUsedForTestStep, testData);
+				
+				if((!testStepAction.equals(Property.INTERNAL_TESTSTEP_KEYWORD)))
+				{ logger.INFO(teststep_details);}
+				
+				//loggerForTestExecution.writeStepLog(Property.StepDescription,testStepAction, Property.StepStatus,Property.Remarks,testObjectToBeUsedForTestStep,testData,(!testStepAction.equals(Property.INTERNAL_TESTSTEP_KEYWORD)));
 				
 				if(Property.LIST_STRATEGY_KEYWORD.contains(Property.STRATEGY_KEYWORD.CRITICAL.toString()) && Property.StepStatus.equals(Property.FAIL)){
 					return;
@@ -164,7 +259,7 @@ public class TestEngine {
 		try{
 			
 			rManager = new ResourceManager(projectBasePath);
-			
+				
 			utils = new Utility(rManager);
 			
 			utils.loadPropertiesDefinedForExecution();
@@ -180,8 +275,16 @@ public class TestEngine {
 			IsWriteStep = true;	
 			
 			engineHelper.setConfigurationInputsToSharedObject();
+			
+			testExecutionLogFileName = Property.PROJECT_NAME + "_" + Utility.getCurrentTimeStampInAlphaNumericFormat();
+			
+			logger = TestLogger.getInstance(rManager.getTestExecutionLogFileLocation().replace("{0}", testExecutionLogFileName + ".txt"));
+			
+			logger.setLogLevel(Property.Logger_Level);
+			
 		}
 		catch (Exception e) {
+			logger.ERROR(e.getMessage());
 			//loggerForTestExecution.logMessageConsole(e.getMessage());
 		}
 	}
@@ -199,14 +302,18 @@ public class TestEngine {
 		HashMap<String, Set<String>> filteredTestExecutionHierarchy = testManager.getTestSuiteAndTestCaseHierarchyForExecution();
 		
 		List<String> testScenarioListInExecutionGroup = new ArrayList<String>();			
-		
 		 
 		testScenarioListInExecutionGroup.addAll(filteredTestExecutionHierarchy.keySet());
+		
+		logger.INFO("Execution logs [" + Property.PROJECT_NAME + "] at " + Utility.getCurrentTimeStampInAlphaNumericFormat() + ": \n");
+		
+		//loggerForTestExecution.prepareLoggingHeaderForTestexecution();
 				 
 		if(testScenarioListInExecutionGroup.size() == 0){
 			  
-				 ERROR_MESSAGES.NO_TEST_SCENARIOS_In_TEST_GROUP.getErrorMessage().replace("{TEST_GROUP}", Property.TEST_EXECUTION_GROUP);
+				String message = ERROR_MESSAGES.NO_TEST_SCENARIOS_In_TEST_GROUP.getErrorMessage().replace("{TEST_GROUP}", Property.TEST_EXECUTION_GROUP);
 			  
+				logger.ERROR(message);
 		}
 		  Property.ExecutionStartTime = Utility.getCurrentDateAndTimeInStringFormat();
 		  
@@ -214,13 +321,18 @@ public class TestEngine {
 					
 			Property.CURRENT_TESTSUITE = testScenarioToExecute;
 			
+			logger.INFO("TestSuite : " + testScenarioToExecute + "\n");
+			logger.INFO("***********************************************************");
 			
+			//loggerForTestExecution.logHeaderForTestSuite(testScenarioToExecute);
 			
 			Set<String> listOfTestCasesInTestSuite = filteredTestExecutionHierarchy.get(testScenarioToExecute);
 			
 			if(listOfTestCasesInTestSuite == null){
 				
-			
+				//loggerForTestExecution.logMessageConsole(ERROR_MESSAGES.ER_IN_SPECIFYING_TEST_SCENARIO.getErrorMessage().replace("{$TESTSCENARIONAME}", testScenarioToExecute));
+				logger.ERROR(ERROR_MESSAGES.ER_IN_SPECIFYING_TEST_SCENARIO.getErrorMessage().replace("{$TESTSCENARIONAME}", testScenarioToExecute));
+				
 				IsAnyTestStepFailedDuringExecution = true;
 				
 				continue;				
@@ -233,6 +345,11 @@ public class TestEngine {
 				String CurrentTestCaseID = testCase;
 				
 				Property.CURRENT_TESTCASE = CurrentTestCaseID;
+				
+				logger.INFO("TestCase : " + testCase + "\n");
+				//loggerForTestExecution.logTestCaseHeader(testCase);
+				
+				logger.INFO("Execution start for " + CurrentTestCaseID);
 				
 				//loggerForTestExecution.logMessageConsole("Execution start for " + CurrentTestCaseID);
 				
@@ -248,8 +365,7 @@ public class TestEngine {
 				
 				testCasesWithTestStepDetails.put(CurrentTestCaseID, testStepsDetailsForATestCase);
 				
-				
-				
+				logger.INFO("Execution ends for " + CurrentTestCaseID);
 				//loggerForTestExecution.logMessageConsole("Execution ends for " + CurrentTestCaseID);
 			}	
 			String timeTakenByTestSute = Utility.haltAndGetTotalTimeRecordedInStopWatch(watchTestSuite);
@@ -258,13 +374,16 @@ public class TestEngine {
 		}
 		
 		Property.ExecutionEndTime = Utility.getCurrentDateAndTimeInStringFormat();
-		
 		}
 		catch(Exception e){
 			IsAnyTestStepFailedDuringExecution = true;
 			throw e;			
 		}
+		
+		
 	}	
+	
+	
 	
 	public boolean isAnyTestStepFailedDuringTestExecution(){
 		return this.IsAnyTestStepFailedDuringExecution;

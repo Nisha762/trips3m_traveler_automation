@@ -28,6 +28,10 @@ public class ResourceManager {
 		String chromedriver_location = this.resourceBasePath + FileSeperator + Property.CHROME_EXECUTABLE;
 		return chromedriver_location;
 	}
+	public String getTestExecutionLogFileLocation(){
+		String logFileLocation = (this.targetBasePath + FileSeperator + "Execution_Log" + FileSeperator + "{0}").replace(" ", "");
+		return logFileLocation; 
+	}
 	
 	public String getUIAutoamtionPropertyFileLocation(){
 		String uiAutomationPropertyFileLocation = this.resourceBasePath + FileSeperator + Property.UIAutomationPropertyFileName;

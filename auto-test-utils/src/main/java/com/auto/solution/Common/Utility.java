@@ -43,6 +43,18 @@ public class Utility {
 	}
 	
 	
+	public static String getTestStepDetailsString(String testStepAction,String Status,String Remarks,String testObject,String testData){
+		
+		String teststep_details = Property.TEST_STEP_LOG_ENTRY.replace("{TEST_STEP_NAME}", Property.StepDescription);
+		teststep_details = teststep_details.replace("{TEST_STEP_ACTION}", testStepAction);
+		teststep_details = teststep_details.replace("{TEST_OBJECT}", testObject);
+		teststep_details = teststep_details.replace("{TEST_DATA}", testData);
+		teststep_details = teststep_details.replace("{STATUS}", Property.StepStatus);
+		teststep_details = teststep_details.replace("{REMARKS}", Property.Remarks);
+		teststep_details = teststep_details.replace("{EXECUTION_TIME}", Property.StepExecutionTime);
+		
+		return teststep_details;
+	}
 	
 	public static String getCurrentTimeStampInAlphaNumericFormat(){
 		Date currentDate = new Date();
@@ -90,9 +102,9 @@ public class Utility {
 	 */
 	public static void populateGlobalVarMapWithPropertiesDefinedInPropertiesFile() throws Exception {
 		try {
-			Enumeration enumOfPropertyKeys = testDrivingPropertyFile.keys();
+			Enumeration<Object> enumOfPropertyKeys = testDrivingPropertyFile.keys();
 			
-			Set setOfKeysInPropertyFile = testDrivingPropertyFile.keySet();
+			Set<Object> setOfKeysInPropertyFile = testDrivingPropertyFile.keySet();
 			
 			Object[] keys = setOfKeysInPropertyFile.toArray();
 			
@@ -238,7 +250,7 @@ public class Utility {
 	public static void storeSystemPropertiesToGlobalVarMap(Properties systemProperties){		
 		
 		try {
-			 Set keySetFromSystemProperties = systemProperties.keySet();
+			 Set<Object> keySetFromSystemProperties = systemProperties.keySet();
 						 
 			 Object[] systemPropertiesKeysArray = keySetFromSystemProperties.toArray();			 
 			 
@@ -273,16 +285,20 @@ public class Utility {
 		return testGroupMap;
 		
 	}
-	public static Boolean decideToExecuteTestStepOnTheBasisOfConditionSpecifiedForTestStep(String conditionsSpecified, ArrayList<String> variablesUsed){
+public static Boolean decideToExecuteTestStepOnTheBasisOfConditionSpecifiedForTestStep(String conditionsSpecified, ArrayList<String> variablesUsed){
 		
-		
+		conditionsSpecified = conditionsSpecified.trim();
+		if(conditionsSpecified == "" || conditionsSpecified.contains(Property.CONDITIONAL_KEYWORD_SEPERATOR)){
+			return true;
+		}
+		else{
 			if(variablesUsed.contains(conditionsSpecified)){
 				return true;
 			}
 			else{
 				return false;
 			}
-		
+		}		
 	}
 	
 	public static String getAbsolutePath(String pathName){
@@ -376,6 +392,7 @@ public class Utility {
     			}
     			webPageUrls.add(URL);
     		}
+    		br.close();
     	}
     	catch(Exception e){
     		throw new Exception(ERROR_MESSAGES.ERR_IN_READING_URL_SOURCE.getErrorMessage() + "--" + e.getMessage());
