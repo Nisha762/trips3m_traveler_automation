@@ -27,8 +27,9 @@
 		<module>auto-test-utils</module>
         <module>auto-test-interpretor</module>       
         <module>auto-test-manager</module>
+		<module>auto-test-logging</module>  
         <module>auto-test-engine</module>
-		<module>auto-test-executor</module>   
+		<module>auto-test-executor</module>    
    </modules>
    
    <properties>

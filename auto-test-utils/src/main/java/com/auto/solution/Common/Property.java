@@ -10,13 +10,23 @@ public class Property {
 	
 	public static String ObjectRepositoryFileName = "ObjectRepository.xls";
 	
+	public static String RECOVERY_FILENAME = "recovery.properties";
+	
 	public static String LEARNING_FILENAME = "learnCompiler.properties";
 	
 	public static String TEST_GROUP_FILENAME = "groups.properties";
+
+	public static String PROPERTY_FILE_SUMMARY = "summary.properties";
+	
+	public static String DB_CONNECT_FLAG_KEY = "dbconnectionrequired";
+	
+	public static String REPORTXSLFILE = "Report.xsl"; 
 	
 	public static String TRUE = "true";
 	
 	public static String TEST_STEP_ID = "";
+	
+	public static String XMLFileName = "ExecutionDetails";
 	
 	public static String CURRENT_TEST_GROUP = "";
 	
@@ -30,9 +40,41 @@ public class Property {
 	
 	public static String TEST_DATA_FILE = "TestData";
 	
+	public static String APP_PLATFORM_VERSION = "";
+	
+	public static String APP_PLATFORM_NAME = "";
+	
+	public static String DEVICE_NAME = "";
+	
+	public static String DEVICE_UDID = "";
+	
+	public static String APP = "";
+	
+	public static String APP_ACTIVITY = "";
+	
+	public static String APP_PACKAGE = "";
+	
+	public static String DRIVER_CAPABILITY_KEYWORD = "drivercapability";
+	
+	public static String TEST_MANAGEMENT_URL = "";
+	
+	public static String CONDITIONAL_KEYWORD_SEPERATOR = "|";
+	
+	public static String TEST_MANAGEMENT_KEY = "";
+	
 	public static String CHROME_EXECUTABLE = "chromedriver.exe";
-		
+	
+	public static String CHROME_EXECUTABLE_SH = "chromedriver";
+
+	public static String PHANTOM_EXECUTABLE = "phantomjs.exe";
+	
+	public static String INTERNET_EXPLORER_KEYWORD = "ie";
+	
+	public static String FIREFOX_KEYWORD = "firefox";
+	
 	public static String CHROME_KEYWORD = "chrome";
+	
+	public static String PHANTOM_KEYWORD = "phantom";
 	
 	public static String DEBUG_MODE = "";
 	
@@ -60,13 +102,23 @@ public class Property {
 	
 	public static String STRATEGY_TO_USE_COMPILER = "Simple";
 	
+	public static String BDDFileQuery = "select * from [Steps$]";
+	
 	public static String TESTOBJECT_KEYWORD_IN_ObjectRepository = "testobject";
+	
+	public static String Firefox_Keyword_In_ObjectRepo = "ff";
+	
+	public static String IE_Keyword_In_ObjectRepo = "ie";
 	
 	public static String Chrome_Keyword_In_ObjectRepo = "chrome";
 	
 	public static String Locating_Strategy_Keyword = "locatingStrategy";
 	
 	public static String TestObject_InFrame_Keyword = "InFrame";
+	
+	public static String TestObject_Filter_Keyword = "TestObjectFilter";
+	
+	public static String Frame_Details_Seperator = ",";
 	
 	public static String Locating_Value_Keyword_In_OR = "location";
 	
@@ -83,6 +135,8 @@ public class Property {
 	
 	public static String JDBCConnectionStringTestData = "jdbc:odbc:Driver={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};DBQ={0};READONLY=TRUE";
 	
+	public static String JDBCConnectionStringBDDFile = "jdbc:odbc:Driver={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};DBQ={0};READONLY=TRUE";
+	
 	public static String IsSauceLabExecution = "false";
 	
 	public static String IsRemoteExecution = "false";
@@ -94,6 +148,16 @@ public class Property {
 	public static String BrowserName = "firefox";
 	
 	public static String TestSuite = "";
+	
+	public static String RECOVERY_OBJECT_NAME_KEYWORD = "RecoveryObjectName";
+	
+	public static String RECOVERY_OBJECT_LOCATING_STRATEGY_KEYWORD = "LocatingStrategy";
+	
+	public static String RECOVERY_OBJECT_LOCATION_KEYWORD = "Location";
+	
+	public static String RECOVERY_ACTION_KEYWORD  = "RecoveryAction";
+	
+	public static String RECOVERY_PRIORITY_KEYWORD = "RecoveryPriority";
 	
 	public static HashMap<String, String> globalVarMap = new HashMap<String, String>();
 	
@@ -115,11 +179,23 @@ public class Property {
 	
 	public static String TESTDATA_SEPERATOR = "#";
 	
+	public static String COOKIE_SEPERATOR = "###";
+	
+	public static String BROWSER_COOKIES = "";
+	
+	public static String COOKIE_VALUE = "cookieValue";
+	
+	public static String COOKIE_DOMAIN_NAME = "cookieDomainName";
+	
 	public static String Pending = "pending";
 	
 	public static String Verified = "verified";
 	
+	public static String BROWSER_COOKIE_TRIAL = "";
+	
 	public static String StepDescription = "";
+	
+	public static String StepSnapShot = "";
 	
 	public static String SyncTimeOut = "";
 	
@@ -135,12 +211,54 @@ public class Property {
 	
 	public static String DESKTOP_WEB_TESTDRIVER_KEYWORD = "desktop";
 	
+	public static String MOBILE_APP_ANDRIOD_TESTDRIVER_KEYWORD = "andriod";
+	
+	public static String MOBILE_WEB_TESTDRIVER_KEYWORD = "mobile";
+	
+	public static String MOBILE_IOS_TESTDRIVER_KEYWORD = "ios";
+	
 	public static String EXECUTION_TEST_DRIVER = "";
 	
 	public static String INTERNAL_TESTSTEP_KEYWORD = "internal-stepsaction";
 	
+	public static String Logger_Level = "";
+	
+	public static String Logger_Level_INFO = "info";
+	
+	public static String Logger_Level_WARN = "warn";
+	
+	public static String Logger_Level_ERROR = "error";
+	
+	public static String Logger_Level_ALL = "all";
+	
+	public static String Logger_Level_DEBUG = "debug";
+	
+	public static String Logger_Level_OFF = "off";
+	
+	public static String Logger_Level_FATAL = "fatal";
+	
+	public static String Logger_Log4j_Properties = "log4j.properties";
+	
+	public static String Logger_LogFile_Name = "log4j-application.log";
+	
+	public static String TEST_STEP_LOG_ENTRY = "------------------------------------------------------------------------------------\n" + 
+	 "Test Step Description : {TEST_STEP_NAME} \n" + "Test Step Action : {TEST_STEP_ACTION} \n" + "Test object : {TEST_OBJECT} \n" + 
+	 "Test Data used -- '{TEST_DATA}' \n" + "Status : {STATUS} \n" + "Remarks : {REMARKS} \n" + "Execution Time : {EXECUTION_TIME} \n" +
+	 "------------------------------------------------------------------------------------\n";
+	
+	
 	public static ArrayList<String > LIST_STRATEGY_KEYWORD = new ArrayList<String>();
 	
+	public static enum FILTERS{
+		IS_CLICKABLE("displayed");
+		private String filter;
+		private FILTERS(String filter){
+			this.filter = filter;
+		}
+		public String getFilter(){
+			return this.filter;
+		}
+	}
 	public static enum ERROR_MESSAGES{
 		ER_SPECIFY_BROWSER ("Incorrect browser specification."),
 		ER_GET_TESTOBJECT("Failed to get the test object, kindly reverify the object locators."),
@@ -217,8 +335,14 @@ public class Property {
 		}
 	}
 	public static enum STRATEGY_KEYWORD{
+		IGNORE_SPACE("ignorespace"),
 		IGNORE_STEP( "skip"),
-		CRITICAL("critical");
+		IGNORE_CASE("ignorecase"),
+		PARTIAL_MATCH("partialmatch"),
+		EXACT_MATCH("exactmatch"),
+		OPTIONAL("optional"),
+		CRITICAL("critical"),
+		NOWAIT("nowait");
 		
 		private String strategy;
 		private STRATEGY_KEYWORD(String strategyKeyword){
