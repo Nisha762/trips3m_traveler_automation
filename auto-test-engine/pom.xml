@@ -51,6 +51,11 @@
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
+		    <groupId>org.traveltriangle</groupId>
+			<artifactId>auto_test_drivers</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.traveltriangle</groupId>
 			<artifactId>auto_test_logging</artifactId>
 			<version>1.0.0</version>

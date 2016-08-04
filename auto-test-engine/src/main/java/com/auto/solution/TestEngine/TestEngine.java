@@ -11,6 +11,7 @@ import org.dbunit.dataset.ITable;
 
 import com.auto.solution.Common.*;
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
+import com.auto.solution.TestDrivers.TestSimulator;
 import com.auto.solution.TestInterpretor.CompilerFactory;
 import com.auto.solution.TestInterpretor.ICompiler;
 import com.auto.solution.TestLogging.TestLogger;
@@ -39,10 +40,12 @@ public class TestEngine {
     
     boolean IsWriteStep = false;
     
+    public TestSimulator objTestSimulator;
+    
     private String testExecutionLogFileName;
     
 	private ArrayList<ArrayList<String>> testStepsDetailsForATestCase = new ArrayList<ArrayList<String>>();
-    
+   
     private HashMap<String, ArrayList<ArrayList<String>>> testCasesWithTestStepDetails = new HashMap<String, ArrayList<ArrayList<String>>>();
     
     public static TestLogger logger = null;
@@ -92,6 +95,8 @@ public class TestEngine {
 				String testStepAction = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testStepCompiler.getStepAction());
 				
 				String testData = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testStepCompiler.getTestData());
+				
+				String options = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testStepCompiler.getStrategyApplied());
 				
 				String conditionSpecifiedForTestStep = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testStepCompiler.getConditionForConditionalTestStep());
 				
@@ -153,6 +158,8 @@ public class TestEngine {
 					}
 					
 				}
+				
+				objTestSimulator.enableTestDriver(Property.EXECUTION_TEST_DRIVER);
 					
 				/*
 				 * Prepare Test Data.
@@ -189,6 +196,7 @@ public class TestEngine {
 							testData = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(testExecutionManager.fetchTestDataRepositoryContent(rowIndexTestData + ":" + testObjectToBeUsedForTestStep));
 						}
 						
+						objTestSimulator.simulateTestStep(testStepAction, testData, testObjectToBeUsedForTestStep, options,(testStepAction.equals(Property.INTERNAL_TESTSTEP_KEYWORD)));
 					}
 					
 				}
@@ -196,9 +204,11 @@ public class TestEngine {
 					if(!lstOfIterationIndexes.isEmpty()){
 						for(Integer iterationIndex : lstOfIterationIndexes){
 							Utility.setKeyValueToGlobalVarMap("iteration_index", String.valueOf(iterationIndex));
-							}
+							objTestSimulator.simulateTestStep(testStepAction, testData, testObjectToBeUsedForTestStep, options,(testStepAction.equals(Property.INTERNAL_TESTSTEP_KEYWORD)));
+						}
 					}
-					}
+					objTestSimulator.simulateTestStep(testStepAction, testData, testObjectToBeUsedForTestStep, options,(testStepAction.equals(Property.INTERNAL_TESTSTEP_KEYWORD)));
+				}
 				
 				if(conditionSpecifiedForTestStep.contains(Property.CONDITIONAL_KEYWORD_SEPERATOR)){
 					
@@ -259,7 +269,7 @@ public class TestEngine {
 		try{
 			
 			rManager = new ResourceManager(projectBasePath);
-				
+		
 			utils = new Utility(rManager);
 			
 			utils.loadPropertiesDefinedForExecution();
@@ -281,7 +291,6 @@ public class TestEngine {
 			logger = TestLogger.getInstance(rManager.getTestExecutionLogFileLocation().replace("{0}", testExecutionLogFileName + ".txt"));
 			
 			logger.setLogLevel(Property.Logger_Level);
-			
 		}
 		catch (Exception e) {
 			logger.ERROR(e.getMessage());
@@ -299,8 +308,10 @@ public class TestEngine {
 		
 		testManager = testManagerFactoryInstance.getTestManager(true);
 		
-		HashMap<String, Set<String>> filteredTestExecutionHierarchy = testManager.getTestSuiteAndTestCaseHierarchyForExecution();
+		objTestSimulator = new TestSimulator(rManager);
 		
+		HashMap<String, Set<String>> filteredTestExecutionHierarchy = testManager.getTestSuiteAndTestCaseHierarchyForExecution();
+			
 		List<String> testScenarioListInExecutionGroup = new ArrayList<String>();			
 		 
 		testScenarioListInExecutionGroup.addAll(filteredTestExecutionHierarchy.keySet());
@@ -365,6 +376,12 @@ public class TestEngine {
 				
 				testCasesWithTestStepDetails.put(CurrentTestCaseID, testStepsDetailsForATestCase);
 				
+				try{
+				objTestSimulator.simulateTestStep("shutdown", "", "", "",false);
+				}
+				catch(Exception e){					
+				}
+				
 				logger.INFO("Execution ends for " + CurrentTestCaseID);
 				//loggerForTestExecution.logMessageConsole("Execution ends for " + CurrentTestCaseID);
 			}	
@@ -382,8 +399,7 @@ public class TestEngine {
 		
 		
 	}	
-	
-	
+
 	
 	public boolean isAnyTestStepFailedDuringTestExecution(){
 		return this.IsAnyTestStepFailedDuringExecution;
