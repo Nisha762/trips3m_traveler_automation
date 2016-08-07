@@ -45,7 +45,7 @@ public class TestEngine {
     private String testExecutionLogFileName;
     
 	private ArrayList<ArrayList<String>> testStepsDetailsForATestCase = new ArrayList<ArrayList<String>>();
-   
+    
     private HashMap<String, ArrayList<ArrayList<String>>> testCasesWithTestStepDetails = new HashMap<String, ArrayList<ArrayList<String>>>();
     
     public static TestLogger logger = null;
@@ -159,8 +159,12 @@ public class TestEngine {
 					
 				}
 				
+				HashMap<String, String> objectDefenition = testExecutionManager.getActualObjectDefination(testObjectToBeUsedForTestStep);
+				
 				objTestSimulator.enableTestDriver(Property.EXECUTION_TEST_DRIVER);
-					
+				
+				objTestSimulator.setTestObjectInfo(objectDefenition);
+				
 				/*
 				 * Prepare Test Data.
 				 */
@@ -269,7 +273,9 @@ public class TestEngine {
 		try{
 			
 			rManager = new ResourceManager(projectBasePath);
-		
+			
+			engineHelper.updateTargetAndResourcesIfProvided(rManager);
+			
 			utils = new Utility(rManager);
 			
 			utils.loadPropertiesDefinedForExecution();
@@ -291,6 +297,7 @@ public class TestEngine {
 			logger = TestLogger.getInstance(rManager.getTestExecutionLogFileLocation().replace("{0}", testExecutionLogFileName + ".txt"));
 			
 			logger.setLogLevel(Property.Logger_Level);
+			
 		}
 		catch (Exception e) {
 			logger.ERROR(e.getMessage());
@@ -311,7 +318,7 @@ public class TestEngine {
 		objTestSimulator = new TestSimulator(rManager);
 		
 		HashMap<String, Set<String>> filteredTestExecutionHierarchy = testManager.getTestSuiteAndTestCaseHierarchyForExecution();
-			
+		
 		List<String> testScenarioListInExecutionGroup = new ArrayList<String>();			
 		 
 		testScenarioListInExecutionGroup.addAll(filteredTestExecutionHierarchy.keySet());
@@ -391,15 +398,13 @@ public class TestEngine {
 		}
 		
 		Property.ExecutionEndTime = Utility.getCurrentDateAndTimeInStringFormat();
+		
 		}
 		catch(Exception e){
 			IsAnyTestStepFailedDuringExecution = true;
 			throw e;			
 		}
-		
-		
 	}	
-
 	
 	public boolean isAnyTestStepFailedDuringTestExecution(){
 		return this.IsAnyTestStepFailedDuringExecution;

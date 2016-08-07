@@ -14,6 +14,7 @@ public class ResourceManager {
 		this.projectBasePath = basePath;
 		this.resourceBasePath = basePath + FileSeperator + "src" + FileSeperator +"main"+ FileSeperator +"resources";
 		this.targetBasePath = basePath + FileSeperator + "target";
+		
 	}
 	
 	public void setTargetBaseLocationRelativeToProjectBase(String targetLocation){

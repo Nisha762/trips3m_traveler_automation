@@ -1,7 +1,6 @@
 package com.auto.solution.Common;
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,13 +12,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.FileImageOutputStream;
 
 import org.apache.commons.lang.time.StopWatch;
 
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
+import com.auto.solution.Common.Property.STRATEGY_KEYWORD;
 
 public class Utility {
 		
@@ -41,7 +47,6 @@ public class Utility {
 			throw e;
 		}
 	}
-	
 	
 	public static String getTestStepDetailsString(String testStepAction,String Status,String Remarks,String testObject,String testData){
 		
@@ -114,9 +119,9 @@ public class Utility {
 				
 				String element = (String) enumOfPropertyKeys.nextElement();	
 				String propertyKey = keys[indexOfKeysInPropertyFile].toString();
-				
-				propertyKey = propertyKey.toLowerCase();
-				
+				if(!propertyKey.contains(Property.DRIVER_CAPABILITY_KEYWORD)){
+					propertyKey = propertyKey.toLowerCase();
+				}
 				String propertyValueForKey = testDrivingPropertyFile.getProperty(element);
 				Property.globalVarMap.put(propertyKey,propertyValueForKey);
 				indexOfKeysInPropertyFile++;
@@ -135,9 +140,11 @@ public class Utility {
 
 	public static void setKeyValueToGlobalVarMap(String Key, String Value) throws Exception {
 		try {
+			if(!Key.contains(Property.DRIVER_CAPABILITY_KEYWORD)){
 				Key = Key.toLowerCase();
+				}
 			
-				Property.globalVarMap.put(Key, Value);
+			Property.globalVarMap.put(Key, Value);
 			
 		} catch (Exception e) {
 			throw e;
@@ -166,9 +173,9 @@ public class Utility {
 
 	public static String getValueForKeyFromGlobalVarMap(String Key){
 		try {
-			
+			if(!Key.contains(Property.DRIVER_CAPABILITY_KEYWORD)){
 			Key = Key.toLowerCase();
-			
+			}
 			return Property.globalVarMap.get(Key);
 			
 		} catch (Exception e) {
@@ -179,8 +186,22 @@ public class Utility {
 	public static boolean matchContentsBasedOnStrategyDefinedForTestStep(String ExpectedValue,
 			String ActualValue) {
 		
+		if(Property.LIST_STRATEGY_KEYWORD.contains(Property.STRATEGY_KEYWORD.IGNORE_SPACE.toString())){
+			/*ExpectedValue = ExpectedValue.replace(" ", "");
+			ActualValue = ActualValue.replace(" ", "");*/
+			ExpectedValue = ExpectedValue.replaceAll("[\\s\\t\\n\\r]","");
+			ActualValue = ActualValue.replaceAll("[\\s\\t\\n\\r]","");
+		}
+		if(Property.LIST_STRATEGY_KEYWORD.contains(Property.STRATEGY_KEYWORD.IGNORE_CASE.toString())){
+			ExpectedValue = ExpectedValue.toLowerCase();
+			ActualValue = ActualValue.toLowerCase();
+		}
+		if(!Property.LIST_STRATEGY_KEYWORD.contains(STRATEGY_KEYWORD.PARTIAL_MATCH.toString()) && Property.LIST_STRATEGY_KEYWORD.contains(STRATEGY_KEYWORD.EXACT_MATCH.toString())){
+			return ActualValue.equals(ExpectedValue);
+		}
+		else {
 			return ActualValue.contains(ExpectedValue);
-		
+		}
 	}
 
 	
@@ -285,7 +306,7 @@ public class Utility {
 		return testGroupMap;
 		
 	}
-public static Boolean decideToExecuteTestStepOnTheBasisOfConditionSpecifiedForTestStep(String conditionsSpecified, ArrayList<String> variablesUsed){
+	public static Boolean decideToExecuteTestStepOnTheBasisOfConditionSpecifiedForTestStep(String conditionsSpecified, ArrayList<String> variablesUsed){
 		
 		conditionsSpecified = conditionsSpecified.trim();
 		if(conditionsSpecified == "" || conditionsSpecified.contains(Property.CONDITIONAL_KEYWORD_SEPERATOR)){
@@ -312,29 +333,101 @@ public static Boolean decideToExecuteTestStepOnTheBasisOfConditionSpecifiedForTe
 		return file.getAbsolutePath();
 	}
 	
-	public static String executeJava(String javaSnippet) throws Exception{
+    public static boolean assertOnInputValue(String testData) throws Exception{
+   	 boolean bFlag = false;
+   	 String objActual = null;
+   	 String objExpected = null;
+	 String delimeter = null;
+		 if(testData.contains("==")){
+	    	 delimeter = "==";
+		 }    		 
+		 else if(testData.contains("!=")){
+			 delimeter = "!=";
+		 }
+		 else if(testData.contains("=")){
+			delimeter = "=";
+		 }
+		 else if(testData.contains("IS_NOT_NULL")){
+			 delimeter = "IS_NOT_NULL";
+		 }
+		 else if(testData.contains(">")){
+			 delimeter = ">";
+		 }
+		 else if(testData.contains("<")){
+			 delimeter = "<";
+		 }
+		 else
+			 throw new Exception(Property.ERROR_MESSAGES.ERR_INCORRECT_COMPARISION_STRATEGY.getErrorMessage().replace("{ACTUAL_STRING}", objActual));
+			
+		 if(delimeter.length() > 0){
+			 if(delimeter.equals("IS_NOT_NULL")){
+				 objActual = testData.split(delimeter)[0];			 
+			 }
+			 else{
+				 testData = testData.replaceAll(" ", ""); 			
+				 testData = testData.trim().toLowerCase();
+				 objActual = testData.split(delimeter)[0]; 			
+				 objExpected = testData.split(delimeter)[1];
+			 }
+		 }
+		 else{
+			 throw new Exception(Property.ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+		 }
 		
-		javaSnippet = javaSnippet.replace("\n", "");
-		javaSnippet = javaSnippet.replace("%%", ";");
-				
-		String javaSnippetResult = "";
-	 
-		try{
-		Binding binding = new Binding();
+		 if((objActual == null && objExpected == null) || (objActual.equals("") && objExpected.equals("")))
+			 throw new Exception(Property.ERROR_MESSAGES.ERR_NULL_INPUT_FOUND.getErrorMessage().replace("{ACTUAL_STRING_VALUE}", objActual));
+		 else{
+			 if(delimeter.equals("==")){
+	   			 if(objActual.equals(objExpected))
+	   				 bFlag = true;
+			 }
+	   		 else if(delimeter.equals("=")){
+	   			 if(objActual.contains(objExpected))
+	   				 bFlag = true;
+	   		 }
+	   		 else if(delimeter.equals("!=")){
+	   			 if(!objActual.equals(objExpected))
+	   				 bFlag = true;
+	   		 }
+	   		else if(delimeter.equals(">")){
+	   		 				try {
+	   		 					int objActualInt = Integer.parseInt(objActual);
+	   		 					int objExpectedInt = Integer.parseInt(objExpected);
+	   		 					if(objActualInt>objExpectedInt){
+	   		 						bFlag = true;
+	   		 					}
+	   		 				} catch (Exception e) {
+	   		 					 throw new Exception(Property.ERROR_MESSAGES.ERR_NOT_AN_INTEGER.getErrorMessage().replace("{ACTUAL_STRING_VALUE}", testData));
+	   		 				}
+	   		 	   		 }
+	   		 else if(delimeter.equals("<")){
+	   		 				try {
+	   		 					int objActualInt = Integer.parseInt(objActual);
+	   		 					int objExpectedInt = Integer.parseInt(objExpected);
+	   		 					if(objActualInt<objExpectedInt){
+	   		 						bFlag = true;
+	   		 					}
+	   		 				} catch (Exception e) {
+	   		 					 throw new Exception(Property.ERROR_MESSAGES.ERR_NOT_AN_INTEGER.getErrorMessage().replace("{ACTUAL_STRING_VALUE}", testData));
+	   		 				}
+	   		 	   		 }
+	   		 else if(delimeter.equals("IS_NOT_NULL")){
+	   			 if(objActual == null)
+	   				 bFlag = false;
+	   			 else
+	   				 bFlag = true;
+	   		 }
+	   		 else
+	   			 throw new Exception(Property.ERROR_MESSAGES.ERR_STRINGS_ARE_UNEQUAL.getErrorMessage().replace("{ACTUAL_STRING_VALUE}", objActual));
+   		 
+		 }
+			 
+   	 return bFlag;
+    }
+	
+	public static void connectToGoogleSheet(){
 		
-		GroovyShell shell = new GroovyShell(binding);
-		
-		Object result = shell.evaluate(javaSnippet);
-		
-		javaSnippetResult = result.toString();
-		}
-		catch(Exception e){
-			String errMessage = Property.ERROR_MESSAGES.ER_EXECUTING_JAVA_SNIPPET.getErrorMessage().replace("{JAVA_SNIPPET}", javaSnippet);
-			throw new Exception(errMessage);
-		}
-		return javaSnippetResult;
 	}
-		
 	 
     public static void reportUrlsStatus(HashMap<String, String> UrlStatusMap,String reportFileLocation)throws Exception{
     	try{    		
@@ -399,5 +492,39 @@ public static Boolean decideToExecuteTestStepOnTheBasisOfConditionSpecifiedForTe
     	}
     	return webPageUrls;
     }
+	
+	public static File reduceScreenShotSize(File srcFile, String destinationPath) throws Exception {
+		String srcPath = srcFile.getAbsolutePath();
+		float quality = 0.5f;
+		File destinationFile = new File(destinationPath);
+		try {
+			Iterator<ImageWriter> iter = ImageIO.getImageWritersByFormatName("jpeg");
+
+			ImageWriter writer = (ImageWriter) iter.next();
+
+			ImageWriteParam iwp = writer.getDefaultWriteParam();
+
+			iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+
+			iwp.setCompressionQuality(quality);
+
+			FileImageOutputStream output = new FileImageOutputStream(destinationFile);
+			writer.setOutput(output);
+
+			FileInputStream inputStream = new FileInputStream(srcPath);
+			BufferedImage originalImage = ImageIO.read(inputStream);
+
+			IIOImage image = new IIOImage(originalImage, null, null);
+			writer.write(null, image, iwp);
+			writer.dispose();
+		} catch (Exception e) {
+			throw e;
+		}
+		return destinationFile;
+	}
+
+
+	
+	
 	}
 	

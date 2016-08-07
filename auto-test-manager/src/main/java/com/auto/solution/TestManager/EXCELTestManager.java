@@ -183,51 +183,54 @@ public class EXCELTestManager implements ITestManager {
 		 return objSheet;
 	 }
 
-@Override
-public HashMap<String, String> getActualObjectDefination(	String logicalNameOfTheObject) throws Exception {
-	
-	HashMap<String,String> objDef = new HashMap<String, String>();
-	try{
-		if(objectRepoTable == null){
-			throw new Exception("Locate Object repository to access its data!");
-		}
-		
-		int rowCount = objectRepoTable.getRowCount();
-		
-		Integer iterativeRow = 0;
-		if(logicalNameOfTheObject != ""){	
-			
-			while(iterativeRow < rowCount){			
-			if(fetchObjectRepositoryContent(iterativeRow.toString() + ":" + Property.TESTOBJECT_KEYWORD_IN_ObjectRepository).equals(logicalNameOfTheObject)){
-				
-				String locatingStrategy = fetchObjectRepositoryContent(iterativeRow.toString() + ":" + Property.Locating_Strategy_Keyword );
-				
-				String locationOfObject = fetchObjectRepositoryContent(iterativeRow.toString() + ":" + Property.Locating_Value_Keyword_In_OR);
-				
-				String inFrame = fetchObjectRepositoryContent(iterativeRow.toString() + ":" + Property.TestObject_InFrame_Keyword);
-			
-				objDef.put(Property.TESTOBJECT_KEYWORD_IN_ObjectRepository, logicalNameOfTheObject);
-				
-				objDef.put(Property.Locating_Strategy_Keyword, locatingStrategy);
-				
-				objDef.put(Property.Locating_Value_Keyword_In_OR, locationOfObject);
-				
-				objDef.put(Property.TestObject_InFrame_Keyword, inFrame);
-				
-				break;
+ @Override
+	public HashMap<String, String> getActualObjectDefination(
+			String logicalNameOfTheObject) throws Exception {
+		HashMap<String,String> objDef = new HashMap<String, String>();
+		try{
+			if(objectRepoTable == null){
+				throw new Exception("Locate Object repository to access its data!");
 			}
-			iterativeRow++;
+			
+			int rowCount = objectRepoTable.getRowCount();
+			
+			Integer iterativeRow = 0;
+			if(logicalNameOfTheObject != ""){	
+				
+				while(iterativeRow < rowCount){			
+				if(fetchObjectRepositoryContent(iterativeRow.toString() + ":" + Property.TESTOBJECT_KEYWORD_IN_ObjectRepository).equals(logicalNameOfTheObject)){
+					
+					String locatingStrategy = fetchObjectRepositoryContent(iterativeRow.toString() + ":" + Property.Locating_Strategy_Keyword );
+					
+					String locationOfObject = fetchObjectRepositoryContent(iterativeRow.toString() + ":" + Property.Locating_Value_Keyword_In_OR);
+					
+					String inFrame = fetchObjectRepositoryContent(iterativeRow.toString() + ":" + Property.TestObject_InFrame_Keyword);
+					
+					String testObjectFilter = fetchObjectRepositoryContent(iterativeRow.toString() + ":" + Property.TestObject_Filter_Keyword);
+					
+					objDef.put(Property.TESTOBJECT_KEYWORD_IN_ObjectRepository, logicalNameOfTheObject);
+					
+					objDef.put(Property.Locating_Strategy_Keyword, locatingStrategy);
+					
+					objDef.put(Property.Locating_Value_Keyword_In_OR, locationOfObject);
+					
+					objDef.put(Property.TestObject_InFrame_Keyword, inFrame);
+					
+					objDef.put(Property.TestObject_Filter_Keyword,testObjectFilter);
+					
+					break;
+				}
+				iterativeRow++;
+			}
+			}
 		}
-		}
+		catch(Exception e){
+			throw new Exception(e.getMessage());
+		}	
+		return objDef;
 	}
-	catch(Exception e){
-		throw new Exception(e.getMessage());
-	}	
-	return objDef;
-}
 
 /**
- * 
  * @param testCaseID : String Test Case ID.
  * @return List of Test Step in Test Case.
  * @throws Exception 

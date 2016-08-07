@@ -211,7 +211,11 @@ public class Property {
 	
 	public static String DESKTOP_WEB_TESTDRIVER_KEYWORD = "desktop";
 	
-	public static String MOBILE_APP_ANDRIOD_TESTDRIVER_KEYWORD = "android";
+	public static String MOBILE_APP_ANDRIOD_TESTDRIVER_KEYWORD = "andriod";
+	
+	public static String MOBILE_WEB_TESTDRIVER_KEYWORD = "mobile";
+	
+	public static String MOBILE_IOS_TESTDRIVER_KEYWORD = "ios";
 	
 	public static String EXECUTION_TEST_DRIVER = "";
 	
@@ -246,7 +250,9 @@ public class Property {
 	public static ArrayList<String > LIST_STRATEGY_KEYWORD = new ArrayList<String>();
 	
 	public static enum FILTERS{
-		IS_DISPLAYED("displayed");
+		IS_ENABLED("enabled"),
+		IS_DISPLAYED("displayed"),
+		IS_CLICKABLE("clickable");
 		private String filter;
 		private FILTERS(String filter){
 			this.filter = filter;
@@ -254,6 +260,7 @@ public class Property {
 		public String getFilter(){
 			return this.filter;
 		}
+		
 	}
 	public static enum ERROR_MESSAGES{
 		ER_SPECIFY_BROWSER ("Incorrect browser specification."),

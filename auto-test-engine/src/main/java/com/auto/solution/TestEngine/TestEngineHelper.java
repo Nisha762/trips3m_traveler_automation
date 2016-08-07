@@ -1,9 +1,26 @@
 package com.auto.solution.TestEngine;
 
 import com.auto.solution.Common.Property;
+import com.auto.solution.Common.ResourceManager;
 import com.auto.solution.Common.Utility;
 
 public class TestEngineHelper {
+	
+	void updateTargetAndResourcesIfProvided(ResourceManager rm){
+		try{
+			String resourceDirectoryProvided = System.getProperty("resourcedirectory");
+			String targetProvided = System.getProperty("targetname");
+			if(resourceDirectoryProvided != null){
+				rm.setResourcesBaseLocationRelativeToProjectBase(resourceDirectoryProvided);
+			}
+			if(targetProvided != null){
+				rm.setTargetBaseLocationRelativeToProjectBase(targetProvided);
+			}
+		}
+		catch(Exception e){
+			//Nothing to do here.
+		}
+	}
 	
 	void setConfigurationInputsToSharedObject(){
 		
