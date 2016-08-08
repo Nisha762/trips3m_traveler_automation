@@ -22,7 +22,7 @@ public class ResourceManager {
 	}
 	
 	public void setResourcesBaseLocationRelativeToProjectBase(String resourceLocation){
-		this.resourceBasePath = this.projectBasePath + FileSeperator + resourceLocation;
+		this.resourceBasePath = resourceLocation;
 	}
 	
 	public String getChromeDriverExecutibleLocation(){
