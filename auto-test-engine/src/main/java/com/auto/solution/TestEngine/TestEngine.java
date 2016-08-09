@@ -14,6 +14,8 @@ import com.auto.solution.Common.Property.ERROR_MESSAGES;
 import com.auto.solution.TestDrivers.TestSimulator;
 import com.auto.solution.TestInterpretor.CompilerFactory;
 import com.auto.solution.TestInterpretor.ICompiler;
+import com.auto.solution.TestLogging.ITestExecutionDetailsContainer;
+import com.auto.solution.TestLogging.TestExecutionDetailsContainer;
 import com.auto.solution.TestLogging.TestLogger;
 import com.auto.solution.TestManager.*;
 
@@ -45,6 +47,8 @@ public class TestEngine {
     private String testExecutionLogFileName;
     
 	private ArrayList<ArrayList<String>> testStepsDetailsForATestCase = new ArrayList<ArrayList<String>>();
+    
+    ITestExecutionDetailsContainer objTestExecutionDetails = TestExecutionDetailsContainer.accessTestExecutionDetailsContainer(); 
     
     private HashMap<String, ArrayList<ArrayList<String>>> testCasesWithTestStepDetails = new HashMap<String, ArrayList<ArrayList<String>>>();
     
@@ -297,7 +301,7 @@ public class TestEngine {
 			logger = TestLogger.getInstance(rManager.getTestExecutionLogFileLocation().replace("{0}", testExecutionLogFileName + ".txt"));
 			
 			logger.setLogLevel(Property.Logger_Level);
-			
+	
 		}
 		catch (Exception e) {
 			logger.ERROR(e.getMessage());
@@ -306,7 +310,6 @@ public class TestEngine {
 	}
 	
 	public void initiateExecution() throws Exception {
-		
 		try{
 			
 		String testManagerToolDefinedByUser = Property.PROJECT_TESTMANAGEMENT_TOOL;
@@ -319,7 +322,13 @@ public class TestEngine {
 		
 		HashMap<String, Set<String>> filteredTestExecutionHierarchy = testManager.getTestSuiteAndTestCaseHierarchyForExecution();
 		
+		HashMap<String,HashMap<String,Set<String>>> completeTestHierarchy = testManager.prepareAndGetCompleteTestHierarchy();
+		
+		objTestExecutionDetails.getTestExecutionContainer().setListOfTestGroupSelectedForExecution(testManager.getTestGroupsForExecution());
+		
 		List<String> testScenarioListInExecutionGroup = new ArrayList<String>();			
+		
+		objTestExecutionDetails.getTestExecutionContainer().setCompleteTestExecutionHierarchyDetails(completeTestHierarchy);
 		 
 		testScenarioListInExecutionGroup.addAll(filteredTestExecutionHierarchy.keySet());
 		
@@ -399,11 +408,17 @@ public class TestEngine {
 		
 		Property.ExecutionEndTime = Utility.getCurrentDateAndTimeInStringFormat();
 		
+		objTestExecutionDetails.getTestExecutionContainer().setMapOfTestCasesAndTheirTestStepsWithDetails(testCasesWithTestStepDetails);
+
+		objTestExecutionDetails.getTestExecutionContainer().prepareMapOfTestCasesAndTheirExecutionStatus();
+		
+		objTestExecutionDetails.getTestExecutionContainer().prepareMapOfTestSuitesAndTheirExecutionStatus();
+		
 		}
 		catch(Exception e){
 			IsAnyTestStepFailedDuringExecution = true;
 			throw e;			
-		}
+		}			
 	}	
 	
 	public boolean isAnyTestStepFailedDuringTestExecution(){
