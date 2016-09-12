@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.traveltriangle</groupId>
+	<groupId>org.creativelabs</groupId>
 	<artifactId>auto_test_logging</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>Test_Logging_Module</name>
-	<url>http://www.traveltriangle.com</url>
+	<url>http://www.creativelabs.com</url>
 	<parent>
-	    <groupId>org.traveltriangle.com</groupId>
+	    <groupId>org.creativelabs.com</groupId>
    		<version>1.0</version>
    		<artifactId>auto-test-parent</artifactId>
 	</parent>
@@ -20,7 +20,7 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.traveltriangle</groupId>
+		    <groupId>org.creativelabs</groupId>
 			<artifactId>auto_test_utils</artifactId>
 			<version>1.0.0</version>
 		</dependency>

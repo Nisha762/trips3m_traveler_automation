@@ -20,7 +20,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.io.*;
 
-public class EXCELTestManager implements ITestManager {
+public class EXCELTestManager extends TestManagerUtils implements ITestManager {
 
 	private String testCaseRepository;
 	
@@ -53,11 +53,28 @@ public class EXCELTestManager implements ITestManager {
 	/**
 	 * Public Constructor which sets the test suite to locate. 
 	 */
-	public EXCELTestManager(ResourceManager rm){
+	public EXCELTestManager(ResourceManager rm) throws Exception{
 		testCaseRepositorySheetName = Property.TestCaseSheet;
 		testDataRepositorySheetName = Property.TestDataSheetName;
 		objectRepositorySheetName = Property.ObjectRepositorySheetName;
 		this.rm = rm;
+		try{
+			accessLocalTestData(rm.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}", "").replace("{PROJECT_NAME}", Property.PROJECT_NAME));
+		}catch (Exception ex) {
+			throw new Exception(Property.ERROR_MESSAGES.ER_CONNECTING_EXTERNALFILE.getErrorMessage());
+		}
+	}
+
+	private void accessLocalTestData(String targetLocation) throws Exception{
+		try{
+			File[] propertyFiles = connectToStaticTestDataProperties(targetLocation);
+			if(propertyFiles != null)
+				setAllKeysInLocalTestDataToGlobalVarMap(propertyFiles);
+		}
+		catch(Exception e){
+			String errMessage = Property.ERROR_MESSAGES.ERR_WHILE_PROCESSING_LOCALTESTDATA.getErrorMessage();
+			throw new Exception(errMessage + e.getMessage());
+		}
 	}
 	
 	private Properties getProjectTestPlans() throws Exception{
@@ -451,7 +468,4 @@ public HashMap<String, HashMap<String, Set<String>>> prepareAndGetCompleteTestHi
 		throw e;
 	}
 }
- 
-
-
  }

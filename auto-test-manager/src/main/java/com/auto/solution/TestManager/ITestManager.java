@@ -41,6 +41,8 @@ public interface ITestManager {
 }
 
 abstract class TestManagerUtils {
+	
+	private File[] staticTestDataProperties = null;
 	protected TestManagerUtils(){
 		
 	}

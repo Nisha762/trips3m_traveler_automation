@@ -8,7 +8,12 @@ import java.util.Properties;
 public class LearnTestAutomationKeywords {
 
 	private Properties prop = new Properties();
-	
+	/**
+	 * @author Nayan
+	 * @param whereToStudyFrom - Specify the properties file where to study from.
+	 * @return Learned Keywords in the form of Map<Key, Aliases[]>.
+	 * @throws FileNotFoundException And Exception.
+	 */
 	public HashMap<String, String[]> learn(String whereToStudyFrom) throws FileNotFoundException,Exception{
 		
 		HashMap<String, String[]> learnedTestKeyword = new HashMap<String,String[]>();

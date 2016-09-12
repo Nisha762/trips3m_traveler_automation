@@ -3,7 +3,7 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>org.traveltriangle</groupId>
+	<groupId>org.creativelabs</groupId>
 	
 	<artifactId>auto_test_engine</artifactId>
 	
@@ -13,12 +13,10 @@
 	
 	<name>Test Engine</name>
 	
-	<url>http://www.traveltriangle.com</url>
-	
 	<description>Module interacts with other modules and manages the test execution.</description>
 	
 	<parent>
-	    <groupId>org.traveltriangle.com</groupId>
+	    <groupId>org.creativelabs.com</groupId>
    		<version>1.0</version>
    		<artifactId>auto-test-parent</artifactId>
 	</parent>
@@ -31,32 +29,32 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.traveltriangle</groupId>
+		    <groupId>org.creativelabs</groupId>
 			<artifactId>auto_test_interpretor</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.traveltriangle</groupId>
+		    <groupId>org.creativelabs</groupId>
+			<artifactId>auto_test_reporter</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.creativelabs</groupId>
 			<artifactId>auto_test_utils</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.traveltriangle</groupId>
-			<artifactId>auto_test_logging</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.traveltriangle</groupId>
+		    <groupId>org.creativelabs</groupId>
 			<artifactId>auto_test_manager</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.traveltriangle</groupId>
+		    <groupId>org.creativelabs</groupId>
 			<artifactId>auto_test_drivers</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.traveltriangle</groupId>
+			<groupId>org.creativelabs</groupId>
 			<artifactId>auto_test_logging</artifactId>
 			<version>1.0.0</version>
 		</dependency>

@@ -1,4 +1,6 @@
 package com.auto.solution.Common;
+import groovy.lang.Binding;
+import groovy.lang.GroovyShell;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -23,6 +25,9 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 
 import org.apache.commons.lang.time.StopWatch;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+import org.apache.pdfbox.text.PDFTextStripperByArea;
 
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
 import com.auto.solution.Common.Property.STRATEGY_KEYWORD;
@@ -47,7 +52,7 @@ public class Utility {
 			throw e;
 		}
 	}
-	
+ 	
 	public static String getTestStepDetailsString(String testStepAction,String Status,String Remarks,String testObject,String testData){
 		
 		String teststep_details = Property.TEST_STEP_LOG_ENTRY.replace("{TEST_STEP_NAME}", Property.StepDescription);
@@ -66,7 +71,7 @@ public class Utility {
 		return currentDate.toString().replace(":", "");
 	}
 	
-	public static  String getTenDigitUniqueNumberInString(){
+	public static  String getNineDigitUniqueNumberInString(){
 		return String.valueOf(System.currentTimeMillis()).substring(0, 10);
 	}
 	
@@ -107,9 +112,9 @@ public class Utility {
 	 */
 	public static void populateGlobalVarMapWithPropertiesDefinedInPropertiesFile() throws Exception {
 		try {
-			Enumeration<Object> enumOfPropertyKeys = testDrivingPropertyFile.keys();
+			Enumeration enumOfPropertyKeys = testDrivingPropertyFile.keys();
 			
-			Set<Object> setOfKeysInPropertyFile = testDrivingPropertyFile.keySet();
+			Set setOfKeysInPropertyFile = testDrivingPropertyFile.keySet();
 			
 			Object[] keys = setOfKeysInPropertyFile.toArray();
 			
@@ -129,7 +134,7 @@ public class Utility {
 			}
 			
 			Property.globalVarMap.put("timestamp", getCurrentTimeStampInAlphaNumericFormat());
-			Property.globalVarMap.put("unique", getTenDigitUniqueNumberInString());
+			Property.globalVarMap.put("unique", getNineDigitUniqueNumberInString());
 			
 			tempMap.putAll(Property.globalVarMap);
 			
@@ -173,6 +178,9 @@ public class Utility {
 
 	public static String getValueForKeyFromGlobalVarMap(String Key){
 		try {
+			if(Key.equals("unique")){
+				Property.globalVarMap.put("unique", getNineDigitUniqueNumberInString());
+			}
 			if(!Key.contains(Property.DRIVER_CAPABILITY_KEYWORD)){
 			Key = Key.toLowerCase();
 			}
@@ -271,7 +279,7 @@ public class Utility {
 	public static void storeSystemPropertiesToGlobalVarMap(Properties systemProperties){		
 		
 		try {
-			 Set<Object> keySetFromSystemProperties = systemProperties.keySet();
+			 Set keySetFromSystemProperties = systemProperties.keySet();
 						 
 			 Object[] systemPropertiesKeysArray = keySetFromSystemProperties.toArray();			 
 			 
@@ -331,6 +339,104 @@ public class Utility {
 		}
 		
 		return file.getAbsolutePath();
+	}
+	
+	public static String executeJava(String javaSnippet) throws Exception{
+		
+		javaSnippet = javaSnippet.replace("\n", "");
+		javaSnippet = javaSnippet.replace("%%", ";");
+				
+		String javaSnippetResult = "";
+	 
+		try{
+		Binding binding = new Binding();
+		
+		GroovyShell shell = new GroovyShell(binding);
+		
+		Object result = shell.evaluate(javaSnippet);
+		
+		javaSnippetResult = result.toString();
+		}
+		catch(Exception e){
+			String errMessage = Property.ERROR_MESSAGES.ER_EXECUTING_JAVA_SNIPPET.getErrorMessage().replace("{JAVA_SNIPPET}", javaSnippet);
+			throw new Exception(errMessage);
+		}
+		return javaSnippetResult;
+	}
+	
+	public static HashMap<String, HashMap<String, String>> getBrowserCookiesMap() throws Exception {
+		HashMap<String, HashMap<String, String>> cookieMap = new HashMap<String, HashMap<String, String>>();
+		try {
+			//String allCookies = Property.BROWSER_COOKIES;
+			String allCookies = (Utility.getValueForKeyFromGlobalVarMap("browser.cookie") == null ? "" : Utility.getValueForKeyFromGlobalVarMap("browser.cookie").trim());
+			
+			String[] cookiesString = allCookies.split(Property.COOKIE_SEPERATOR);
+			
+			for (int i = 0; i < cookiesString.length; i++) {
+				String[] cookieKeyValuePair = cookiesString[i].split("=");
+				HashMap<String, String> cookieValue =  new HashMap<String, String>();
+				cookieValue.put(Property.COOKIE_VALUE, cookieKeyValuePair[1]);
+				if(cookieKeyValuePair.length > 2){
+					cookieValue.put(Property.COOKIE_DOMAIN_NAME, cookieKeyValuePair[2]);
+				}
+				cookieMap.put(cookieKeyValuePair[0], cookieValue);
+			}
+			
+		} catch (Exception e) {
+			//Nothing to throw.
+		}
+		return cookieMap;
+	}
+	/*
+	 * Example
+	 * user @A fetch Value; using @D arg0#arg1#agr2#agr3;
+	 * arg0= represent the output variable name
+	 * arg1= represent the input variable value
+	 * arg2= represent the split value
+	 * arg3= represent the index number
+	 */
+	
+	public static String splitAndReturnIndexedValue(String arg1,String arg2,String arg3) throws Exception{
+		String outputValue = "";
+		try{
+			int index = Integer.parseInt(arg3);
+			outputValue = arg1.split(arg2)[index];
+		}
+		catch(NumberFormatException ex){
+			throw new Exception(Property.ERROR_MESSAGES.ERR_NOT_AN_INTEGER.getErrorMessage().replace("{ACTUAL_STRING_VALUE}", arg3));
+		}
+		catch (Exception e) {
+			throw e;
+		}
+		return outputValue.trim();
+	}
+	
+	/*
+	 * Example
+	 * user @A replaceAll;  @D arg0#arg1#arg2 with arg3;
+	 * arg0= represent the output variable name
+	 * arg1= represent the input variable value
+	 * arg2= represent the replace from value
+	 * arg3= represent the replace by value
+	 */
+	public static String replaceAll(String arg1,String arg2)throws Exception{
+		String outputValue ="";
+		try{
+			String []dataValues = arg2.split("with");
+			String replace = dataValues[0].trim();
+			String replaceBy = dataValues[1].trim();
+			if(replace.equalsIgnoreCase("spaces") && replaceBy.equalsIgnoreCase("blanks")){
+				outputValue = arg1.replaceAll(" ", "");
+			}else if(replace.equalsIgnoreCase("commas") && replaceBy.equalsIgnoreCase("blanks")){
+				outputValue = arg1.replaceAll("\\,", "");
+			}
+			else{
+				outputValue = arg1.replaceAll(replace, replaceBy);
+			}
+		}catch(Exception e){
+			throw e;
+		}
+		return outputValue;
 	}
 	
     public static boolean assertOnInputValue(String testData) throws Exception{
@@ -485,20 +591,52 @@ public class Utility {
     			}
     			webPageUrls.add(URL);
     		}
-    		br.close();
     	}
     	catch(Exception e){
     		throw new Exception(ERROR_MESSAGES.ERR_IN_READING_URL_SOURCE.getErrorMessage() + "--" + e.getMessage());
     	}
     	return webPageUrls;
     }
-	
+    
+    /*
+     * verify text from whole file:- @A verifyPdfText; @D filename#texttoverify;
+     * verify text from page number file:- @A verifyPdfText; @D filename#texttoverify#pagenumber;
+     * verify text from range of page:- @A verifyPdfText; @D filename#texttoverify#startpagenumber to endpagenumber;
+     */
+    
+    public static void verifyPdfText(String filePath,String expectedValueOfProperty,int startPage,int endPage){
+    	try {	
+    		PDDocument document = null;   
+		    document = PDDocument.load(new File(filePath));
+		    document.getClass();
+		    if (!document.isEncrypted()) {
+		        PDFTextStripperByArea stripper = new PDFTextStripperByArea();
+		        stripper.setSortByPosition(true);
+		        PDFTextStripper Tstripper = new PDFTextStripper();
+		        
+		        if(startPage >= 0 || endPage >= 0){
+			        Tstripper.setStartPage(startPage);
+			        Tstripper.setEndPage(endPage);
+		        }
+		        String actualTestElementProperty = Tstripper.getText(document);
+		       
+		        if(!Utility.matchContentsBasedOnStrategyDefinedForTestStep(expectedValueOfProperty, actualTestElementProperty)){
+					String errMessage = ERROR_MESSAGES.ER_IN_VERIFYING_TESTELEMENT_PROPERTY.getErrorMessage().replace("{EXPECTED}", expectedValueOfProperty);
+					errMessage = errMessage.replace("{ACTUAL}", actualTestElementProperty);
+					throw new Exception(errMessage);
+				}
+		    }
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+    }
+    
 	public static File reduceScreenShotSize(File srcFile, String destinationPath) throws Exception {
 		String srcPath = srcFile.getAbsolutePath();
 		float quality = 0.5f;
 		File destinationFile = new File(destinationPath);
 		try {
-			Iterator<ImageWriter> iter = ImageIO.getImageWritersByFormatName("jpeg");
+			Iterator iter = ImageIO.getImageWritersByFormatName("jpeg");
 
 			ImageWriter writer = (ImageWriter) iter.next();
 

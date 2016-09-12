@@ -1,14 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.traveltriangle</groupId>
+	<groupId>org.creativelabs</groupId>
 	<artifactId>auto_test_manager</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>Test_Manager_Module</name>
-	<url>http://www.traveltriangle.com</url>
 	<parent>
-	    <groupId>org.traveltriangle.com</groupId>
+	    <groupId>org.creativelabs.com</groupId>
    		<version>1.0</version>
    		<artifactId>auto-test-parent</artifactId>
 	</parent>
@@ -20,10 +19,68 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.traveltriangle</groupId>
+		    <groupId>org.creativelabs</groupId>
 			<artifactId>auto_test_utils</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+  			<groupId>br.eti.kinoshita</groupId>
+  			<artifactId>testlink-java-api</artifactId>
+  			<version>1.9.6-1</version>
+  		</dependency>
+  		<dependency>
+    		<groupId>com.retailmenot</groupId>
+    		<artifactId>testrailsdk</artifactId>
+    		<version>1.1.1</version>
+    		<exclusions>
+            <exclusion>
+   				<groupId>com.fasterxml.jackson.core</groupId>
+    			<artifactId>jackson-annotations</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>com.fasterxml.jackson.core</groupId>
+    			<artifactId>jackson-core</artifactId>
+            </exclusion>
+            <exclusion>
+    			<groupId>com.fasterxml.jackson.core</groupId>
+    			<artifactId>jackson-databind</artifactId>
+            </exclusion>
+        </exclusions>
+		</dependency>
+
+  		
+		<dependency>
+    			<groupId>com.googlecode.json-simple</groupId>
+    			<artifactId>json-simple</artifactId>
+    			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.codehaus.jackson</groupId>
+    		<artifactId>jackson-core-asl</artifactId>
+    		<version>1.9.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.codehaus.jackson</groupId>
+    		<artifactId>jackson-mapper-asl</artifactId>
+    		<version>1.9.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.codehaus.jackson</groupId>
+    		<artifactId>jackson-jaxrs</artifactId>
+    		<version>1.9.0</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.codehaus.groovy</groupId>
+    		<artifactId>groovy-json</artifactId>
+    		<version>2.4.7</version>
+		</dependency>
+		<dependency>
+      		<groupId>junit</groupId>
+      		<artifactId>junit</artifactId>
+      		<version>3.8.1</version>
+      		<scope>test</scope>
+    	</dependency>
 	    <dependency>
 			<groupId>org.dbunit</groupId>
 			<artifactId>dbunit</artifactId>

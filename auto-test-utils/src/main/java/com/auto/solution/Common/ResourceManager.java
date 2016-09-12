@@ -1,5 +1,8 @@
 package com.auto.solution.Common;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class ResourceManager {
 	
 	private String FileSeperator = System.getProperty("file.separator");
@@ -21,8 +24,11 @@ public class ResourceManager {
 		this.targetBasePath = this.projectBasePath + FileSeperator + targetLocation;
 	}
 	
-	public void setResourcesBaseLocationRelativeToProjectBase(String resourceLocation){
-		this.resourceBasePath = resourceLocation;
+	public void setResourcesBaseLocation(String resourceLocation){
+		if(!resourceLocation.contains(Property.FileSeperator))
+			this.resourceBasePath = this.projectBasePath + FileSeperator + resourceLocation;
+		else
+			this.resourceBasePath = resourceLocation;
 	}
 	
 	public String getChromeDriverExecutibleLocation(){
@@ -52,6 +58,11 @@ public class ResourceManager {
 	public String getMobileAPKFileLocation(){
 		String apk_file_location = this.resourceBasePath + FileSeperator + "{PROJECT_NAME}" + FileSeperator + "{APK_FILENAME}";
 		return apk_file_location;
+	}
+	
+	public String getRecoveryFileLocation(){
+		String recovery_file_location = this.resourceBasePath + FileSeperator + "{PROJECT_NAME}"+ FileSeperator + "RecoveryFiles" + FileSeperator + Property.RECOVERY_FILENAME;
+		return recovery_file_location;
 	}
 	
 	public String getTestSuiteLocationInFileSystem(){

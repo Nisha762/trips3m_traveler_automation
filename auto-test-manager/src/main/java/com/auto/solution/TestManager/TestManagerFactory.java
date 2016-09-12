@@ -14,8 +14,13 @@ public class TestManagerFactory {
 	
 	public ITestManager getTestManager(boolean isTestManagerNeedToReinitialized) throws Exception{
 		ITestManager testManager = null;
-		if(this.testManagerString.contains("excel")){
+		if(this.testManagerString.contains("testlink")){
+			testManager = new TESTLINKTestManager(isTestManagerNeedToReinitialized,this.rmanager);
+		}else if(this.testManagerString.contains("excel")){
 			testManager = new EXCELTestManager(this.rmanager);
+		}
+		else if(this.testManagerString.contains("testrail")){
+			testManager = new TESTRAILTestManager(isTestManagerNeedToReinitialized, this.rmanager);
 		}
 		else{
 			String err_Message = Property.ERROR_MESSAGES.ERR_SPECIFYING_TESTMANAGER.getErrorMessage().replace("{TESTMANAGERKEY}", testManagerString);

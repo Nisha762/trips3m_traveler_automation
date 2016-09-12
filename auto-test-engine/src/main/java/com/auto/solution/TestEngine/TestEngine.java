@@ -11,6 +11,8 @@ import org.dbunit.dataset.ITable;
 
 import com.auto.solution.Common.*;
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
+import com.auto.solution.DatabaseManager.ConnectDatabase;
+import com.auto.solution.HTMLReport.HTMLReportGenerator;
 import com.auto.solution.TestDrivers.TestSimulator;
 import com.auto.solution.TestInterpretor.CompilerFactory;
 import com.auto.solution.TestInterpretor.ICompiler;
@@ -18,6 +20,7 @@ import com.auto.solution.TestLogging.ITestExecutionDetailsContainer;
 import com.auto.solution.TestLogging.TestExecutionDetailsContainer;
 import com.auto.solution.TestLogging.TestLogger;
 import com.auto.solution.TestManager.*;
+import com.auto.solution.TestReporting.*;
 
 
 public class TestEngine {
@@ -301,7 +304,15 @@ public class TestEngine {
 			logger = TestLogger.getInstance(rManager.getTestExecutionLogFileLocation().replace("{0}", testExecutionLogFileName + ".txt"));
 			
 			logger.setLogLevel(Property.Logger_Level);
-	
+			
+			try{
+			if(Utility.getValueForKeyFromGlobalVarMap(Property.DB_CONNECT_FLAG_KEY).equalsIgnoreCase(Property.TRUE)){
+				ConnectDatabase.connectToAllDatabase();
+			}
+			}
+			catch(NullPointerException ne){
+				
+			}
 		}
 		catch (Exception e) {
 			logger.ERROR(e.getMessage());
@@ -310,6 +321,7 @@ public class TestEngine {
 	}
 	
 	public void initiateExecution() throws Exception {
+		
 		try{
 			
 		String testManagerToolDefinedByUser = Property.PROJECT_TESTMANAGEMENT_TOOL;
@@ -418,8 +430,30 @@ public class TestEngine {
 		catch(Exception e){
 			IsAnyTestStepFailedDuringExecution = true;
 			throw e;			
-		}			
+		}
+		
+		
 	}	
+	public void logExecutionDetailsIntoXml() throws Exception{
+		try{
+			new XMLReporting(true, Property.XMLFileName + ".xml", objTestExecutionDetails.getTestExecutionContainer(),rManager);
+			}
+			catch(Exception e){
+				throw new Exception(Property.ERROR_MESSAGES.ERR_GENERATING_XML.getErrorMessage() + ":- " + e.getMessage());
+			}
+	}
+	public void initateReportingOfTestExecutionDetails() throws Exception{
+		try{
+			String sourceFile = rManager.getTestExecutionLogFileLocation().replace("{0}", Property.XMLFileName + ".xml");
+			String targetFile = rManager.getTestExecutionLogFileLocation().replace("{0}", testExecutionLogFileName + ".html");
+			String helperFileName = Property.REPORTXSLFILE;
+			HTMLReportGenerator objReporter = new HTMLReportGenerator(sourceFile, targetFile);
+			objReporter.generateHtmlReport(helperFileName);
+		}
+		catch(Exception e){
+			throw new Exception(Property.ERROR_MESSAGES.ERR_INITIATING_REPORT.getErrorMessage() + ":- " + e.getMessage());
+		}
+	}
 	
 	public boolean isAnyTestStepFailedDuringTestExecution(){
 		return this.IsAnyTestStepFailedDuringExecution;
