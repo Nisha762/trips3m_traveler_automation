@@ -657,6 +657,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									profile.put("download.default_directory",Utility.getAbsolutePath(rManager.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}","").replace("{PROJECT_NAME}", Property.PROJECT_NAME)));
 									profile.put("download.directory_upgrade", "true");
 									profile.put("download.prompt_for_download", "false");
+									profile.put("plugins.plugins_disabled", Arrays.asList("Chrome PDF Viewer"));
 									ChromeOptions options = new ChromeOptions();
 									options.addArguments("--disable-extensions");
 									options.setExperimentalOption("prefs", profile);
