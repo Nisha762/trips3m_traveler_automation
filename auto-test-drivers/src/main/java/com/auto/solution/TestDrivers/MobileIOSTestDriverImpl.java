@@ -876,7 +876,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 	}
 	
 	@Override
-	public void verifyAndReportBrokenLinksFromPages() throws Exception {
+	public void verifyAndReportBrokenLinksFromPages(String UrlsSource) throws Exception {
 		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
 		
 	}

@@ -378,8 +378,11 @@ public class TestSimulator {
  				Utility.setKeyValueToGlobalVarMap(testDataContents[0], propertyValue);
  			}
  			else if(stepAction.toLowerCase().equals("verifybrokenlinks")){
- 				
- 				testSimulator.verifyAndReportBrokenLinksFromPages();
+ 				if(testDataContents.length < 1){
+ 					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+ 				}
+ 				String urlSource = testDataContents[0];
+ 				testSimulator.verifyAndReportBrokenLinksFromPages(urlSource);
  			}
  			else if(stepAction.toLowerCase().equalsIgnoreCase("browsernavigation")){
  				if(testDataContents.length != 1){

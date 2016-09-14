@@ -59,6 +59,10 @@ import com.auto.solution.TestDrivers.RecoveryHandling.RecoverySupportForSelenium
 import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.SeleniumException;
 import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 
 public class DesktopWebTestDriverImpl implements TestDrivers{
@@ -546,6 +550,24 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throw ne;
 		}
 		return actualTestElement;
+	}
+	
+	private int validateUrlStatus(String url){
+		
+		int url_status = 000;
+		HttpClient client = HttpClientBuilder.create().build();
+		
+		HttpGet request = new HttpGet(url);
+		
+		try {
+			
+			HttpResponse response = client.execute(request);
+			
+			url_status = response.getStatusLine().getStatusCode();
+			
+		} catch (Exception e) {
+				}
+		return url_status;
 	}
 	
 	public void waitUntilObjectIsThere(){
@@ -1537,16 +1559,14 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	
 	
 	@Override
-	public void verifyAndReportBrokenLinksFromPages() throws Exception{
+	public void verifyAndReportBrokenLinksFromPages(String urlSource) throws Exception{
 		
 		
-		try{
-			String PageNotFoundLocator = testObjectInfo.getLocationOfTestObject();
-			
+		try{			
 			HashMap<String, String> brokenUrls = new HashMap<String, String>();
 			
 			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
-			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", "ApplicationURLSource.csv");
+			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", urlSource);
 			String sourceFileForBrokenLinks = fileLocation;
 			
 			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForBrokenLinks);
@@ -1568,17 +1588,13 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 							brokenUrls.put(linkUrl, "ERROR -- Contains # in hyper reference");
 							continue;
 						}
-						driver.navigate().to(linkUrl);
-						
-						try{
-						WebElement pageNotFoundTestObject = driver.findElement(By.xpath(PageNotFoundLocator));
-						if(pageNotFoundTestObject.isDisplayed()){
-							brokenUrls.put(linkUrl, "ERROR -- Page Not Found");
-							}
+						if (linkUrl != null && !linkUrl.contains("javascript")){
+						 int url_status = this.validateUrlStatus(linkUrl);
+						 if(url_status != 200){
+							 brokenUrls.put(linkUrl, String.valueOf(url_status));
+						 }
 						}
-						catch(Exception ne){
-							
-						}
+					
 						}
 						catch(Exception e){
 							brokenUrls.put(linkUrl, "FAILED --" + e.getMessage());

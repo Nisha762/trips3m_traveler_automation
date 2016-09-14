@@ -22,6 +22,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -497,6 +501,24 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 			throw e;
 		}
 		
+	}
+	
+	private int validateUrlStatus(String url){
+		
+		int url_status = 000;
+		HttpClient client = HttpClientBuilder.create().build();
+		
+		HttpGet request = new HttpGet(url);
+		
+		try {
+			
+			HttpResponse response = client.execute(request);
+			
+			url_status = response.getStatusLine().getStatusCode();
+			
+		} catch (Exception e) {
+				}
+		return url_status;
 	}
 	
 	@Override
@@ -1213,16 +1235,14 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 
 	
 	@Override
-	public void verifyAndReportBrokenLinksFromPages() throws Exception{
+	public void verifyAndReportBrokenLinksFromPages(String urlSource) throws Exception{
 		
 		
-		try{
-			String PageNotFoundLocator = testObjectInfo.getLocationOfTestObject();
-			
+		try{			
 			HashMap<String, String> brokenUrls = new HashMap<String, String>();
 			
 			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
-			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", "ApplicationURLSource.csv");
+			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", urlSource);
 			String sourceFileForBrokenLinks = fileLocation;
 			
 			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForBrokenLinks);
@@ -1241,32 +1261,28 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 						
 						try{
 						if(linkUrl.contains("#")){
-							brokenUrls.put(linkUrl, "Contains # in hyper reference");
+							brokenUrls.put(linkUrl, "ERROR -- Contains # in hyper reference");
 							continue;
 						}
-						driver.navigate().to(linkUrl);
-						
-						try{
-						WebElement pageNotFoundTestObject = driver.findElement(By.xpath(PageNotFoundLocator));
-						if(pageNotFoundTestObject.isDisplayed()){
-							brokenUrls.put(linkUrl, "Page Not Found");
-							}
+						if (linkUrl != null && !linkUrl.contains("javascript")){
+						 int url_status = this.validateUrlStatus(linkUrl);
+						 if(url_status != 200){
+							 brokenUrls.put(linkUrl, String.valueOf(url_status));
+						 }
 						}
-						catch(NoSuchElementException ne){
-							
-						}
+					
 						}
 						catch(Exception e){
-							
+							brokenUrls.put(linkUrl, "FAILED --" + e.getMessage());
 						}
 					}				
 				}
 				catch(Exception e){
-					System.out.println("Got Exception for URL -- " + url + "::" + e.getMessage());
+					brokenUrls.put(url, "FAILED --" + e.getMessage());
 				}
 			}
 			
-			Utility.reportUrlsStatus(brokenUrls, rManager.getTestExecutionLogFileLocation().replace("{0}", "BrokenLinks.csv"));
+			Utility.reportUrlsStatus(brokenUrls,rManager.getTestExecutionLogFileLocation().replace("{0}","BrokenLinks.csv"));
 		}
 		catch(Exception e){
 			throw e;

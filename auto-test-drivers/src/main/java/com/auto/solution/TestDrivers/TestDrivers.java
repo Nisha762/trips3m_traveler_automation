@@ -71,7 +71,7 @@ public interface TestDrivers {
 
 	public void verifyTestElementAttributeNotPresent(String propertyToVerify,
 			String expectedValueOfProperty) throws Exception;
-	public void verifyAndReportBrokenLinksFromPages() throws Exception;
+	public void verifyAndReportBrokenLinksFromPages(String UrlSource) throws Exception;
 	
 	public void browserNavigation(String navigationOption) throws Exception;
 	
