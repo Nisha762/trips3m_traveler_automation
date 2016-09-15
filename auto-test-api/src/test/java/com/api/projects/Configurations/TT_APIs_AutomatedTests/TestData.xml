@@ -17,7 +17,7 @@
 			   <price_ranges>40000-60000</price_ranges>
 		   </User_Search_for_a_trip>
 	   </SearchAndFilter>
-	   <Request_A_Quote>
+	   <QuoteScenarios>
 		   <tags>requestquote,quoterequest,regression</tags>
 		   <LoggedIn_User_Request_A_Quote>
 			   <number_of_days>10-12</number_of_days>
@@ -41,6 +41,6 @@
 			   <activity_encoded>11%2C10%2C3</activity_encoded>
 			   <months_encoded>1-3%2C4-6%2C7-9%2C10-12</months_encoded>
 		   </LoggedInUser_Request_More_Quotes>
-	   </Request_A_Quote>
+	   </QuoteScenarios>
 </TestSuite>
 </project>
