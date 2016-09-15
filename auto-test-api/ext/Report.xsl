@@ -156,7 +156,7 @@ body {
    </head>
       
 	  <div id="test_Header">  
- 				<img src="http://static.jabong.com/images/jlite/logo-new.png" alt="Jabong.com" style="float: left;"></img> 
+ 				<img src="" alt="TravelTriangle.com" style="float: left;"></img> 
  			    <span>Test Execution Summary Report </span> 
  			  </div> 
  	 <xsl:for-each select="testSuite">
