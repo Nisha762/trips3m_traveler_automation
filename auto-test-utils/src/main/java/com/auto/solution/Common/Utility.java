@@ -234,6 +234,7 @@ public class Utility {
 					String keyVariable = dataValue.substring((stindex + 2),
 							endindex);
 					String value = getValueForKeyFromGlobalVarMap(keyVariable);
+					if(value == null) value = "null";
 					if (!value.equalsIgnoreCase(keyVariable)) {
 						dataValue = dataValue.replace("{$" + keyVariable + "}",
 								value);
