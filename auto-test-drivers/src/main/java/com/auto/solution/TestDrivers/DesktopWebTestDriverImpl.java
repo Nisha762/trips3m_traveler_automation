@@ -2,6 +2,7 @@ package com.auto.solution.TestDrivers;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.ProxySelector;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,6 +42,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -685,6 +688,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									options.setExperimentalOption("prefs", profile);
 									executionCapabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
 									executionCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+								
 									ChromeDriverService service = new ChromeDriverService.Builder()
 									.usingAnyFreePort()
 									.usingDriverExecutable(new File(rManager.getChromeDriverExecutibleLocation()))
@@ -1578,26 +1582,29 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 					}
 				
 					driver.navigate().to(url);
-				
+					Thread.sleep(10000);
 					ArrayList<String> hrefs = this.getHyperRefrenceOfAllLinksOnPage();
 				
 					for (String linkUrl : hrefs) {
-						
+						System.out.println(linkUrl);
 						try{
+							if(linkUrl==null){
+								continue;
+							}
+							
 						if(linkUrl.contains("#")){
 							brokenUrls.put(linkUrl, "ERROR -- Contains # in hyper reference");
 							continue;
 						}
 						if (linkUrl != null && !linkUrl.contains("javascript")){
 						 int url_status = this.validateUrlStatus(linkUrl);
-						 if(url_status != 200){
+						 //if(url_status != 200){
 							 brokenUrls.put(linkUrl, String.valueOf(url_status));
-						 }
+						 //}
 						}
-					
 						}
 						catch(Exception e){
-							brokenUrls.put(linkUrl, "FAILED --" + e.getMessage());
+							brokenUrls.put(linkUrl, "FAILED --" + e.getMessage().replaceAll("\\,"," "));
 						}
 					}				
 				}

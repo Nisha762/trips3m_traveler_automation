@@ -274,6 +274,9 @@ public class TestEngine {
 		catch(Exception e){
 			throw e;
 		}
+    	finally{
+    		logger.setLogLevel(Property.Logger_Level); 
+    	}
 	}
 
     public void prepareTestEngineForExecution(String projectBasePath){
