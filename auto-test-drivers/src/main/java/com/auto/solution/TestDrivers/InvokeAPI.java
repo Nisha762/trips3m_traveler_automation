@@ -1,14 +1,18 @@
 package com.auto.solution.TestDrivers;
 
+import java.net.ProxySelector;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import net.sf.saxon.functions.Replace;
 
 import com.auto.solution.Common.Property;
 import com.auto.solution.Common.ResourceManager;
+import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
+import com.eviware.soapui.impl.wsdl.support.http.SoapUIMultiThreadedHttpConnectionManager;
 import com.eviware.soapui.model.support.PropertiesMap;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.model.testsuite.TestCaseRunner;
@@ -92,13 +96,39 @@ public class InvokeAPI {
 			testCaseStatusWithReason.add(status.toString());
 		
 			testCaseStatusWithReason.add(reason);
+			ProxySelector.setDefault(resource_manager.getdefaultproxy());
+			closeSoapui();
 		}
 		catch(Exception e){
 			throw e;
 		}
 		return testCaseStatusWithReason;
 	}
-	
+	public void closeSoapui(){
+		// Need to shutdown all the threads invoked by each SoapUI TestSuite
+		
+		SoapUI.getThreadPool().shutdown();
+		
+		try {
+		        SoapUI.getThreadPool().awaitTermination(1, TimeUnit.SECONDS);
+		
+		
+		// Now to shutdown the monitor thread setup by SoapUI
+		Thread[] tarray = new Thread[Thread.activeCount()];
+		Thread.enumerate(tarray);
+		for (Thread t : tarray) {
+		        if (t instanceof SoapUIMultiThreadedHttpConnectionManager.IdleConnectionMonitorThread) {
+		                ((SoapUIMultiThreadedHttpConnectionManager.IdleConnectionMonitorThread) t)
+		                .shutdown();
+		        }
+		}
+
+		// Finally Shutdown SoapUI itself.
+		SoapUI.shutdown();
+		} catch (Exception e) {
+	        e.printStackTrace();
+	}
+	}
 	
 	
 	

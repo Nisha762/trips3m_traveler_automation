@@ -1,5 +1,6 @@
 package com.auto.solution.Common;
 
+import java.net.ProxySelector;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -13,11 +14,16 @@ public class ResourceManager {
 	
 	private String projectBasePath = "";
 	
+	private ProxySelector proxy = null;
+	
 	public ResourceManager(String basePath){
 		this.projectBasePath = basePath;
 		this.resourceBasePath = basePath + FileSeperator + "src" + FileSeperator +"main"+ FileSeperator +"resources";
 		this.targetBasePath = basePath + FileSeperator + "target";
-		
+		this.proxy = ProxySelector.getDefault();
+	}
+	public ProxySelector getdefaultproxy(){
+		return proxy;
 	}
 	
 	public void setTargetBaseLocationRelativeToProjectBase(String targetLocation){
