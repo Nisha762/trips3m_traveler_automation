@@ -1602,7 +1602,6 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 							 brokenUrls.put(linkUrl, String.valueOf(url_status));
 						 //}
 						}
-					System.out.println("navi "+ linkUrl);
 						}
 						catch(Exception e){
 							brokenUrls.put(linkUrl, "FAILED --" + e.getMessage().replaceAll("\\,"," "));
