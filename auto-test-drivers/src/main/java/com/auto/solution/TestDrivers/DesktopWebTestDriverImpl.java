@@ -1586,7 +1586,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 					ArrayList<String> hrefs = this.getHyperRefrenceOfAllLinksOnPage();
 				
 					for (String linkUrl : hrefs) {
-						System.out.println(linkUrl);
+						
 						try{
 							if(linkUrl==null){
 								continue;
