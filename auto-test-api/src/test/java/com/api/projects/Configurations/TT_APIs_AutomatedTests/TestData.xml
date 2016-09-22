@@ -18,7 +18,7 @@
 		   </User_Search_for_a_trip>
 	   </SearchAndFilter>
 	   <QuoteScenarios>
-		   <tags>requestquote,quoterequest,regression</tags>
+		   <tags>requestquote,quoterequest,regression,quote</tags>
 		   <LoggedIn_User_Request_A_Quote>
 			   <number_of_days>10-12</number_of_days>
 			   <per_page>60</per_page>
