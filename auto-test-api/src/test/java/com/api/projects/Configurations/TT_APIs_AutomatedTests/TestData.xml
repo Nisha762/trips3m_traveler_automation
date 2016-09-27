@@ -42,5 +42,14 @@
 			   <months_encoded>1-3%2C4-6%2C7-9%2C10-12</months_encoded>
 		   </LoggedInUser_Request_More_Quotes>
 	   </QuoteScenarios>
+	   <AgentInfo>
+		   <tags>agent,regression</tags>
+		   <User_view_Agent_testimonials>
+			   <agentID>199585</agentID>
+		   </User_view_Agent_testimonials>
+		   <User_gets_agent_details>
+			   <agentID>199585</agentID>
+		   </User_gets_agent_details>
+	   </AgentInfo>
 </TestSuite>
 </project>

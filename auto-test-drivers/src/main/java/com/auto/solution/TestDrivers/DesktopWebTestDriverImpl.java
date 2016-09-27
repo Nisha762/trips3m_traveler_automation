@@ -100,7 +100,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		
     private void scroll(){
 		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("window.scrollBy(0,500)", "");
+		js.executeScript("window.scrollBy(0,1500)", "");
 		sleep(500);
     }
     
@@ -977,9 +977,6 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		try{
 		if(testElement == null){
 			throw new Exception(Property.ERROR_MESSAGES.ER_ELEMENT_NOT_PRESENT.getErrorMessage());
-		}
-		if(!testElement.isDisplayed()){
-			throw new Exception(Property.ERROR_MESSAGES.ER_ELEMENT_NOT_DISPLAYED.getErrorMessage());
 		}
 		
 		}

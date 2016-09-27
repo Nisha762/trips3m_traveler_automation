@@ -232,7 +232,7 @@ public class Utility {
 						break;
 					}
 					String keyVariable = dataValue.substring((stindex + 2),
-							endindex);
+							endindex);;
 					String value = getValueForKeyFromGlobalVarMap(keyVariable);
 					if(value == null) value = "null";
 					if (!value.equalsIgnoreCase(keyVariable)) {
@@ -353,6 +353,7 @@ public class Utility {
 		Binding binding = new Binding();
 		
 		GroovyShell shell = new GroovyShell(binding);
+		
 		
 		Object result = shell.evaluate(javaSnippet);
 		

@@ -177,8 +177,6 @@ public class Property {
 	
 	public static String ApplicationURL = "";
 	
-	public static String SEPERATOR = "#";
-	
 	public static String TESTDATA_SEPERATOR = "#";
 	
 	public static String COOKIE_SEPERATOR = "###";

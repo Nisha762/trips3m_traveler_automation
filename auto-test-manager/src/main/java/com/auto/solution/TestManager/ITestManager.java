@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import com.auto.solution.Common.Property;
 import com.auto.solution.Common.Utility;
 
 public interface ITestManager {
@@ -92,9 +93,9 @@ abstract class TestManagerUtils {
 					
 					int i = 0;
 					
-					if(valueString.contains(",")){
+					if(valueString.contains(Property.CONDITIONAL_KEYWORD_SEPERATOR)){
 					
-						String[] values = valueString.split(",");
+						String[] values = valueString.split(Property.CONDITIONAL_KEYWORD_SEPERATOR);
 						
 						for (String valuecontent : values) {
 						
