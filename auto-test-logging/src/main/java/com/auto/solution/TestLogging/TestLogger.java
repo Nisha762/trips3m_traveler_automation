@@ -57,9 +57,10 @@ public class TestLogger {
 		LogManager.getRootLogger().addAppender(fileAppender);
 	}
 
-	public void setLogLevel(String level) {
+	public void setLogLevel(String level,boolean isnew) {
 
-		setLogFileLocation();
+		if(isnew)
+			setLogFileLocation();
 
 		if (level.toLowerCase().equals(Property.Logger_Level_INFO)
 				|| level.equals("")) {
