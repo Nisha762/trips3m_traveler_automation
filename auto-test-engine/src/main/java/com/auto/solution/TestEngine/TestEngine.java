@@ -275,7 +275,7 @@ public class TestEngine {
 			throw e;
 		}
     	finally{
-    		logger.setLogLevel(Property.Logger_Level); 
+    		logger.setLogLevel(Property.Logger_Level,false); 
     	}
 	}
 
@@ -306,7 +306,7 @@ public class TestEngine {
 			
 			logger = TestLogger.getInstance(rManager.getTestExecutionLogFileLocation().replace("{0}", testExecutionLogFileName + ".txt"));
 			
-			logger.setLogLevel(Property.Logger_Level);
+			logger.setLogLevel(Property.Logger_Level,true);
 			
 			try{
 			if(Utility.getValueForKeyFromGlobalVarMap(Property.DB_CONNECT_FLAG_KEY).equalsIgnoreCase(Property.TRUE)){
