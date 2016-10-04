@@ -200,7 +200,7 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 			throw new Exception(Property.ERROR_MESSAGES.ER_SPECIFYING_KEYBOARD_KEY.getErrorMessage());
 		}
 		try {
-			driver.sendKeyEvent(keyValue);
+			driver.pressKeyCode(keyValue);
 		} catch (Exception e) {
 				throw e;
 		}
