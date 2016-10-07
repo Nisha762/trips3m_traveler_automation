@@ -622,6 +622,19 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									remoteProfile.setAssumeUntrustedCertificateIssuer(false);
 									remoteProfile.setAcceptUntrustedCertificates(true);
 									remoteProfile.setEnableNativeEvents(true);
+									remoteProfile.setPreference("browser.download.folderList", 2);
+									remoteProfile.setPreference("browser.download.manager.showWhenStarting", false);									
+									remoteProfile.setPreference("browser.download.dir",
+											Utility.getAbsolutePath(rManager.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}","").
+													replace("{PROJECT_NAME}", Property.PROJECT_NAME)));
+									remoteProfile.setPreference("browser.helperApps.neverAsk.openFile",
+											"text/csv,application/x-msexcel,application/excel,application/x-excel,"
+											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,"
+											+ "application/msword,application/xml");
+									remoteProfile.setPreference("browser.helperApps.neverAsk.saveToDisk",
+											"text/csv,application/x-msexcel,application/excel,application/x-excel,"
+											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,"
+											+ "application/xml");
 									// We can also add extension to firefox profile if needed in future.
 									executionCapabilities.setBrowserName("firefox");									
 									executionCapabilities.setCapability("firefox_profile", remoteProfile.toString());									
@@ -632,7 +645,17 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 								}
 								else if(this.browserName.contains(Property.CHROME_KEYWORD)){
 									executionCapabilities = DesiredCapabilities.chrome();
+									Map<String,Object> profile=new HashMap<String,Object>();
+									profile.put("disable-popup-blocking", "true");
+									profile.put("download.default_directory",Utility.getAbsolutePath(rManager.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}","").replace("{PROJECT_NAME}", Property.PROJECT_NAME)));
+									profile.put("download.directory_upgrade", "true");
+									profile.put("download.prompt_for_download", "false");
+									profile.put("plugins.plugins_disabled", Arrays.asList("Chrome PDF Viewer"));
+									ChromeOptions options = new ChromeOptions();
+									options.addArguments("--disable-extensions");
+									options.setExperimentalOption("prefs", profile);
 									executionCapabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
+									executionCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
 								}
 								else{
 									throw new Exception(Property.ERROR_MESSAGES.ER_SPECIFY_BROWSER.getErrorMessage());
