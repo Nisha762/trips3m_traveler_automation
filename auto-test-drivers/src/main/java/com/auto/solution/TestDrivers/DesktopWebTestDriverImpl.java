@@ -1105,7 +1105,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		else{
 			attributeValue = testElement.getAttribute(propertyToFetch);
 		}
-		
+		attributeValue = (attributeValue == null) ? "null" : attributeValue;
 		return attributeValue;
 		}
 		catch(NullPointerException ne){
