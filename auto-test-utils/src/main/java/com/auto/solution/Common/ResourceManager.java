@@ -36,6 +36,10 @@ public class ResourceManager {
 		else
 			this.resourceBasePath = resourceLocation;
 	}
+	public String getSoapUiLogConfig(){
+		String configfile = this.resourceBasePath + FileSeperator + "soapui-log4j.xml";
+		return configfile;
+	}
 	
 	public String getChromeDriverExecutibleLocation(){
 		String chromedriver_location = this.resourceBasePath + FileSeperator + Property.CHROME_EXECUTABLE;
