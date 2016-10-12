@@ -542,7 +542,18 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(NoSuchFrameException ne){
 			throw ne;
 		}
-		catch(Exception ex){
+		catch(UnhandledAlertException ua){
+			try {
+				recoverySupportHandle.doRecovery();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				throw new Exception(Property.ERROR_MESSAGES.ER_IN_SPECIFYING_RECOVERY_ACTION.getErrorMessage());
+			}
+			waitAndGetTestObject(false);
+			if(actualTestElement==null)
+					throw new NoSuchElementException(Property.ERROR_MESSAGES.ER_GET_TESTOBJECT.getErrorMessage());
+		}
+		catch(TimeoutException ex){
 			try {
 				recoverySupportHandle.doRecovery();
 			} catch (Exception e) {
