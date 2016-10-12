@@ -193,6 +193,8 @@ public class Property {
 	
 	public static String BROWSER_COOKIE_TRIAL = "";
 	
+	public static String RECOVERY_ALERT_TRIAL = "3";
+	
 	public static String StepDescription = "";
 	
 	public static String StepSnapShot = "";

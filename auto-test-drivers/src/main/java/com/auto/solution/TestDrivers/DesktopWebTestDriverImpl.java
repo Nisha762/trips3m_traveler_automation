@@ -33,6 +33,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -538,7 +539,10 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 				actualTestElement = getActualTestObject();
 			}
 		}
-		catch(TimeoutException te){
+		catch(NoSuchFrameException ne){
+			throw ne;
+		}
+		catch(Exception ex){
 			try {
 				recoverySupportHandle.doRecovery();
 			} catch (Exception e) {
@@ -549,9 +553,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			if(actualTestElement==null)
 					throw new NoSuchElementException(Property.ERROR_MESSAGES.ER_GET_TESTOBJECT.getErrorMessage());
 		}
-		catch(NoSuchFrameException ne){
-			throw ne;
-		}
+		
 		return actualTestElement;
 	}
 	
