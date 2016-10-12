@@ -34,6 +34,7 @@ public class InvokeAPI {
 	
 	private TestCase accessSoapUIProject() throws Exception{
 		try{
+			System.setProperty("soapui.log4j.config", resource_manager.getSoapUiLogConfig());
 			String soapuiProject = resource_manager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME).replace("{EXTERNAL_FILE_NAME}", this.project_name + ".xml");
 			
 			WsdlProject soapui_project = new WsdlProject(soapuiProject);

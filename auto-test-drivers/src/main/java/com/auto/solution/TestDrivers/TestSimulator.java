@@ -66,7 +66,7 @@ public class TestSimulator {
  	}
  	
  	
- 	public void simulateTestStep(String stepAction,String testData,String testObject, String strategyModifier,boolean isReusableTestKeyword) throws Exception{
+ 	public void simulateTestStep(String stepAction,String testData,String testObject, String strategyModifier,boolean isReusableTestKeyword){
  		
  		if(isReusableTestKeyword){
  			return;

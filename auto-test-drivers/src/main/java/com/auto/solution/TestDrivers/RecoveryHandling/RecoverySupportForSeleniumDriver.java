@@ -3,6 +3,7 @@ package com.auto.solution.TestDrivers.RecoveryHandling;
 import java.util.List;
 import java.util.Properties;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,6 +27,34 @@ public class RecoverySupportForSeleniumDriver extends RecoverySupport {
 		}
 	}
 	
+	private boolean handleRecovery(String recoveryObjectName,String recoveryObjectStrategyToLocate,String recoveryObjectLocation,String recoveryActionToPerform) throws Exception {
+		boolean isRecoveryPerformed =  false;
+		try{
+		if(recoveryObjectName.toLowerCase().contains("alert")){
+			int alertTrial = Integer.parseInt(Property.RECOVERY_ALERT_TRIAL);
+			boolean alertFound = true;
+			while(alertTrial > 0 && alertFound!=false){
+				alertTrial--;
+				Alert alert = getRecoveryAlertObject(recoveryObjectStrategyToLocate, recoveryObjectLocation);
+				if(alert == null){alertFound = false; continue;}
+				performRecoveryActionOnTestObject(recoveryActionToPerform, alert);
+				isRecoveryPerformed =  true;
+			}
+		}else{
+			WebElement recoveryTestObject = getRecoveryTestObject(recoveryObjectStrategyToLocate, recoveryObjectLocation);
+			if(recoveryTestObject == null){ 
+				isRecoveryPerformed = false;
+			}else{
+				performRecoveryActionOnTestObject(recoveryActionToPerform, recoveryTestObject);
+				isRecoveryPerformed =  true;
+			}
+		}
+		}catch(Exception ex){
+			throw ex;
+		}
+		return isRecoveryPerformed;
+	}
+	
 	@Override
 	public void doRecovery() throws Exception {
 		try{
@@ -35,10 +64,12 @@ public class RecoverySupportForSeleniumDriver extends RecoverySupport {
 			String recoveryObjectLocation = this.recoveryObjectLocations.get(recoveryObjectIndex);
 			String recoveryActionToPerform = this.recoveryActionsToBeExcutedOnObject.get(recoveryObjectIndex);
 			
-			WebElement recoveryTestObject = getRecoveryTestObject(recoveryObjectStrategyToLocate, recoveryObjectLocation);
-			if(recoveryTestObject == null){continue;}
-			performRecoveryActionOnTestObject(recoveryActionToPerform, recoveryTestObject);
-			break;
+			if(!handleRecovery(recoveryObjectName, recoveryObjectStrategyToLocate, recoveryObjectLocation, recoveryActionToPerform)){
+				continue;
+			}else{
+				break;
+			}
+			
 		}
 		}
 		catch(Exception e){
@@ -59,11 +90,12 @@ public class RecoverySupportForSeleniumDriver extends RecoverySupport {
 			String recoveryObjectPriority = this.recoveryObjectsPriorities.get(recoveryObjectIndex);
 			
 			if(recoveryObjectPriority.equalsIgnoreCase("high")){
-				WebElement recoveryTestObject = getRecoveryTestObject(recoveryObjectStrategyToLocate, recoveryObjectLocation);
-				if(recoveryTestObject == null){ continue;}
-					performRecoveryActionOnTestObject(recoveryActionToPerform, recoveryTestObject);
+				if(!handleRecovery(recoveryObjectName, recoveryObjectStrategyToLocate, recoveryObjectLocation, recoveryActionToPerform)){
+					continue;
+				}else{
 					break;
 				}
+			}
 		}
 		}
 		catch(Exception e){
@@ -113,10 +145,28 @@ public class RecoverySupportForSeleniumDriver extends RecoverySupport {
 		return testElement;
 	}
 	
-	private void performRecoveryActionOnTestObject(String actionNameToPerform,WebElement recoveryObject) throws Exception{
+	private Alert getRecoveryAlertObject(String locatingStrategyForRecoveryObject,String locationOfRecoveryObject){
+		Alert alt = null;
+		try{
+			if(locatingStrategyForRecoveryObject.toLowerCase().contains("text")){
+				alt = this.actionDriver.switchTo().alert();
+				if(!alt.getText().contains(locationOfRecoveryObject)){
+					alt=null;
+				}
+			}
+		}catch(Exception ex){
+			return null;
+		}
+		
+		return alt;
+	}
+	
+	private void performRecoveryActionOnTestObject(String actionNameToPerform,Object recoveryObject) throws Exception{
 		try{
 			if(actionNameToPerform.equalsIgnoreCase("click")){
-				recoveryObject.click();
+				((WebElement) recoveryObject).click();
+			}else if(actionNameToPerform.contains("alert-accept")){
+					((Alert) recoveryObject).accept();
 			}
 			else{
 				String errMessage = ERROR_MESSAGES.ER_IN_SPECIFYING_RECOVERY_ACTION.getErrorMessage().replace("{ACTION_NAME}", actionNameToPerform);

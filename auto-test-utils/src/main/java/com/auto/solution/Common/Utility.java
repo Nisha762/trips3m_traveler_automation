@@ -606,7 +606,7 @@ public class Utility {
      * verify text from range of page:- @A verifyPdfText; @D filename#texttoverify#startpagenumber to endpagenumber;
      */
     
-    public static void verifyPdfText(String filePath,String expectedValueOfProperty,int startPage,int endPage){
+    public static void verifyPdfText(String filePath,String expectedValueOfProperty,int startPage,int endPage) throws Exception{
     	try {	
     		PDDocument document = null;   
 		    document = PDDocument.load(new File(filePath));
@@ -629,7 +629,7 @@ public class Utility {
 				}
 		    }
 		} catch (Exception e) {
-		    e.printStackTrace();
+			throw new Exception(e.getMessage());
 		}
     }
     
