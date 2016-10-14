@@ -543,6 +543,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throw ne;
 		}
 		catch(UnhandledAlertException ua){
+			if(isWaitRequiredToFetchTheTestObject){
 			try {
 				recoverySupportHandle.doRecovery();
 			} catch (Exception e) {
@@ -552,6 +553,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			waitAndGetTestObject(false);
 			if(actualTestElement==null)
 					throw new NoSuchElementException(Property.ERROR_MESSAGES.ER_GET_TESTOBJECT.getErrorMessage());
+			}
 		}
 		catch(TimeoutException ex){
 			try {
