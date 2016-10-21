@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="CancelRequest" resourceRoot="" soapui-version="5.2.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="2b6eba35-6c51-49da-9258-6b87d1163832" wadlVersion="http://wadl.dev.java.net/2009/02" name="CancelRequestById" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#TestCase#endpoint}</con:endpoint></con:endpoints><con:resource name="cancelRequest" path="/api/{api_version}/requested_trips/{requestID}/cancelRequest" id="cf30528a-c862-495a-9033-5cc32474cc06"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>requestID</con:name><con:value>requestID</con:value><con:style>TEMPLATE</con:style><con:default>requestID</con:default></con:parameter></con:parameters><con:method name="Method 1" id="c5f8b40c-a33a-4c61-89f8-2348cd9e0f0b" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="f405aa86-ece1-48d8-8d43-96e55b7e70fb" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="5fc9e98b-f392-4bb3-9304-cc3873931683" wadlVersion="http://wadl.dev.java.net/2009/02" name="SignIn" type="rest" definitionUrl="SignIn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="sign_in" path="/users/sign_in" id="25613143-5157-454e-a786-a43fc405813d"><con:settings/><con:parameters/><con:method name="Method 1" id="1e4c6bd4-5130-44b7-84a3-bbd624846937" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="3eb9c184-403c-43f6-84c0-7d65f6492be2" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:request>{"login_type":"json","user":{"email":"testing1112015a@rediffmail.com","password":"testing00000007"}}</con:request><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="4656eb9f-537a-4675-8655-bfb6e8421b2c" name="CancelRequest"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="43ae1842-4650-4765-9f14-fad241f36136" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="User_Cancel_A_Request" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Given user gets the hash key" id="a312f009-b295-493d-a53c-e260ac7319f0"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/users/sign_in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>3A9iJpxCt8Sw9klp25TaT1z0E/vKSfpADaUkGy1NyUQ=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user logged in with correct credentials" id="801874b5-35c4-49fe-9f0b-03bf2d12503d"><con:settings/><con:config service="SignIn" resourcePath="/users/sign_in" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user logged in with correct credentials" id="3eb9c184-403c-43f6-84c0-7d65f6492be2" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  <con:entry key="TT-Mobile" value="${Get TT-Mobile Token#hash_key}"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request>{"login_type":"json","user":{"email":"${#TestCase#user_email}","password":"${#TestCase#user_password}"}}</con:request><con:originalUri>http://null///users/sign_in</con:originalUri><con:assertion type="Simple Contains" id="deae8a1e-56bc-4019-85a4-6d04f3a82c81" name="emaiid"><con:configuration><token>${#TestCase#user_email}</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="be0dfb93-4128-458c-aabe-15a2cc6aa949"><con:configuration/></con:assertion><con:assertion type="Simple Contains" id="750cdc75-673f-447e-a12a-9269845d64e1" name="status"><con:configuration><token>true</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="3e90558a-626c-4798-ab16-12ce73076132" name="Get user details"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+String user_id = json_response_holder.current_user.id.toString();
+
+String auth_key = json_response_holder.current_user.pubnub_auth.auth_key;
+
+messageExchange.modelItem.testCase.setPropertyValue("user_id",user_id);
+
+messageExchange.modelItem.testCase.setPropertyValue("auth_key",auth_key);
+log.info "user_id : "+user_id</scriptText></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="3e5b7cc5-db38-4884-83f1-ec8f73d04b6a" name="Get responce cookie"><con:configuration><scriptText>for(String cookie in messageExchange.getResponseHeaders()["Set-Cookie"]){
+	if(cookie.contains("_trips3m_session")){
+		messageExchange.modelItem.testCase.setPropertyValue("Cookie",cookie);
+	}
+}</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="Get TT-Mobile Token" id="67298079-97e0-4e2e-9e0c-6525e9e5e2c6"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>${#TestCase#endpoint}/api/v1/requested_trips/${#TestCase#request_id}/cancelRequest</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>3A9iJpxCt8Sw9klp25TaT1z0E/vKSfpADaUkGy1NyUQ=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Cancel Request" id="304f4423-4957-4a4f-86f6-02faa374512d"><con:settings/><con:config service="CancelRequestById" resourcePath="/api/{api_version}/requested_trips/{requestID}/cancelRequest" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Cancel Request" id="f405aa86-ece1-48d8-8d43-96e55b7e70fb" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  <con:entry key="TT-Mobile" value="${Get TT-Mobile Token#hash_key}"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request>{"cancel_reason":"","changed_destination_name":"","commit":"Cancel Request","id":${#TestCase#request_id},"otherReason":"","quote_customization":"","reason":"Canceled"}</con:request><con:originalUri>http://traveltriangle.com/api/v1/requested_trips/1009588/cancelRequest</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="59d34fac-a746-4614-9a05-9ee9a274b7e9" name="HTTP Status - 200!"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="requestID" value="${#TestCase#request_id}"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters></con:restRequest></con:config></con:testStep><con:setupScript>log.info testCase.getLabel()</con:setupScript><con:properties><con:property><con:name>endpoint</con:name><con:value>traveltriangle.com</con:value></con:property><con:property><con:name>user_email</con:name><con:value>rahul@traveltriangle.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value>123456</con:value></con:property><con:property><con:name>request_id</con:name><con:value>946499</con:value></con:property><con:property><con:name>user_id</con:name><con:value>645051</con:value></con:property><con:property><con:name>auth_key</con:name><con:value>1548ae3e677011e6a8af06e354b2dad3</con:value></con:property><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CUkiD3Nlc3Npb25faWQGOgZFVEkiJTZlYmU2ZTQ5MDVhMDdmZTg2NGVkNTRkZjVkYzc1MzU3BjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA7vXCUkiIiQyYSQxMCRvSFJOM1Jram9CQlNUVkQ4TUljL1h1BjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVV5cnpPbktzblBCcmI4b0Uxbk8zMGQ4L29VZzBFQ20yd1BYNVhZczVOQ1k9BjsARg%3D%3D--748add55b1169f0255c2149d08d7100bf8569999; path=/; HttpOnly</con:value></con:property></con:properties></con:testCase><con:properties/><con:setupScript>log.info </con:setupScript></con:testSuite><con:testSuite id="fdca761a-7dc9-4c44-8551-75593cd9d082" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1966b330-a53d-494b-ba1a-a687afdeabe8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="4afacfac-43d1-4460-8712-12aef9c0477c"><con:settings/><con:config><script>import java.security.MessageDigest;
+import org.codehaus.groovy.runtime.EncodingGroovyMethods;
+
+
+String requestUrl = context.expand('${#TestCase#request_url}');
+String userEmail = context.expand('${#TestCase#user_email}');
+String requestType = context.expand('${#TestCase#request_type}');
+log.info requestUrl;
+String digest;
+
+if( requestType == "get" ){
+  	digest = requestUrl; 
+} else {
+digest = userEmail + requestType;
+}
+
+digest = getUserDigest(digest); //this is final digest
+
+log.info digest;
+testRunner.testCase.setPropertyValue("hash_key",digest);
+
+String getUserDigest(String digest) {
+   String TT_S_KEY = "DAFAC0A55F50A75558B778035E3C9A8BDF03AF1E4C2124D2CD5DD42092EFD32E";
+   try {
+       digest = TT_S_KEY + digest;
+       MessageDigest msgDigest = MessageDigest.getInstance("SHA-256");
+       msgDigest.update(digest.getBytes());
+       EncodingGroovyMethods encodeObj = new EncodingGroovyMethods();
+       //digest = new String(Base64.encode(msgDigest.digest(), Base64.DEFAULT));
+       digest = encodeObj.encodeBase64(msgDigest.digest()).toString();
+       if (digest.length() > 164) {
+           digest = digest.substring(0, 163);
+       }
+       return digest;
+   } catch (Exception e) {
+       log.info e.getMessage();
+   }
+   return null;
+}
+</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>http://traveltriangle.com/users/sign_in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>rahul@traveltriangle.com</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>3A9iJpxCt8Sw9klp25TaT1z0E/vKSfpADaUkGy1NyUQ=</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties><con:property><con:name>execution_tag</con:name><con:value>regression</con:value></con:property><con:property><con:name>dbname</con:name><con:value/></con:property><con:property><con:name>traveler_apiendpoint</con:name><con:value>traveler-api.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>jocker11@gmail.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value>abc123</con:value></con:property><con:property><con:name>api_version</con:name><con:value>v2</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:beforeRunScript>import groovy.lang.Binding;
+import groovy.util.GroovyScriptEngine;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoDatabase;
+
+////////////////////// Functions /////////////////////////
+
+def filterList(commaSperatedListContent){
+	def list = commaSperatedListContent.split(",");
+	def filteredList = [];
+	list.each(){
+	def entry = it.toLowerCase().replaceAll("^\\s+", "");
+	entry = entry.trim();
+	if(entry != ""){
+	filteredList.add(entry);}	
+	}
+	return filteredList;
+}
+
+def customListCompare(list1,list2){
+	//list1 is the list of tags that are given by user to execute.
+	//list2 is the list of tags for specific test suite.
+	boolean isRunnable = false;
+	for(int l1 in 0 .. list1.size()-1)
+	{
+		def inputTag = list1.get(l1);		
+		for(int l2 in 0 .. list2.size()-1){
+			
+			if(inputTag.toString() == list2.get(l2).toString()){
+				isRunnable =  true;
+				break;
+			}
+		}
+		if(isRunnable){
+			break;
+		}
+	}
+	return isRunnable;
+}
+///////////////////// Function //////////////////////////////////////////////
+
+log.info "Start execution";
+def projDir = context.expand('${projectDir}')
+try{
+File propFile =new File(projDir + "/Configurations/" + project.getName() + "/" + project.getName() + ".properties");
+log.info propFile;
+boolean isDeleted = propFile.delete();
+log.info isDeleted;
+}
+catch(Exception e){log.info e.getMessage();}
+
+
+
+def execution_Tag = project.getPropertyValue("execution_tag");
+
+log.info "Test Execution Base Tag : "+ execution_Tag;
+
+//Fetch the tags to execute the required test suites.
+def filteredTags = filterList(execution_Tag) ;
+
+def Conf_input = "";
+
+log.info "Reading the Configuration file.....";
+
+try{
+
+Conf_input = new File(projDir + "/Configurations/" + project.getName() + "/TestData.xml");
+
+def parser = new XmlParser(); //Get XML Parser.
+
+def Configuration = parser.parse(Conf_input);//Point parser to configration file.
+
+context.Configuration = Configuration;
+
+}
+catch(Exception e){
+		assert false : "Error in reading configuration file -- " + e.getMessage();
+}
+
+def testSuiteListToExecute = [];
+
+log.info "Fetching Test-Scenarios to execute....";
+
+def testSuites = project.getTestSuiteList();
+
+//Enable all TestSuites.
+for(j in 0 .. testSuites.size()-1){
+	//log.info testSuites.get(j).getName();
+	testSuites.get(j).setDisabled(false); 
+}
+//Decide which test suites to execute and eventually disabled the non-relevant test suites.
+		for(i in 0 .. testSuites.size()-1) {
+   			def testSuiteName = testSuites.get(i).getName();
+   			def tags = context.Configuration.TestSuite."${testSuiteName}".tags.text()
+   			def testSuiteTags = filterList(tags);
+   			   			
+   			if(filteredTags == null || filteredTags.empty){
+   				break;
+   			}
+   			else{
+   				if(testSuiteTags == null || testSuiteTags.empty){
+   					testSuites.get(i).setDisabled(true);
+   				}
+   				else{
+   					def isRunnable = customListCompare(filteredTags,testSuiteTags);
+   					log.info testSuiteName+":::"+isRunnable
+   					if(!isRunnable){
+   						testSuites.get(i).setDisabled(true);
+   					}
+   				}
+   			}
+   			
+		}
+
+
+// Load Databases.
+log.info"Loading Databases........";
+
+int index = 1;
+
+String[] db_Names = project.getPropertyValue("dbname").split(",");
+
+for(String db_Name in db_Names){
+
+db_Name = db_Name.trim();
+
+if(db_Name == ""){break;}
+
+context.dbName = db_Name;
+
+String dbConnectionString = "";
+
+String dbDriver = "";
+
+String dbType = "";
+
+try{
+	String databaseCollectionFile_Location = projDir + "/Configurations/" + project.getName() + "/DataBases.csv";
+	
+	BufferedReader reader = new BufferedReader(new FileReader(databaseCollectionFile_Location));
+	
+	String lineInFile = reader.readLine();
+		
+		while(lineInFile != null){
+		
+		String[] lineContents = lineInFile.split(",");
+		
+		if(lineContents[0] == context.dbName){
+			dbType = lineContents[1]
+			dbDriver = lineContents[2];
+			dbConnectionString = lineContents[3];
+			break;
+		}
+		lineInFile = reader.readLine();
+		}
+}
+catch(Exception e){
+	log.info "Couldn't load database from 'Databases' repo.Please review the file again!!" + e.getMessage();
+}
+context.dbDriver = dbDriver
+
+context.dbConnectionString = dbConnectionString
+
+log.info "Connecting to : [" + context.dbName + "] ................";
+
+log.info "DB Connection String --" + dbConnectionString;
+
+if(dbType.toLowerCase().contains("mongo")){
+	try{
+	MongoClient mongoClient = new MongoClient(new MongoClientURI(context.dbConnectionString));
+   	
+     context.dbConnection = mongoClient;
+	if(context.mongoConnection == null){
+     context.mongoConnection = mongoClient;}
+     else{
+     	String mongoConnectionString = "mongoConnection" + index;
+     	log.info mongoConnectionString;
+     	context."${mongoConnectionString}" = mongoClient;
+     }
+	}
+	catch(Exception e){
+		runner.fail("Couldn't connect to application DB -- " + context.dbName + " " + e.getMessage());
+	}
+}
+else if(dbType.toLowerCase().contains("mysql")){
+	if(context.dbName != "" &amp;&amp; context.dbName != null){
+	try{
+		com.eviware.soapui.support.GroovyUtils.registerJdbcDriver(context.dbDriver )
+		
+		def connection = DriverManager.getConnection(context.dbConnectionString);
+		context.dbConnection = connection;
+		if(context.mysqlConnection == null){
+     		context.mysqlConnection = connection;}
+     	else{
+     		String mysqlConnectionString = "mysqlConnection" + index;
+     		context."${mysqlConnectionString}" = connection;
+    		 }
+		context.statement = connection.createStatement();
+	}
+	catch(Exception e){
+			runner.fail("Couldn't connect to application DB -- " + context.dbName + " " + e.getMessage());	
+	}
+}
+}
+index++;
+}
+log.info "Loading utilities......";
+//create an instance of generic utilities.
+try{
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+String path = projDir + "/ext/";
+
+GroovyScriptEngine gse = new GroovyScriptEngine(path) ;
+externalScript = gse.loadScriptByName("Utilities.groovy")
+instance = externalScript.newInstance()
+context.utility = instance ; 
+}
+catch(Exception e){
+	log.info "Unable to initialize framework utility, error being -- " + e.getMessage();
+}
+
+log.info"Preparing test data ..............";
+
+context.Configuration.children().each{
+	if(it.name() == "TestSuite"){
+		it.children().each{
+	String testSuiteNameInConf = it.name();
+	
+	it.children().each{
+		if(it.name() != "tags"){			
+			String testCaseNameInConf = it.name();
+			
+			it.children().each{
+				try{
+					//log.info testSuiteNameInConf+":::"+testCaseNameInConf+":::"+it.name()+":::"+it.text()
+					project.getTestSuiteByName(testSuiteNameInConf).getTestCaseByName(testCaseNameInConf).setPropertyValue(it.name(), it.text());
+					}
+				catch(Exception e){ }
+			}
+		}
+	}
+}
+}
+}</con:beforeRunScript><con:afterRunScript>import com.eviware.soapui.model.testsuite.TestSuiteRunner;
+import com.eviware.soapui.model.testsuite.TestCaseRunner;
+import com.eviware.soapui.model.testsuite.TestRunner.Status;
+
+def projDir = context.expand('${projectDir}')
+// Get the Execution tag.
+String executiontag = project.getPropertyValue("execution_tag");
+
+//Start Time
+def projectstartTime = new Date(runner.getStartTime());
+
+//Time Taken
+def pr_timeTaken = runner.getTimeTaken();
+
+int testcasespassed = 0;
+int testcasesfailed = 0;
+int testcasesexecuted = 0;
+List&lt;String> testCaseNameFailed = new ArrayList&lt;String>();
+//Number Of test cases passed/failed/didn't run.
+def List&lt;TestSuiteRunner> testSuiteRunners = runner.getResults()
+
+for(TestSuiteRunner suiterunner in testSuiteRunners){
+	String testSuiteName = suiterunner.getTestSuite().getName();
+	List&lt;TestCaseRunner> testcaserunners = suiterunner.getResults();
+	for(TestCaseRunner testcaserunner in testcaserunners){
+		Status status = testcaserunner.getStatus();
+		 String testcasename = testcaserunner.getTestCase().getName();
+		if(status == Status.FINISHED){
+			testcasespassed++;
+		}
+		if(status == Status.FAILED){
+			testcasesfailed++;
+			testCaseNameFailed.add(testcasename);
+		}
+		log.info status;
+	}
+}
+testcasesexecuted = testcasespassed + testcasesfailed;
+def percentPassed = (testcasespassed / testcasesexecuted) * 100;
+percentPassed = Math.round(percentPassed * 100) / 100
+String testCaseFailedInStringFormat = "";
+for(String testCaseFailed in testCaseNameFailed){
+	if(testCaseFailedInStringFormat == ""){
+		testCaseFailedInStringFormat = testCaseFailed;
+	}
+	else{
+	testCaseFailedInStringFormat = testCaseFailedInStringFormat + "," + testCaseFailed}
+}
+
+// create a property file.
+try{
+File propFile =new File(projDir + "/Configurations/" + project.getName() + "/" + project.getName() + ".properties");
+propFile.delete();
+boolean isCreated = propFile.createNewFile();
+log.info isCreated;
+Properties props = new Properties();
+props.load(propFile.newDataInputStream());
+props.setProperty("testgroup",executiontag);
+props.setProperty("StartTime",projectstartTime.toString());
+props.setProperty("timetaken",pr_timeTaken.toString());
+props.setProperty("testexecuted",testcasesexecuted.toString());
+props.setProperty("testcasespassed",testcasespassed.toString());
+props.setProperty("testcasesfailed",testcasesfailed.toString());
+props.setProperty("persentpassed",percentPassed.toString());
+props.setProperty("testCaseFailedInStringFormat",testCaseFailedInStringFormat);
+props.store(propFile.newWriter(), null)
+}
+catch(Exception e){
+	log.info "Error in storing test execution data"  + e.getMessage();
+}
+</con:afterRunScript><con:sensitiveInformation/></con:soapui-project>
