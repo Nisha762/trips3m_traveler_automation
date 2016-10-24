@@ -51,5 +51,11 @@
 			   <agentID>199585</agentID>
 		   </User_gets_agent_details>
 	   </AgentInfo>
+	   <BookingScenarios>
+			<tags>booktrip,regression</tags>
+	   </BookingScenarios>
+	   <UserRejectQuote>
+			<tags>rejectquote,regression</tags>
+	   </UserRejectQuote>
 </TestSuite>
 </project>
