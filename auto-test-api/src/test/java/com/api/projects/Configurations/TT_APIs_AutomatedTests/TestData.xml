@@ -57,5 +57,20 @@
 	   <UserRejectQuote>
 			<tags>rejectquote,regression</tags>
 	   </UserRejectQuote>
+	   <UserReactiveQuote>
+		<tags>reactivequote,regression</tags>
+	   </UserReactiveQuote>
+	   <CancelRequest>
+		<tags>cancelrequest,regression</tags>
+	   </CancelRequest>
+	   <ReactivateTrip>
+		<tags>reactivetrip,regression</tags>
+	   </ReactivateTrip>
+	   <CommentOnQuote>
+	   <tags>comment,regression</tags>
+	   </CommentOnQuote>
+	   <Hotel>
+	   <tags>hotel,regression</tags>
+	   </Hotel>
 </TestSuite>
 </project>
