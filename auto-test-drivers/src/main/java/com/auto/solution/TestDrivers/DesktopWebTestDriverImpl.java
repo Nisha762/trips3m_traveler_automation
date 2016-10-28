@@ -552,7 +552,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			}
 			waitAndGetTestObject(false);
 			if(actualTestElement==null)
-					throw new NoSuchElementException(Property.ERROR_MESSAGES.ER_GET_TESTOBJECT.getErrorMessage());
+					throw ua;
 			}
 		}
 		catch(TimeoutException ex){
