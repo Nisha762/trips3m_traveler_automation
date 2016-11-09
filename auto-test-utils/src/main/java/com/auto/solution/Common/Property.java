@@ -60,6 +60,8 @@ public class Property {
 	
 	public static String CONDITIONAL_KEYWORD_SEPERATOR = "|";
 	
+	public static String PRECONDITION_SEPERATOR = "==";
+	
 	public static String TEST_MANAGEMENT_KEY = "";
 	
 	public static String TEST_MANAGEMENT_USERNAME = "";
@@ -288,6 +290,7 @@ public class Property {
 		ER_IN_SPECIFYING_TEST_PROJECT("Engine couldn't find the project specified -- '" + PROJECT_NAME + "'"),
 		ER_INFILTERING_TESTSUITES("Something went wrong while filtering Test Scenarios to execute"),
 		ER_IN_GETTING_TESTSTEPS_FOR_TESTCASE("Something went wrong while getting test steps for the testcase"),
+		ERR_IN_PARSING_PRECONDITIONS_FOR_TESTCASE("Something not right in getting preconditions for a testcase"),
 		ER_IN_REPORTING_TESTCASE_STATUS("Error in reporting test result."),
 		ER_CONNECTING_REPOSITORIES("Couldn't connect to {REPOSITORY}."),
 		ER_CONNECTING_EXTERNALFILE("Engine failed to connect external file contant"),

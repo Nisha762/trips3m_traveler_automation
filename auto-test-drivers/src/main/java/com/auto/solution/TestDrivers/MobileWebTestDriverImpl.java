@@ -58,6 +58,7 @@ import com.auto.solution.Common.Property;
 import com.auto.solution.Common.ResourceManager;
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
 import com.auto.solution.Common.Property.FILTERS;
+import com.auto.solution.Common.RecoveryObjectsMapper;
 import com.auto.solution.Common.Utility;
 import com.auto.solution.TestDrivers.RecoveryHandling.RecoverySupportForSeleniumDriver;
 
@@ -84,6 +85,10 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 	private TestObjectDetails testObjectInfo = null;
 	
 	private ResourceManager rManager;
+	
+	private RecoveryObjectsMapper objMapper;
+	
+	public ArrayList<String> recoveryObjectsToSkip = new ArrayList<String>();
 	
 	MobileWebTestDriverImpl(ResourceManager rmanager) {
 		this.rManager = rmanager;
@@ -378,10 +383,10 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 							}
 					});
 					try{
-					recoverySupportHandle.doRecoveryForSpecialObjectsWithHigherPriority();
+					recoverySupportHandle.doRecoveryForSpecialObjectsWithHigherPriority(this.objMapper);
 					
 					if(actualTestElement==null)
-						recoverySupportHandle.doRecovery();
+						recoverySupportHandle.doRecovery(this.objMapper);
 					}
 					catch(Exception e){  System.out.println("RECOVERY_ACTION - " + e.getMessage());}
 					waitAndGetTestObject(false);
@@ -392,7 +397,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		}
 		catch(TimeoutException te){
 			try {
-				recoverySupportHandle.doRecovery();
+				recoverySupportHandle.doRecovery(this.objMapper);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				throw new Exception(Property.ERROR_MESSAGES.ER_IN_SPECIFYING_RECOVERY_ACTION.getErrorMessage());
@@ -519,6 +524,12 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		} catch (Exception e) {
 				}
 		return url_status;
+	}
+	
+	
+	public void setRecoveryObjectMapper(RecoveryObjectsMapper objMapper){
+		this.objMapper = new RecoveryObjectsMapper();
+		this.objMapper = objMapper;
 	}
 	
 	@Override

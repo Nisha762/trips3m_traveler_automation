@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.poi.hssf.record.formula.functions.Files;
 import org.dbunit.dataset.DataSetException;
@@ -357,6 +358,49 @@ public class TESTLINKTestManager extends TestManagerUtils implements ITestManage
 			throw new Exception(ERROR_MESSAGES.ER_IN_GETTING_TESTSTEPS_FOR_TESTCASE.getErrorMessage() + " --" + e.getMessage());
 		}
 		return testCaseSteps;
+	}
+	
+	@Override
+	public ArrayList<String> getPreConditionsForTestCase(String testCaseID) throws Exception {
+		
+		ArrayList<String> objectsNotToRecover = new ArrayList<String>();
+		try{
+		Integer testCaseid = testLinkInstance.getTestCaseIDByName(testCaseID, this.testSuiteName, this.testProject.getName(), "");
+		
+		this.testCaseID = testCaseid;
+		
+		this.testCase = testLinkInstance.getTestCase(this.testCaseID, null, null);
+		
+		String preconditions = "";
+		
+		preconditions = this.testCase.getPreconditions();
+		
+		if(!preconditions.contains(Property.PRECONDITION_SEPERATOR) && !preconditions.isEmpty()){
+			//throw new Exception("Precondition not defined correctly");
+			return objectsNotToRecover;
+		}
+		
+		if(!preconditions.isEmpty()){
+		String precondition_parsed = preconditions.split(Pattern.quote(Property.PRECONDITION_SEPERATOR))[1].trim();
+		
+		String[] testObjectsInPrecondition = precondition_parsed.split(",");
+		
+		for (int i = 0; i < testObjectsInPrecondition.length; i++)
+			{String parsedObjectNames = testObjectsInPrecondition[i].replaceAll("\\<.*?>","");
+			parsedObjectNames = parsedObjectNames.replaceAll("&nbsp;","");
+			parsedObjectNames = parsedObjectNames.trim();
+			testObjectsInPrecondition[i] = parsedObjectNames;
+			}
+		
+		objectsNotToRecover = new ArrayList<String>(Arrays.asList(testObjectsInPrecondition));
+		}
+		
+	}
+		catch(Exception e){
+			//throw new Exception(ERROR_MESSAGES.ERR_IN_PARSING_PRECONDITIONS_FOR_TESTCASE.getErrorMessage() + " --" + e.getMessage());
+			
+		}
+		return objectsNotToRecover;
 	}
 
 	@Override

@@ -509,6 +509,12 @@ public class TESTRAILTestManager extends TestManagerUtils implements ITestManage
 			}
 	}
 
+	@Override
+	public ArrayList<String> getPreConditionsForTestCase(String testCaseID) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
 

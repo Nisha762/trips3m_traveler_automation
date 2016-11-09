@@ -1,5 +1,6 @@
 package com.auto.solution.TestDrivers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -8,6 +9,7 @@ import com.auto.solution.Common.Property;
 import com.auto.solution.Common.ResourceManager;
 import com.auto.solution.Common.Utility;
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
+import com.auto.solution.Common.RecoveryObjectsMapper;
 import com.auto.solution.DatabaseManager.AccessResultsetData;
 import com.auto.solution.DatabaseManager.ConnectDatabase;
 import com.auto.solution.FileManager.CsvManager;
@@ -26,6 +28,8 @@ public class TestSimulator {
  	
  	private InvokeAPI api_caller = null;
  	
+ 	private RecoveryObjectsMapper objMapper = null;
+ 	
  	public TestSimulator(ResourceManager rmanager){
  		
  		this.rm = rmanager;
@@ -42,18 +46,26 @@ public class TestSimulator {
  		this.objDefInfo = currentTestObjectInfo;
  	}
  	
+ 	public void consumeTestObjectsNameToSkipDuringRecovery(RecoveryObjectsMapper objMapper){
+		this.objMapper = new RecoveryObjectsMapper();
+		this.objMapper = objMapper;
+	}
+
+ 	
  	public void enableTestDriver(String testDriverKey){
  		
  		testSimulator = null;
  		
  		if(testDriverKey.contains(Property.DESKTOP_WEB_TESTDRIVER_KEYWORD)){
  			testSimulator = new DesktopWebTestDriverImpl(this.rm);
+ 			((DesktopWebTestDriverImpl)testSimulator).setRecoveryObjectMapper(this.objMapper);
  	    }
  	    else if(testDriverKey.contains(Property.MOBILE_APP_ANDRIOD_TESTDRIVER_KEYWORD)){
  	    	testSimulator = new MobileAndriodTestDriverImpl(this.rm);
  	    }
  	    else if(testDriverKey.contains(Property.MOBILE_WEB_TESTDRIVER_KEYWORD)){
  	    	testSimulator = new MobileWebTestDriverImpl(this.rm);
+ 	    	((MobileWebTestDriverImpl)testSimulator).setRecoveryObjectMapper(this.objMapper);
  	    }
  	    else if(testDriverKey.contains(Property.MOBILE_IOS_TESTDRIVER_KEYWORD)){
  	    	testSimulator = new MobileIOSTestDriverImpl(this.rm);
