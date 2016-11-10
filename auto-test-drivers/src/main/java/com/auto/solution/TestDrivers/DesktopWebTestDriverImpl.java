@@ -364,6 +364,9 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			else if(Key.equalsIgnoreCase("tab")){
 				testElement.sendKeys(Keys.TAB);
 			}
+			else if(Key.equalsIgnoreCase("ctrlv")){
+				testElement.sendKeys(Keys.CONTROL+"v");
+			}
 			else{
 				throw new Exception(Property.ERROR_MESSAGES.ER_SPECIFYING_KEYBOARD_KEY.getErrorMessage());
 			}
