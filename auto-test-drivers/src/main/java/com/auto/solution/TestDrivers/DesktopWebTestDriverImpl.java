@@ -55,6 +55,7 @@ import org.openqa.selenium.interactions.Actions;
 import us.codecraft.xsoup.Xsoup;
 
 import com.auto.solution.Common.Property;
+import com.auto.solution.Common.RecoveryObjectsMapper;
 import com.auto.solution.Common.ResourceManager;
 import com.auto.solution.Common.Property.FILTERS;
 import com.auto.solution.Common.Utility;
@@ -95,10 +96,13 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
     
     private TestObjectDetails testObjectInfo = null;
     
+    private RecoveryObjectsMapper objMapper = null;
+    
     DesktopWebTestDriverImpl(ResourceManager rManager) {
 		this.rManager = rManager;
 	}
-		
+	
+	
     private void scroll(){
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("window.scrollBy(0,1500)", "");
@@ -360,6 +364,9 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			else if(Key.equalsIgnoreCase("tab")){
 				testElement.sendKeys(Keys.TAB);
 			}
+			else if(Key.equalsIgnoreCase("ctrlv")){
+				testElement.sendKeys(Keys.CONTROL+"v");
+			}
 			else{
 				throw new Exception(Property.ERROR_MESSAGES.ER_SPECIFYING_KEYBOARD_KEY.getErrorMessage());
 			}
@@ -527,10 +534,10 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 							}
 					});
 					try{
-					recoverySupportHandle.doRecoveryForSpecialObjectsWithHigherPriority();
+					recoverySupportHandle.doRecoveryForSpecialObjectsWithHigherPriority(this.objMapper);
 					
 					if(actualTestElement==null)
-						recoverySupportHandle.doRecovery();
+						recoverySupportHandle.doRecovery(this.objMapper);
 					}
 					catch(Exception e){  System.out.println("RECOVERY_ACTION - " + e.getMessage());}
 					waitAndGetTestObject(false);
@@ -545,7 +552,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(UnhandledAlertException ua){
 			if(isWaitRequiredToFetchTheTestObject){
 			try {
-				recoverySupportHandle.doRecovery();
+				recoverySupportHandle.doRecovery(this.objMapper);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				throw new Exception(Property.ERROR_MESSAGES.ER_IN_SPECIFYING_RECOVERY_ACTION.getErrorMessage());
@@ -557,7 +564,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		}
 		catch(TimeoutException ex){
 			try {
-				recoverySupportHandle.doRecovery();
+				recoverySupportHandle.doRecovery(this.objMapper);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				throw new Exception(Property.ERROR_MESSAGES.ER_IN_SPECIFYING_RECOVERY_ACTION.getErrorMessage());
@@ -586,6 +593,11 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		} catch (Exception e) {
 				}
 		return url_status;
+	}
+	
+	public void setRecoveryObjectMapper(RecoveryObjectsMapper objMapper){
+		this.objMapper = new RecoveryObjectsMapper();
+		this.objMapper = objMapper;
 	}
 	
 	public void waitUntilObjectIsThere(){

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,8 @@ public interface ITestManager {
 	public HashMap<String, String> getActualObjectDefination(String logicalNameOfTheObject) throws Exception;
 	
 	public List<String>  getTestStepsForTestCase(String testCaseID) throws Exception;
+	
+	public ArrayList<String> getPreConditionsForTestCase(String testCaseID) throws Exception;
 	
 	//public void reportTestCaseResult(String testCaseName,String status,String remarks,boolean needToReport) throws Exception;
 	

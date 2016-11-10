@@ -35,6 +35,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.auto.solution.Common.Property;
+import com.auto.solution.Common.RecoveryObjectsMapper;
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
 import com.auto.solution.Common.Property.FILTERS;
 import com.auto.solution.Common.ResourceManager;
@@ -64,6 +65,8 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 	private TestObjectDetails testObjectInfo = null;
 	
 	private ResourceManager rManager;
+	
+	private RecoveryObjectsMapper objMapper = null;
 	
 	MobileAndriodTestDriverImpl(ResourceManager rm) {
 		this.rManager = rm;
@@ -286,6 +289,11 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 		}
 	}
 	
+	public void setRecoveryObjectMapper(RecoveryObjectsMapper objMapper){
+		this.objMapper = new RecoveryObjectsMapper();
+		this.objMapper = objMapper;
+	}
+	
     private WebElement waitAndGetTestObject(Boolean isWaitRequiredToFetchTheTestObject) throws NoSuchElementException, Exception{
 	try{
 		if(Property.LIST_STRATEGY_KEYWORD.contains(Property.STRATEGY_KEYWORD.NOWAIT.toString())){
@@ -314,7 +322,7 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 							}
 					});
 					try{
-					recoverySupportHandle.doRecoveryForSpecialObjectsWithHigherPriority();
+					recoverySupportHandle.doRecoveryForSpecialObjectsWithHigherPriority(this.objMapper);
 					}
 					catch(Exception e){  System.out.println("RECOVERY_ACTION - " + e.getMessage());}
 					waitAndGetTestObject(false);
@@ -325,7 +333,7 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 		}
 		catch(TimeoutException te){
 				try {
-					recoverySupportHandle.doRecovery();
+					recoverySupportHandle.doRecovery(this.objMapper);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					throw new Exception(Property.ERROR_MESSAGES.ER_IN_SPECIFYING_RECOVERY_ACTION.getErrorMessage());
@@ -348,6 +356,7 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 			
 		return testElement;					
 	}
+	
 	
 	@Override
 	public void initializeApp(String endpoint) throws MalformedURLException,

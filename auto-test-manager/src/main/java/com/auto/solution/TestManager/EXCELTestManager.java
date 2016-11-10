@@ -468,4 +468,10 @@ public HashMap<String, HashMap<String, Set<String>>> prepareAndGetCompleteTestHi
 		throw e;
 	}
 }
+
+@Override
+public ArrayList<String> getPreConditionsForTestCase(String testCaseID) throws Exception {
+	// TODO Auto-generated method stub
+	return null;
+}
  }

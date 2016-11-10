@@ -41,6 +41,8 @@ public class TestEngine {
     
     public ResourceManager rManager;
     
+    private ArrayList<String> testObjectsNotToRecoverDuringTestCaseExecution = new ArrayList<String>();
+    
     public static ArrayList<String> TestCaseIDsForExecution = new ArrayList<String>();
     
     boolean IsWriteStep = false;
@@ -75,7 +77,7 @@ public class TestEngine {
 						
     		testExecutionManager.connectRepositories();
 							
-			List<String> listOfTestStepInTestCase = testExecutionManager.getTestStepsForTestCase(TestCaseIDToExecute);			
+			List<String> listOfTestStepInTestCase = testExecutionManager.getTestStepsForTestCase(TestCaseIDToExecute);
 			
 			CompilerFactory factoryInstanceToGetCompilerForTestStep = new CompilerFactory(Property.STRATEGY_TO_USE_COMPILER,rManager);
 			
@@ -83,9 +85,17 @@ public class TestEngine {
 			
 			ArrayList<String> listOfVariableUsedForSpecifyingConditionalTestStep = new ArrayList<String>();
 			
+			testObjectsNotToRecoverDuringTestCaseExecution = new ArrayList<String>();
 			
+			testObjectsNotToRecoverDuringTestCaseExecution = testExecutionManager.getPreConditionsForTestCase(TestCaseIDToExecute);
 			
-			for (String currentTestStep : listOfTestStepInTestCase) {
+			RecoveryObjectsMapper objMapper = new RecoveryObjectsMapper();
+			
+			objMapper.setTestObjectNamesToSkipInRecovery(testObjectsNotToRecoverDuringTestCaseExecution);
+			
+			for (String currentTestStep : listOfTestStepInTestCase) {		
+				
+				objTestSimulator.consumeTestObjectsNameToSkipDuringRecovery(objMapper);				
 				
 				Property.TEST_STEP_ID = 
 				

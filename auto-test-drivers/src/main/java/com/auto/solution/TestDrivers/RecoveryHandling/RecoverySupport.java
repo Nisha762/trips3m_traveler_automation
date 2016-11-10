@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 
 import com.auto.solution.Common.Property;
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
+import com.auto.solution.Common.RecoveryObjectsMapper;
 import com.auto.solution.Common.ResourceManager;
 
 public abstract class RecoverySupport {
@@ -56,7 +57,7 @@ public abstract class RecoverySupport {
 		}
 	}
 	
-	abstract void doRecovery() throws Exception;
+	abstract void doRecovery(RecoveryObjectsMapper objMapper) throws Exception;
 	
-	abstract void doRecoveryForSpecialObjectsWithHigherPriority() throws Exception;
+	abstract void doRecoveryForSpecialObjectsWithHigherPriority(RecoveryObjectsMapper objMapper) throws Exception;
 }

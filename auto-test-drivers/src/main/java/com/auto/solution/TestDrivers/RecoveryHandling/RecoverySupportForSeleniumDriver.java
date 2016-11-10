@@ -1,5 +1,6 @@
 package com.auto.solution.TestDrivers.RecoveryHandling;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -10,7 +11,9 @@ import org.openqa.selenium.WebElement;
 
 import com.auto.solution.Common.Property;
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
+import com.auto.solution.Common.RecoveryObjectsMapper;
 import com.auto.solution.Common.ResourceManager;
+import com.auto.solution.Common.Utility;
 
 
 public class RecoverySupportForSeleniumDriver extends RecoverySupport {
@@ -56,22 +59,26 @@ public class RecoverySupportForSeleniumDriver extends RecoverySupport {
 	}
 	
 	@Override
-	public void doRecovery() throws Exception {
+	public void doRecovery(RecoveryObjectsMapper objMapper) throws Exception {
 		try{
-		for(int recoveryObjectIndex = 0;recoveryObjectIndex < this.recoveryObjectNames.size();recoveryObjectIndex++){
+		
+			for(int recoveryObjectIndex = 0;recoveryObjectIndex < this.recoveryObjectNames.size();recoveryObjectIndex++){
 			String recoveryObjectName = this.recoveryObjectNames.get(recoveryObjectIndex);
 			String recoveryObjectStrategyToLocate = this.recoveryLocatingStrategiesForObject.get(recoveryObjectIndex);
 			String recoveryObjectLocation = this.recoveryObjectLocations.get(recoveryObjectIndex);
 			String recoveryActionToPerform = this.recoveryActionsToBeExcutedOnObject.get(recoveryObjectIndex);
-			
+			ArrayList<String> listOfTestObjectsToSkip = objMapper.getTestObjectNamesToSkipInRecovery();
+			if(!listOfTestObjectsToSkip.contains(recoveryObjectName)){
 			if(!handleRecovery(recoveryObjectName, recoveryObjectStrategyToLocate, recoveryObjectLocation, recoveryActionToPerform)){
 				continue;
 			}else{
 				break;
 			}
+			}
 			
 		}
 		}
+		
 		catch(Exception e){
 			throw e;
 		}
@@ -79,24 +86,28 @@ public class RecoverySupportForSeleniumDriver extends RecoverySupport {
 	}
 	
 	@Override
-	public void doRecoveryForSpecialObjectsWithHigherPriority() throws Exception {
+	public void doRecoveryForSpecialObjectsWithHigherPriority(RecoveryObjectsMapper objMapper) throws Exception {
 		try{
-			int objectSize = this.recoveryObjectNames.size();
-		for(int recoveryObjectIndex = 0;recoveryObjectIndex < objectSize;recoveryObjectIndex++){
-			String recoveryObjectName = this.recoveryObjectNames.get(recoveryObjectIndex);
-			String recoveryObjectStrategyToLocate = this.recoveryLocatingStrategiesForObject.get(recoveryObjectIndex);
-			String recoveryObjectLocation = this.recoveryObjectLocations.get(recoveryObjectIndex);
-			String recoveryActionToPerform = this.recoveryActionsToBeExcutedOnObject.get(recoveryObjectIndex);
-			String recoveryObjectPriority = this.recoveryObjectsPriorities.get(recoveryObjectIndex);
 			
-			if(recoveryObjectPriority.equalsIgnoreCase("high")){
-				if(!handleRecovery(recoveryObjectName, recoveryObjectStrategyToLocate, recoveryObjectLocation, recoveryActionToPerform)){
+			int objectSize = this.recoveryObjectNames.size();
+			for(int recoveryObjectIndex = 0;recoveryObjectIndex < objectSize;recoveryObjectIndex++){
+				String recoveryObjectName = this.recoveryObjectNames.get(recoveryObjectIndex);
+				String recoveryObjectStrategyToLocate = this.recoveryLocatingStrategiesForObject.get(recoveryObjectIndex);
+				String recoveryObjectLocation = this.recoveryObjectLocations.get(recoveryObjectIndex);
+				String recoveryActionToPerform = this.recoveryActionsToBeExcutedOnObject.get(recoveryObjectIndex);
+				String recoveryObjectPriority = this.recoveryObjectsPriorities.get(recoveryObjectIndex);
+				ArrayList<String> listOfTestObjectsToSkip = objMapper.getTestObjectNamesToSkipInRecovery();
+				if(!listOfTestObjectsToSkip.contains(recoveryObjectName)){
+				if(recoveryObjectPriority.equalsIgnoreCase("high")){
+					if(!handleRecovery(recoveryObjectName, recoveryObjectStrategyToLocate, recoveryObjectLocation, recoveryActionToPerform)){
 					continue;
-				}else{
+					}else{
 					break;
+					}
 				}
 			}
-		}
+			}
+			
 		}
 		catch(Exception e){
 			throw e;
