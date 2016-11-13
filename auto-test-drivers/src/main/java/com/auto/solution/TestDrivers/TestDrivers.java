@@ -13,8 +13,6 @@ public interface TestDrivers {
 	
 	public void initializeApp(String endpoint) throws MalformedURLException,Exception;
 	
-	public void hitTwice() throws Exception;
-	
 	public void pressKeyboardKey(String Key) throws Exception;
 	
 	public void check() throws NoSuchElementException,Exception;

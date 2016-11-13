@@ -375,12 +375,6 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 	}
 
 	@Override
-	public void hitTwice() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void pressKeyboardKey(String Key) throws Exception {
 		try{
 			this.performKeyBoardAction(Key);

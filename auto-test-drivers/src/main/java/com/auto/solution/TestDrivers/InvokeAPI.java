@@ -19,17 +19,62 @@ import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestRunner.Status;
 import com.eviware.soapui.model.testsuite.TestSuite;
 
-public class InvokeAPI {
+public class InvokeAPI extends Thread{
 	private String project_name = "";
 	
 	ResourceManager resource_manager = null;
 	
 	private String soapui_testSuite_name = "";
+	
 	private String soapui_testCase_name = "";
 	
+	private HashMap<String,String> mapOfSoapUIProperties = new HashMap<String, String>();
+	
+	private List<String> listOfApisTestCaseStatus = new ArrayList<String>();
 	
 	InvokeAPI(ResourceManager rManager) {
 		this.resource_manager = rManager;
+	}
+	
+	public void run(){
+		
+		List<String> testCaseStatusWithReason = new ArrayList<String>();
+		try{		
+		
+		TestCase soapui_testcase = this.accessSoapUIProject();
+		
+		PropertiesMap mapOfProperties = new PropertiesMap();
+			
+		if(this.mapOfSoapUIProperties != null)
+			{
+			for (String property_key : this.mapOfSoapUIProperties.keySet()) {
+				String property_value = this.mapOfSoapUIProperties.get(property_key);
+				soapui_testcase.setPropertyValue(property_key, property_value);
+			}
+		}
+			
+		TestCaseRunner testRunner = soapui_testcase.run(mapOfProperties, false);
+		
+		Status status = testRunner.getStatus();
+		
+		String reason = testRunner.getReason();
+		
+		testCaseStatusWithReason.add(status.toString());
+		
+		testCaseStatusWithReason.add(reason);
+			
+		ProxySelector.setDefault(resource_manager.getdefaultproxy());
+			
+		this.listOfApisTestCaseStatus =  testCaseStatusWithReason;
+		}
+		catch(Exception e){
+			testCaseStatusWithReason.add("FAILED");
+			testCaseStatusWithReason.add(e.getMessage());
+		}
+	}
+	
+	public List<String> getListOfApisTestCaseStatus(){
+		return this.listOfApisTestCaseStatus;
 	}
 	
 	private TestCase accessSoapUIProject() throws Exception{
@@ -59,52 +104,49 @@ public class InvokeAPI {
 		}
 	}
 	
-	protected String getSoapUITestSuiteName(){
-		return this.soapui_testSuite_name;
+	public void setAPIProjectReference(String projectname,HashMap<String,String> propertiesMap){
+		this.project_name = projectname;
+		this.mapOfSoapUIProperties = propertiesMap;
 	}
 	
-	protected String getSoapUITestCaseName(){
-		return this.soapui_testCase_name;
-	}
 	
-	public List<String> invoke(String soapui_projectname, HashMap<String, String> propertiesMap) throws Exception{
-		this.project_name = soapui_projectname;
-		
-		List<String> testCaseStatusWithReason = new ArrayList<String>();
-		
-		try{	
-		
-			TestCase soapui_testcase = this.accessSoapUIProject();
-	
-			PropertiesMap mapOfProperties = new PropertiesMap();
-			
-			if(propertiesMap != null)
-			{
-				for (String property_key : propertiesMap.keySet()) {
-					String property_value = propertiesMap.get(property_key);
-					soapui_testcase.setPropertyValue(property_key, property_value);
-				}
-			}
-			
-			TestCaseRunner testRunner = soapui_testcase.run(mapOfProperties, false);
-		
-			Status status = testRunner.getStatus();
-		
-			//while(status != Status.FINISHED || status != Status.FAILED){}
-		
-			String reason = testRunner.getReason();
-		
-			testCaseStatusWithReason.add(status.toString());
-		
-			testCaseStatusWithReason.add(reason);
-			ProxySelector.setDefault(resource_manager.getdefaultproxy());
-			closeSoapui();
-		}
-		catch(Exception e){
-			throw e;
-		}
-		return testCaseStatusWithReason;
-	}
+//	public List<String> invoke() throws Exception{
+//				
+//		List<String> testCaseStatusWithReason = new ArrayList<String>();
+//		
+//		try{	
+//		
+//			TestCase soapui_testcase = this.accessSoapUIProject();
+//	
+//			PropertiesMap mapOfProperties = new PropertiesMap();
+//			
+//			if(this.mapOfSoapUIProperties != null)
+//			{
+//				for (String property_key : this.mapOfSoapUIProperties.keySet()) {
+//					String property_value = this.mapOfSoapUIProperties.get(property_key);
+//					soapui_testcase.setPropertyValue(property_key, property_value);
+//				}
+//			}
+//			
+//			TestCaseRunner testRunner = soapui_testcase.run(mapOfProperties, false);
+//		
+//			Status status = testRunner.getStatus();
+//		
+//			//while(status != Status.FINISHED || status != Status.FAILED){}
+//		
+//			String reason = testRunner.getReason();
+//		
+//			testCaseStatusWithReason.add(status.toString());
+//		
+//			testCaseStatusWithReason.add(reason);
+//			ProxySelector.setDefault(resource_manager.getdefaultproxy());
+//			closeSoapui();
+//		}
+//		catch(Exception e){
+//			throw e;
+//		}
+//		return testCaseStatusWithReason;
+//	}
 	public void closeSoapui(){
 		// Need to shutdown all the threads invoked by each SoapUI TestSuite
 		
