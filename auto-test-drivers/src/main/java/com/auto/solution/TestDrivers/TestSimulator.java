@@ -364,6 +364,15 @@ public class TestSimulator {
  				String value = testDataContents[1];
  				Utility.setKeyValueToGlobalVarMap(key, value);
  			}
+ 			else if(stepAction.equalsIgnoreCase("changedateformat")){
+ 				if(testDataContents.length != 3){
+ 					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+ 				}
+ 				String oldDateFormat = testDataContents[1];
+ 				String newFormat = testDataContents[2];
+ 				String newDateFormat = Utility.changeDateFormat(oldDateFormat, newFormat);
+ 				Utility.setKeyValueToGlobalVarMap(testDataContents[0], newDateFormat);
+ 			}
  			else if(stepAction.equalsIgnoreCase("verifypageproperty")){
  				if(testDataContents.length != 2){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());

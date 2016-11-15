@@ -663,6 +663,17 @@ public class Utility {
 		return destinationFile;
 	}
 
+	public static String changeDateFormat(String oldFormatDate,String newFormat) throws Exception{
+		String newFormatDate = "";
+		try {
+			Date date =  new Date(oldFormatDate);
+	    	SimpleDateFormat sdf = new SimpleDateFormat(newFormat); 
+	        newFormatDate = sdf.format(date);
+		} catch (Exception e) {
+			throw e;
+		}
+		return newFormatDate;
+	}
 	
 	}
 	
