@@ -1,6 +1,5 @@
 package com.auto.solution.TestDrivers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -101,7 +100,6 @@ public class TestSimulator {
  		}
  		
  		try{
- 		///////////////////////////////////
  			if(stepAction.toLowerCase().equals("initializeapp")){
  				
  				//TODO : Replace the STep description with actual test data used. 
@@ -116,10 +114,6 @@ public class TestSimulator {
  					throw new Exception(Property.ERROR_MESSAGES.ER_MISSING_TESTDATA.getErrorMessage());
  				}
  					testSimulator.initializeApp(URL);
- 			}
- 		///////////////////////////////////////	
- 			else if(stepAction.toLowerCase().equals("hittwice")){
- 				testSimulator.hitTwice();
  			}
  			else if(stepAction.toLowerCase().equals("check")){
  				testSimulator.check();				
@@ -537,7 +531,12 @@ public class TestSimulator {
  						throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage() + "--"  + e.getMessage());
  					}
  				}
- 				List<String> statusDetails = api_caller.invoke(soapui_project_name,propertiesMap);
+ 				api_caller.setAPIProjectReference(soapui_project_name, propertiesMap);
+ 				Thread api_thread = new Thread(api_caller);
+ 				api_thread.setDaemon(true);
+ 				api_thread.start();
+ 				api_thread.join();
+ 				List<String> statusDetails = api_caller.getListOfApisTestCaseStatus();
  				if(statusDetails.get(0) == "FAILED"){
  					throw new Exception(statusDetails.get(1));
  				}

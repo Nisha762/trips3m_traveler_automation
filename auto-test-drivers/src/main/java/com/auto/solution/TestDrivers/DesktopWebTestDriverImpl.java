@@ -2,7 +2,6 @@ package com.auto.solution.TestDrivers;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.ProxySelector;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,7 +41,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -120,23 +117,6 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		return srcFile;
 	}
     
-    private Selenium GetSeleniumOne() {
-		
-		Selenium seleniumOne = null;
-		
-		try {
-			
-			if (seleniumOne == null)
-				seleniumOne = new WebDriverBackedSelenium(driver,	driver.getCurrentUrl());
-	
-				seleniumOne.start();
-			
-				return seleniumOne;
-		} catch (Exception e) {
-			return  null;
-		}
-	}
-	
 	private Object executeJavaScriptOnBrowserInstance(WebElement testElement,String javaScriptSnippet) throws Exception{
 		
 		JavascriptExecutor jsExecutor = null;
@@ -770,25 +750,6 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		
-	}
-
-	@Override
-	public void hitTwice() throws Exception {
-		
-		Selenium objSelenium = this.GetSeleniumOne();
-		try{	
-			if(objSelenium != null){
-				objSelenium.doubleClick(testObjectInfo.getLocationOfTestObject());
-			}
-			else{
-				throw new SeleniumException(Property.ERROR_MESSAGES.ER_GETTING_DRIVER_SELENIUM.getErrorMessage());
-			}
-		}
-		catch(Exception e){
-			throw e;
-		}
-		
 		
 	}
 
