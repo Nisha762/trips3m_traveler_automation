@@ -1,5 +1,6 @@
 package com.auto.solution.TestDrivers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -526,11 +527,13 @@ public class TestSimulator {
  							String value = keyValueSplitted[1].trim();
  							propertiesMap.put(key, value);
  							}
+ 						
  					}
  					catch(Exception e){
  						throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage() + "--"  + e.getMessage());
  					}
  				}
+ 				
  				api_caller.setAPIProjectReference(soapui_project_name, propertiesMap);
  				Thread api_thread = new Thread(api_caller);
  				api_thread.setDaemon(true);
@@ -540,6 +543,24 @@ public class TestSimulator {
  				if(statusDetails.get(0) == "FAILED"){
  					throw new Exception(statusDetails.get(1));
  				}
+ 				if(testDataContents.length == 3){
+ 					String[] out_key_value_pairs = testDataContents[2].split(Pattern.quote("||"));
+ 					List <String> outProp = new ArrayList<String>();
+ 					for (String prop : out_key_value_pairs) {
+ 						outProp.add(prop);
+					}
+ 					
+ 					HashMap<String, String> outputPropertiesMap = api_caller.getTestCaseProperty(outProp);
+ 					if(outputPropertiesMap != null)
+ 					{
+ 					for (String property_key : outputPropertiesMap.keySet()) {
+ 						String property_value = outputPropertiesMap.get(property_key);
+ 						Utility.setKeyValueToGlobalVarMap(property_key, property_value);
+ 					}
+ 				}
+ 				}
+ 				
+ 				
  			}
  			else if(stepAction.toLowerCase().equalsIgnoreCase("resizecurrentwindow")){
  				if(testDataContents.length != 2){

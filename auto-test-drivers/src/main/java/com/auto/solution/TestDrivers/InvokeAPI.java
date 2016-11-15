@@ -28,6 +28,8 @@ public class InvokeAPI extends Thread{
 	
 	private String soapui_testCase_name = "";
 	
+	private TestCase soapuiTest = null;
+	
 	private HashMap<String,String> mapOfSoapUIProperties = new HashMap<String, String>();
 	
 	private List<String> listOfApisTestCaseStatus = new ArrayList<String>();
@@ -62,15 +64,26 @@ public class InvokeAPI extends Thread{
 		testCaseStatusWithReason.add(status.toString());
 		
 		testCaseStatusWithReason.add(reason);
+		
 			
 		ProxySelector.setDefault(resource_manager.getdefaultproxy());
 			
 		this.listOfApisTestCaseStatus =  testCaseStatusWithReason;
+		 
+		soapuiTest = soapui_testcase;
 		}
 		catch(Exception e){
 			testCaseStatusWithReason.add("FAILED");
 			testCaseStatusWithReason.add(e.getMessage());
 		}
+	}
+	
+	public HashMap<String, String> getTestCaseProperty(List<String> properties){
+		mapOfSoapUIProperties = new HashMap<String, String>();
+		for (String prop : properties) {
+			mapOfSoapUIProperties.put(prop,soapuiTest.getPropertyValue(prop));
+		}
+		return mapOfSoapUIProperties;
 	}
 	
 	public List<String> getListOfApisTestCaseStatus(){
@@ -108,4 +121,5 @@ public class InvokeAPI extends Thread{
 		this.project_name = projectname;
 		this.mapOfSoapUIProperties = propertiesMap;
 	}	
+
 }
