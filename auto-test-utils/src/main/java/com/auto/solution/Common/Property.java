@@ -335,7 +335,9 @@ public class Property {
 		ERR_INITIATING_REPORT("Error occured while generating test execution report"),
 		ERR_WHILE_PROCESSING_LOCALTESTDATA("Error while reading local test data, typical error details are - "),
 		ERR_ACCESSING_SOAP_PROJECT("Error in accessing soap ui project, please review again"),
-		ERR_SET_TESTOBJECT_DETAILS("Error in setting test object details");
+		ERR_SET_TESTOBJECT_DETAILS("Error in setting test object details"),
+		ERR_IN_GETTING_EMAIL_CONTENTS_BY_SUBJECT("Couldn't find message with given subject pattern - "),
+		ERR_IN_FINIDING_CONTENT_IN_MAIL("Couldn't find element with query - '{CSS_QUERY}' in mail content");
 		private String errorKeyword;
 		private ERROR_MESSAGES(String ErrorKeyword){
 			this.errorKeyword= ErrorKeyword;

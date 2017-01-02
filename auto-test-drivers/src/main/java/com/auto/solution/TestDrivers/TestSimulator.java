@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.auto.solution.Common.EmailNotificationHandler;
 import com.auto.solution.Common.Property;
 import com.auto.solution.Common.ResourceManager;
 import com.auto.solution.Common.Utility;
@@ -30,6 +31,8 @@ public class TestSimulator {
  	
  	private RecoveryObjectsMapper objMapper = null;
  	
+ 	private EmailNotificationHandler mailHandler = null;
+ 	
  	public TestSimulator(ResourceManager rmanager){
  		
  		this.rm = rmanager;
@@ -38,6 +41,7 @@ public class TestSimulator {
  		
  		api_caller = new InvokeAPI(rmanager);	
  		
+ 		mailHandler = new EmailNotificationHandler(rm);
  	}
  	
  	public void setTestObjectInfo(HashMap<String, String> currentTestObjectInfo){
@@ -586,6 +590,25 @@ public class TestSimulator {
  			}
  			else if(stepAction.toLowerCase().equalsIgnoreCase("closeBrowserWindow")){
  				testSimulator.shutdown();
+ 			}
+ 			else if(stepAction.toLowerCase().equalsIgnoreCase("emailnotificationreceived")){
+ 				
+ 				String email_id = Utility.getValueForKeyFromGlobalVarMap("email_server_name"); 				
+ 				String email_password = Utility.getValueForKeyFromGlobalVarMap("email_server_password"); 				
+ 				mailHandler.connectToMailServerInbox(email_id, email_password); 				
+ 				String email_subject_pattern = testDataContents[0]; 				
+ 				boolean emailReceived = mailHandler.isEmailSentToIndox(email_subject_pattern); 				
+ 				if(!emailReceived){
+ 					throw new Exception(Property.ERROR_MESSAGES.ERR_IN_GETTING_EMAIL_CONTENTS_BY_SUBJECT.getErrorMessage() + email_subject_pattern);
+ 				}
+ 				
+ 			}
+ 			else if(stepAction.toLowerCase().equalsIgnoreCase("iselementinemail")){
+ 				String cssQuery = testDataContents[0];
+ 				boolean isElementInMail = mailHandler.isElementThereInMailContent(cssQuery);
+ 				if(!isElementInMail){
+ 					throw new Exception(Property.ERROR_MESSAGES.ERR_IN_FINIDING_CONTENT_IN_MAIL.getErrorMessage().replace("{CSS_QUERY}",cssQuery));
+ 				}
  			}
  			else{
  				throw new NoSuchMethodException(Property.ERROR_MESSAGES.ER_NO_STEP_ACTION.getErrorMessage());
