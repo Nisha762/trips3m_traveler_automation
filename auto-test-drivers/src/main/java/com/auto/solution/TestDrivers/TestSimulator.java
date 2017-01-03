@@ -593,6 +593,9 @@ public class TestSimulator {
  			}
  			else if(stepAction.toLowerCase().equalsIgnoreCase("emailnotificationreceived")){
  				
+ 				if(testDataContents.length < 1){
+ 					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+ 				}
  				String email_id = Utility.getValueForKeyFromGlobalVarMap("email_server_name"); 				
  				String email_password = Utility.getValueForKeyFromGlobalVarMap("email_server_password"); 				
  				mailHandler.connectToMailServerInbox(email_id, email_password); 				
@@ -604,7 +607,14 @@ public class TestSimulator {
  				
  			}
  			else if(stepAction.toLowerCase().equalsIgnoreCase("iselementinemail")){
- 				String cssQuery = testDataContents[0];
+ 				if(testDataContents.length < 1){
+ 					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+ 				}
+ 				String cssQuery = "";
+ 				for (String testDataContent : testDataContents) {
+					cssQuery = cssQuery + testDataContent;
+				} 				
+ 				
  				boolean isElementInMail = mailHandler.isElementThereInMailContent(cssQuery);
  				if(!isElementInMail){
  					throw new Exception(Property.ERROR_MESSAGES.ERR_IN_FINIDING_CONTENT_IN_MAIL.getErrorMessage().replace("{CSS_QUERY}",cssQuery));
