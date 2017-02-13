@@ -424,6 +424,15 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		return testElement;
 	}
 	
+	private void waitForJStoLoad() {	
+	  try{  
+	  wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class='js-loaded']")));
+	  }
+	  catch(TimeoutException te){
+		  //nothing to do here.
+	  }
+	}
+	
 	public static boolean isClickable(WebElement testObject){
 		
 		try
@@ -485,9 +494,15 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	
 		
 		try{
+			
 			switchToMostRecentWindow();
+			
 			driver.switchTo().defaultContent();
+			
 			this.switchToTestObjectFrame();
+			
+			this.waitForJStoLoad();
+			
 			if(Property.LIST_STRATEGY_KEYWORD.contains(Property.STRATEGY_KEYWORD.NOWAIT.toString())){
 				isWaitRequiredToFetchTheTestObject = false;
 			}
