@@ -354,42 +354,40 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 			}
 		}
 	
-	private void  waitForJStoLoad() {	
-		try{
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class='js-loaded']")));
-		}
-		catch(TimeoutException te){
-			//nothing to do here.
-		}
+	private boolean  waitForJStoLoad() {	
+		
+		//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class='js-loaded']")));
+			
+			
+			ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+			      @Override
+			      public Boolean apply(WebDriver driver) {
+			        try {
+			        	JavascriptExecutor jsExecutor = null;
+			        	jsExecutor = (JavascriptExecutor)driver;
+			        	return ((Long)jsExecutor.executeScript("return jQuery.active") == 0);
+			        }
+			        catch (Exception e) {
+			          return true;
+			        }
+			      }
+			    };
+		
+			    // wait for Javascript to load
+			    ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+			      @Override
+			      public Boolean apply(WebDriver driver) {
+			    	  JavascriptExecutor jsExecutor = null;
+			        	jsExecutor = (JavascriptExecutor)driver;
+			        	return jsExecutor.executeScript("return document.readyState").toString().equals("complete");
+			      }
+			    };
+		
+			  return wait.until(jQueryLoad) && wait.until(jsLoad);
+
 	}
-//	    // wait for jQuery to load
-//	    ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
-//	      @Override
-//	      public Boolean apply(WebDriver driver) {
-//	        try {
-//	        	JavascriptExecutor jsExecutor = null;
-//	        	jsExecutor = (JavascriptExecutor)driver;
-//	        	return ((Long)jsExecutor.executeScript("return jQuery.active") == 0);
-//	        }
-//	        catch (Exception e) {
-//	          return true;
-//	        }
-//	      }
-//	    };
-//
-//	    // wait for Javascript to load
-//	    ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
-//	      @Override
-//	      public Boolean apply(WebDriver driver) {
-//	    	  JavascriptExecutor jsExecutor = null;
-//	        	jsExecutor = (JavascriptExecutor)driver;
-//	        	return jsExecutor.executeScript("return document.readyState").toString().equals("complete");
-//	      }
-//	    };
-//
-//	  return wait.until(jQueryLoad) && wait.until(jsLoad);
-	
-	 private void switchToMostRecentWindow() {
+
+	private void switchToMostRecentWindow() {
 			try {
 
 				Set<String> windowHandles = driver.getWindowHandles();

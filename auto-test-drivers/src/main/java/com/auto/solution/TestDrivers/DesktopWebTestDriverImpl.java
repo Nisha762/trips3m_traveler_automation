@@ -424,13 +424,38 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		return testElement;
 	}
 	
-	private void waitForJStoLoad() {	
-	  try{  
-	  wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class='js-loaded']")));
-	  }
-	  catch(TimeoutException te){
-		  //nothing to do here.
-	  }
+	private boolean waitForJStoLoad() {	
+//	  try{  
+//	  wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class='js-loaded']")));
+//	  }
+//	  catch(TimeoutException te){
+//		  //nothing to do here.
+//	  }
+		ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+		      @Override
+		      public Boolean apply(WebDriver driver) {
+		        try {
+		        	JavascriptExecutor jsExecutor = null;
+		        	jsExecutor = (JavascriptExecutor)driver;
+		        	return ((Long)jsExecutor.executeScript("return jQuery.active") == 0);
+		        }
+		        catch (Exception e) {
+		          return true;
+		        }
+		      }
+		    };
+	
+		    // wait for Javascript to load
+		    ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+		      @Override
+		      public Boolean apply(WebDriver driver) {
+		    	  JavascriptExecutor jsExecutor = null;
+		        	jsExecutor = (JavascriptExecutor)driver;
+		        	return jsExecutor.executeScript("return document.readyState").toString().equals("complete");
+		      }
+		    };
+	
+		  return wait.until(jQueryLoad) && wait.until(jsLoad);
 	}
 	
 	public static boolean isClickable(WebElement testObject){
