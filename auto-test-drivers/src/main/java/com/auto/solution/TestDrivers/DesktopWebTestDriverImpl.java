@@ -526,7 +526,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			
 			this.switchToTestObjectFrame();
 			
-			this.waitForJStoLoad();
+			//this.waitForJStoLoad();
 			
 			if(Property.LIST_STRATEGY_KEYWORD.contains(Property.STRATEGY_KEYWORD.NOWAIT.toString())){
 				isWaitRequiredToFetchTheTestObject = false;
