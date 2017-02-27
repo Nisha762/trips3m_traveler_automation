@@ -1,5 +1,6 @@
 package com.auto.solution.TestDrivers;
 
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 
 import java.io.File;
@@ -157,7 +158,9 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 	@Override
 	public void swipetoElementVisible(String swipeType) throws Exception{	
 		int currentTime = 0;
-		try {	
+		try {
+			String locationOfObject = testObjectInfo.getLocationOfTestObject();
+			if(locationOfObject != null){			
 			int timeOut =Integer.parseInt(Property.SyncTimeOut);
 			actualTestElement =  getActualTestObject();
 			while(actualTestElement == null && currentTime < timeOut ){
@@ -166,6 +169,10 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 				actualTestElement =  getActualTestObject();
 				currentTime++;
 			}	
+			}
+			else{
+				swipe(swipeType);
+			}
 		}catch(Exception ex){	
 			String errMessage = Property.ERROR_MESSAGES.ERR_IN_SWIPING_TO_OBJECT.getErrorMessage().replaceAll("{TIME}",String.valueOf(currentTime));
 			throw new Exception(errMessage + ex.getMessage());
@@ -426,7 +433,7 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 		}
 		
 	}
-
+	
 	@Override
 	public void sendKey(String text) throws NoSuchElementException, Exception {
 		WebElement testElement = null;
@@ -438,17 +445,18 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 		}
 		try{
 			try {
-			testElement.click();
 			testElement.clear();
 			}catch(Exception ex){
 				
 			}
-			testElement.sendKeys(text);	
+			testElement.sendKeys(text);
 			try {
 				driver.hideKeyboard();
+				
 			} catch (Exception e) {
 				
 			}
+			
 		}
 		catch(Exception e){
 			throw e;
@@ -905,8 +913,39 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 	 		
 	 	}
 
-	public void clickOnCo_ordinates(int i,int j) throws Exception{
-		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
+	public void clickOnCo_ordinates(int x_coordinates,int y_coordinates) throws Exception{
+		WebElement testElement = null;
+		try{
+			String locationOfObject = testObjectInfo.getLocationOfTestObject();
+			
+			if(locationOfObject != null){
+			
+				testElement = this.waitAndGetTestObject(true);
+			
+				int left_x = testElement.getLocation().getX();
+			
+				int right_x = left_x + testElement.getSize().getWidth();
+			
+				int middle_x = (left_x+right_x)/2;
+			
+				int upper_y = testElement.getLocation().getY();
+			
+				int lower_y = upper_y + testElement.getSize().getHeight();
+			
+				int middle_y = (upper_y + lower_y)/2;
+				
+				x_coordinates = middle_x + x_coordinates;
+				y_coordinates = middle_y + y_coordinates;
+			
+			}
+			
+			TouchAction action = new TouchAction(driver);
+			
+			action.tap(x_coordinates, y_coordinates).perform();
+		}
+		catch(Exception e){
+			throw e;
+		}
 	}
 
 	@Override
