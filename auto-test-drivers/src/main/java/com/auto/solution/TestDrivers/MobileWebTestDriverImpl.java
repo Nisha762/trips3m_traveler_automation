@@ -303,7 +303,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 				this.testObjectList.clear();
 				this.testObjectList = (ArrayList<WebElement>) testElements;
 			}
-			String[] filtersForTestObject = testObjectInfo.getFramedetailsOfTestObject().split(",");
+			String[] filtersForTestObject = testObjectInfo.getFiltersAppliedOnTestObject().split(",");
 			
 			
 			for (WebElement testObject : testElements) {				
