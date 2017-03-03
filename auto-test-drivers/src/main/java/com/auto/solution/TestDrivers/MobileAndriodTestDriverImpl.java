@@ -144,7 +144,7 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 				.getHeight())) / 2;
 		
 		if(swipeType.trim().toLowerCase().contains("up")){
-			driver.swipe(screenWidth, (2*screenHight)-170, screenWidth, screenHight, 2000);	
+			driver.swipe(screenWidth, (2*screenHight)-240, screenWidth, screenHight, 2000);	
 		}else if(swipeType.trim().toLowerCase().contains("down")){
 			driver.swipe(screenWidth, screenHight, screenWidth, (2*screenHight)-100, 2000);	
 		}

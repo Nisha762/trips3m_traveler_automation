@@ -107,6 +107,7 @@ public class EmailNotificationHandler {
 			
 			for (Message message : messages) {
 				String msg_subject = message.getSubject();
+				if(msg_subject == null){continue;}
 				Pattern pattern = Pattern.compile(email_subject_pattern);
 				if(pattern.matcher(msg_subject).matches()){
 					matched_msg = message;

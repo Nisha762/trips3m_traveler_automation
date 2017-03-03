@@ -297,7 +297,7 @@ public class TestSimulator {
  				int index  = testData.indexOf("#");
  				testData = testData.substring(index+1);
  				String scriptResult = Utility.executeJava(testData);
- 				Utility.setKeyValueToGlobalVarMap(testDataContents[0], scriptResult);
+ 				Utility.setKeyValueToGlobalVarMap(testDataContents[0].trim(), scriptResult);
  			}
  			else if(stepAction.equalsIgnoreCase("replaceall")){
  				if(testDataContents.length < 3){
