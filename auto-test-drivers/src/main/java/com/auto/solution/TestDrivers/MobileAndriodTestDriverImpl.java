@@ -866,7 +866,21 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 	@Override
 	public void browserNavigation(String navigationOption) throws Exception
 	{
-		// TODO Auto-generated method stub
+		try{
+			if(navigationOption.equalsIgnoreCase("back")){
+				driver.navigate().back();
+			}
+			else if(navigationOption.equalsIgnoreCase("forward")){
+				driver.navigate().forward();
+			}
+			else{
+				String errMessage = ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage();
+				throw new Exception(errMessage);
+			}
+		}
+		catch(Exception e){
+			throw e;
+		}
 	}
 
 	@Override
