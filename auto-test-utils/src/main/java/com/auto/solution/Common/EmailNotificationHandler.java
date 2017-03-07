@@ -1,6 +1,10 @@
 package com.auto.solution.Common;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
@@ -10,6 +14,9 @@ import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.mail.search.ComparisonTerm;
+import javax.mail.search.ReceivedDateTerm;
+import javax.mail.search.SearchTerm;
 
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
@@ -38,23 +45,34 @@ public class EmailNotificationHandler {
 	
 	private void storeEmailHtmlContentToFile()throws Exception{
 		
-			try{
-			Multipart mp = (Multipart) matched_msg.getContent();
-			
-			int mpcount = mp.getCount();
-			
+		try{
 			String html_content = "";
 			
-			for(int index = 0;index < mpcount; index++){
-				 html_content = fetchHtmlContent(mp.getBodyPart(index));
-			}			
+			Object messageContent = matched_msg.getContent();
+
+			if(messageContent instanceof String){
 			
+				html_content = messageContent.toString();
+			}
+			else if(messageContent instanceof Multipart){
+			
+				Multipart mp = (Multipart) matched_msg.getContent();
+			
+				int mpcount = mp.getCount();
+			
+				for(int index = 0;index < mpcount; index++){
+			
+				html_content = fetchHtmlContent(mp.getBodyPart(index));
+				}
+			}
+			else{
+			throw new Exception(Property.ERROR_MESSAGES.ERR_GETTING_MAIL_CONTENT.getErrorMessage());	
+			}
 			FileUtils.writeStringToFile(new File(htmlFileName), html_content);
-			
-		}
-		catch(Exception e){
+			}
+			catch(Exception e){
 			throw e;
-		}
+			}
 	}
 	
 	
@@ -103,8 +121,16 @@ public class EmailNotificationHandler {
 		
 		
 		try{
-			Message[] messages = inbox.getMessages();
+			Calendar cal = null;
 			
+			cal = Calendar.getInstance();
+			
+			Date todaysDate = new Date(cal.getTimeInMillis());
+			
+			ReceivedDateTerm todaysSearchTerm = new ReceivedDateTerm(ComparisonTerm.EQ, todaysDate);
+			
+			Message[] messages = inbox.search(todaysSearchTerm);
+						
 			for (Message message : messages) {
 				String msg_subject = message.getSubject();
 				if(msg_subject == null){continue;}
