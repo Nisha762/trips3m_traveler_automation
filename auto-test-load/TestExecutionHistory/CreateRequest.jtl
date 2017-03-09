@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testResults version="1.2">
+<httpSample t="717" it="0" lt="716" ct="377" ts="1489051910156" s="true" lb="Fake Mail Check" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="806" sby="457" ng="1" na="1">
+  <assertionResult>
+    <name>Success?</name>
+    <failure>false</failure>
+    <error>false</error>
+  </assertionResult>
+</httpSample>
+<httpSample t="4630" it="0" lt="4630" ct="0" ts="1489051910886" s="true" lb="Fill Form 1" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="1407" sby="1519" ng="1" na="1">
+  <assertionResult>
+    <name>form 1 filled?</name>
+    <failure>false</failure>
+    <error>false</error>
+  </assertionResult>
+</httpSample>
+<httpSample t="2693" it="0" lt="1722" ct="317" ts="1489051915521" s="true" lb="Customize Request" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="49188" sby="1210" ng="1" na="1">
+  <assertionResult>
+    <name>Form 2 Loaded?</name>
+    <failure>false</failure>
+    <error>false</error>
+  </assertionResult>
+</httpSample>
+<httpSample t="648" it="0" lt="648" ct="303" ts="1489051918228" s="true" lb="Set_trip_redirect_link" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="940" sby="423" ng="1" na="1"/>
+<httpSample t="620" it="0" lt="620" ct="0" ts="1489051918877" s="true" lb="async_traveler_notification" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="786" sby="415" ng="1" na="1"/>
+<httpSample t="6323" it="0" lt="3183" ct="0" ts="1489051919499" s="true" lb="Fill Form 2" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="75760" sby="5451" ng="1" na="1">
+  <assertionResult>
+    <name>Form 2 Submitted?</name>
+    <failure>false</failure>
+    <error>false</error>
+  </assertionResult>
+  <httpSample t="3183" it="0" lt="3183" ct="0" ts="1489051919499" s="true" lb="http://traveler.ttdev.in/requested_trips/1425247-Lorem-Tt-Test-Ipsum" rc="302" rm="Found" tn="Thread Group 1-1" dt="text" by="1792" sby="4258" ng="1" na="1"/>
+  <httpSample t="3137" it="0" lt="1923" ct="290" ts="1489051922685" s="true" lb="http://traveler.ttdev.in/requested_trips/1425247-Lorem-Tt-Test-Ipsum" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="73968" sby="1193" ng="1" na="1"/>
+</httpSample>
+<httpSample t="2874" it="0" lt="1681" ct="279" ts="1489051925833" s="true" lb="Booking Details" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="73732" sby="1191" ng="1" na="1">
+  <assertionResult>
+    <name>Details Loaded?</name>
+    <failure>false</failure>
+    <error>false</error>
+  </assertionResult>
+</httpSample>
+<httpSample t="659" it="0" lt="658" ct="315" ts="1489051928715" s="true" lb="set_trip_redirect_link" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="940" sby="413" ng="1" na="1"/>
+
+</testResults>
