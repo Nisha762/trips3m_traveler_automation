@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="Notifications" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" lastOpened="2016-09-23T17:40:06.494+05:30" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="434c13b9-2626-4f42-b474-48449fd196b4" wadlVersion="http://wadl.dev.java.net/2009/02" name="getNotifications" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://${#TestCase#apiendpoint}</con:endpoint></con:endpoints><con:resource name="user_notifications" path="/user_notifications" id="b5e9dc36-a40a-424d-a03b-93fb09621831"><con:settings/><con:parameters><con:parameter><con:name>email</con:name><con:value>mayankraj55@gmail.com</con:value><con:style>QUERY</con:style><con:default>mayankraj55@gmail.com</con:default></con:parameter><con:parameter><con:name>msg_type</con:name><con:value>email</con:value><con:style>QUERY</con:style><con:default>email</con:default></con:parameter><con:parameter><con:name>item</con:name><con:value>2</con:value><con:style>QUERY</con:style><con:default>2</con:default></con:parameter><con:parameter><con:name>event_name</con:name><con:value>quote_#added</con:value><con:style>QUERY</con:style><con:default>quote_#added</con:default></con:parameter></con:parameters><con:method name="Method 1" id="bcec115a-c0a8-47c1-8225-2a2cd301d865" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="71c01694-0dc7-4380-a94d-b810688e58ec" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${#TestCase#apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-individual.ttdev.in/user_notifications</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="email" value="tt1489058962@mailinator.com"/>
+  <con:entry key="msg_type" value="sms"/>
+  <con:entry key="item" value="1"/>
+  <con:entry key="event_name" value="user_#registered"/>
+</con:parameters></con:request></con:method></con:resource></con:interface><con:savedRecentRuns>1</con:savedRecentRuns><con:testSuite id="6403d57a-240d-45d0-9e5c-9f05dd38ffe2" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a2125bc0-b5e1-4d28-818b-48303b517ae0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="REST Request" id="5b218e71-c583-438e-8120-2cd77c71a9ac"><con:settings/><con:config service="getNotifications" methodName="Method 1" resourcePath="/user_notifications" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request" id="14f2fae7-5186-450f-903e-1d00b34704b2" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://${#TestCase#apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-individual.ttdev.in/user_notifications</con:originalUri><con:assertion type="GroovyScriptAssertion" id="2774839b-81f1-42bb-8dbc-c3cfd2c6219b" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+import java.util.regex.*;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def status = json_response_holder.status;
+assert(status == true) : "API status is false";
+
+int totalcount = json_response_holder.total_count;
+assert(totalcount == 1);
+
+String msg_type = context.expand('${#TestCase#message_type}');
+String messagebody = json_response_holder."${msg_type}".template_body[0];
+log.info messagebody;
+String pattern = context.expand('${#TestCase#pattern}');
+if(!Pattern.matches(pattern,messagebody)){
+	assert false : "Pattern -["+ pattern + "] didn't match with message -["+messagebody + "]."; 
+}
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="email" value="${#TestCase#user_email}"/>
+  <con:entry key="item" value="${#TestCase#items}"/>
+  <con:entry key="msg_type" value="${#TestCase#message_type}"/>
+  <con:entry key="event_name" value="${#TestCase#event_name}"/>
+</con:parameters></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>apiendpoint</con:name><con:value>traveler-individual.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>tt1489058962@mailinator.com</con:value></con:property><con:property><con:name>message_type</con:name><con:value>sms</con:value></con:property><con:property><con:name>event_name</con:name><con:value>user_#registered</con:value></con:property><con:property><con:name>items</con:name><con:value>1</con:value></con:property><con:property><con:name>pattern</con:name><con:value>Hi, TravelTriangle welcomes you onboard. To plan, customize and book your perfect holiday, click.*</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
+import groovy.util.GroovyScriptEngine;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoDatabase;
+
+////////////////////// Functions /////////////////////////
+
+def filterList(commaSperatedListContent){
+	def list = commaSperatedListContent.split(",");
+	def filteredList = [];
+	list.each(){
+	def entry = it.toLowerCase().replaceAll("^\\s+", "");
+	entry = entry.trim();
+	if(entry != ""){
+	filteredList.add(entry);}	
+	}
+	return filteredList;
+}
+
+def customListCompare(list1,list2){
+	//list1 is the list of tags that are given by user to execute.
+	//list2 is the list of tags for specific test suite.
+	boolean isRunnable = false;
+	for(int l1 in 0 .. list1.size()-1)
+	{
+		def inputTag = list1.get(l1);		
+		for(int l2 in 0 .. list2.size()-1){
+			
+			if(inputTag.toString() == list2.get(l2).toString()){
+				isRunnable =  true;
+				break;
+			}
+		}
+		if(isRunnable){
+			break;
+		}
+	}
+	return isRunnable;
+}
+///////////////////// Function //////////////////////////////////////////////
+
+log.info "Start execution";
+def projDir = context.expand('${projectDir}')
+try{
+File propFile =new File(projDir + "/Configurations/" + project.getName() + "/" + project.getName() + ".properties");
+log.info propFile;
+boolean isDeleted = propFile.delete();
+log.info isDeleted;
+}
+catch(Exception e){log.info e.getMessage();}
+
+
+
+def execution_Tag = project.getPropertyValue("execution_tag");
+
+log.info "Test Execution Base Tag : "+ execution_Tag;
+
+//Fetch the tags to execute the required test suites.
+def filteredTags = filterList(execution_Tag) ;
+
+def Conf_input = "";
+
+log.info "Reading the Configuration file.....";
+
+try{
+
+Conf_input = new File(projDir + "/Configurations/" + project.getName() + "/TestData.xml");
+
+def parser = new XmlParser(); //Get XML Parser.
+
+def Configuration = parser.parse(Conf_input);//Point parser to configration file.
+
+context.Configuration = Configuration;
+
+}
+catch(Exception e){
+		assert false : "Error in reading configuration file -- " + e.getMessage();
+}
+
+def testSuiteListToExecute = [];
+
+log.info "Fetching Test-Scenarios to execute....";
+
+def testSuites = project.getTestSuiteList();
+
+//Enable all TestSuites.
+for(j in 0 .. testSuites.size()-1){
+	//log.info testSuites.get(j).getName();
+	testSuites.get(j).setDisabled(false); 
+}
+//Decide which test suites to execute and eventually disabled the non-relevant test suites.
+		for(i in 0 .. testSuites.size()-1) {
+   			def testSuiteName = testSuites.get(i).getName();
+   			def tags = context.Configuration.TestSuite."${testSuiteName}".tags.text()
+   			def testSuiteTags = filterList(tags);
+   			   			
+   			if(filteredTags == null || filteredTags.empty){
+   				break;
+   			}
+   			else{
+   				if(testSuiteTags == null || testSuiteTags.empty){
+   					testSuites.get(i).setDisabled(true);
+   				}
+   				else{
+   					def isRunnable = customListCompare(filteredTags,testSuiteTags);
+   					log.info testSuiteName+":::"+isRunnable
+   					if(!isRunnable){
+   						testSuites.get(i).setDisabled(true);
+   					}
+   				}
+   			}
+   			
+		}
+
+
+// Load Databases.
+log.info"Loading Databases........";
+
+int index = 1;
+
+String[] db_Names = project.getPropertyValue("dbname").split(",");
+
+for(String db_Name in db_Names){
+
+db_Name = db_Name.trim();
+
+if(db_Name == ""){break;}
+
+context.dbName = db_Name;
+
+String dbConnectionString = "";
+
+String dbDriver = "";
+
+String dbType = "";
+
+try{
+	String databaseCollectionFile_Location = projDir + "/Configurations/" + project.getName() + "/DataBases.csv";
+	
+	BufferedReader reader = new BufferedReader(new FileReader(databaseCollectionFile_Location));
+	
+	String lineInFile = reader.readLine();
+		
+		while(lineInFile != null){
+		
+		String[] lineContents = lineInFile.split(",");
+		
+		if(lineContents[0] == context.dbName){
+			dbType = lineContents[1]
+			dbDriver = lineContents[2];
+			dbConnectionString = lineContents[3];
+			break;
+		}
+		lineInFile = reader.readLine();
+		}
+}
+catch(Exception e){
+	log.info "Couldn't load database from 'Databases' repo.Please review the file again!!" + e.getMessage();
+}
+context.dbDriver = dbDriver
+
+context.dbConnectionString = dbConnectionString
+
+log.info "Connecting to : [" + context.dbName + "] ................";
+
+log.info "DB Connection String --" + dbConnectionString;
+
+if(dbType.toLowerCase().contains("mongo")){
+	try{
+	MongoClient mongoClient = new MongoClient(new MongoClientURI(context.dbConnectionString));
+   	
+     context.dbConnection = mongoClient;
+	if(context.mongoConnection == null){
+     context.mongoConnection = mongoClient;}
+     else{
+     	String mongoConnectionString = "mongoConnection" + index;
+     	log.info mongoConnectionString;
+     	context."${mongoConnectionString}" = mongoClient;
+     }
+	}
+	catch(Exception e){
+		runner.fail("Couldn't connect to application DB -- " + context.dbName + " " + e.getMessage());
+	}
+}
+else if(dbType.toLowerCase().contains("mysql")){
+	if(context.dbName != "" &amp;&amp; context.dbName != null){
+	try{
+		com.eviware.soapui.support.GroovyUtils.registerJdbcDriver(context.dbDriver )
+		
+		def connection = DriverManager.getConnection(context.dbConnectionString);
+		context.dbConnection = connection;
+		if(context.mysqlConnection == null){
+     		context.mysqlConnection = connection;}
+     	else{
+     		String mysqlConnectionString = "mysqlConnection" + index;
+     		context."${mysqlConnectionString}" = connection;
+    		 }
+		context.statement = connection.createStatement();
+	}
+	catch(Exception e){
+			runner.fail("Couldn't connect to application DB -- " + context.dbName + " " + e.getMessage());	
+	}
+}
+}
+index++;
+}
+log.info "Loading utilities......";
+//create an instance of generic utilities.
+try{
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+String path = projDir + "/ext/";
+
+GroovyScriptEngine gse = new GroovyScriptEngine(path) ;
+externalScript = gse.loadScriptByName("Utilities.groovy")
+instance = externalScript.newInstance()
+context.utility = instance ; 
+}
+catch(Exception e){
+	log.info "Unable to initialize framework utility, error being -- " + e.getMessage();
+}
+
+log.info"Preparing test data ..............";
+
+context.Configuration.children().each{
+	if(it.name() == "TestSuite"){
+		it.children().each{
+	String testSuiteNameInConf = it.name();
+	
+	it.children().each{
+		if(it.name() != "tags"){			
+			String testCaseNameInConf = it.name();
+			
+			it.children().each{
+				try{
+					//log.info testSuiteNameInConf+":::"+testCaseNameInConf+":::"+it.name()+":::"+it.text()
+					project.getTestSuiteByName(testSuiteNameInConf).getTestCaseByName(testCaseNameInConf).setPropertyValue(it.name(), it.text());
+					}
+				catch(Exception e){ }
+			}
+		}
+	}
+}
+}
+}</con:beforeRunScript><con:afterRunScript>import com.eviware.soapui.model.testsuite.TestSuiteRunner;
+import com.eviware.soapui.model.testsuite.TestCaseRunner;
+import com.eviware.soapui.model.testsuite.TestRunner.Status;
+
+def projDir = context.expand('${projectDir}')
+// Get the Execution tag.
+String executiontag = project.getPropertyValue("execution_tag");
+
+//Start Time
+def projectstartTime = new Date(runner.getStartTime());
+
+//Time Taken
+def pr_timeTaken = runner.getTimeTaken();
+
+int testcasespassed = 0;
+int testcasesfailed = 0;
+int testcasesexecuted = 0;
+List&lt;String> testCaseNameFailed = new ArrayList&lt;String>();
+//Number Of test cases passed/failed/didn't run.
+def List&lt;TestSuiteRunner> testSuiteRunners = runner.getResults()
+
+for(TestSuiteRunner suiterunner in testSuiteRunners){
+	String testSuiteName = suiterunner.getTestSuite().getName();
+	List&lt;TestCaseRunner> testcaserunners = suiterunner.getResults();
+	for(TestCaseRunner testcaserunner in testcaserunners){
+		Status status = testcaserunner.getStatus();
+		 String testcasename = testcaserunner.getTestCase().getName();
+		if(status == Status.FINISHED){
+			testcasespassed++;
+		}
+		if(status == Status.FAILED){
+			testcasesfailed++;
+			testCaseNameFailed.add(testcasename);
+		}
+		log.info status;
+	}
+}
+testcasesexecuted = testcasespassed + testcasesfailed;
+def percentPassed = (testcasespassed / testcasesexecuted) * 100;
+percentPassed = Math.round(percentPassed * 100) / 100
+String testCaseFailedInStringFormat = "";
+for(String testCaseFailed in testCaseNameFailed){
+	if(testCaseFailedInStringFormat == ""){
+		testCaseFailedInStringFormat = testCaseFailed;
+	}
+	else{
+	testCaseFailedInStringFormat = testCaseFailedInStringFormat + "," + testCaseFailed}
+}
+
+// create a property file.
+try{
+File propFile =new File(projDir + "/Configurations/" + project.getName() + "/" + project.getName() + ".properties");
+propFile.delete();
+boolean isCreated = propFile.createNewFile();
+log.info isCreated;
+Properties props = new Properties();
+props.load(propFile.newDataInputStream());
+props.setProperty("testgroup",executiontag);
+props.setProperty("StartTime",projectstartTime.toString());
+props.setProperty("timetaken",pr_timeTaken.toString());
+props.setProperty("testexecuted",testcasesexecuted.toString());
+props.setProperty("testcasespassed",testcasespassed.toString());
+props.setProperty("testcasesfailed",testcasesfailed.toString());
+props.setProperty("persentpassed",percentPassed.toString());
+props.setProperty("testCaseFailedInStringFormat",testCaseFailedInStringFormat);
+props.store(propFile.newWriter(), null)
+}
+catch(Exception e){
+	log.info "Error in storing test execution data"  + e.getMessage();
+}
+</con:afterRunScript><con:sensitiveInformation/><con:authRepository/><con:tags/></con:soapui-project>
