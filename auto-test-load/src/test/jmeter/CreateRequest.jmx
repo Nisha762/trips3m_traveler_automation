@@ -435,7 +435,7 @@ log.info(&quot;Phone-- &quot;+phone);</stringProp>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Get User ID" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">user_id</stringProp>
-            <stringProp name="RegexExtractor.regex">&quot;traveler_id&quot;:(.*)}}</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;user_id&quot;:(\d+),</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default">user_id</stringProp>
             <stringProp name="RegexExtractor.match_number">0</stringProp>
