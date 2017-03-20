@@ -1,6 +1,7 @@
 package com.auto.solution.TestDrivers;
 
 import java.net.ProxySelector;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +51,7 @@ public class InvokeAPI extends Thread{
 		if(this.mapOfSoapUIProperties != null)
 			{
 			for (String property_key : this.mapOfSoapUIProperties.keySet()) {
+				property_key = URLDecoder.decode(property_key, "UTF-8");
 				String property_value = this.mapOfSoapUIProperties.get(property_key);
 				soapui_testcase.setPropertyValue(property_key, property_value);
 			}
