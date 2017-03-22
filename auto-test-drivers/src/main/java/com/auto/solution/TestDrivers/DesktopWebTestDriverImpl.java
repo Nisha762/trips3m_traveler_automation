@@ -1,6 +1,7 @@
 package com.auto.solution.TestDrivers;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -162,16 +163,36 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		
 	}
     
-    private ArrayList<String> getHyperRefrenceOfAllLinksOnPage(){
+    private ArrayList<String> getHyperRefrenceOnPage(){
 		
 		ArrayList<String> hrefs = new ArrayList<String>();
 		
-		List<WebElement> linksOnPage = driver.findElements(By.xpath("//a"));
+		List<WebElement> anchortagOnPage = driver.findElements(By.xpath("//a"));
 		
-		for (WebElement link : linksOnPage) {
+		for (WebElement link : anchortagOnPage) {
 		
 			String href = link.getAttribute("href");
 			hrefs.add(href);
+		}
+		List<WebElement> linksOnPage = driver.findElements(By.xpath("//link"));
+		
+		for (WebElement link : linksOnPage) {
+			String href = link.getAttribute("href");
+			hrefs.add(href);
+		}
+		List<WebElement> imgOnPage = driver.findElements(By.xpath("//img"));
+		for (WebElement image : imgOnPage) {
+			String data_src = image.getAttribute("data-src");
+			String src = image.getAttribute("src");
+			String data_original = image.getAttribute("data-original");
+			hrefs.add(data_src);
+			hrefs.add(src);
+			hrefs.add(data_original);
+		}
+		List<WebElement> metaOnPage = driver.findElements(By.xpath("//meta"));
+		for (WebElement meta : metaOnPage) {
+			String content = meta.getAttribute("content");
+			hrefs.add(content);
 		}
 		
 		return hrefs;
@@ -1607,12 +1628,10 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throw ex;
 		}
 		
-	}
-	
+	}	
 	
 	@Override
 	public void verifyAndReportBrokenLinksFromPages(String urlSource) throws Exception{
-		
 		
 		try{			
 			HashMap<String, String> brokenUrls = new HashMap<String, String>();
@@ -1628,33 +1647,40 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 					if(!url.contains("http")){
 						url = "http://" + url;
 					}
-				
+					url = url.replace("http", "https");
+					
+					System.out.println("Main Url -- " + url);
+					
 					driver.navigate().to(url);
+					
 					Thread.sleep(10000);
-					ArrayList<String> hrefs = this.getHyperRefrenceOfAllLinksOnPage();
+					
+					ArrayList<String> hrefs = this.getHyperRefrenceOnPage();
 				
 					for (String linkUrl : hrefs) {
 						
 						try{
 							if(linkUrl==null){
 								continue;
+								}
+							if(!linkUrl.contains("https")){
+								linkUrl = linkUrl.replaceAll("http", "https");
 							}
 							
-						if(linkUrl.contains("#")){
-							brokenUrls.put(linkUrl, "ERROR -- Contains # in hyper reference");
-							continue;
-						}
-						if (linkUrl != null && !linkUrl.contains("javascript")){
-						 int url_status = this.validateUrlStatus(linkUrl);
-						 //if(url_status != 200){
-							 brokenUrls.put(linkUrl, String.valueOf(url_status));
-						 //}
-						}
+//							if(linkUrl.contains("#")){
+//								brokenUrls.put(linkUrl, "ERROR -- Contains # in hyper reference");
+//								continue;
+//							}
+							if (linkUrl != null && !linkUrl.contains("javascript")){
+									int url_status = this.validateUrlStatus(linkUrl);
+									brokenUrls.put(linkUrl, String.valueOf(url_status));
+							}
 						}
 						catch(Exception e){
 							brokenUrls.put(linkUrl, "FAILED --" + e.getMessage().replaceAll("\\,"," "));
 						}
-					}				
+						System.out.println("\t" + "URL--" + linkUrl);
+					}					
 				}
 				catch(Exception e){
 					brokenUrls.put(url, "FAILED --" + e.getMessage());

@@ -223,7 +223,7 @@ public class TESTLINKTestManager extends TestManagerUtils implements ITestManage
 			String errMessage = ERROR_MESSAGES.ER_RETRIEVING_TESTCASE.getErrorMessage();
 			errMessage = errMessage.replace("{PROJECT}", testProject.getName());
 			errMessage = errMessage.replace("{TESTNAME}", testSuiteName);
-			throw new Exception(errMessage);
+			throw new Exception(errMessage + "====" + te.getMessage());
 		}
 		return testDataCollection;
 	}

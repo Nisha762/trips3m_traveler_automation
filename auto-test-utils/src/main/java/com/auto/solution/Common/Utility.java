@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -345,7 +346,10 @@ public class Utility {
 	public static String executeJava(String javaSnippet) throws Exception{
 		
 		javaSnippet = javaSnippet.replace("\n", "");
+		
 		javaSnippet = javaSnippet.replace("%%", ";");
+		
+		javaSnippet = URLDecoder.decode(javaSnippet, "UTF-8");
 				
 		String javaSnippetResult = "";
 	 
@@ -543,7 +547,7 @@ public class Utility {
 			FileWriter writer = new FileWriter(reportFileLocation);
 			
 			writer.append("URLS");		    
-			writer.append(',');
+			writer.append("###");
 		    writer.append("REMARKS");
 		    
 			writer.append('\n');
@@ -551,7 +555,7 @@ public class Utility {
 			for (String Url : UrlStatusMap.keySet()) {
 		    	String remarks = UrlStatusMap.get(Url);
 				writer.append(Url);
-			    writer.append(',');
+			    writer.append("###");
 			    writer.append(remarks);
 			    writer.append('\n');
 			}
