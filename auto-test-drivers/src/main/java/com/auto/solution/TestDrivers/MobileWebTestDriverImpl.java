@@ -798,14 +798,10 @@ WebElement testElement = null;
 	@Override
 	public void isObjectThere() throws Exception {
 		WebElement testElement = this.waitAndGetTestObject(true);
-		try{
-		if(testElement == null){
-			throw new Exception(Property.ERROR_MESSAGES.ER_ELEMENT_NOT_PRESENT.getErrorMessage());
-		}
-		if(!testElement.isDisplayed()){
-			throw new Exception(Property.ERROR_MESSAGES.ER_ELEMENT_NOT_DISPLAYED.getErrorMessage());
-		}
-		
+			try{
+					if(testElement == null){
+							throw new Exception(Property.ERROR_MESSAGES.ER_ELEMENT_NOT_PRESENT.getErrorMessage());
+				}
 		}
 		catch(Exception e){
 			throw e;
