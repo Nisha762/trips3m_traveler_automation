@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -348,8 +347,6 @@ public class Utility {
 		javaSnippet = javaSnippet.replace("\n", "");
 		
 		javaSnippet = javaSnippet.replace("%%", ";");
-		
-		javaSnippet = URLDecoder.decode(javaSnippet, "UTF-8");
 				
 		String javaSnippetResult = "";
 	 
