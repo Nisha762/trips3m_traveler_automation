@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="GetFilteredResults" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" lastOpened="2016-09-23T17:40:06.494+05:30" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d7c48414-9b1d-49d0-b44b-a92a9a748dbb" wadlVersion="http://wadl.dev.java.net/2009/02" name="SIGNIN" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://${#Project#traveler_apiendpoint}}</con:endpoint></con:endpoints><con:resource name="sign_in" path="/users/sign_in" id="948afba5-5ffc-4440-a549-d192ff653635"><con:settings/><con:parameters/><con:method name="Method 1" id="c7528823-614f-4e0c-9b32-84a978bf12a5" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="d64103bc-b669-42bf-befd-5fb67bf06081" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="GetFilteredResults" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" lastOpened="2016-09-23T17:40:06.494+05:30" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d7c48414-9b1d-49d0-b44b-a92a9a748dbb" wadlVersion="http://wadl.dev.java.net/2009/02" name="SIGNIN" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://${#Project#traveler_apiendpoint}}</con:endpoint></con:endpoints><con:resource name="sign_in" path="/users/sign_in" id="948afba5-5ffc-4440-a549-d192ff653635"><con:settings/><con:parameters/><con:method name="Method 1" id="c7528823-614f-4e0c-9b32-84a978bf12a5" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="d64103bc-b669-42bf-befd-5fb67bf06081" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="TT-Mobile-Post" value="testing1112015a@rediffmail.compost"/>
   <con:entry key="TT-Mobile" value=""/>
   <con:entry key="Content-Type" value="application/json; charset=UTF-8"/>
@@ -515,7 +515,71 @@
   <con:entry key="Accept" value="application/json; charset=utf-8"/>
   <con:entry key="Content-Type" value="application/json"/>
   <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="fdca761a-7dc9-4c44-8551-75593cd9d082" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1966b330-a53d-494b-ba1a-a687afdeabe8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="4afacfac-43d1-4460-8712-12aef9c0477c"><con:settings/><con:config><script>import java.security.MessageDigest;
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="c0a4f28e-09db-40a0-9eb7-e950e53645d2" name="SearchAndFilter"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="ddb23050-2347-4d64-b914-2dfbbacd5b90" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Search_Filter" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="ec983896-6d36-4124-a7c4-60fdc2c9f95e"><con:settings/><con:config><script><![CDATA[
+String days = context.expand('${#TestCase#days}');
+String activity = context.expand('${#TestCase#activity}');
+String months = context.expand('${#TestCase#months}');
+String price_ranges = context.expand('${#TestCase#price_ranges}');
+String destination_type = context.expand('${#TestCase#destination_type}');
+String sort_by = context.expand('${#TestCase#sort_by}');
+String request_url = "http://" + context.expand('${#TestCase#endpoint}') + "/api/v4/get_filtered_results?per_page=50&result_type=destination_catalog&page_number=1";
+
+if(days != "")
+request_url = request_url + "&days=" + days;
+
+if(activity != "")
+request_url = request_url + "&activity=" + activity;
+
+if(months != "")
+request_url = request_url + "&months=" + months;
+
+if(price_ranges != "")
+request_url = request_url + "&price_ranges=" + price_ranges;
+
+if(destination_type != "")
+request_url = request_url + "&destination_type=" + destination_type;
+
+if(sort_by != "")
+request_url = request_url + "&sort_by=" + sort_by;
+
+
+testRunner.testCase.setPropertyValue("request_url",request_url);
+]]></script></con:config></con:testStep><con:testStep type="calltestcase" name="Given user get the TT-Mobile token for sort" id="212f6ca3-0bb1-46bc-9403-b48fb32bac10"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>${#TestCase#request_url}</con:value></con:property><con:property><con:name>user_email</con:name><con:value/></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>vbOsplmPSTXpTR8y3vaEZ8IY49KnxKD1wUrKhrYsgSI=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user can sort the destination catalog by price low to high" id="15cb900a-a274-4b98-a49c-c02e66496b37"><con:settings/><con:config service="FilterDestinationsCatalogSearchResults" resourcePath="/api/{api_version}/get_filtered_results" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user can sort the destination catalog by price low to high" id="0684b8d0-f7d7-4119-899a-d47c06780a8f" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="TT-Mobile" value="${Given user get the TT-Mobile token for sort#hash_key}"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+  &lt;con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v4/get_filtered_results</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="16032cd7-c23d-400b-872a-786f0311e114" name="HTTP Status - 200"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="bffe08a5-943e-4d89-a464-2cd8de10cf1c" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+String result_type = json_response_holder.result_type;
+assert(result_type == "destination_catalog");
+
+String[] destinations = json_response_holder.destinations.name;
+
+assert(destinations.size() != 0);
+String destination_1 = destinations[0];
+String destination_2 = destinations[1];
+String destination_3 = destinations[2];
+String destination_4 = destinations[3];
+String destination_5 = destinations[4];
+
+messageExchange.modelItem.testCase.setPropertyValue("destination1",destination_1);
+messageExchange.modelItem.testCase.setPropertyValue("destination2",destination_2);
+messageExchange.modelItem.testCase.setPropertyValue("destination3",destination_3);
+messageExchange.modelItem.testCase.setPropertyValue("destination4",destination_4);
+messageExchange.modelItem.testCase.setPropertyValue("destination5",destination_5);
+
+</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="months" value="${#TestCase#months}"/>
+  <con:entry key="days" value="${#TestCase#days}"/>
+  <con:entry key="sort_by" value="${#TestCase#sort_by}"/>
+  <con:entry key="price_ranges" value="${#TestCase#price_ranges}"/>
+  <con:entry key="destination_type" value="${#TestCase#destination_type}"/>
+  <con:entry key="activity" value="${#TestCase#activity}"/>
+</con:parameters><con:parameterOrder><con:entry>per_page</con:entry><con:entry>result_type</con:entry><con:entry>page_number</con:entry><con:entry>days</con:entry><con:entry>activity</con:entry><con:entry>months</con:entry><con:entry>price_ranges</con:entry><con:entry>destination_type</con:entry><con:entry>sort_by</con:entry><con:entry>api_version</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:setupScript>
+</con:setupScript><con:properties><con:property><con:name>days</con:name><con:value/></con:property><con:property><con:name>activity</con:name><con:value/></con:property><con:property><con:name>months</con:name><con:value/></con:property><con:property><con:name>price_ranges</con:name><con:value/></con:property><con:property><con:name>destination_type</con:name><con:value/></con:property><con:property><con:name>sort_by</con:name><con:value>price_l-h</con:value></con:property><con:property><con:name>endpoint</con:name><con:value>traveler-api.ttdev.in</con:value></con:property><con:property><con:name>request_url</con:name><con:value>http://traveler-api.ttdev.in/api/v4/get_filtered_results?per_page=50&amp;result_type=destination_catalog&amp;page_number=1&amp;sort_by=price_l-h</con:value></con:property><con:property><con:name>destination1</con:name><con:value>Jammu</con:value></con:property><con:property><con:name>destination2</con:name><con:value>Tirupati</con:value></con:property><con:property><con:name>destination3</con:name><con:value>Chandigarh</con:value></con:property><con:property><con:name>destination4</con:name><con:value>Uttarakhand</con:value></con:property><con:property><con:name>destination5</con:name><con:value>Manali</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:testSuite id="fdca761a-7dc9-4c44-8551-75593cd9d082" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1966b330-a53d-494b-ba1a-a687afdeabe8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="4afacfac-43d1-4460-8712-12aef9c0477c"><con:settings/><con:config><script>import java.security.MessageDigest;
 import org.codehaus.groovy.runtime.EncodingGroovyMethods;
 
 
@@ -554,7 +618,7 @@ String getUserDigest(String digest) {
    }
    return null;
 }
-</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>http://traveler-api.ttdev.in/api/v4/get_filtered_results?per_page=50&amp;result_type=destination_catalog&amp;page_number=1</con:value></con:property><con:property><con:name>user_email</con:name><con:value/></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>+w9VHEUblw1+KJgk6PTlWWSjuRuARuYOsI+LRX92FyA=</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:testCase id="d6e38075-ad8f-4890-9379-2f1cb755b34d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="User press the search tab" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Given user get the TT-MObile token for search tab" id="75ded9eb-a813-4ba3-863d-9f02dd664f1f"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#Project#traveler_apiendpoint}/api/v3/metadata/filter?filter_type=search</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#Project#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>zgoSGRbWeDGM/lF7xxotB4zstK0Fbp7XIZEgf+edPEE=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="And search filter type is invoked" id="c582bfd1-ee48-40eb-ae4b-3f4844427f9d"><con:settings/><con:config service="FilterType" resourcePath="/api/{api_version}/metadata/filter" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="And search filter type is invoked" id="436ba333-2b44-4d4a-adc7-688847704b53" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>http://traveler-api.ttdev.in/api/v4/get_filtered_results?per_page=50&amp;result_type=destination_catalog&amp;page_number=1&amp;sort_by=price_l-h</con:value></con:property><con:property><con:name>user_email</con:name><con:value/></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>vbOsplmPSTXpTR8y3vaEZ8IY49KnxKD1wUrKhrYsgSI=</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:testCase id="d6e38075-ad8f-4890-9379-2f1cb755b34d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="User press the search tab" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Given user get the TT-MObile token for search tab" id="75ded9eb-a813-4ba3-863d-9f02dd664f1f"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#Project#traveler_apiendpoint}/api/v3/metadata/filter?filter_type=search</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#Project#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>zgoSGRbWeDGM/lF7xxotB4zstK0Fbp7XIZEgf+edPEE=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="And search filter type is invoked" id="c582bfd1-ee48-40eb-ae4b-3f4844427f9d"><con:settings/><con:config service="FilterType" resourcePath="/api/{api_version}/metadata/filter" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="And search filter type is invoked" id="436ba333-2b44-4d4a-adc7-688847704b53" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="TT-Mobile" value="${Given user get the TT-MObile token for search tab#hash_key}"/>
   &lt;con:entry key="Accept" value="application/json"/>
   &lt;con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
@@ -710,71 +774,7 @@ assert("Budget (per person)" in filter_titles);
 assert("" in filter_titles);</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttsuer</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
   <con:entry key="filter_type" value="destination_catalog"/>
   <con:entry key="api_version" value="v3"/>
-</con:parameters></con:restRequest></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:testSuite id="c0a4f28e-09db-40a0-9eb7-e950e53645d2" name="SearchAndFilter"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="ddb23050-2347-4d64-b914-2dfbbacd5b90" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Search_Filter" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="ec983896-6d36-4124-a7c4-60fdc2c9f95e"><con:settings/><con:config><script><![CDATA[
-String days = context.expand('${#TestCase#days}');
-String activity = context.expand('${#TestCase#activity}');
-String months = context.expand('${#TestCase#months}');
-String price_ranges = context.expand('${#TestCase#price_ranges}');
-String destination_type = context.expand('${#TestCase#destination_type}');
-String sort_by = context.expand('${#TestCase#sort_by}');
-String request_url = "http://" + context.expand('${#TestCase#endpoint}') + "/api/v4/get_filtered_results?per_page=50&result_type=destination_catalog&page_number=1";
-
-if(days != "")
-request_url = request_url + "&days=" + days;
-
-if(activity != "")
-request_url = request_url + "&activity=" + activity;
-
-if(months != "")
-request_url = request_url + "&months=" + months;
-
-if(price_ranges != "")
-request_url = request_url + "&price_ranges=" + price_ranges;
-
-if(destination_type != "")
-request_url = request_url + "&destination_type=" + destination_type;
-
-if(sort_by != "")
-request_url = request_url + "&sort_by=" + sort_by;
-
-
-testRunner.testCase.setPropertyValue("request_url",request_url);
-]]></script></con:config></con:testStep><con:testStep type="calltestcase" name="Given user get the TT-Mobile token for sort" id="212f6ca3-0bb1-46bc-9403-b48fb32bac10"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>${#TestCase#request_url}</con:value></con:property><con:property><con:name>user_email</con:name><con:value/></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>+w9VHEUblw1+KJgk6PTlWWSjuRuARuYOsI+LRX92FyA=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user can sort the destination catalog by price low to high" id="15cb900a-a274-4b98-a49c-c02e66496b37"><con:settings/><con:config service="FilterDestinationsCatalogSearchResults" resourcePath="/api/{api_version}/get_filtered_results" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user can sort the destination catalog by price low to high" id="0684b8d0-f7d7-4119-899a-d47c06780a8f" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  &lt;con:entry key="TT-Mobile" value="${Given user get the TT-Mobile token for sort#hash_key}"/>
-  &lt;con:entry key="Accept" value="application/json"/>
-  &lt;con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
-&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v4/get_filtered_results</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="16032cd7-c23d-400b-872a-786f0311e114" name="HTTP Status - 200"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="bffe08a5-943e-4d89-a464-2cd8de10cf1c" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
-
-String response = messageExchange.getResponseContent();
-def json_response_holder = new JsonSlurper().parseText(response);
-
-String result_type = json_response_holder.result_type;
-assert(result_type == "destination_catalog");
-
-String[] destinations = json_response_holder.destinations.name;
-
-assert(destinations.size() != 0);
-String destination_1 = destinations[0];
-String destination_2 = destinations[1];
-String destination_3 = destinations[2];
-String destination_4 = destinations[3];
-String destination_5 = destinations[4];
-
-messageExchange.modelItem.testCase.setPropertyValue("destination_1",destination_1);
-messageExchange.modelItem.testCase.setPropertyValue("destination_2",destination_2);
-messageExchange.modelItem.testCase.setPropertyValue("destination_3",destination_3);
-messageExchange.modelItem.testCase.setPropertyValue("destination_4",destination_4);
-messageExchange.modelItem.testCase.setPropertyValue("destination_5",destination_5);
-
-</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="months" value="${#TestCase#months}"/>
-  <con:entry key="days" value="${#TestCase#days}"/>
-  <con:entry key="sort_by" value="${#TestCase#sort_by}"/>
-  <con:entry key="price_ranges" value="${#TestCase#price_ranges}"/>
-  <con:entry key="destination_type" value="${#TestCase#destination_type}"/>
-  <con:entry key="activity" value="${#TestCase#activity}"/>
-</con:parameters><con:parameterOrder><con:entry>per_page</con:entry><con:entry>result_type</con:entry><con:entry>page_number</con:entry><con:entry>days</con:entry><con:entry>activity</con:entry><con:entry>months</con:entry><con:entry>price_ranges</con:entry><con:entry>destination_type</con:entry><con:entry>sort_by</con:entry><con:entry>api_version</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:setupScript>
-</con:setupScript><con:properties><con:property><con:name>days</con:name><con:value/></con:property><con:property><con:name>activity</con:name><con:value/></con:property><con:property><con:name>months</con:name><con:value/></con:property><con:property><con:name>price_ranges</con:name><con:value/></con:property><con:property><con:name>destination_type</con:name><con:value/></con:property><con:property><con:name>sort_by</con:name><con:value/></con:property><con:property><con:name>endpoint</con:name><con:value/></con:property><con:property><con:name>request_url</con:name><con:value/></con:property><con:property><con:name>destination_1</con:name><con:value/></con:property><con:property><con:name>destination_2</con:name><con:value/></con:property><con:property><con:name>destination_3</con:name><con:value/></con:property><con:property><con:name>destination_4</con:name><con:value/></con:property><con:property><con:name>destination_5</con:name><con:value/></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:savedRecentRuns>1</con:savedRecentRuns><con:requirements/><con:properties><con:property><con:name>execution_tag</con:name><con:value>regression</con:value></con:property><con:property><con:name>dbname</con:name><con:value/></con:property><con:property><con:name>traveler_apiendpoint</con:name><con:value>traveler-mobile.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>europecfee@yopmail.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value>abc123</con:value></con:property><con:property><con:name>api_version</con:name><con:value>v2</con:value></con:property><con:property><con:name>appversion</con:name><con:value>3.2</con:value></con:property><con:property><con:name>agent_user_email</con:name><con:value>ttagentdemo@gmail.com</con:value></con:property><con:property><con:name>agent_user_password</con:name><con:value>abc123</con:value></con:property><con:property><con:name>admin_user_email</con:name><con:value>devesh.joshi@traveltriangle.com</con:value></con:property><con:property><con:name>admin_user_password</con:name><con:value>asdf123</con:value></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
+</con:parameters></con:restRequest></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:savedRecentRuns>1</con:savedRecentRuns><con:requirements/><con:properties><con:property><con:name>execution_tag</con:name><con:value>regression</con:value></con:property><con:property><con:name>dbname</con:name><con:value/></con:property><con:property><con:name>traveler_apiendpoint</con:name><con:value>traveler-mobile.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>europecfee@yopmail.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value>abc123</con:value></con:property><con:property><con:name>api_version</con:name><con:value>v2</con:value></con:property><con:property><con:name>appversion</con:name><con:value>3.2</con:value></con:property><con:property><con:name>agent_user_email</con:name><con:value>ttagentdemo@gmail.com</con:value></con:property><con:property><con:name>agent_user_password</con:name><con:value>abc123</con:value></con:property><con:property><con:name>admin_user_email</con:name><con:value>devesh.joshi@traveltriangle.com</con:value></con:property><con:property><con:name>admin_user_password</con:name><con:value>asdf123</con:value></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
 import groovy.util.GroovyScriptEngine;
 import java.sql.DriverManager;
 import java.sql.Connection;
