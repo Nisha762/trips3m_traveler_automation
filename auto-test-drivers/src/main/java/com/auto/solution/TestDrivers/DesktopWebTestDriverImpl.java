@@ -1,16 +1,22 @@
 package com.auto.solution.TestDrivers;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.lang.reflect.Array;
+import java.io.FileReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,6 +48,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -49,6 +56,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 
 import us.codecraft.xsoup.Xsoup;
 
@@ -59,9 +70,6 @@ import com.auto.solution.Common.Property.FILTERS;
 import com.auto.solution.Common.Utility;
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
 import com.auto.solution.TestDrivers.RecoveryHandling.RecoverySupportForSeleniumDriver;
-import com.thoughtworks.selenium.Selenium;
-import com.thoughtworks.selenium.SeleniumException;
-import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -133,6 +141,23 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		}
 		return jsResult;
 	}
+	
+	private void ExtractAndLogJSErrors(String logFile,String url) throws Exception {
+        try{
+        	LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
+        	
+        	Files.write(Paths.get(logFile), ("URL ========= " + url + "\n").getBytes(), StandardOpenOption.APPEND);
+        	int index = 1;
+        	for (LogEntry entry : logEntries) {
+        		String logText = String.valueOf(index) + ". " + (new Date(entry.getTimestamp()) + " " + entry.getLevel() + " " + entry.getMessage()).toString() + "\n";
+        		Files.write(Paths.get(logFile), logText.getBytes(), StandardOpenOption.APPEND);
+        		index++;
+        	}
+        }
+        catch(Exception e){
+        	throw e;
+        }
+    }
 	
     private void switchToMostRecentWindow() {
 		try {
@@ -724,6 +749,9 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									options.setExperimentalOption("prefs", profile);
 									executionCapabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
 									executionCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+									LoggingPreferences loggingprefs = new LoggingPreferences();
+									loggingprefs.enable(LogType.BROWSER, Level.WARNING);
+									executionCapabilities.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
 								}
 								else{
 									throw new Exception(Property.ERROR_MESSAGES.ER_SPECIFY_BROWSER.getErrorMessage());
@@ -779,7 +807,11 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									options.setExperimentalOption("prefs", profile);
 									executionCapabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
 									executionCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
-								
+									
+									LoggingPreferences loggingprefs = new LoggingPreferences();
+									loggingprefs.enable(LogType.BROWSER, Level.WARNING);
+									executionCapabilities.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
+									
 									ChromeDriverService service = new ChromeDriverService.Builder()
 									.usingAnyFreePort()
 									.usingDriverExecutable(new File(rManager.getChromeDriverExecutibleLocation()))
@@ -801,9 +833,9 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 						// Open the URL to respective Browser
 						this.openEndPointInBrowser(endpoint);
 						this.setCookies();
-
 						recoverySupportHandle = new RecoverySupportForSeleniumDriver(driver,rManager);
 						Utility.addObjectToGlobalObjectCollection(Property.TEST_DRIVER_KEY, driver);
+						
 		}
 		catch(MalformedURLException me){
 			throw me;
@@ -1837,6 +1869,39 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
+	}
+
+
+	@Override
+	public void extractJSErrors(String inputUrlReferenceFile) throws Exception {
+		try{
+			
+			String inputLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
+			
+			inputLocation = inputLocation.replace("{EXTERNAL_FILE_NAME}", inputUrlReferenceFile);;
+			
+			File input_file = new File(inputLocation);
+			
+			BufferedReader br = new BufferedReader(new FileReader(input_file));
+			
+			String url = "";
+			
+			String logFileName = "JSError_" + Utility.getCurrentTimeStampInAlphaNumericFormat() + ".txt";
+			
+			String logFile = rManager.getTestExecutionLogFileLocation().replace("{0}", logFileName);;
+			
+			Files.createFile(Paths.get(logFile));
+			
+			while ((url = br.readLine()) != null) {				
+				String actual_url = Property.ApplicationURL + url;
+				driver.navigate().to(actual_url);
+				this.ExtractAndLogJSErrors(logFile,actual_url);
+			}			
+		}
+		catch(Exception e){
+			throw e;
+		}
+		
 	}
 	
 }

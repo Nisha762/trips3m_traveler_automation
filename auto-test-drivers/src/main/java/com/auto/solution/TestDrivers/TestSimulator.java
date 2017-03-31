@@ -614,6 +614,13 @@ public class TestSimulator {
  					throw new Exception(Property.ERROR_MESSAGES.ERR_IN_FINIDING_CONTENT_IN_MAIL.getErrorMessage().replace("{CSS_QUERY}",cssQuery));
  				}
  			}
+ 			else if(stepAction.toLowerCase().equalsIgnoreCase("extractjserrors")){
+ 				if(testDataContents.length < 1){
+ 					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+ 				}
+ 				String input_reference_file = testDataContents[0];
+ 				testSimulator.extractJSErrors(input_reference_file);
+ 			}
  			else{
  				throw new NoSuchMethodException(Property.ERROR_MESSAGES.ER_NO_STEP_ACTION.getErrorMessage());
  			}
