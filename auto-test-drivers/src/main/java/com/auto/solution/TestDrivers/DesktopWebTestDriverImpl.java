@@ -1876,11 +1876,16 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	public void extractJSErrors(String inputUrlReferenceFile) throws Exception {
 		try{
 			
-			String inputLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
+			String input_file_location = Utility.getValueForKeyFromGlobalVarMap("dumpurlfile") == null ? "" : Utility.getValueForKeyFromGlobalVarMap("dumpurlfile");
 			
-			inputLocation = inputLocation.replace("{EXTERNAL_FILE_NAME}", inputUrlReferenceFile);;
+			if(input_file_location.equals("")){
 			
-			File input_file = new File(inputLocation);
+				input_file_location = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
+			
+				input_file_location = input_file_location.replace("{EXTERNAL_FILE_NAME}", inputUrlReferenceFile);;
+			}
+			
+			File input_file = new File(input_file_location);
 			
 			BufferedReader br = new BufferedReader(new FileReader(input_file));
 			
