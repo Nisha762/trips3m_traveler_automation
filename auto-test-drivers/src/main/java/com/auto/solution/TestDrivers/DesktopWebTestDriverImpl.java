@@ -74,6 +74,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonGenerator;
 
 
 public class DesktopWebTestDriverImpl implements TestDrivers{
@@ -142,17 +144,23 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		return jsResult;
 	}
 	
-	private void ExtractAndLogJSErrors(String logFile,String url) throws Exception {
+	private void ExtractAndLogJSErrors(JsonGenerator jsonGenerator,String url) throws Exception {
         try{
         	LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
         	
-        	Files.write(Paths.get(logFile), ("URL ========= " + url + "\n").getBytes(), StandardOpenOption.APPEND);
-        	int index = 1;
+
+        	jsonGenerator.writeObjectFieldStart("details");
+        	
+        	jsonGenerator.writeStringField("URL", url);
+        	
+        	jsonGenerator.writeObjectFieldStart("err");          	
+        	
         	for (LogEntry entry : logEntries) {
-        		String logText = String.valueOf(index) + ". " + (new Date(entry.getTimestamp()) + " " + entry.getLevel() + " " + entry.getMessage()).toString() + "\n";
-        		Files.write(Paths.get(logFile), logText.getBytes(), StandardOpenOption.APPEND);
-        		index++;
+        		jsonGenerator.writeStringField(entry.getLevel().toString(), entry.getMessage());
         	}
+        	jsonGenerator.writeEndObject();
+        	
+        	jsonGenerator.writeEndObject();
         }
         catch(Exception e){
         	throw e;
@@ -1874,8 +1882,10 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 
 	@Override
 	public void extractJSErrors(String inputUrlReferenceFile) throws Exception {
-		try{
-			
+		
+		JsonGenerator jsonGenerator = null;
+		
+		try{			
 			String input_file_location = Utility.getValueForKeyFromGlobalVarMap("dumpurlfile") == null ? "" : Utility.getValueForKeyFromGlobalVarMap("dumpurlfile");
 			
 			if(input_file_location.equals("")){
@@ -1891,20 +1901,32 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			
 			String url = "";
 			
-			String logFileName = "JSError_" + Utility.getCurrentTimeStampInAlphaNumericFormat() + ".txt";
+			String logFileName = "JSError_" + Utility.getCurrentTimeStampInAlphaNumericFormat() + ".json";
 			
 			String logFile = rManager.getTestExecutionLogFileLocation().replace("{0}", logFileName);;
 			
-			Files.createFile(Paths.get(logFile));
+			jsonGenerator = Utility.createJsonFile(logFile);
+			
+			jsonGenerator.writeStartObject();
+			
+			jsonGenerator.writeObjectFieldStart("json_error");
 			
 			while ((url = br.readLine()) != null) {				
 				String actual_url = Property.ApplicationURL + url;
-				driver.navigate().to(actual_url);
-				this.ExtractAndLogJSErrors(logFile,actual_url);
-			}			
+				driver.navigate().to(actual_url);				
+				this.ExtractAndLogJSErrors(jsonGenerator,actual_url);
+			}	
+			
 		}
 		catch(Exception e){
 			throw e;
+		}
+		finally {
+			if(jsonGenerator != null){
+			jsonGenerator.writeEndObject();
+			jsonGenerator.writeEndObject();
+			jsonGenerator.close();
+			}
 		}
 		
 	}

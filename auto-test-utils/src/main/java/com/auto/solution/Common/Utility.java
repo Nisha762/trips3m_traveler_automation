@@ -28,6 +28,9 @@ import org.apache.commons.lang.time.StopWatch;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
+import org.codehaus.jackson.JsonEncoding;
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonGenerator;
 
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
 import com.auto.solution.Common.Property.STRATEGY_KEYWORD;
@@ -674,6 +677,22 @@ public class Utility {
 			throw e;
 		}
 		return newFormatDate;
+	}
+	
+	public static JsonGenerator createJsonFile(String filepathwithnameandextension)throws Exception{
+		
+		JsonGenerator jsonGenerator = null;
+		try {
+			JsonFactory jsonfactory = new JsonFactory(); 
+			
+			File jsonDoc = new File(filepathwithnameandextension);
+			
+			jsonGenerator = jsonfactory.createJsonGenerator(jsonDoc, JsonEncoding.UTF8);
+
+		} catch (Exception e) {
+			throw e;
+		}
+		return jsonGenerator;
 	}
 	
 	}
