@@ -341,7 +341,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			//this.deleteAllCookies();
 			
 			//this.switchToMostRecentWindow();
-			
+			if(!Property.BrowserName.equals(Property.CHROME_KEYWORD))
 			driver.manage().window().maximize();
 		}
 		catch(Exception e){
@@ -754,6 +754,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									profile.put("plugins.plugins_disabled", Arrays.asList("Chrome PDF Viewer"));
 									ChromeOptions options = new ChromeOptions();
 									options.addArguments("--disable-extensions");
+									options.addArguments("start-maximized");
 									options.setExperimentalOption("prefs", profile);
 									executionCapabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
 									executionCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
@@ -812,6 +813,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									profile.put("plugins.plugins_disabled", Arrays.asList("Chrome PDF Viewer"));
 									ChromeOptions options = new ChromeOptions();
 									options.addArguments("--disable-extensions");
+									options.addArguments("start-maximized");
 									options.setExperimentalOption("prefs", profile);
 									executionCapabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
 									executionCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
