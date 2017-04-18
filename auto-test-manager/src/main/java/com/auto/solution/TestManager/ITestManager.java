@@ -33,14 +33,13 @@ public interface ITestManager {
 	
 	public ArrayList<String> getPreConditionsForTestCase(String testCaseID) throws Exception;
 	
-	//public void reportTestCaseResult(String testCaseName,String status,String remarks,boolean needToReport) throws Exception;
+	public void reportTestCasesResult(HashMap<String,String> testCasesAndTheirStatus,HashMap<String,String> testCasesAndTheirFailedReasons,HashMap<String,List<String>> testGroupAndTheirTestCases,boolean needToReport)throws Exception;
 	
 	public List<String> getTestGroupsForExecution() throws Exception;
 	
 	public HashMap<String, Set<String>> getTestSuiteAndTestCaseHierarchyForExecution() throws Exception;
 	
 	public HashMap<String,HashMap<String, Set<String>>> prepareAndGetCompleteTestHierarchy() throws Exception;
-		
 	
 }
 

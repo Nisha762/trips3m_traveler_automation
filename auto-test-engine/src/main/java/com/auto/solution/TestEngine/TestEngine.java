@@ -59,6 +59,8 @@ public class TestEngine {
     
     public static TestLogger logger = null;
     
+    private boolean dumpToTestLink = false;
+    
     public TestEngine(TestEngineHelper engineHelper) {
 		this.engineHelper = engineHelper;
 	}
@@ -354,6 +356,8 @@ public class TestEngine {
 		List<String> testScenarioListInExecutionGroup = new ArrayList<String>();			
 		
 		objTestExecutionDetails.getTestExecutionContainer().setCompleteTestExecutionHierarchyDetails(completeTestHierarchy);
+		
+		objTestExecutionDetails.getTestExecutionContainer().setMapOfTestGroupAndTheirTestCases();
 		 
 		testScenarioListInExecutionGroup.addAll(filteredTestExecutionHierarchy.keySet());
 		
@@ -438,15 +442,18 @@ public class TestEngine {
 		objTestExecutionDetails.getTestExecutionContainer().prepareMapOfTestCasesAndTheirExecutionStatus();
 		
 		objTestExecutionDetails.getTestExecutionContainer().prepareMapOfTestSuitesAndTheirExecutionStatus();
+				
+		boolean exportresults = Utility.getValueForKeyFromGlobalVarMap(Property.EXPORT_TO_TESTLINK).equals("true")? true : false;
+		
+		testManager.reportTestCasesResult(objTestExecutionDetails.getMapOfTestCasesAndTheirStatus(), objTestExecutionDetails.getMapOfTestCasesAndItsFailedReason(), objTestExecutionDetails.getMapOfTestGroupAndTheirTestCases(), exportresults);
 		
 		}
 		catch(Exception e){
 			IsAnyTestStepFailedDuringExecution = true;
 			throw e;			
-		}
-		
-		
+		}	
 	}	
+	
 	public void logExecutionDetailsIntoXml() throws Exception{
 		try{
 			new XMLReporting(true, Property.XMLFileName + ".xml", objTestExecutionDetails.getTestExecutionContainer(),rManager);

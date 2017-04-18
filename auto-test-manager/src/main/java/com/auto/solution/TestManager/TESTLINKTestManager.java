@@ -26,7 +26,9 @@ import com.auto.solution.Common.Utility;
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
 
 import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
+import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
 import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionType;
+import br.eti.kinoshita.testlinkjavaapi.model.Build;
 import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 import br.eti.kinoshita.testlinkjavaapi.model.TestCaseStep;
 import br.eti.kinoshita.testlinkjavaapi.model.TestPlan;
@@ -555,52 +557,36 @@ public class TESTLINKTestManager extends TestManagerUtils implements ITestManage
 		}
 	}
 	
-//	@Override
-//	public void reportTestCaseResult(String testCaseName,String status, String remarks, boolean needToReport)	throws Exception {
-//		String groupName = "";
-//		ExecutionStatus executionStatus;
-//		if(needToReport)
-//		{
-//		if(status.equals(Property.PASS)){
-//			executionStatus = ExecutionStatus.PASSED;
-//		}
-//		else{
-//			executionStatus = ExecutionStatus.FAILED;
-//		}
-//		
-//		try{
-//			
-//			if(this.testHierarchyOnFilter != null){
-//				for(String group : testHierarchyOnFilter.keySet()){
-//					List<String> testSuites = testHierarchyOnFilter.get(group);
-//					if(testSuites.contains(this.testSuiteName)){
-//						groupName = group;
-//						List<String>  groupMentionedByUser = Arrays.asList(Utility.getValueForKeyFromGlobalVarMap("execution.group").toLowerCase().split(","));
-//						if(groupMentionedByUser.contains(groupName)){
-//						break;}
-//					}
-//				}
-//				Integer testCaseid = testLinkInstance.getTestCaseIDByName(testCaseName, this.testSuiteName, this.testProject.getName(), "");
-//				Integer testPlanId = testLinkInstance.getTestPlanByName(groupName, Property.PROJECT_NAME).getId();
-//				Integer buildId = null;
-//				
-//				try{
-//					Build[] testBuilds = testLinkInstance.getBuildsForTestPlan(testPlanId);
-//				for(Build build : testBuilds){
-//					buildId = build.getId();
-//				}
-//				}
-//				catch(Exception e){
-//					throw new Exception(ERROR_MESSAGES.ER_IN_GETTING_TEST_EXECUTION_BUILD_TEST_MANAGEMENT_TOOL.getErrorMessage());
-//				}
-//				testLinkInstance.reportTCResult(testCaseid, null, testPlanId,executionStatus, buildId, null, remarks, null, null, null, null, null, true);
-//			}
-//		}
-//		catch(Exception e){
-//			throw new Exception(ERROR_MESSAGES.ER_IN_REPORTING_TESTCASE_STATUS.getErrorMessage() + e.getMessage());
-//		}
-//		}
-//	}
+	@Override
+	public void reportTestCasesResult(HashMap<String,String> testCasesAndTheirStatus,HashMap<String,String> testCasesAndTheirFailedReasons,HashMap<String,List<String>> testGroupAndTheirTestCases,boolean needToReport)throws Exception {
+		
+		if(needToReport)
+		{
+			try{
+				for (String testCase : testCasesAndTheirStatus.keySet()) {
+				
+				String status = testCasesAndTheirStatus.get(testCase);
+				
+				ExecutionStatus testCaseStatus = status.equals(Property.PASS) ? ExecutionStatus.PASSED : ExecutionStatus.FAILED;
+				
+				String remark = testCasesAndTheirFailedReasons.get(testCase);
+				
+				List<String> testplansForATestCase = Utility.getKeysFromValueInHashMap(testGroupAndTheirTestCases,testCase);
+				
+				Integer testCaseid = testLinkInstance.getTestCaseIDByName(testCase, this.testSuiteName, TESTLINKTestManager.testProject.getName(),"");
+	
+				for (String testplan : testplansForATestCase) {
+					Integer testPlanId = testLinkInstance.getTestPlanByName(testplan, Property.PROJECT_NAME).getId();
+					Build build = testLinkInstance.getLatestBuildForTestPlan(testPlanId);
+					testLinkInstance.reportTCResult(testCaseid, null, testPlanId, testCaseStatus, build.getId(), build.getName(), remark,null,null,null,null,null,true);
+					}
+				}
+			}
+			catch(Exception e){
+				throw new Exception(ERROR_MESSAGES.ER_IN_REPORTING_TESTCASE_STATUS.getErrorMessage() + e.getMessage());
+			}
+		}
+	}
 
 	@Override
 	public List<String> getTestGroupsForExecution() throws Exception {				

@@ -515,6 +515,14 @@ public class TESTRAILTestManager extends TestManagerUtils implements ITestManage
 		return null;
 	}
 
+	@Override
+	public void reportTestCasesResult(HashMap<String, String> testCasesAndTheirStatus,
+			HashMap<String, String> testCasesAndTheirFailedReasons,
+			HashMap<String, List<String>> testGroupAndTheirTestCases, boolean needToReport) throws Exception {
+		throw new Exception(Property.ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
+		
+	}
+
 }
 
 

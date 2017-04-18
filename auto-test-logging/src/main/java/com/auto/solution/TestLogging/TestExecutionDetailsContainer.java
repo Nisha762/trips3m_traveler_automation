@@ -1,6 +1,7 @@
 package com.auto.solution.TestLogging;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -19,9 +20,9 @@ public class TestExecutionDetailsContainer implements ITestExecutionDetailsConta
 	
 	private HashMap<String, String> mapOfTestCasesAndItsExecutionStatus = new HashMap<String, String>();
 	
-	private HashMap<String, HashMap<String,String>> mapOfTestSuiteExecutionStatusCorrespondingToTestGroup = new HashMap<String, HashMap<String,String>>();
+	private HashMap<String,String> mapOfTestCasesAndItsFailedReason = new HashMap<String, String>();
 	
-	private HashMap<String, HashMap<String, Set<String>>> executionDetailMap = new HashMap<String, HashMap<String,Set<String>>>();
+	private HashMap<String, HashMap<String,String>> mapOfTestSuiteExecutionStatusCorrespondingToTestGroup = new HashMap<String, HashMap<String,String>>();
 	
 	private TestExecutionDetailsContainer() { }
 	
@@ -50,9 +51,27 @@ public class TestExecutionDetailsContainer implements ITestExecutionDetailsConta
 	public HashMap<String, ArrayList<ArrayList<String>>> getMapOfTestCasesAndTheirTestStepsWithDetails(){
 		return this.mapOfTestCasesAndTheirTestStepsWithDetails;
 	}
+	
+	@Override
+	public HashMap<String, List<String>> getMapOfTestGroupAndTheirTestCases(){
+		return this.mapOfTestGroupAndTheirTestCases;
+	}
+
+	public void setMapOfTestGroupAndTheirTestCases(){
 		
-	public void setMapOfTestGroupAndTheirTestCases(HashMap<String,List<String>> testGroupAndTestCaseDetails){
-		this.mapOfTestGroupAndTheirTestCases = testGroupAndTestCaseDetails;
+		HashMap<String, HashMap<String, Set<String>>> hierarchy = this.completeTestExecutionHierarchy;
+		
+		for (String testGroup : hierarchy.keySet()) {
+			
+			ArrayList<String> testCasesInTestGroup = new ArrayList<String>();
+			
+			HashMap<String, Set<String>> mapOfTestSuiteAndTestCases = hierarchy.get(testGroup);
+			
+			for(String testSuite : mapOfTestSuiteAndTestCases.keySet()){
+				testCasesInTestGroup.addAll(mapOfTestSuiteAndTestCases.get(testSuite));
+			}			
+			mapOfTestGroupAndTheirTestCases.put(testGroup, testCasesInTestGroup);
+		}		
 	}
 	
 	public void prepareMapOfTestCasesAndTheirExecutionStatus(){
@@ -61,16 +80,26 @@ public class TestExecutionDetailsContainer implements ITestExecutionDetailsConta
 				ArrayList<ArrayList<String>> testStepsWithDetails = mapOfTestCasesAndTheirTestStepsWithDetails.get(testcase);
 				
 				mapOfTestCasesAndItsExecutionStatus.put(testcase, Property.PASS);
-				
+				mapOfTestCasesAndItsFailedReason.put(testcase, "");
 				for (ArrayList<String> testStep : testStepsWithDetails) {
 					String stepStatus = testStep.get(0);
+					String remarks = testStep.get(3);
 					if(stepStatus.equals(Property.FAIL)){
 						mapOfTestCasesAndItsExecutionStatus.put(testcase, Property.FAIL);
+						mapOfTestCasesAndItsFailedReason.put(testcase, remarks);
 						break;
 					}					
 				}
 			}
 		}
+	}
+	
+	public HashMap<String, String> getMapOfTestCasesAndTheirStatus(){
+		return mapOfTestCasesAndItsExecutionStatus;
+	}
+	
+	public HashMap<String,String> getMapOfTestCasesAndItsFailedReason(){
+		return this.mapOfTestCasesAndItsFailedReason;
 	}
 	
 	public void prepareMapOfTestSuitesAndTheirExecutionStatus(){

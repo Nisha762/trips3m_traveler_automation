@@ -245,6 +245,8 @@ public class Property {
 	
 	public static String Logger_LogFile_Name = "log4j-application.log";
 	
+	public static String EXPORT_TO_TESTLINK = "exportToTestLink";
+	
 	public static String TEST_STEP_LOG_ENTRY = "------------------------------------------------------------------------------------\n" + 
 	 "Test Step Description : {TEST_STEP_NAME} \n" + "Test Step Action : {TEST_STEP_ACTION} \n" + "Test object : {TEST_OBJECT} \n" + 
 	 "Test Data used -- '{TEST_DATA}' \n" + "Status : {STATUS} \n" + "Remarks : {REMARKS} \n" + "Execution Time : {EXECUTION_TIME} \n" +

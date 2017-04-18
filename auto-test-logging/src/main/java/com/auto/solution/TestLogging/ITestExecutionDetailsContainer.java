@@ -34,5 +34,11 @@ public List<Integer> getTestCaseNumbersDetailsForTestGroup(String testGroupName)
 public List<String> getListOfFailedTestCases();
 
 public HashMap<String,HashMap<String,Set<String>>> getCompleteTestExecutionHierarchyDetails();
+
+public HashMap<String, String> getMapOfTestCasesAndTheirStatus();
+
+public HashMap<String,String> getMapOfTestCasesAndItsFailedReason();
+
+public HashMap<String, List<String>> getMapOfTestGroupAndTheirTestCases();
 	
 }

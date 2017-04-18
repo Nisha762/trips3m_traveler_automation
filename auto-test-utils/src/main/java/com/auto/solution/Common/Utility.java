@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -667,6 +668,20 @@ public class Utility {
 		return destinationFile;
 	}
 
+	
+	public static List<String> getKeysFromValueInHashMap(HashMap<String,List<String>> mapOfKeyAndValues,String value){
+		
+		List<String> keysForValues = new ArrayList<String>();
+		
+		for(String key : mapOfKeyAndValues.keySet()){
+			List<String> values = mapOfKeyAndValues.get(key);
+			if(values.contains(value)){
+				keysForValues.add(key);
+			}
+		}		
+		return keysForValues;
+	}
+	
 	public static String changeDateFormat(String oldFormatDate,String newFormat) throws Exception{
 		String newFormatDate = "";
 		try {
@@ -694,6 +709,7 @@ public class Utility {
 		}
 		return jsonGenerator;
 	}
+
 	
-	}
+}	
 	
