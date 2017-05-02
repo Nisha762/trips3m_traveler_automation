@@ -306,7 +306,7 @@
             <hashTree/>
             <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Category loaded?" enabled="true">
               <boolProp name="XPath.negate">false</boolProp>
-              <stringProp name="XPath.xpath">//a[@class=&apos;main-navigation-active&apos; and contains(@href,&apos;${category}&apos;)]</stringProp>
+              <stringProp name="XPath.xpath">//a[contains(@class,&apos;main-navigation-active&apos;) and contains(@href,&apos;${category}&apos;)]</stringProp>
               <boolProp name="XPath.validate">false</boolProp>
               <boolProp name="XPath.whitespace">false</boolProp>
               <boolProp name="XPath.tolerant">true</boolProp>
