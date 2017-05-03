@@ -287,15 +287,8 @@
 	  	<plugin>
 				<groupId>com.lazerycode.jmeter</groupId>
 				<artifactId>jmeter-analysis-maven-plugin</artifactId>
-				<version>1.0.6</version>
-				<executions>
-					<execution>
-						<id>report-generation</id>
-						<phase>install</phase>
-						<goals>
-							<goal>analyze</goal>
-						</goals>
-						<configuration>
+				<version>1.0.6</version>				
+				<configuration>
 							<source>${basedir}/auto-test-load/TestExecutionHistory/*${LoadTestName}.jtl</source>
 							<targetDirectory>${project.build.directory}/jmeter/results</targetDirectory>
 							<sourceDirFailed>true</sourceDirFailed>
@@ -327,6 +320,13 @@
 						<templateDirectory>${project.build.directory}/jmeter/results/</templateDirectory>
 						<remoteResourcesFromUntilDateFormat>HH:mm_yyyyMMdd</remoteResourcesFromUntilDateFormat>
 					</configuration>
+				<executions>
+					<execution>
+						<id>report-generation</id>
+						<phase>install</phase>
+						<goals>
+							<goal>analyze</goal>
+						</goals>
 				</execution>
 			</executions>
 		</plugin>
