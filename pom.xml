@@ -234,13 +234,6 @@
 	        			<version>2.4.7</version>
 					</dependency>
 				</dependencies>
-        		<executions>
-            		<execution>
-						<id>jmeter-tests</id>
-                		<phase>verify</phase>
-                		<goals>
-                    		<goal>jmeter</goal>
-                		</goals>
 						<configuration>
 							<suppressJMeterOutput>false</suppressJMeterOutput>
 							<overrideRootLogLevel>ERROR</overrideRootLogLevel>
@@ -266,7 +259,7 @@
 								<users>${concurrency}</users> 
 								<rampUp>${rampup}</rampUp>
 								<Loop>${loop}</Loop>
-								<durationinseconds>${durationinseconds}</durationinseconds>
+								<duration>${durationinseconds}</duration>
 								<application_url>${application_url}</application_url>						
 							</propertiesUser>
 							<testFilesDirectory>auto-test-load/src/test/jmeter</testFilesDirectory>
@@ -281,8 +274,15 @@
                                     <excludeJMeterTestFile></excludeJMeterTestFile>
                                 </testFilesExcluded>-->
                 		</configuration>
-					</execution>
-				</executions>
+				        <executions>
+            				<execution>
+								<id>jmeter-tests</id>
+                				<phase>verify</phase>
+                				<goals>
+                    				<goal>jmeter</goal>
+                				</goals>
+							</execution>
+						</executions>
 			</plugin>
 	  	<plugin>
 				<groupId>com.lazerycode.jmeter</groupId>
