@@ -239,13 +239,14 @@
 							<overrideRootLogLevel>ERROR</overrideRootLogLevel>
 							<ignoreResultFailures>true</ignoreResultFailures>
 							<propertiesJMeter>
-								<jmeter.save.saveservice.response_data>true</jmeter.save.saveservice.response_data>
+								<jmeter.save.saveservice.assertion_results_failure_message>false</jmeter.save.saveservice.assertion_results_failure_message>
+								<jmeter.save.saveservice.response_data>false</jmeter.save.saveservice.response_data>
 								<jmeter.save.saveservice.samplerData>true</jmeter.save.saveservice.samplerData>
-								<jmeter.save.saveservice.requestHeaders>true</jmeter.save.saveservice.requestHeaders>
+								<jmeter.save.saveservice.requestHeaders>false</jmeter.save.saveservice.requestHeaders>
 								<jmeter.save.saveservice.url>true</jmeter.save.saveservice.url>
-								<jmeter.save.saveservice.responseHeaders>true</jmeter.save.saveservice.responseHeaders>
+								<jmeter.save.saveservice.responseHeaders>false</jmeter.save.saveservice.responseHeaders>
 								<jmeter.save.saveservice.output_format>xml</jmeter.save.saveservice.output_format>
-								<jmeter.save.saveservice.print_field_names>true</jmeter.save.saveservice.print_field_names>
+								<jmeter.save.saveservice.print_field_names>false</jmeter.save.saveservice.print_field_names>
 							</propertiesJMeter>
 							<jMeterProcessJVMSettings>
 								<xms>1024</xms>
