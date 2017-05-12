@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="AgentUpdateQuote" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" lastOpened="2016-09-23T17:40:06.494+05:30" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d7c48414-9b1d-49d0-b44b-a92a9a748dbb" wadlVersion="http://wadl.dev.java.net/2009/02" name="SIGNIN" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://${#Project#traveler_apiendpoint}}</con:endpoint></con:endpoints><con:resource name="sign_in" path="/users/sign_in" id="948afba5-5ffc-4440-a549-d192ff653635"><con:settings/><con:parameters/><con:method name="Method 1" id="c7528823-614f-4e0c-9b32-84a978bf12a5" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="d64103bc-b669-42bf-befd-5fb67bf06081" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="TT-Mobile-Post" value="testing1112015a@rediffmail.compost"/>
+  <con:entry key="TT-Mobile" value=""/>
+  <con:entry key="Content-Type" value="application/json; charset=UTF-8"/>
+  <con:entry key="Accept" value="application/json"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#Project#traveler_apiendpoint}</con:endpoint><con:request>{"login_type":"json","user":{"email":"testing1112015a@rediffmail.com","password":"testing00000007"}}</con:request><con:originalUri>http://traveler-api.ttdev.in/users/sign_in</con:originalUri><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="d6589a44-6938-4e43-a23c-69d8a1e51bf0" wadlVersion="http://wadl.dev.java.net/2009/02" name="QuoteView" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://traveler.ttdev.in</con:endpoint></con:endpoints><con:resource name="edit" path="/api/{api_version}/requested_trips/{request_id}/quotes/{quote_id}/edit" id="69caced4-207d-4c3c-bf49-e8b971df2d31"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>request_id</con:name><con:value>request_id</con:value><con:style>TEMPLATE</con:style><con:default>request_id</con:default></con:parameter><con:parameter><con:name>quote_id</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/></con:parameter></con:parameters><con:method name="Method 1" id="4400392f-88cf-4a23-942b-243c34ff8046" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>403</con:status><con:params/><con:element xmlns:edit="http://traveler.ttdev.in/api/v4/requested_trips/1367187/quotes/2397809/edit">edit:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:edit="http://traveler.ttdev.in/api/v4/requested_trips/1367187/quotes/2397809/edit">edit:Response</con:element></con:representation><con:request name="Request 1" id="1d7c8707-6e44-48ef-a4de-c189cab13414" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value="_trips3m_session=BAh7C0kiD3Nlc3Npb25faWQGOgZFVEkiJTdlMDdmODQ4MzY1NGM4Nzg3ZGEzODc0NmYzOTg0NDdmBjsAVEkiDHJlZmVyZXIGOwBUSSIhKGRpcmVjdCk6OihkaXJlY3QpOjo6Oihub25lKQY7AFRJIhl3YXJkZW4udXNlci51c2VyLmtleQY7AFRbB1sGaQNNlQtJIiIkMmEkMTAkeE1kaFNzVWovNmdHdEVWZzc3U21xLgY7AFRJIg5uZXh0X3BhdGgGOwBGSSJOL3JlcXVlc3RlZF90cmlwcy8xMzY3MTg3LVJhamEvcXVvdGVzLzIzOTc4MDktNC1EYXlzLTMtTmlnaHRzLVBhY2thZ2UvZWRpdAY7AEZJIhVyZl9wZW5kaW5nX2NvdW50BjsAVGkASSIQX2NzcmZfdG9rZW4GOwBGSSIxKzZrWFNvZjJhZ2MwNnB4VlpDUGM0eCtjK2RMeTFGcklFbXd4T2dPdHFpST0GOwBG--5b4dbe5024aa4331442379d5dd4276198d99e7f3"/>
+  &lt;con:entry key="TT-Mobile" value="jddV49Bn0lULKsKDJ0JLbpcdq41Kj5xAAHS/ncEFsK0="/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveler.ttdev.in</con:endpoint><con:request/><con:originalUri>http://traveler.ttdev.in/api/v4/requested_trips/1367187/quotes/2397809/edit</con:originalUri><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="request_id" value="1367187"/>
+  <con:entry key="quote_id" value="2397809"/>
+  <con:entry key="api_version" value="v4"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>request_id</con:entry><con:entry>quote_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="ffae232a-ef60-4e6c-b263-84f2a7c5ca5d" wadlVersion="http://wadl.dev.java.net/2009/02" name="REQUESTNEWQUOTEDETAIL" type="rest" definitionUrl="hji" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="new" path="/api/v4/requested_trips/{requestID}/quotes/new" id="0b601389-9372-4933-a6d2-d88fff619fed"><con:settings/><con:parameters><con:parameter><con:name>requestID</con:name><con:style>TEMPLATE</con:style></con:parameter></con:parameters><con:method name="Method 1" id="a8ffc674-73be-4af5-8a4b-c1c82f8b4b2c" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="7dcecddc-c035-4ed9-a869-45324dc9b574" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value="_trips3m_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTg4MTNiNTEwZTQwMjI4ZjQ2NDFkOGUyNDgwZDNlNzRhBjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA6ELA0kiIiQyYSQxMCRRdTBBa2ZXRGg1NjlXckFmcHZ3TmplBjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVA%3D%3D--a330c87a3f840d9a58e19b343b9f41343fc42ea4; path=/; HttpOnly"/>
+  &lt;con:entry key="Content-Type" value="application/json"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveler-api.ttdev.in</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v4/requested_trips/889699/quotes/new</con:originalUri><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder><con:entry>requestID</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="f29c4f8d-a1a0-46dc-8d57-b5da97b36821" wadlVersion="http://wadl.dev.java.net/2009/02" name="CreateQuote" type="rest" definitionUrl="createquote" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="quotes" path="/api/v4/requested_trips/{request_id}/quotes" id="55ad4e5b-a2c7-4346-a3ce-e941aab43c6d"><con:settings/><con:parameters><con:parameter><con:name>request_id</con:name><con:style>TEMPLATE</con:style></con:parameter></con:parameters><con:method name="Method 1" id="bc8bc869-5c08-490e-a976-5d14405908f5" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="07a0e598-f3b8-4df7-8cfa-e914de4d51d2" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value=""/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://${#Project#traveler_apiendpoint}</con:endpoint><con:request>{"utf8":"✓",
+"authenticity_token":"8g+WtepgUDToey49evWgFuDCWNjvWDfEv+ji32uAIAk=",
+"version":"",
+"should_warnings_override":"false",
+"commit":"SAVE &amp; SEND",
+"quote_match_param":"last",
+"quote":
+ {"type_of_trip":"",
+  "days":"5",
+  "nights":"4",
+  "perperson":"per person",
+  "currency":"Rupee",
+  "flight_cost":"0",
+  "visa_cost":"0",
+  "price":"32430",
+  "hotels":"gjfjhg",
+  "flights":"",
+  "cabs":"fjhfjhfjhgfj",
+  "quote_inclusions_attributes":
+   {"0":
+     {"id":"",
+      "inclusion_id":"447",
+      "comments_added":"",
+      "is_included":"1"},
+    "1":{"id":"", "inclusion_id":"99", "is_included":"1"},
+    "2":{"id":"", "inclusion_id":"100", "is_included":"0"},
+    "3":{"id":"", "inclusion_id":"101", "is_included":"0"},
+    "4":
+     {"id":"",
+      "inclusion_id":"102",
+      "comments_added":"",
+      "is_included":"0"},
+    "5":
+     {"id":"",
+      "inclusion_id":"103",
+      "comments_added":"",
+      "is_included":"0"},
+    "6":
+     {"id":"",
+      "inclusion_id":"104",
+      "comments_added":"",
+      "is_included":"0"},
+    "7":
+     {"id":"",
+      "inclusion_id":"105",
+      "comments_added":"",
+      "is_included":"0"},
+    "8":
+     {"id":"",
+      "inclusion_id":"113",
+      "comments_added":"",
+      "is_included":"0"},
+    "9":
+     {"id":"",
+      "inclusion_id":"446",
+      "comments_added":"",
+      "is_included":"0"},
+    "10":
+     {"id":"",
+      "inclusion_id":"114",
+      "comments_added":"",
+      "is_included":"1"},
+    "11":
+     {"id":"",
+      "inclusion_id":"115",
+      "comments_added":"",
+      "is_included":"0"}},
+  "trip_days_attributes":
+   {"0":{"title":"fdhghdg", "description":"gfdhgf", "_destroy":"false"},
+    "1":{"title":"gfhghfh", "description":"gffhfh", "_destroy":"false"},
+    "2":{"title":"gfhfh", "description":"gfhh", "_destroy":"false"},
+    "3":{"title":"hggfhg", "description":"hgfhgh", "_destroy":"false"},
+    "5":{"title":"ghgfh", "description":"ghhggf", "_destroy":"false"}},
+  "terms_conditions":"gghhg",
+  "description":"hfhg"},
+"quote_land_package_cost":"0",
+"flights_not_included":"true",
+"save_inclusions":"true",
+"action":"create",
+"controller":"quotes",
+"requested_trip_id":"946352l"}</con:request><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder><con:entry>request_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="7ad57026-8ecb-4f0f-9a6b-2f77da249424" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetHotelImages" type="rest" definitionUrl="xcc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="destination_hotel_images" path="/api/{api_version}/destinations/{destinationId}/destination_hotel_images" id="6cc1bcb3-5e80-4cbf-9808-ebdbfec7b314"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>destinationId</con:name><con:value>destinationId</con:value><con:style>TEMPLATE</con:style><con:default>destinationId</con:default></con:parameter></con:parameters><con:method name="Method 1" id="72059ed7-3cdf-477b-9a2b-6a69cb3d6ff7" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="a66554aa-4cde-4618-a7c8-b0e1860b3e4c" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="6f4f9841-00d6-43f9-b6e4-c9bd8576990c" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetRequestDetail" type="rest" definitionUrl="reqdetail" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="{rtripId}" path="/api/{version}/requested_trips/{rtripId}" id="41572f7a-778e-4c4d-8d7b-28565d65b4b5"><con:settings/><con:parameters><con:parameter><con:name>version</con:name><con:value>version</con:value><con:style>TEMPLATE</con:style><con:default>version</con:default></con:parameter><con:parameter><con:name>rtripId</con:name><con:value>rtripId</con:value><con:style>TEMPLATE</con:style><con:default>rtripId</con:default></con:parameter></con:parameters><con:method name="Method 1" id="752582fa-2759-422f-9885-12956e2bfb7a" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="384b6469-8f34-4cc1-ae43-a88a840e1fcf" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value=""/>
+  <con:entry key="TT-Mobile" value=""/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="Content-Type" value="application/json; charset=utf-8"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
+</xml-fragment>]]></con:setting></con:settings><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="d9e902c0-53b5-450e-8f96-c675a9a3bdb5" wadlVersion="http://wadl.dev.java.net/2009/02" name="QuoteUpdate" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://traveler.ttdev.in</con:endpoint></con:endpoints><con:resource name="{quote_id}" path="/api/{api_version}/requested_trips/{rtrip_id}/quotes/{quote_id}" id="f7890e7f-76a4-4fad-8943-21060dff8467"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>rtrip_id</con:name><con:value>rtrip_id</con:value><con:style>TEMPLATE</con:style><con:default>rtrip_id</con:default></con:parameter><con:parameter><con:name>quote_id</con:name><con:value>quote_id</con:value><con:style>TEMPLATE</con:style><con:default>quote_id</con:default></con:parameter></con:parameters><con:method name="Method 1" id="ea1e4dc3-b62d-47fe-bf0a-c440b309d8a2" method="PUT"><con:settings/><con:parameters/><con:request name="Request 1" id="d5193658-41e0-44d1-92bc-41809f130e48" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value="_trips3m_session=BAh7C0kiD3Nlc3Npb25faWQGOgZFVEkiJTdlMDdmODQ4MzY1NGM4Nzg3ZGEzODc0NmYzOTg0NDdmBjsAVEkiDHJlZmVyZXIGOwBUSSIhKGRpcmVjdCk6OihkaXJlY3QpOjo6Oihub25lKQY7AFRJIhl3YXJkZW4udXNlci51c2VyLmtleQY7AFRbB1sGaQNNlQtJIiIkMmEkMTAkeE1kaFNzVWovNmdHdEVWZzc3U21xLgY7AFRJIg5uZXh0X3BhdGgGOwBGSSJOL3JlcXVlc3RlZF90cmlwcy8xMzY3MTg3LVJhamEvcXVvdGVzLzIzOTc4MDktNC1EYXlzLTMtTmlnaHRzLVBhY2thZ2UvZWRpdAY7AEZJIhVyZl9wZW5kaW5nX2NvdW50BjsAVGkASSIQX2NzcmZfdG9rZW4GOwBGSSIxKzZrWFNvZjJhZ2MwNnB4VlpDUGM0eCtjK2RMeTFGcklFbXd4T2dPdHFpST0GOwBG--5b4dbe5024aa4331442379d5dd4276198d99e7f3"/>
+  &lt;con:entry key="TT-Mobile" value="exj9B9q+OsZYvqcqI6kjVbx79BBj38hz9sKC/FxNZe0="/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveler.ttdev.in</con:endpoint><con:request>{"utf8":"✓",
+"authenticity_token":"8g+WtepgUDToey49evWgFuDCWNjvWDfEv+ji32uAIAk=",
+"version":"",
+"should_warnings_override":"false",
+"commit":"SAVE &amp; SEND",
+"quote_match_param":"last",
+"quote":
+ {"type_of_trip":"",
+  "days":"5",
+  "nights":"4",
+  "perperson":"per person",
+  "currency":"Rupee",
+  "flight_cost":"0",
+  "visa_cost":"0",
+  "price":"5678",
+  "hotels":"gjfjhg",
+  "flights":"",
+  "cabs":"fjhfjhfjhgfj",
+  "quote_inclusions_attributes":
+   {"0":
+     {"id":"",
+      "inclusion_id":"447",
+      "comments_added":"",
+      "is_included":"1"},
+    "1":{"id":"", "inclusion_id":"99", "is_included":"1"},
+    "2":{"id":"", "inclusion_id":"100", "is_included":"0"},
+    "3":{"id":"", "inclusion_id":"101", "is_included":"0"},
+    "4":
+     {"id":"",
+      "inclusion_id":"102",
+      "comments_added":"",
+      "is_included":"0"},
+    "5":
+     {"id":"",
+      "inclusion_id":"103",
+      "comments_added":"",
+      "is_included":"0"},
+    "6":
+     {"id":"",
+      "inclusion_id":"104",
+      "comments_added":"",
+      "is_included":"0"},
+    "7":
+     {"id":"",
+      "inclusion_id":"105",
+      "comments_added":"",
+      "is_included":"0"},
+    "8":
+     {"id":"",
+      "inclusion_id":"113",
+      "comments_added":"",
+      "is_included":"0"},
+    "9":
+     {"id":"",
+      "inclusion_id":"446",
+      "comments_added":"",
+      "is_included":"0"},
+    "10":
+     {"id":"",
+      "inclusion_id":"114",
+      "comments_added":"",
+      "is_included":"1"},
+    "11":
+     {"id":"",
+      "inclusion_id":"115",
+      "comments_added":"",
+      "is_included":"0"}},
+  "trip_days_attributes":
+   {"0":{"title":"fdhghdg", "description":"gfdhgf", "_destroy":"false"},
+    "1":{"title":"gfhghfh", "description":"gffhfh", "_destroy":"false"},
+    "2":{"title":"gfhfh", "description":"gfhh", "_destroy":"false"},
+    "3":{"title":"hggfhg", "description":"hgfhgh", "_destroy":"false"},
+    "5":{"title":"ghgfh", "description":"ghhggf", "_destroy":"false"}},
+  "terms_conditions":"gghhg",
+  "description":"hfhg"},
+"quote_land_package_cost":"0",
+"flights_not_included":"true",
+"save_inclusions":"true",
+"action":"update",
+"controller":"quotes",
+"requested_trip_id":"946352l"}</con:request><con:originalUri>http://traveler.ttdev.in/api/v4/requested_trips/1367187/quotes/2397809</con:originalUri><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="rtrip_id" value="1367187"/>
+  <con:entry key="quote_id" value="2397809"/>
+  <con:entry key="api_version" value="v4"/>
+</con:parameters></con:request></con:method></con:resource></con:interface><con:testSuite id="f579f66c-5920-4988-a9cf-cb6a7854e1d9" name="Agent"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="5794d198-7055-4330-be4a-67978cc6ef03" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Agent_Create_Quote_For_Active_Trip" searchProperties="true"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="calltestcase" name="Given user gets the hash key" id="12bc44e1-280d-479b-b19e-83979f0d7f9d"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/users/sign_in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>EUbu9tWtMs6VuRbDl4HL5+RdOgeuQHYzWp4ORCd/Ubw=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user logged in with correct credentials" id="5eee5c62-8af4-4dd6-b4d4-0bdcd56eee52"><con:settings/><con:config service="SIGNIN" methodName="Method 1" resourcePath="/users/sign_in" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user logged in with correct credentials" id="92adcda0-aa7e-4e62-8955-07a8e112025c" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="TT-Mobile" value="${Given user gets the hash key#hash_key}"/>
+  &lt;con:entry key="Content-Type" value="application/json"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request>{"login_type":"json","user":{"email":"${#TestCase#user_email}","password":"${#TestCase#user_password}"}}</con:request><con:originalUri>http://traveltriangle.com/users/sign_in</con:originalUri><con:assertion type="Simple Contains" id="30720fd6-5852-4816-95db-835bda8cd5ee" name="EmailExistsInResponse"><con:configuration><token>${#TestCase#user_email}</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="64530aec-6185-4dd1-8e26-fc05f38974ad" name="Get user details"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+String user_id = json_response_holder.current_user.id.toString();
+
+String auth_key = json_response_holder.current_user.pubnub_auth.auth_key;
+
+messageExchange.modelItem.testCase.setPropertyValue("user_id",user_id);
+
+messageExchange.modelItem.testCase.setPropertyValue("auth_key",auth_key);</scriptText></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="657dca54-7dbe-4e4f-8f91-cbbffb9522e0" name="Get the response cookie"><con:configuration><scriptText>for(String cookie in messageExchange.getResponseHeaders()["Set-Cookie"]){
+	if(cookie.contains("_trips3m_session")){
+		messageExchange.modelItem.testCase.setPropertyValue("Cookie",cookie);
+	}
+}</scriptText></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="9b45a882-1c4d-4006-a970-ecd7203d183d" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="Given user gets the hash key for trip detail" id="5520abb7-9525-484c-815a-b53452e140e0"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/api/v2/requested_trips/${#TestCase#request_id}</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>OJB2MazIH6kjkv2sm1RlCNtCr+5joPdw8CumVvDTUEg=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="User Get Request Detail" id="b411fd66-4c35-4c88-bed7-f0d0800a9721"><con:settings/><con:config service="GetRequestDetail" resourcePath="/api/{version}/requested_trips/{rtripId}" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User Get Request Detail" id="384b6469-8f34-4cc1-ae43-a88a840e1fcf" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  <con:entry key="TT-Mobile" value="${Given user gets the hash key for trip detail#hash_key}"/>
+  <con:entry key="Content-Type" value="application/json; charset=utf-8"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/api/v2/requested_trips/1148502</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="b58fec85-15a9-4800-8b3f-daa23ac79e93" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="680642fc-cdff-49cf-96c8-f8846856bb2c" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def destinationID = json_response_holder.destinations.id;
+
+messageExchange.modelItem.testCase.setPropertyValue("destinationID",destinationID[0].toString());</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="rtripId" value="${#TestCase#request_id}"/>
+  <con:entry key="version" value="v2"/>
+</con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="get the hash for destination hotel detail" id="b9a84ba0-415e-433f-85bf-7f569f6770b1"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/api/v2/destinations/${#TestCase#destinationID}/destination_hotel_images</con:value></con:property><con:property><con:name>user_email</con:name><con:value/></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>fuvTYmQ9NJzijJCpaclSqsdFW0kA6FbymVmPg0/CiW8=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="get destination hotel list" id="544f8c66-e345-433e-b424-a6ae051175ee"><con:settings/><con:config service="GetHotelImages" resourcePath="/api/{api_version}/destinations/{destinationId}/destination_hotel_images" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="get destination hotel list" id="f00ef24d-81e4-44a7-b43f-423ab7721729" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="TT-Mobile" value="${get the hash for destination hotel detail#hash_key}"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v2/destinations/67/destination_hotel_images.json</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="69d48784-f9f6-4d46-b41f-4e97a941b7af" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="7d45352f-9592-4e9d-a41f-cafe6b72a7f2" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def hotels= json_response_holder.hotel_images;
+for (def hotel in hotels){
+	messageExchange.modelItem.testCase.setPropertyValue("address",hotel.address);
+//	messageExchange.modelItem.testCase.setPropertyValue("category",hotel.category);
+	messageExchange.modelItem.testCase.setPropertyValue("city",hotel.city);
+	messageExchange.modelItem.testCase.setPropertyValue("city_id",String.valueOf(hotel.city_id));
+	messageExchange.modelItem.testCase.setPropertyValue("d_id",String.valueOf(hotel.d_id));
+	messageExchange.modelItem.testCase.setPropertyValue("img",hotel.img);
+	messageExchange.modelItem.testCase.setPropertyValue("name",hotel.name);
+	messageExchange.modelItem.testCase.setPropertyValue("picture",hotel.pictures);
+	break;
+
+}
+</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="destinationId" value="${#TestCase#destinationID}"/>
+  <con:entry key="api_version" value="v2"/>
+</con:parameters><con:parameterOrder><con:entry>destinationId</con:entry><con:entry>api_version</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="agent get the hash key" id="ceb89233-8a70-424c-9ad7-ade9fd9669dd"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/api/v4/requested_trips/${#TestCase#request_id}/quotes/new</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>u42mm9+FUusDm4qzKmpMusPtk1ZOcDr1+/d/K6UcF0U=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="User get request new quote default detail" id="defe744c-47af-493c-a55e-296caa3081d6"><con:settings/><con:config service="REQUESTNEWQUOTEDETAIL" resourcePath="/api/v4/requested_trips/{requestID}/quotes/new" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User get request new quote default detail" id="7dcecddc-c035-4ed9-a869-45324dc9b574" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  &lt;con:entry key="TT-Mobile" value="${agent get the hash key#hash_key}"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v4/requested_trips/889699/quotes/new</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="cc7eb389-b1e2-4742-943d-63db37226b92" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="0cf8574d-2ae0-4e23-b096-e43710400f80" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def quoteinclexcl = json_response_holder.quote_incl_excl_info_form_enabled;
+def hotelformenabled = json_response_holder.hotel_form_enabled;
+def days = json_response_holder.trip_days.day_of_itinerary;
+
+log.info "days " + days
+String quoteincl ="";
+String saveinclusions = false;
+if(quoteinclexcl == true){
+	saveinclusions = "true";
+	def inclid = json_response_holder.quote_inclusions.id;
+	int i=0;
+	for (value in inclid){
+	quoteincl = (quoteincl == "") ? quoteincl + "\""+i+"\":{\"id\":\"\",\"inclusion_id\":\""+value+"\",\"comments_added\":\"\",\"is_included\":\"0\"}" : quoteincl + "," + "\""+i+"\":{\"id\":\"\",\"inclusion_id\":\""+value+"\",\"comments_added\":\"\",\"is_included\":\"1\"}";
+	i++;
+	}
+	
+}else{
+	messageExchange.modelItem.testCase.setPropertyValue("excluded","kdfhsdkjsdhfl");
+	messageExchange.modelItem.testCase.setPropertyValue("included","kdfhsdkjhhvjsdhfl");
+}
+
+String travel_days="";
+for( int i=0; i&lt;days.size();i++){
+	travel_days = (travel_days == "") ? travel_days + "\""+i+"\":{\"title\":\"fdhghdg\", \"description\":\"gfdhgf\", \"_destroy\":\"false\"}" : travel_days + "," +"\""+i+"\":{\"title\":\"fdhghdg\", \"description\":\"gfdhgf\", \"_destroy\":\"false\"}"; 
+}
+
+
+String hoteldetail = ""; 
+if(hotelformenabled){
+	String nights="1";
+	for (int i=2; i&lt;days.size();i++){
+		nights =  nights+","+i
+	}
+
+String hotelName = context.expand('${#TestCase#name}');
+String cityName = context.expand('${#TestCase#city}');
+String cityId = context.expand('${#TestCase#city_id}');
+
+log.info "hotelName "+hotelName
+
+String hoteinfo  = "\"hotels_info_1\":[{\"alternate_hotel\":\"0\",\"hotel_id\":\"\",\"ta_url\":\"\",\"hotel_name\":\"\",\"hotel_city_id\":\"\",\"hotel_city\":\"\",\"hotel_category\":\"\",\"room_type\":\"\",\"comments\":\"\"}],";
+hoteldetail = hoteinfo + "\"hotels_info\":[{\"nights\":\""+nights+"\",\"hotel_name\":\""+hotelName+"\",\"hotel_id\":\"\",\"hotel_ta_url\":\"\",\"alternate_hotel\":\"0\",\"room_type\":\"Standard\",\"hotel_city_id\":\""+cityId+"\",\"hotel_city_name\":\""+cityName+"\",\"hotel_category\":\"\",\"comments\":\"gfdgsgds\"}],";
+
+}else{
+	messageExchange.modelItem.testCase.setPropertyValue("hotelnames","kdfhsdkjsdhfl");
+}
+
+messageExchange.modelItem.testCase.setPropertyValue("hoteldetail",hoteldetail);
+messageExchange.modelItem.testCase.setPropertyValue("quoteincl",quoteincl);
+messageExchange.modelItem.testCase.setPropertyValue("traveldays",travel_days);
+messageExchange.modelItem.testCase.setPropertyValue("saveinclusions",saveinclusions);</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="requestID" value="${#TestCase#request_id}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>requestID</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="Again agent get the hash key" id="7abdadfd-0d2f-4707-bb28-79add4961d8b"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/api/v4/requested_trips/${#TestCase#request_id}/quotes</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>Po4FvUhKl0B4sB3ljUTS2wPuM/yPNeAh/Cl6XUvmP1c=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Agent give quote to traveler" id="10b6d4e0-20cf-4f95-b281-75bf6723f826"><con:settings/><con:config service="CreateQuote" resourcePath="/api/v4/requested_trips/{request_id}/quotes" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Agent give quote to traveler" id="07a0e598-f3b8-4df7-8cfa-e914de4d51d2" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  &lt;con:entry key="TT-Mobile" value="${Again agent get the hash key#hash_key}"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request>{"utf8":"✓", "version":"", "should_warnings_override":"false", "commit":"SAVE &amp; SEND", "quote_match_param":"last", "quote":  {"type_of_trip":"",   "days":"8",   "nights":"7",   "perperson":"per person",   "currency":"Rupee",   "flight_cost":"0",   "included":"${#TestCase#included}",   "excluded":"${#TestCase#excluded}",   "visa_cost":"0",   "price":"${#TestCase#price}",   "hotels":"${#TestCase#hotelnames}",   "flights":"",   "cabs":"fjhfjhfjhgfj",   "terms_conditions":"gghhg",   "quote_inclusions_attributes":{ 	${#TestCase#quoteincl}       },    "trip_days_attributes":{    	${#TestCase#traveldays}     },   "description":"hfhg"}, "quote_land_package_cost":"0", ${#TestCase#hoteldetail} "flights_not_included":"true", "save_inclusions":"${#TestCase#saveinclusions}", "action":"create", "controller":"quotes", "requested_trip_id":"${#TestCase#request_id}"}</con:request><con:originalUri>http://traveler-api.ttdev.in/api/v4/requested_trips/946765/quotes/</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="7dfb941c-19d8-4646-8ed0-86cf91a99255" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="42d213a9-2946-4128-87e1-c4e0648496d1" name="verify and get  generated quote id"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def is_activate = json_response_holder.is_activate;
+def quote_id = json_response_holder.quote_id;
+def message = json_response_holder.message;
+assert(quote_id != null):"Quote not generated"
+
+log.info quote_id + " " + message
+messageExchange.modelItem.testCase.setPropertyValue("quoteid",String.valueOf(quote_id));
+</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="request_id" value="${#TestCase#request_id}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>request_id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>user_email</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">ttagentdemo@gmail.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">abc123</con:value></con:property><con:property><con:name>request_id</con:name><con:value>1199678</con:value></con:property><con:property><con:name>Agent_TagID</con:name><con:value>521</con:value></con:property><con:property><con:name>endpoint</con:name><con:value>stage-2.ttdev.in</con:value></con:property><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTI3MTJhYzZlN2U0M2FjM2JkNzY3ZTk1YTE5NmM3OWQwBjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA6ELA0kiIiQyYSQxMCRRdTBBa2ZXRGg1NjlXckFmcHZ3TmplBjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVA%3D%3D--c945ae9a61bcccf72cbd838cefa8bc8cbd71b2bb; path=/; HttpOnly</con:value></con:property><con:property><con:name>user_id</con:name><con:value>199585</con:value></con:property><con:property><con:name>auth_key</con:name><con:value>bc7f02a6bbb811e6ba800a213af2e147</con:value></con:property><con:property><con:name>hoteldetail</con:name><con:value/></con:property><con:property><con:name>quoteincl</con:name><con:value/></con:property><con:property><con:name>traveldays</con:name><con:value>"0":{"title":"fdhghdg", "description":"gfdhgf", "_destroy":"false"},"1":{"title":"fdhghdg", "description":"gfdhgf", "_destroy":"false"},"2":{"title":"fdhghdg", "description":"gfdhgf", "_destroy":"false"},"3":{"title":"fdhghdg", "description":"gfdhgf", "_destroy":"false"}</con:value></con:property><con:property><con:name>saveinclusions</con:name><con:value>false</con:value></con:property><con:property><con:name>price</con:name><con:value>3500</con:value></con:property><con:property><con:name>destinationID</con:name><con:value>null</con:value></con:property><con:property><con:name>address</con:name><con:value>PB. No. 40, 685612 Munnar, India</con:value></con:property><con:property><con:name>category</con:name><con:value>4</con:value></con:property><con:property><con:name>city</con:name><con:value>Munnar</con:value></con:property><con:property><con:name>city_id</con:name><con:value>26320</con:value></con:property><con:property><con:name>d_id</con:name><con:value>587488</con:value></con:property><con:property><con:name>img</con:name><con:value>668492/medium/3699808.jpg</con:value></con:property><con:property><con:name>name</con:name><con:value>Tall Trees</con:value></con:property><con:property><con:name>picture</con:name><con:value>668492/large/3699808.jpg,668493/large/3699833.jpg,668494/large/3699824.jpg,668495/large/3699823.jpg,668496/large/3699822.jpg</con:value></con:property><con:property><con:name>quoteid</con:name><con:value>2044037</con:value></con:property><con:property><con:name>excluded</con:name><con:value>kdfhsdkjsdhfl</con:value></con:property><con:property><con:name>included</con:name><con:value>kdfhsdkjhhvjsdhfl</con:value></con:property><con:property><con:name>hotelnames</con:name><con:value>kdfhsdkjsdhfl</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/></con:testSuite><con:savedRecentRuns>1</con:savedRecentRuns><con:testSuite id="fdca761a-7dc9-4c44-8551-75593cd9d082" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1966b330-a53d-494b-ba1a-a687afdeabe8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="4afacfac-43d1-4460-8712-12aef9c0477c"><con:settings/><con:config><script>import java.security.MessageDigest;
+import org.codehaus.groovy.runtime.EncodingGroovyMethods;
+
+
+String requestUrl = context.expand('${#TestCase#request_url}');
+String userEmail = context.expand('${#TestCase#user_email}');
+String requestType = context.expand('${#TestCase#request_type}');
+log.info requestUrl;
+String digest;
+
+if( requestType == "get" ){
+  	digest = requestUrl; 
+} else {
+digest = userEmail + requestType;
+}
+
+digest = getUserDigest(digest); //this is final digest
+
+log.info digest;
+testRunner.testCase.setPropertyValue("hash_key",digest);
+
+String getUserDigest(String digest) {
+   String TT_S_KEY = "DAFAC0A55F50A75558B778035E3C9A8BDF03AF1E4C2124D2CD5DD42092EFD32E";
+   try {
+       digest = TT_S_KEY + digest;
+       MessageDigest msgDigest = MessageDigest.getInstance("SHA-256");
+       msgDigest.update(digest.getBytes());
+       EncodingGroovyMethods encodeObj = new EncodingGroovyMethods();
+       //digest = new String(Base64.encode(msgDigest.digest(), Base64.DEFAULT));
+       digest = encodeObj.encodeBase64(msgDigest.digest()).toString();
+       if (digest.length() > 164) {
+           digest = digest.substring(0, 163);
+       }
+       return digest;
+   } catch (Exception e) {
+       log.info e.getMessage();
+   }
+   return null;
+}
+</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>http://stage-2.ttdev.in/api/v4/requested_trips/1199678/quotes</con:value></con:property><con:property><con:name>user_email</con:name><con:value>ttagentdemo@gmail.com</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>Po4FvUhKl0B4sB3ljUTS2wPuM/yPNeAh/Cl6XUvmP1c=</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
+import groovy.util.GroovyScriptEngine;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoDatabase;
+
+////////////////////// Functions /////////////////////////
+
+def filterList(commaSperatedListContent){
+	def list = commaSperatedListContent.split(",");
+	def filteredList = [];
+	list.each(){
+	def entry = it.toLowerCase().replaceAll("^\\s+", "");
+	entry = entry.trim();
+	if(entry != ""){
+	filteredList.add(entry);}	
+	}
+	return filteredList;
+}
+
+def customListCompare(list1,list2){
+	//list1 is the list of tags that are given by user to execute.
+	//list2 is the list of tags for specific test suite.
+	boolean isRunnable = false;
+	for(int l1 in 0 .. list1.size()-1)
+	{
+		def inputTag = list1.get(l1);		
+		for(int l2 in 0 .. list2.size()-1){
+			
+			if(inputTag.toString() == list2.get(l2).toString()){
+				isRunnable =  true;
+				break;
+			}
+		}
+		if(isRunnable){
+			break;
+		}
+	}
+	return isRunnable;
+}
+///////////////////// Function //////////////////////////////////////////////
+
+log.info "Start execution";
+def projDir = context.expand('${projectDir}')
+try{
+File propFile =new File(projDir + "/Configurations/" + project.getName() + "/" + project.getName() + ".properties");
+log.info propFile;
+boolean isDeleted = propFile.delete();
+log.info isDeleted;
+}
+catch(Exception e){log.info e.getMessage();}
+
+
+
+def execution_Tag = project.getPropertyValue("execution_tag");
+
+log.info "Test Execution Base Tag : "+ execution_Tag;
+
+//Fetch the tags to execute the required test suites.
+def filteredTags = filterList(execution_Tag) ;
+
+def Conf_input = "";
+
+log.info "Reading the Configuration file.....";
+
+try{
+
+Conf_input = new File(projDir + "/Configurations/" + project.getName() + "/TestData.xml");
+
+def parser = new XmlParser(); //Get XML Parser.
+
+def Configuration = parser.parse(Conf_input);//Point parser to configration file.
+
+context.Configuration = Configuration;
+
+}
+catch(Exception e){
+		assert false : "Error in reading configuration file -- " + e.getMessage();
+}
+
+def testSuiteListToExecute = [];
+
+log.info "Fetching Test-Scenarios to execute....";
+
+def testSuites = project.getTestSuiteList();
+
+//Enable all TestSuites.
+for(j in 0 .. testSuites.size()-1){
+	//log.info testSuites.get(j).getName();
+	testSuites.get(j).setDisabled(false); 
+}
+//Decide which test suites to execute and eventually disabled the non-relevant test suites.
+		for(i in 0 .. testSuites.size()-1) {
+   			def testSuiteName = testSuites.get(i).getName();
+   			def tags = context.Configuration.TestSuite."${testSuiteName}".tags.text()
+   			def testSuiteTags = filterList(tags);
+   			   			
+   			if(filteredTags == null || filteredTags.empty){
+   				break;
+   			}
+   			else{
+   				if(testSuiteTags == null || testSuiteTags.empty){
+   					testSuites.get(i).setDisabled(true);
+   				}
+   				else{
+   					def isRunnable = customListCompare(filteredTags,testSuiteTags);
+   					log.info testSuiteName+":::"+isRunnable
+   					if(!isRunnable){
+   						testSuites.get(i).setDisabled(true);
+   					}
+   				}
+   			}
+   			
+		}
+
+
+// Load Databases.
+log.info"Loading Databases........";
+
+int index = 1;
+
+String[] db_Names = project.getPropertyValue("dbname").split(",");
+
+for(String db_Name in db_Names){
+
+db_Name = db_Name.trim();
+
+if(db_Name == ""){break;}
+
+context.dbName = db_Name;
+
+String dbConnectionString = "";
+
+String dbDriver = "";
+
+String dbType = "";
+
+try{
+	String databaseCollectionFile_Location = projDir + "/Configurations/" + project.getName() + "/DataBases.csv";
+	
+	BufferedReader reader = new BufferedReader(new FileReader(databaseCollectionFile_Location));
+	
+	String lineInFile = reader.readLine();
+		
+		while(lineInFile != null){
+		
+		String[] lineContents = lineInFile.split(",");
+		
+		if(lineContents[0] == context.dbName){
+			dbType = lineContents[1]
+			dbDriver = lineContents[2];
+			dbConnectionString = lineContents[3];
+			break;
+		}
+		lineInFile = reader.readLine();
+		}
+}
+catch(Exception e){
+	log.info "Couldn't load database from 'Databases' repo.Please review the file again!!" + e.getMessage();
+}
+context.dbDriver = dbDriver
+
+context.dbConnectionString = dbConnectionString
+
+log.info "Connecting to : [" + context.dbName + "] ................";
+
+log.info "DB Connection String --" + dbConnectionString;
+
+if(dbType.toLowerCase().contains("mongo")){
+	try{
+	MongoClient mongoClient = new MongoClient(new MongoClientURI(context.dbConnectionString));
+   	
+     context.dbConnection = mongoClient;
+	if(context.mongoConnection == null){
+     context.mongoConnection = mongoClient;}
+     else{
+     	String mongoConnectionString = "mongoConnection" + index;
+     	log.info mongoConnectionString;
+     	context."${mongoConnectionString}" = mongoClient;
+     }
+	}
+	catch(Exception e){
+		runner.fail("Couldn't connect to application DB -- " + context.dbName + " " + e.getMessage());
+	}
+}
+else if(dbType.toLowerCase().contains("mysql")){
+	if(context.dbName != "" &amp;&amp; context.dbName != null){
+	try{
+		com.eviware.soapui.support.GroovyUtils.registerJdbcDriver(context.dbDriver )
+		
+		def connection = DriverManager.getConnection(context.dbConnectionString);
+		context.dbConnection = connection;
+		if(context.mysqlConnection == null){
+     		context.mysqlConnection = connection;}
+     	else{
+     		String mysqlConnectionString = "mysqlConnection" + index;
+     		context."${mysqlConnectionString}" = connection;
+    		 }
+		context.statement = connection.createStatement();
+	}
+	catch(Exception e){
+			runner.fail("Couldn't connect to application DB -- " + context.dbName + " " + e.getMessage());	
+	}
+}
+}
+index++;
+}
+log.info "Loading utilities......";
+//create an instance of generic utilities.
+try{
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+String path = projDir + "/ext/";
+
+GroovyScriptEngine gse = new GroovyScriptEngine(path) ;
+externalScript = gse.loadScriptByName("Utilities.groovy")
+instance = externalScript.newInstance()
+context.utility = instance ; 
+}
+catch(Exception e){
+	log.info "Unable to initialize framework utility, error being -- " + e.getMessage();
+}
+
+log.info"Preparing test data ..............";
+
+context.Configuration.children().each{
+	if(it.name() == "TestSuite"){
+		it.children().each{
+	String testSuiteNameInConf = it.name();
+	
+	it.children().each{
+		if(it.name() != "tags"){			
+			String testCaseNameInConf = it.name();
+			
+			it.children().each{
+				try{
+					//log.info testSuiteNameInConf+":::"+testCaseNameInConf+":::"+it.name()+":::"+it.text()
+					project.getTestSuiteByName(testSuiteNameInConf).getTestCaseByName(testCaseNameInConf).setPropertyValue(it.name(), it.text());
+					}
+				catch(Exception e){ }
+			}
+		}
+	}
+}
+}
+}</con:beforeRunScript><con:afterRunScript>import com.eviware.soapui.model.testsuite.TestSuiteRunner;
+import com.eviware.soapui.model.testsuite.TestCaseRunner;
+import com.eviware.soapui.model.testsuite.TestRunner.Status;
+
+def projDir = context.expand('${projectDir}')
+// Get the Execution tag.
+String executiontag = project.getPropertyValue("execution_tag");
+
+//Start Time
+def projectstartTime = new Date(runner.getStartTime());
+
+//Time Taken
+def pr_timeTaken = runner.getTimeTaken();
+
+int testcasespassed = 0;
+int testcasesfailed = 0;
+int testcasesexecuted = 0;
+List&lt;String> testCaseNameFailed = new ArrayList&lt;String>();
+//Number Of test cases passed/failed/didn't run.
+def List&lt;TestSuiteRunner> testSuiteRunners = runner.getResults()
+
+for(TestSuiteRunner suiterunner in testSuiteRunners){
+	String testSuiteName = suiterunner.getTestSuite().getName();
+	List&lt;TestCaseRunner> testcaserunners = suiterunner.getResults();
+	for(TestCaseRunner testcaserunner in testcaserunners){
+		Status status = testcaserunner.getStatus();
+		 String testcasename = testcaserunner.getTestCase().getName();
+		if(status == Status.FINISHED){
+			testcasespassed++;
+		}
+		if(status == Status.FAILED){
+			testcasesfailed++;
+			testCaseNameFailed.add(testcasename);
+		}
+		log.info status;
+	}
+}
+testcasesexecuted = testcasespassed + testcasesfailed;
+def percentPassed = (testcasespassed / testcasesexecuted) * 100;
+percentPassed = Math.round(percentPassed * 100) / 100
+String testCaseFailedInStringFormat = "";
+for(String testCaseFailed in testCaseNameFailed){
+	if(testCaseFailedInStringFormat == ""){
+		testCaseFailedInStringFormat = testCaseFailed;
+	}
+	else{
+	testCaseFailedInStringFormat = testCaseFailedInStringFormat + "," + testCaseFailed}
+}
+
+// create a property file.
+try{
+File propFile =new File(projDir + "/Configurations/" + project.getName() + "/" + project.getName() + ".properties");
+propFile.delete();
+boolean isCreated = propFile.createNewFile();
+log.info isCreated;
+Properties props = new Properties();
+props.load(propFile.newDataInputStream());
+props.setProperty("testgroup",executiontag);
+props.setProperty("StartTime",projectstartTime.toString());
+props.setProperty("timetaken",pr_timeTaken.toString());
+props.setProperty("testexecuted",testcasesexecuted.toString());
+props.setProperty("testcasespassed",testcasespassed.toString());
+props.setProperty("testcasesfailed",testcasesfailed.toString());
+props.setProperty("persentpassed",percentPassed.toString());
+props.setProperty("testCaseFailedInStringFormat",testCaseFailedInStringFormat);
+props.store(propFile.newWriter(), null)
+}
+catch(Exception e){
+	log.info "Error in storing test execution data"  + e.getMessage();
+}
+</con:afterRunScript><con:sensitiveInformation/><con:authRepository/><con:tags/></con:soapui-project>
