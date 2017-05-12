@@ -346,7 +346,7 @@ public class TESTLINKTestManager extends TestManagerUtils implements ITestManage
 		Integer testCaseid = testLinkInstance.getTestCaseIDByName(testCaseID, this.testSuiteName, this.testProject.getName(), "");
 		
 		this.testCaseID = testCaseid;
-		
+		System.out.println("getTestStepsForTestCase() -- Name : " + testCaseID + "ID :" + testCaseid);
 		this.testCase = testLinkInstance.getTestCase(this.testCaseID, null, null);
 		
 		List<TestCaseStep> testSteps = this.testCase.getSteps();
