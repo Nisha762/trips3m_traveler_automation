@@ -357,7 +357,7 @@ public class TESTLINKTestManager extends TestManagerUtils implements ITestManage
 		}
 	}
 		catch(Exception e){
-			throw new Exception(ERROR_MESSAGES.ER_IN_GETTING_TESTSTEPS_FOR_TESTCASE.getErrorMessage() + " --" + e.getMessage());
+			throw new Exception(ERROR_MESSAGES.ER_IN_GETTING_TESTSTEPS_FOR_TESTCASE.getErrorMessage() + " --" + "["+this.testCase.getName()+"]"+ e.getMessage());
 		}
 		return testCaseSteps;
 	}
