@@ -163,6 +163,7 @@ public class XMLReporting {
 		float percentPassed = ((float)passed/(passed+failed))*100;
 		double percentPassedInDouble = Math.round(percentPassed*100.0)/100.0;
 		summaryPropertyFile.setProperty("successRate", String.valueOf(percentPassedInDouble) + "%");
+		summaryPropertyFile.setProperty("YVALUE", String.valueOf(percentPassedInDouble));
 		
 		List<String> failedTestCasesList = objTestDetails.getListOfFailedTestCases();
 		String failedTestCases = "";
