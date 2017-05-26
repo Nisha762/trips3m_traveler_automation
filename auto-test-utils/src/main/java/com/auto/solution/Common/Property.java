@@ -251,6 +251,14 @@ public class Property {
 	 "Test Step Description : {TEST_STEP_NAME} \n" + "Test Step Action : {TEST_STEP_ACTION} \n" + "Test object : {TEST_OBJECT} \n" + 
 	 "Test Data used -- '{TEST_DATA}' \n" + "Status : {STATUS} \n" + "Remarks : {REMARKS} \n" + "Execution Time : {EXECUTION_TIME} \n" +
 	 "------------------------------------------------------------------------------------\n";
+	public static String APP_ACTIVITY_LIST  = ".LoginActivity,.SignUpActivity,.QuoteViewActivity,com.facebook.FacebookActivity,"
+			+".HomeActivity,com.clevertap.android.sdk.InAppNotificationActivity,.ViewActivity,.SearchActivity,.DestinationDetailActivity,"
+			+".ContactUsActivity,.ThankYouMessageActivity,.ViewPhotosActivity,.ViewMoreActivity,.QuoteItineraryActivity,.TravelerInfoDetailActivity,"
+			+".NotificationsActivity,.ChangePasswordActivity,.AllBookingsActivity,.MapActivity,.RequestCreationActivity,.PaymentActivity,"
+			+".PaymentBrowserActivity,.PaymentNewBrowserActivity,.QuoteSelectionActivity,.CompareQuoteActivity,.ComparePackageActivity,.VouchersActivity,"
+			+".AttachmentBuilderActivity,com.soundcloud.android.crop.CropImageActivity, .AgentProfileDetailActivity,.WishlistActivity,.CallbackRequestActivity,.PackageDetailActivity,com.paytm.pgsdk.PaytmPGActivity,"
+			+".ProfileActivity,.InvoiceActivity,.PackageItineraryActivity,.PackageListActivity,.DestinationCatalogActivity,.InAppBrowserActivity,.HotelDetailActivity,.QuoteAccommodationActivity,.OffersActivity,.RequestCallbackActivity";
+	
 	
 	
 	public static ArrayList<String > LIST_STRATEGY_KEYWORD = new ArrayList<String>();
@@ -340,7 +348,8 @@ public class Property {
 		ERR_SET_TESTOBJECT_DETAILS("Error in setting test object details"),
 		ERR_IN_GETTING_EMAIL_CONTENTS_BY_SUBJECT("Couldn't find message with given subject pattern - "),
 		ERR_IN_FINIDING_CONTENT_IN_MAIL("Couldn't find element with query - '{CSS_QUERY}' in mail content"),
-		ERR_GETTING_MAIL_CONTENT("Unable to parse Email Content, contact admin!");
+		ERR_GETTING_MAIL_CONTENT("Unable to parse Email Content, contact admin!"),
+		ERR_STARTING_ACTIVITY("Error in starting app activity - ");
 		private String errorKeyword;
 		private ERROR_MESSAGES(String ErrorKeyword){
 			this.errorKeyword= ErrorKeyword;

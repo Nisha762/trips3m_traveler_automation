@@ -465,7 +465,14 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 
 	@Override
 	public void navigateURL(String URL) throws Exception {
-		// TODO Auto-generated method stub
+		
+		String deepLinkURL=Property.ApplicationURL+URL;
+		try {
+		driver.startActivity(Property.APP_PACKAGE, Property.APP_ACTIVITY, Property.APP_PACKAGE, Property.APP_ACTIVITY_LIST, "", "", "", " -a android.intent.action.VIEW -d "+deepLinkURL );
+		} 
+		catch (Exception e) {
+		throw new Exception(Property.ERROR_MESSAGES.ERR_STARTING_ACTIVITY.getErrorMessage() + e.getMessage());
+		}
 		
 	}
 
