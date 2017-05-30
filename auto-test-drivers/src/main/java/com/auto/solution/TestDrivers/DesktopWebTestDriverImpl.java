@@ -947,13 +947,21 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	}
 	
 	public void uploadFile(String text) throws NoSuchElementException, Exception {
-		String file = null; 
+		
+		String file = null;
+		
+		File objFile = new File(text);
+		
+		if(objFile.isAbsolute()){ //follow path as given.
+			file = text;
+		}
+		else{ //path relative to project external folder.
 		file =	rManager.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}", text);
 		
 		file =  file.replace("{PROJECT_NAME}", Property.PROJECT_NAME);
+		file = Utility.getAbsolutePath(file);
+		}
 		
-		String filepath = Utility.getAbsolutePath(file);
-
 		WebElement testElement = null;;
 		try{
 			testElement = this.waitAndGetTestObject(true);;			
@@ -962,7 +970,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throw ne;
 		}
 		try{
-			testElement.sendKeys(filepath);			
+			testElement.sendKeys(file);			
 		}
 		catch(Exception e){
 			throw e;
