@@ -1,0 +1,4 @@
+1.To Download project from repository 
+git clone repopath
+
+2.
