@@ -25,6 +25,7 @@ import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -709,6 +710,9 @@ public class Utility {
 		}
 		return jsonGenerator;
 	}
+	public static boolean isAbsolute(final String path) {
+	      return FilenameUtils.getPrefixLength(path) != 0;
+	   }
 
 	
 }	

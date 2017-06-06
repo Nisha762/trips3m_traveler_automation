@@ -950,9 +950,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		
 		String file = null;
 		
-		File objFile = new File(text);
-		
-		if(objFile.isAbsolute()){ //follow path as given.
+		if(Utility.isAbsolute(text)){ //follow path as given.
 			file = text;
 		}
 		else{ //path relative to project external folder.
