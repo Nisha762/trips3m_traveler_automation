@@ -1,0 +1,27 @@
+user @A getTestElementAttribute; @D text; @O Requested Trip ID in Switch Request;
+
+And @A calculate; requestID2 from @D requestID3 # String actual_id = "{$Requested Trip ID In Switch Request}"%%
+  actual_id = actual_id.replaceAll("\\D+","")%%
+  return actual_id%%;
+
+And @A calculate; trip amount  from @D trip_amount2 # String heading = "{$Price at Payment Method}"%%String[] headingarr=heading.split("\\.")%% heading = headingarr[0].replaceAll("\\D+","")%% return heading%%;
+
+perform @A assert; on @D {$trip_amount1}=={$trip_amount2};
+
+
+
+user @A fetch object attribute; @D text; @O Price of Trip;
+
+And @A calculate; trip amount  from @D trip_amount1 # String heading = "{$Price of Trip}"%%
+  heading = heading.replaceAll("\\D+","")%%
+  return heading%%;
+
+And @A calculate; trip amount  from @D trip_amount2 # String heading = "{$Price at Payment Method}"%%String[] headingarr=heading.split("\\.")%% heading = headingarr[0].replaceAll("\\D+","")%% return heading%%;
+
+perform @A assert; on @D {$trip_amount1}=={$trip_amount2};
+
+
+
+@A  calculate; actualadults# String total person[] ={$Group}.split(",")%% String adults[] = total person[0].split(' ')%% return adults[0]%%
+
+@A  calculate; actualstatus# String profstatus={$status}.split(",")%% String adults[] = total person[0].split(' ')%% return adults[0]%%
