@@ -261,6 +261,7 @@
 								<rampUp>${rampup}</rampUp>
 								<Loop>${loop}</Loop>
 								<duration>${durationinseconds}</duration>
+								<pprod>${pprod}</pprod>
 								<application_url>${application_url}</application_url>						
 							</propertiesUser>
 							<testFilesDirectory>auto-test-load/src/test/jmeter</testFilesDirectory>

@@ -30,7 +30,12 @@
           <collectionProp name="Arguments.arguments">
             <elementProp name="endpoint" elementType="Argument">
               <stringProp name="Argument.name">endpoint</stringProp>
-              <stringProp name="Argument.value">${__P(application_url,master.ttdev.in)}</stringProp>
+              <stringProp name="Argument.value">${__P(application_url,traveltriangle.com)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="pprod" elementType="Argument">
+              <stringProp name="Argument.name">pprod</stringProp>
+              <stringProp name="Argument.value">${__P(pprod,t)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
           </collectionProp>
@@ -56,9 +61,9 @@
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/</stringProp>
+          <stringProp name="HTTPSampler.path">/?pprod=${pprod}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -120,9 +125,9 @@
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/testimonials</stringProp>
+          <stringProp name="HTTPSampler.path">/testimonials/?pprod=${pprod}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -170,9 +175,9 @@
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/tour-packages</stringProp>
+          <stringProp name="HTTPSampler.path">/tour-packages/?pprod=${pprod}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -269,9 +274,9 @@ log.info(String.valueOf(random_index));</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${tour_package_showpage}</stringProp>
+          <stringProp name="HTTPSampler.path">${tour_package_showpage}/?pprod=${pprod}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -315,9 +320,9 @@ log.info(String.valueOf(random_index));</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/family-packages</stringProp>
+          <stringProp name="HTTPSampler.path">/family-packages/?pprod=${pprod}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -412,9 +417,9 @@ vars.put(&quot;family_random_index&quot;,String.valueOf(random_index));</stringP
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${family_package_showpage}</stringProp>
+          <stringProp name="HTTPSampler.path">${family_package_showpage}/?pprod=${pprod}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -458,9 +463,9 @@ vars.put(&quot;family_random_index&quot;,String.valueOf(random_index));</stringP
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/honeymoon-packages</stringProp>
+          <stringProp name="HTTPSampler.path">/honeymoon-packages/?pprod=${pprod}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -555,9 +560,9 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${honeymoon_package_showpage}</stringProp>
+          <stringProp name="HTTPSampler.path">${honeymoon_package_showpage}/?pprod=${pprod}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -601,9 +606,9 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/mktc/weekend-getaway-packages/</stringProp>
+          <stringProp name="HTTPSampler.path">/mktc/weekend-getaway-packages/?pprod=${pprod}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -638,7 +643,7 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="weekend_gataway_breadcrumb" enabled="true">
+          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="weekend_gataway_breadcrumb" enabled="false">
             <boolProp name="XPath.negate">false</boolProp>
             <stringProp name="XPath.xpath">//div[@id=&apos;breadcrumbs&apos;]//span[@itemprop=&apos;name&apos; and contains(text(),&apos;Weekend Getaways&apos;)]</stringProp>
             <boolProp name="XPath.validate">false</boolProp>
@@ -647,27 +652,28 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
             <boolProp name="XPath.namespace">false</boolProp>
           </XPathAssertion>
           <hashTree/>
-          <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="package_count" enabled="true">
+          <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="package_count" enabled="false">
             <stringProp name="XPathExtractor.default">NILL</stringProp>
             <stringProp name="XPathExtractor.refname">weekend_package_count</stringProp>
-            <stringProp name="XPathExtractor.xpathQuery">count(//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;package_summary_on_listing_page&apos;)]//a[contains(@class,&apos;orange-square-btn view-details&apos;)])</stringProp>
+            <stringProp name="XPathExtractor.xpathQuery">count(//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;list-product-box&apos;)])</stringProp>
             <boolProp name="XPathExtractor.validate">false</boolProp>
             <boolProp name="XPathExtractor.tolerant">true</boolProp>
             <boolProp name="XPathExtractor.namespace">false</boolProp>
           </XPathExtractor>
           <hashTree/>
-          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="script">import java.util.Random;
 String maxIndex = vars.get(&quot;weekend_package_count&quot;);
+log.info(&quot;maxIndex&quot;+maxIndex);
 Integer packagecount = Integer.parseInt(maxIndex);
 Integer random_index = Math.abs(new Random().nextInt() % (packagecount-1) + 1);
 vars.put(&quot;weekend_random_index&quot;,String.valueOf(random_index));</stringProp>
           </BeanShellPostProcessor>
           <hashTree/>
-          <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="weekend_package_href" enabled="true">
+          <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="weekend_package_href" enabled="false">
             <stringProp name="XPathExtractor.default">NILL</stringProp>
             <stringProp name="XPathExtractor.refname">weekend_package_showpage</stringProp>
             <stringProp name="XPathExtractor.xpathQuery">//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;list-product-box&apos;)][${weekend_random_index}]//a[contains(@class,&apos;btn orange-brd-btn&apos;)]/@href</stringProp>
@@ -677,7 +683,7 @@ vars.put(&quot;weekend_random_index&quot;,String.valueOf(random_index));</string
           </XPathExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Weekend_package_showpage" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Weekend_package_showpage" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -751,9 +757,9 @@ vars.put(&quot;weekend_random_index&quot;,String.valueOf(random_index));</string
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.connect_timeout"></stringProp>
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
-              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.protocol">https</stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/${category}-Places</stringProp>
+              <stringProp name="HTTPSampler.path">/${category}-Places/?pprod=${pprod}</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -821,9 +827,9 @@ vars.put(&quot;category_pg&quot;,category_updated);
             <stringProp name="HTTPSampler.port"></stringProp>
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/travel-to/${travel_to_destinations}</stringProp>
+            <stringProp name="HTTPSampler.path">/travel-to/${travel_to_destinations}/?pprod=${pprod}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
