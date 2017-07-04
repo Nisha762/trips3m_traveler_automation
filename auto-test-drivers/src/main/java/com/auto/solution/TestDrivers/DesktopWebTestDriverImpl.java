@@ -149,16 +149,35 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
         	LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
         	
 
-        	jsonGenerator.writeObjectFieldStart("details");
+        	//jsonGenerator.writeObjectFieldStart("details");
         	
         	jsonGenerator.writeStringField("URL", url);
         	
         	jsonGenerator.writeObjectFieldStart("err");          	
         	
-        	for (LogEntry entry : logEntries) {
-        		jsonGenerator.writeStringField(entry.getLevel().toString(), entry.getMessage());
+    		jsonGenerator.writeFieldName("SEVERE");
+    		
+    		jsonGenerator.writeStartArray();
+        	
+    		for (LogEntry entry : logEntries) {
+        		String err_type = entry.getLevel().toString();
+        		if(err_type.toLowerCase().equals("severe")){
+        			jsonGenerator.writeString(entry.getMessage());
+        		}
         	}
-        	jsonGenerator.writeEndObject();
+        	jsonGenerator.writeEndArray();
+    		
+        	jsonGenerator.writeFieldName("WARNING");
+    		
+        	jsonGenerator.writeStartArray();
+        	
+        	for (LogEntry entry : logEntries) {
+        		String err_type = entry.getLevel().toString();        		
+        		if(err_type.toLowerCase().equals("warning")){
+        			jsonGenerator.writeString(entry.getMessage());
+        		}
+        	}
+        	jsonGenerator.writeEndArray();
         	
         	jsonGenerator.writeEndObject();
         }
@@ -1917,16 +1936,18 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			
 			String logFile = rManager.getTestExecutionLogFileLocation().replace("{0}", logFileName);;
 			
-			jsonGenerator = Utility.createJsonFile(logFile);
-			
+			jsonGenerator = Utility.createJsonFile(logFile);		
 			jsonGenerator.writeStartObject();
+			Integer index = 1;
+			while ((url = br.readLine()) != null) {	
 			
-			jsonGenerator.writeObjectFieldStart("json_error");
-			
-			while ((url = br.readLine()) != null) {				
+				jsonGenerator.writeObjectFieldStart(String.valueOf(index));
+				//jsonGenerator.writeStartObject();
 				String actual_url = Property.ApplicationURL + url;
 				driver.navigate().to(actual_url);				
 				this.ExtractAndLogJSErrors(jsonGenerator,actual_url);
+				jsonGenerator.writeEndObject();
+				index++;
 			}	
 			
 		}
@@ -1935,7 +1956,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		}
 		finally {
 			if(jsonGenerator != null){
-			jsonGenerator.writeEndObject();
+			//jsonGenerator.writeEndObject();
 			jsonGenerator.writeEndObject();
 			jsonGenerator.close();
 			}
