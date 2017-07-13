@@ -1,0 +1,18 @@
+ticketable_id,user_id,status,created_by,requirement,progress_stage
+,false,in_progress,false,More package Option,Work done by agent
+,171095,new,false,Invoice for payment,Already informed to agent
+,false,new,false,Invoice for payment,Already informed to agent
+,false,new,false,false,false
+,false,in_progress,false,false,false
+,false,rejected,false,false,false
+,false,completed,false,false,false
+,false,reopen,false,false,false
+,false,false,false,false,Already informed to agent
+,false,false,false,false,Work done by agent
+,false,false,false,false,Pending from AH end
+,false,false,false,Customization of packages,false
+,false,false,false,Price Negotiation,false
+,false,false,false,Others,false
+,false,false,false,Call back from agent,false
+,false,false,false,Invoice for payment,false
+,false,false,false,More package Option,false
