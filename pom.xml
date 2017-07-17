@@ -262,7 +262,9 @@
 								<Loop>${loop}</Loop>
 								<duration>${durationinseconds}</duration>
 								<pprod>${pprod}</pprod>
-								<application_url>${application_url}</application_url>						
+								<application_url>${application_url}</application_url>
+								<username>${username}</username>
+								<password>${password}</password>						
 							</propertiesUser>
 							<testFilesDirectory>auto-test-load/src/test/jmeter</testFilesDirectory>
                     		<testFilesIncluded>
