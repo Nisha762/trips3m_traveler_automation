@@ -38,7 +38,7 @@ public abstract class BaseComponent extends GalenTestNgTestBase {
 								Map<String,Object> chromeoptions=new HashMap<String,Object>();
 								Map<String, String> mobileEmulation = new HashMap<String, String>();
 								if(devicename.toLowerCase().equals(GenericProperty.MOBILE_KEYWORD)){
-						    		mobileEmulation.put("deviceName", "Nexus 5");}
+						    		mobileEmulation.put("deviceName", "Google Nexus 5");}
 								else if(devicename.toLowerCase().equals(GenericProperty.TABLET_KEYWORD)){
 					        		mobileEmulation.put("deviceName", "iPad");}
 								chromeoptions.put("mobileEmulation", mobileEmulation);
@@ -79,45 +79,6 @@ public abstract class BaseComponent extends GalenTestNgTestBase {
     		
     	}
 
-
-//    private WebDriver createChromeDriver(String device) throws Exception{
-//    	WebDriver driver = null;
-//    	String directory = GenericProperty.getBaseDirectoryLocation();
-//    	try{
-//    		DesiredCapabilities executionCapabilities = DesiredCapabilities.chrome();
-//    		
-//    		if(device.toLowerCase().equals(GenericProperty.MOBILE_KEYWORD)){
-//    		Map<String, String> mobileEmulation = new HashMap<String, String>();
-//    		mobileEmulation.put("deviceName", "Nexus 5");
-//    		Map<String, Object> chromeOptions = new HashMap<String, Object>();
-//    		chromeOptions.put("mobileEmulation", mobileEmulation);
-//    		
-//    		executionCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-//    		}
-//    		else if(device.toLowerCase().equals(GenericProperty.TABLET_KEYWORD)){
-//        		Map<String, String> mobileEmulation = new HashMap<String, String>();
-//        		mobileEmulation.put("deviceName", "iPad");
-//        		Map<String, Object> chromeOptions = new HashMap<String, Object>();
-//        		chromeOptions.put("mobileEmulation", mobileEmulation);
-//        		
-//        		executionCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-//        		}
-//    		executionCapabilities.setCapability("start-maximized", true);
-//    		ChromeDriverService service = new ChromeDriverService.Builder()
-//		.usingAnyFreePort()
-//		.usingDriverExecutable(new File(directory + File.separator + "chromedriver"))
-//		.build();
-//		service.start();
-//		driver = new ChromeDriver(service, executionCapabilities);
-//		return driver;
-//		}
-//		catch(Exception e){
-//			throw e;
-//		}
-//    	
-//    }
-    
-    
     @Override
     public WebDriver createDriver(Object[] args){
     	WebDriver driver = null;
