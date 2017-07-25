@@ -10,6 +10,7 @@
   <properties>
   		<application_url>http://www.traveltriangle.com/</application_url>
   		<device_details>{"mobile"}</device_details>
+  		<remote_ip></remote_ip>
   </properties>
   <dependencies>
     <dependency>
@@ -49,6 +50,7 @@
         <systemPropertyVariables>
         	<environment_url>${application_url}</environment_url>
         	<layout_device_details>${device_details}</layout_device_details>
+        	<remote_ip>${remote_ip}</remote_ip>
         </systemPropertyVariables>
           <properties>
             <property><name>usedefaultlisteners</name><value>false</value></property>

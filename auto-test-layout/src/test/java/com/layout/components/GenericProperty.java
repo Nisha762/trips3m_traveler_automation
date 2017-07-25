@@ -9,8 +9,22 @@ import org.openqa.selenium.Dimension;
 
 public class GenericProperty {
 
+	public static String MOBILE_KEYWORD = "mobile";
+	
+	public static String TABLET_KEYWORD = "tablet";
+	
+	public static String DESKTOP_KEYWORD = "desktop";
+	
+	public static String CHROME_EXECUTABLE_SH = "chromedriver";
+	
+	public static String CHROME_EXECUTABLE = "chromedriver.exe";
 	
 	public static String correct_input_format = "-D device_details={\"mobile\"}{\"desktop\"_\"1024\"_\"800\"}";
+	
+	public static String OS_STRING = System.getProperty("os.name").toLowerCase();
+	
+	public static String REMOTE_IP = System.getProperty("remote_ip");
+	
 	
 	public static String getBaseDirectoryLocation(){
 		String working_directory = System.getProperty("user.dir");
@@ -64,8 +78,9 @@ public class GenericProperty {
 
         @Override
         public String toString() {
-            return String.format("%s %dx%d", name, screenSize.width, screenSize.height);
-        }
+        	String deviceString = "";
+        	deviceString = (screenSize != null) ? String.format("%s %dx%d", name, screenSize.width, screenSize.height) : String.format("%s %dx%d", name, null , null);
+                 return deviceString;  }
     }
 	
 	private static Object[][] fetchDeviceInfo(String devicesInfoAsString) throws Exception{
