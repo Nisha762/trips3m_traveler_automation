@@ -9,12 +9,12 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="email" elementType="Argument">
             <stringProp name="Argument.name">email</stringProp>
-            <stringProp name="Argument.value">${__Random(1,10000000,refName)}@loremIpsum.com</stringProp>
+            <stringProp name="Argument.value">lorem_tt_test_ipsum_${__RandomString(3,12345qwerty)}@mail.com</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="endpoint" elementType="Argument">
             <stringProp name="Argument.name">endpoint</stringProp>
-            <stringProp name="Argument.value">${__P(application_url,traveltriangle.com)}</stringProp>
+            <stringProp name="Argument.value">${__P(application_url,master.ttdev.in)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
