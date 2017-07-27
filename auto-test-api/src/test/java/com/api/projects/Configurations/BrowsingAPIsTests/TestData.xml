@@ -28,13 +28,18 @@
 			<dtmf>1,2,3,4,5,6,7,8,9,#,*</dtmf>
 			</Health_check_tests_for_IVR>
 			<Health_check_tests_for_seo_packages_listing>
-			<p_search> 
-			 [{“destination_type”: [“india”],“category”: [“Family”],“days”: [“7-9”],“price_ranges”: [“20_000-40_000”],“hotel_ratings”: [“4”],“inclusions”: [“SharedCoach”,“Meals”],“trip_types” :[“Adventure”]}];[{“destination_type”: [“india”],“category”: [“Honeymoon”],“days”: [“1-3”],“price_ranges”: [“30_000-60_000”],“hotel_ratings”: [“3”],“inclusions”: [“SharedCoach”,“Meals”],“trip_types” :[“Romantic”]}];[{“destination_type”: [“International”],“category”: [“Wildlife”],“days”: [“1-3”],“price_ranges”: [“60_000-90_000”],“hotel_ratings”: [“3”],“inclusions”: [“SharedCoach”,“Meals”,"Transfers"],“trip_types” :[“Adventure”]}];[{“destination_type”: [“india”],“category”: [“Nature”],“days”: [“7-9”],“price_ranges”: [“20_000-40_000”],“hotel_ratings”: [“2”],“inclusions”: [“SharedCoach”,“Meals”],“trip_types” :["Nature"]}];[“India”],“category”: [“Water Activities”],“days”: [“7-9”],“price_ranges”: [“20_000-40_000”],“hotel_ratings”: [“4”],“inclusions”: [“SharedCoach”,“Meals”,"Sightseeing","Private Cab"],“trip_types” :[“Water Activities”]}] </p_search>
+			<psearch> 
+			 {"destination_type": ["india"],"category": ["Family"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["4"],"inclusions": ["SharedCoach","Meals"],"trip_types" :["Adventure"]};{"destination_type": ["india"],"category": ["Honeymoon"],"days": ["1-3"],"price_ranges": ["30_000-60_000"],"hotel_ratings": ["3"],"inclusions": ["SharedCoach","Meals"],"trip_types" :["Romantic"]};{"destination_type": ["International"],"category": ["Wildlife"],"days": ["1-3"],"price_ranges": ["60_000-90_000"],"hotel_ratings": ["3"],"inclusions": ["SharedCoach","Meals","Transfers"],"trip_types" :["Adventure"]};{"destination_type": ["india"],"category": ["Nature"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["2"],"inclusions": ["SharedCoach","Meals"],"trip_types" :["Nature"]};{"destination_type": ["India"],"category": ["Water Activities"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["4"],"inclusions": ["SharedCoach","Meals","Sightseeing","Private Cab"],"trip_types" :["Water Activities"]} </psearch>
 			</Health_check_tests_for_seo_packages_listing>
 			<Health_check_tests_for_Html_tags>
 			<category>Honeymoon,Adventure,Family,Nature,Wildlife,Relegious,Water Activities</category>
 			<destination_type>domestic,international</destination_type>
+			<level>package,page,testimonial</level>
 			</Health_check_tests_for_Html_tags>
+			<health_check_tests_for_searches>
+			<term>ke,an,him,jai,rajas,lad,maur,bal,goa </term>
+			</health_check_tests_for_searches>
+			
 	   </HealthCheckTest>
 </TestSuite>
 </project>
