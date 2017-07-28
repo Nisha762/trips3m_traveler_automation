@@ -15,13 +15,13 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">${__P(users,1)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,1)}</stringProp>
         <longProp name="ThreadGroup.start_time">1499232937000</longProp>
         <longProp name="ThreadGroup.end_time">1499232937000</longProp>
-        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration">${__P(duration,180)}</stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
@@ -805,13 +805,11 @@ vars.put(&quot;report_agent_id&quot;,report_agent_id);</stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="script">String req_trip = vars.get(&quot;req_trip_url&quot;);
+String endpoint = vars.get(&quot;endpoint&quot;);
 log.info(req_trip);
-//String endpoint=vars.get(&quot;endpoint&quot;);
-req_trip=req_trip.replace(&quot;http://traveltriangle.com&quot;,&quot;&quot;);
+req_trip=req_trip.replace(&quot;http://&quot;+endpoint,&quot;&quot;);
 vars.put(&quot;req_trip_url&quot;,req_trip);
-//String user_name=req_trip.replacell(&quot;\D+&quot;,&quot;&quot;);
-//log.info(user_name);
-print(req_trip_url);</stringProp>
+</stringProp>
           </BeanShellPostProcessor>
           <hashTree/>
           <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="get first trip id" enabled="true">
@@ -1230,17 +1228,13 @@ print(req_trip_url);</stringProp>
           <stringProp name="cacheKey"></stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="parameters"></stringProp>
-          <stringProp name="script">import org.apache.jmeter.gui.GuiPackage;
+          <stringProp name="script">import org.apache.jmeter.services.FileServer;
+ 
+//get path of current jmeter&apos;s script
+String path = FileServer.getFileServer().getBaseDir();
 
-import org.apache.commons.io.FilenameUtils;
 
-String testPlanFile = GuiPackage.getInstance().getTestPlanFile();
-
-String testPlanFileDir = FilenameUtils.getFullPathNoEndSeparator(testPlanFile);
-
-log.info(&quot;testPlanFileDir:&quot; + testPlanFileDir);
-
-String Filename = testPlanFileDir+File.separator+&quot;TestData&quot;+File.separator+&quot;adminticketfilter.csv&quot;;
+String Filename = path+File.separator+&quot;TestData&quot;+File.separator+&quot;adminticketfilter.csv&quot;;
 
 String fileContents = new File(Filename).getText(&apos;UTF-8&apos;)
 
@@ -1563,17 +1557,12 @@ for(int i=0;i&lt;count;i++){
           <stringProp name="cacheKey"></stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="parameters"></stringProp>
-          <stringProp name="script">import org.apache.jmeter.gui.GuiPackage;
+          <stringProp name="script">import org.apache.jmeter.services.FileServer;
+ 
+//get path of current jmeter&apos;s script
+String path = FileServer.getFileServer().getBaseDir();
 
-import org.apache.commons.io.FilenameUtils;
-
-String testPlanFile = GuiPackage.getInstance().getTestPlanFile();
-
-String testPlanFileDir = FilenameUtils.getFullPathNoEndSeparator(testPlanFile);
-
-log.info(&quot;testPlanFileDir:&quot; + testPlanFileDir);
-
-String Filename = testPlanFileDir+File.separator+&quot;TestData&quot;+File.separator+&quot;Reminder_filters.csv&quot;;
+String Filename = path+File.separator+&quot;TestData&quot;+File.separator+&quot;Reminder_filters.csv&quot;;
 
 String fileContents = new File(Filename).getText(&apos;UTF-8&apos;)
 
@@ -1792,17 +1781,12 @@ for(int i=0;i&lt;count;i++){
           <stringProp name="cacheKey"></stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="parameters"></stringProp>
-          <stringProp name="script">import org.apache.jmeter.gui.GuiPackage;
+          <stringProp name="script">import org.apache.jmeter.services.FileServer;
+ 
+//get path of current jmeter&apos;s script
+String path = FileServer.getFileServer().getBaseDir();
 
-import org.apache.commons.io.FilenameUtils;
-
-String testPlanFile = GuiPackage.getInstance().getTestPlanFile();
-
-String testPlanFileDir = FilenameUtils.getFullPathNoEndSeparator(testPlanFile);
-
-log.info(&quot;testPlanFileDir:&quot; + testPlanFileDir);
-
-String Filename = testPlanFileDir+File.separator+&quot;TestData&quot;+File.separator+&quot;flight_filters.csv&quot;;
+String Filename = path+File.separator+&quot;TestData&quot;+File.separator+&quot;flight_filters.csv&quot;;
 
 String fileContents = new File(Filename).getText(&apos;UTF-8&apos;)
 
