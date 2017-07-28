@@ -17,6 +17,11 @@
             <stringProp name="Argument.value">${__P(application_url,master.ttdev.in)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="tripdate" elementType="Argument">
+            <stringProp name="Argument.name">tripdate</stringProp>
+            <stringProp name="Argument.value">${__time(dd/MM/yyyy)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
         </collectionProp>
       </elementProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
@@ -296,7 +301,7 @@
               <elementProp name="requested_trip%5Bstart_date%5D" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">requested_trip%5Bstart_date%5D</stringProp>
-                <stringProp name="Argument.value">27+Jul%2C+2017</stringProp>
+                <stringProp name="Argument.value">${tripdate}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
