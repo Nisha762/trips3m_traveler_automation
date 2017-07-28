@@ -1,0 +1,4 @@
+id,trip_id,status,user,ops
+status,,Active,,,TEST
+ops,,,,gaurav.gupta@traveltriangle.com
+status_and_ops,,Active,,gaurav.gupta@traveltriangle.com

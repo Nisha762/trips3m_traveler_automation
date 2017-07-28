@@ -1,0 +1,6 @@
+id,trip_id,flight_status,flight_urgency,flight_destination,flight_options,created_platform,flight_owner,booking_type,flight_form,flight_to
+active_flights_with_all_booking_type,,true,,,,,,All,,,TEST
+all_active_flights_of_a_user,,true,,,,,74,All,,,TEST
+active_kerala,,true,,Kerala,,,,All,,,TEST
+user_pending,,,,,Pending,,74,All,,,TEST
+user_urgent,,,1,,,,74,All,,,TEST

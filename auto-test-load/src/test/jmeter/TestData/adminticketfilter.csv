@@ -1,18 +1,18 @@
-ticketable_id,user_id,status,created_by,requirement,progress_stage
-,false,in_progress,false,More package Option,Work done by agent
-,171095,new,false,Invoice for payment,Already informed to agent
-,false,new,false,Invoice for payment,Already informed to agent
-,false,new,false,false,false
-,false,in_progress,false,false,false
-,false,rejected,false,false,false
-,false,completed,false,false,false
-,false,reopen,false,false,false
-,false,false,false,false,Already informed to agent
-,false,false,false,false,Work done by agent
-,false,false,false,false,Pending from AH end
-,false,false,false,Customization of packages,false
-,false,false,false,Price Negotiation,false
-,false,false,false,Others,false
-,false,false,false,Call back from agent,false
-,false,false,false,Invoice for payment,false
-,false,false,false,More package Option,false
+identifier,ticketable_id,user_id,status,created_by,requirement,progress_stage
+in progress status with more package option req and progress stage is work done by agent,,false,in_progress,false,More package Option,Work done by agent
+user id with new status where req is invoice for payment and progress is already informed to agent,,171095,new,false,Invoice for payment,Already informed to agent
+new status with req invoice for payment and prigress is already informed to agent,,false,new,false,Invoice for payment,Already informed to agent
+status new,,false,new,false,false,false
+status in progress,,false,in_progress,false,false,false
+status rejected,,false,rejected,false,false,false
+status completed,,false,completed,false,false,false
+status reopen,,false,reopen,false,false,false
+progress stage already informed to agent,,false,false,false,false,Already informed to agent
+progress stage is work done by agent,,false,false,false,false,Work done by agent
+progress stage is Pending from AH end,,false,false,false,false,Pending from AH end
+requirement customization of package,,false,false,false,Customization of packages,false
+requirement price negotiation,,false,false,false,Price Negotiation,false
+requirement others,,false,false,false,Others,false
+requirement Call back from agent,,false,false,false,Call back from agent,false
+requirement Invoice for payment,,false,false,false,Invoice for payment,false
+requirement More package Option,,false,false,false,More package Option,false
