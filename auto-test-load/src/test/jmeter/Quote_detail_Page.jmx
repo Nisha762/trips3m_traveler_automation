@@ -15,7 +15,7 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">${__P(users,1)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,1)}</stringProp>
@@ -62,7 +62,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;requested_trip&quot;:{&quot;email&quot;:&quot;${Tr_email_id}&quot;,&quot;from_complete&quot;:&quot;Uttar Pradesh,India&quot;,&quot;from_loc&quot;:&quot;Noida, India&quot;,&quot;budget&quot;:&quot;3500&quot;,&quot;adult&quot;:&quot;2&quot;,&quot;usr_location&quot;:&quot;Noida, India&quot;,&quot;phone_no&quot;:&quot;&quot;,&quot;preferences&quot;:[],&quot;start_date&quot;:&quot;31 August 2017&quot;,&quot;to_loc&quot;:&quot;Ladakh&quot;,&quot;trip_days&quot;:&quot;5&quot;,&quot;trip_stage&quot;:&quot;2&quot;,&quot;hotel_category_answers_attributes&quot;:{&quot;0&quot;:{&quot;customization_id&quot;:&quot;2&quot;, &quot;_destroy&quot;:&quot;false&quot;}, &quot;1&quot;:{&quot;option_id&quot;:&quot;7&quot;, &quot;customization_id&quot;:&quot;2&quot;, &quot;_destroy&quot;:&quot;false&quot;}, &quot;2&quot;:{&quot;option_id&quot;:&quot;8&quot;, &quot;customization_id&quot;:&quot;2&quot;, &quot;_destroy&quot;:&quot;false&quot;}, &quot;3&quot;:{&quot;customization_id&quot;:&quot;2&quot;, &quot;_destroy&quot;:&quot;false&quot;}}, &quot;hotel_needed_answer_attributes&quot;:{&quot;option_id&quot;:&quot;95&quot;, &quot;customization_id&quot;:&quot;22&quot;}}}</stringProp>
+                <stringProp name="Argument.value">{&quot;requested_trip&quot;:{&quot;email&quot;:&quot;${Tr_email_id}&quot;,&quot;from_complete&quot;:&quot;Uttar Pradesh,India&quot;,&quot;from_loc&quot;:&quot;Noida, India&quot;,&quot;budget&quot;:&quot;3500&quot;,&quot;adult&quot;:&quot;2&quot;,&quot;usr_location&quot;:&quot;Noida, India&quot;,&quot;phone_no&quot;:&quot;&quot;,&quot;preferences&quot;:[],&quot;start_date&quot;:&quot;${start_date}&quot;,&quot;to_loc&quot;:&quot;Ladakh&quot;,&quot;trip_days&quot;:&quot;5&quot;,&quot;trip_stage&quot;:&quot;2&quot;,&quot;hotel_category_answers_attributes&quot;:{&quot;0&quot;:{&quot;customization_id&quot;:&quot;2&quot;, &quot;_destroy&quot;:&quot;false&quot;}, &quot;1&quot;:{&quot;option_id&quot;:&quot;7&quot;, &quot;customization_id&quot;:&quot;2&quot;, &quot;_destroy&quot;:&quot;false&quot;}, &quot;2&quot;:{&quot;option_id&quot;:&quot;8&quot;, &quot;customization_id&quot;:&quot;2&quot;, &quot;_destroy&quot;:&quot;false&quot;}, &quot;3&quot;:{&quot;customization_id&quot;:&quot;2&quot;, &quot;_destroy&quot;:&quot;false&quot;}}, &quot;hotel_needed_answer_attributes&quot;:{&quot;option_id&quot;:&quot;95&quot;, &quot;customization_id&quot;:&quot;22&quot;}}}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -182,6 +182,20 @@ String getUserDigest(String digest) {
 </stringProp>
             <stringProp name="scriptLanguage">groovy</stringProp>
           </JSR223PreProcessor>
+          <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="StartDate" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import java.text.SimpleDateFormat; 
+import java.util.Date; 
+
+Date date = new Date(); 
+date.setDate(date.getDate()+30); 
+SimpleDateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;); 
+String formattedDate = df.format(date); 
+vars.put(&quot;start_date&quot;,formattedDate);</stringProp>
+          </BeanShellPreProcessor>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AdminSignInForAuthToken" enabled="true">
