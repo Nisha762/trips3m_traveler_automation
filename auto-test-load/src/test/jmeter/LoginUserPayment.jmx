@@ -17,8 +17,8 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__P(users,1)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,1)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,2)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,2)}</stringProp>
         <longProp name="ThreadGroup.start_time">1501063031000</longProp>
         <longProp name="ThreadGroup.end_time">1501063031000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -71,7 +71,7 @@
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">api/v3/requested_trips</stringProp>
+          <stringProp name="HTTPSampler.path">api/v3/requested_trips?security_auth_token=ekxnfvoxefmpelbvzuerofqmtcffxxcuwengpdrvwwgrbajkrk&amp;TT-Mobile=${token}</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -194,13 +194,6 @@ String getUserDigest(String digest) {
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">utf8</stringProp>
-              </elementProp>
-              <elementProp name="authenticity_token" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">${authenticity_token_Admin}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">authenticity_token</stringProp>
               </elementProp>
               <elementProp name="next" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
@@ -1099,7 +1092,6 @@ String path = SampleResult.getURL().getPath();
 if (!path.contains(&quot;/requested_trips/${trip_id}/quotes/${Quote_id}&quot;)) {
    Failure = true;
    FailureMessage = &quot;URL Path: didn&apos;t contain \&quot;requested_trips\&quot;&quot; + System.getProperty(&quot;line.separator&quot;) + &quot;URL Path detected: &quot; + path;
-
 }</stringProp>
             <stringProp name="BeanShellAssertion.filename"></stringProp>
             <stringProp name="BeanShellAssertion.parameters"></stringProp>
