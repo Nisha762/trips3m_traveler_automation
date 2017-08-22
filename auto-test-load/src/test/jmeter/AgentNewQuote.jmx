@@ -30,7 +30,7 @@
           <collectionProp name="Arguments.arguments">
             <elementProp name="endpoint" elementType="Argument">
               <stringProp name="Argument.name">endpoint</stringProp>
-              <stringProp name="Argument.value">${__P(application_url,bookings-qa1.ttdev.in)}</stringProp>
+              <stringProp name="Argument.value">${__P(application_url,master.ttdev.in)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="email" elementType="Argument">
@@ -40,71 +40,6 @@
             </elementProp>
           </collectionProp>
         </Arguments>
-        <hashTree/>
-        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate: User &quot;To&quot; location &amp; Trip_type" enabled="true">
-          <stringProp name="cacheKey"></stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="script">String[] query = new String[]{&quot;Bali&quot;, &quot;Himachal&quot;, &quot;Kerala&quot;};
-Random random = new Random();
-int i = random.nextInt(query.length);
-vars.put(&quot;to_loc&quot;,query[i]);
-if (query[i].equals(&quot;Bali&quot;)) {
-	vars.put(&quot;trip_type&quot;,&quot;International&quot;);
-} else {
-	vars.put(&quot;trip_type&quot;,&quot;Domestic&quot;); 
-}
-</stringProp>
-          <stringProp name="scriptLanguage">java</stringProp>
-        </JSR223PreProcessor>
-        <hashTree/>
-        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Generate: Trip Start date " enabled="true">
-          <boolProp name="resetInterpreter">false</boolProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="script">import java.text.SimpleDateFormat; 
-import java.util.Date; 
-
-Date date = new Date(); 
-date.setDate(date.getDate()+30); 
-SimpleDateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;); 
-String formattedDate = df.format(date); 
-vars.put(&quot;start_date&quot;,formattedDate);</stringProp>
-        </BeanShellPreProcessor>
-        <hashTree/>
-        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate Token" enabled="true">
-          <stringProp name="cacheKey"></stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="script">import java.security.MessageDigest;
-import org.codehaus.groovy.runtime.EncodingGroovyMethods;
-
-String userEmail = &apos;${email}&apos;;
-String digest;
-
-digest = userEmail + &apos;post&apos;;
-
-
-digest = getUserDigest(digest); //this is final digest
-vars.put(&quot;token&quot;,digest);
-
-String getUserDigest(String digest) {
-   String TT_S_KEY = &quot;DAFAC0A55F50A75558B778035E3C9A8BDF03AF1E4C2124D2CD5DD42092EFD32E&quot;;
- 
-       digest = TT_S_KEY + digest;
-       MessageDigest msgDigest = MessageDigest.getInstance(&quot;SHA-256&quot;);
-       msgDigest.update(digest.getBytes());
-       EncodingGroovyMethods encodeObj = new EncodingGroovyMethods();
-       digest = encodeObj.encodeBase64(msgDigest.digest()).toString();
-       if (digest.length() &gt; 164) {
-           digest = digest.substring(0, 163);
-       }
-       return digest;
-}
-
-</stringProp>
-          <stringProp name="scriptLanguage">groovy</stringProp>
-        </JSR223PreProcessor>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateTripAPI" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
@@ -187,8 +122,112 @@ String getUserDigest(String digest) {
             <stringProp name="JSONPostProcessor.defaultValues">Null</stringProp>
           </JSONPostProcessor>
           <hashTree/>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate: User &quot;To&quot; location &amp; Trip_type" enabled="true">
+            <stringProp name="cacheKey"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import java.io.*;
+import java.util.*;
+
+String[] query = new String[]{&quot;Himachal&quot;, &quot;Kerala&quot;};
+Random random = new Random();
+int i = random.nextInt(query.length);
+vars.put(&quot;to_loc&quot;,query[i]);
+if (query[i].equals(&quot;Bali&quot;)) {
+	vars.put(&quot;trip_type&quot;,&quot;International&quot;);
+} else {
+	vars.put(&quot;trip_type&quot;,&quot;Domestic&quot;); 
+}
+</stringProp>
+            <stringProp name="scriptLanguage">java</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Random Agent" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import java.io.*;
+import java.util.*;
+
+String[] query = new String[]{&quot;ttprodagent@gmail.com&quot;, &quot;ttprodagent_two@gmail.com&quot;,&quot;ttprodagent_three@gmail.com&quot; , &quot;ttprodagent_four@gmail.com&quot; , &quot;ttprodagent_five@gmail.com&quot; };
+Random random = new Random();
+int i = random.nextInt(query.length);
+vars.put(&quot;agent_email&quot;,query[i]);
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Random Agent Id " enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import java.io.*;
+import java.util.*;
+
+String agent_email = vars.get(&quot;agent_email&quot;);
+
+if(agent_email.equals(&quot;ttprodagent@gmail.com&quot;)) { 
+    vars.put(&quot;agent_id_got&quot;,&quot;759117&quot;);
+} else if(agent_email.equals(&quot;ttprodagent_two@gmail.com&quot;)) { 
+    vars.put(&quot;agent_id_got&quot;,&quot;1260951&quot;); 
+} else if(agent_email.equals(&quot;ttprodagent_three@gmail.com&quot;)) { 
+    vars.put(&quot;agent_id_got&quot;,&quot;1260952&quot;);
+} else if(agent_email.equals(&quot;ttprodagent_four@gmail.com&quot;)) { 
+    vars.put(&quot;agent_id_got&quot;,&quot;1260953&quot;);
+} else if(agent_email.equals(&quot;ttprodagent_five@gmail.com&quot;)) { 
+    vars.put(&quot;agent_id_got&quot;,&quot;1260954&quot;);
+}</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Generate: Trip Start date " enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import java.text.SimpleDateFormat; 
+import java.util.Date; 
+
+Date date = new Date(); 
+date.setDate(date.getDate()+30); 
+SimpleDateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;); 
+String formattedDate = df.format(date); 
+vars.put(&quot;start_date&quot;,formattedDate);</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate Token" enabled="true">
+            <stringProp name="cacheKey"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import java.security.MessageDigest;
+import org.codehaus.groovy.runtime.EncodingGroovyMethods;
+
+String userEmail = &apos;${email}&apos;;
+String digest;
+
+digest = userEmail + &apos;post&apos;;
+
+
+digest = getUserDigest(digest); //this is final digest
+vars.put(&quot;token&quot;,digest);
+
+String getUserDigest(String digest) {
+   String TT_S_KEY = &quot;DAFAC0A55F50A75558B778035E3C9A8BDF03AF1E4C2124D2CD5DD42092EFD32E&quot;;
+ 
+       digest = TT_S_KEY + digest;
+       MessageDigest msgDigest = MessageDigest.getInstance(&quot;SHA-256&quot;);
+       msgDigest.update(digest.getBytes());
+       EncodingGroovyMethods encodeObj = new EncodingGroovyMethods();
+       digest = encodeObj.encodeBase64(msgDigest.digest()).toString();
+       if (digest.length() &gt; 164) {
+           digest = digest.substring(0, 163);
+       }
+       return digest;
+}
+
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UserSignInPage" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UserSignInPage - Admin for trip:  ${trip_id}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -255,7 +294,7 @@ String getUserDigest(String digest) {
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UserSignIn: Admin" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UserSignIn: Admin for trip: ${trip_id}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="utf8" elementType="HTTPArgument">
@@ -455,7 +494,7 @@ String getUserDigest(String digest) {
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AdminRequestedTripPage: ${trip_id}" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AdminRequestedTripPage for trip: ${trip_id}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -526,7 +565,7 @@ String getUserDigest(String digest) {
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="MarkTripActive: ${trip_id}" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="MarkTripActive for trip: ${trip_id}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="utf8" elementType="HTTPArgument">
@@ -733,7 +772,7 @@ String getUserDigest(String digest) {
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AssignLeadToAgent: ${trip_id}" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AssignLeadToAgent for trip: ${trip_id}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="trip_id" elementType="HTTPArgument">
@@ -745,7 +784,7 @@ String getUserDigest(String digest) {
               </elementProp>
               <elementProp name="agent_id" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">759117</stringProp>
+                <stringProp name="Argument.value">${agent_id_got}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">agent_id</stringProp>
@@ -822,7 +861,7 @@ String getUserDigest(String digest) {
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UserSignInPage" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UserSignInPage - Agent for trip: ${trip_id}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -881,7 +920,7 @@ String getUserDigest(String digest) {
           <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="GetToken" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-            <stringProp name="RegexExtractor.refname">authenticity_token</stringProp>
+            <stringProp name="RegexExtractor.refname">agent_authenticity_token</stringProp>
             <stringProp name="RegexExtractor.regex">input name=&quot;authenticity_token&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default"></stringProp>
@@ -889,7 +928,7 @@ String getUserDigest(String digest) {
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UserSignIn: Agent" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="UserSignIn - Agent for trip: ${trip_id}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="utf8" elementType="HTTPArgument">
@@ -902,7 +941,7 @@ String getUserDigest(String digest) {
               <elementProp name="authenticity_token" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
                 <stringProp name="Argument.name">authenticity_token</stringProp>
-                <stringProp name="Argument.value">${authenticity_token}</stringProp>
+                <stringProp name="Argument.value">${agent_authenticity_token}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
@@ -916,7 +955,7 @@ String getUserDigest(String digest) {
               <elementProp name="user[email]" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
                 <stringProp name="Argument.name">user[email]</stringProp>
-                <stringProp name="Argument.value">ttprodagent@gmail.com</stringProp>
+                <stringProp name="Argument.value">${agent_email}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
@@ -997,7 +1036,7 @@ String getUserDigest(String digest) {
           <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="GetCookie" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">true</stringProp>
-            <stringProp name="RegexExtractor.refname">sessioncookie</stringProp>
+            <stringProp name="RegexExtractor.refname">agent_sessioncookie</stringProp>
             <stringProp name="RegexExtractor.regex">_trips3m_session=(.*)</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default">NULL</stringProp>
@@ -1005,7 +1044,7 @@ String getUserDigest(String digest) {
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AgentDashboard" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AgentDashboard for trip: ${trip_id}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -1056,7 +1095,7 @@ String getUserDigest(String digest) {
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Cookie</stringProp>
-                <stringProp name="Header.value">_trips3m_session=${sessioncookie}</stringProp>
+                <stringProp name="Header.value">_trips3m_session=${agent_sessioncookie}</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -1071,7 +1110,7 @@ String getUserDigest(String digest) {
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AgentRequestedTripPage: ${trip_id}" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AgentRequestedTripPage: ${trip_id}" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -1122,7 +1161,7 @@ String getUserDigest(String digest) {
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Cookie</stringProp>
-                <stringProp name="Header.value">_trips3m_session=${sessioncookie}</stringProp>
+                <stringProp name="Header.value">_trips3m_session=${agent_sessioncookie}</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -1137,7 +1176,7 @@ String getUserDigest(String digest) {
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NewQuotePage: ${trip_id}" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NewQuotePage for trip: ${trip_id}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -1192,7 +1231,7 @@ String getUserDigest(String digest) {
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Cookie</stringProp>
-                <stringProp name="Header.value">_trips3m_session=${sessioncookie}</stringProp>
+                <stringProp name="Header.value">_trips3m_session=${agent_sessioncookie}</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -1227,7 +1266,7 @@ vars.put(&quot;start_day&quot;,start_day);</stringProp>
           </JSR223PreProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NewQuote: ${trip_id}" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="NewQuote for trip: ${trip_id}" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="authenticity_token" elementType="HTTPArgument">
@@ -1900,7 +1939,7 @@ vars.put(&quot;start_day&quot;,start_day);</stringProp>
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Cookie</stringProp>
-                <stringProp name="Header.value">_trips3m_session=${sessioncookie}</stringProp>
+                <stringProp name="Header.value">_trips3m_session=${agent_sessioncookie}</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -1915,7 +1954,7 @@ vars.put(&quot;start_day&quot;,start_day);</stringProp>
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="QuoteConfirmation: ${trip_id}" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="QuoteConfirmation: ${trip_id}" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -1967,7 +2006,7 @@ vars.put(&quot;start_day&quot;,start_day);</stringProp>
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Cookie</stringProp>
-                <stringProp name="Header.value">_trips3m_session=${sessioncookie}</stringProp>
+                <stringProp name="Header.value">_trips3m_session=${agent_sessioncookie}</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -1982,42 +2021,6 @@ vars.put(&quot;start_day&quot;,start_day);</stringProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-          <boolProp name="ResultCollector.error_logging">false</boolProp>
-          <objProp>
-            <name>saveConfig</name>
-            <value class="SampleSaveConfiguration">
-              <time>true</time>
-              <latency>true</latency>
-              <timestamp>true</timestamp>
-              <success>true</success>
-              <label>true</label>
-              <code>true</code>
-              <message>true</message>
-              <threadName>true</threadName>
-              <dataType>true</dataType>
-              <encoding>false</encoding>
-              <assertions>true</assertions>
-              <subresults>true</subresults>
-              <responseData>false</responseData>
-              <samplerData>false</samplerData>
-              <xml>false</xml>
-              <fieldNames>true</fieldNames>
-              <responseHeaders>false</responseHeaders>
-              <requestHeaders>false</requestHeaders>
-              <responseDataOnError>false</responseDataOnError>
-              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-              <assertionsResultsToSave>0</assertionsResultsToSave>
-              <bytes>true</bytes>
-              <sentBytes>true</sentBytes>
-              <threadCounts>true</threadCounts>
-              <idleTime>true</idleTime>
-              <connectTime>true</connectTime>
-            </value>
-          </objProp>
-          <stringProp name="filename"></stringProp>
-        </ResultCollector>
-        <hashTree/>
       </hashTree>
     </hashTree>
     <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
