@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="CreateTripWithGuestUser" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" lastOpened="2016-09-23T17:40:06.494+05:30" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d7c48414-9b1d-49d0-b44b-a92a9a748dbb" wadlVersion="http://wadl.dev.java.net/2009/02" name="SIGNIN" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://${#Project#traveler_apiendpoint}}</con:endpoint></con:endpoints><con:resource name="sign_in" path="/users/sign_in" id="948afba5-5ffc-4440-a549-d192ff653635"><con:settings/><con:parameters/><con:method name="Method 1" id="c7528823-614f-4e0c-9b32-84a978bf12a5" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="d64103bc-b669-42bf-befd-5fb67bf06081" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="CreateTripWithGuestUser" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" lastOpened="2016-09-23T17:40:06.494+05:30" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d7c48414-9b1d-49d0-b44b-a92a9a748dbb" wadlVersion="http://wadl.dev.java.net/2009/02" name="SIGNIN" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://${#Project#traveler_apiendpoint}}</con:endpoint></con:endpoints><con:resource name="sign_in" path="/users/sign_in" id="948afba5-5ffc-4440-a549-d192ff653635"><con:settings/><con:parameters/><con:method name="Method 1" id="c7528823-614f-4e0c-9b32-84a978bf12a5" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="d64103bc-b669-42bf-befd-5fb67bf06081" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="TT-Mobile-Post" value="testing1112015a@rediffmail.compost"/>
   <con:entry key="TT-Mobile" value=""/>
   <con:entry key="Content-Type" value="application/json; charset=UTF-8"/>
@@ -532,376 +532,7 @@ SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 String formatted = format1.format(cal.getTime());
 testRunner.testCase.setPropertyValue("start_date",formatted);
 //messageExchange.modelItem.testCase.testSuite.setPropertyValue("start_date",formatted);
-</script></con:config></con:testStep><con:testStep type="calltestcase" name="TT-Mobile token for all destinations" id="246b3e15-47b3-4ccd-bed4-870b810ad50f"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v2/trip_types/all_destinations</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>aIGNdSfr+9y/iQlTz5zCK8P8NAJvd+hrn3m7X4uaMgM=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Get All Destinations" id="6209ea9c-2a44-47b5-b287-44e815f38d61" disabled="true"><con:settings/><con:config service="AllDestinations" resourcePath="/api/{api_version}/trip_types/all_destinations" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get All Destinations" id="11a3efbf-a754-4d81-953d-eb828619270e" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  &lt;con:entry key="TT-Mobile" value="${TT-Mobile token for all destinations#hash_key}"/>
-  &lt;con:entry key="Accept" value="application/json"/>
-  &lt;con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
-&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://null///api/v2/trip_types/all_destinations</con:originalUri><con:assertion type="GroovyScriptAssertion" id="d6dba7b2-4074-4ac6-941f-503b42d1ce63" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
-
-String response = messageExchange.getResponseContent();
-def json_response_holder = new JsonSlurper().parseText(response);
-
-
-def destination_ids = json_response_holder.id;
-def destination_names = json_response_holder.name;
-
-int total_destinations = destination_ids.size();
-
-Random rand = new Random();
-int randomindex = rand.nextInt((total_destinations - 0) + 1) + 0;
-
-int selected_destination_id = destination_ids[randomindex];
-String selected_destination_name = destination_names[randomindex];
-messageExchange.modelItem.testCase.setPropertyValue("selected_destination_id",selected_destination_id.toString());
-messageExchange.modelItem.testCase.setPropertyValue("selected_destination_name",selected_destination_name);
-
-log.info "Selected destination ID: " + selected_destination_id;
-log.info "Selected destination: " + selected_destination_name;
-</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v2" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="And TT-Mobile token for filtered result is fetched" id="aaecc756-6ac5-4f70-a4b8-509ac2202074" disabled="true"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value><![CDATA[http://${#TestCase#traveler_apiendpoint}/api/v4/get_filtered_results?days=${#TestCase#number_of_days}&per_page=${#TestCase#per_page}&result_type=destination_catalog&activity=${#TestCase#activity_encoded}&page_number=1&months=${#TestCase#months_encoded}&price_ranges=${#TestCase#price_ranges_encoded}&destination_type=${#TestCase#destination_type}]]></con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>mX0MlgIj9M4fSwzq3iTE/+tDZNsd41GXDpV7EBa1Mkk=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="And user filter the search results to get appropriate destinations" id="abf3fff5-32b4-412c-b2d3-2502d1b5a23b" disabled="true"><con:settings/><con:config service="FilterDestinationsCatalogSearchResults" resourcePath="/api/{api_version}/get_filtered_results" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="And user filter the search results to get appropriate destinations" id="0684b8d0-f7d7-4119-899a-d47c06780a8f" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  <con:entry key="Cookie" value="${Given user login to application#Cookie}"/>
-  <con:entry key="TT-Mobile" value="${And TT-Mobile token for filtered result is fetched#hash_key}"/>
-  <con:entry key="Accept" value="application/json"/>
-  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v4/get_filtered_results</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="2112e70d-164c-4a36-b6bd-73d0d1c450fd" name="HTTP Status - 200!"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="d0d52a1a-6970-4cdc-a198-7ac994eeed59" name="Script Assertion"><con:configuration><scriptText><![CDATA[import groovy.json.JsonSlurper;
-import java.util.Random;
-// Get the json response holder.
-String response = messageExchange.getResponseContent();
-def json_response_holder = new JsonSlurper().parseText(response);
-
-//verify the result type in response.
-String result_type = json_response_holder.result_type;
-assert(result_type == "destination_catalog");
-
-
-//Verify if the budget in destination search result is in range specified by user. 
-
-def min_budget = json_response_holder.destinations.min_b;
-String price_ranges_given = context.expand('${#TestCase#price_ranges}');
-String[] price_ranges = price_ranges_given.split(",");
-int numberOfRanges = price_ranges.size();
-Long min_range = Long.parseLong(price_ranges[0].split("-")[0]);
-Long max_range = Long.parseLong(price_ranges[numberOfRanges-1].split("-")[1]);
-for(def min_b in min_budget){
-	assert(min_b >= min_range && min_b <= max_range);
-}
-
-
-int[] destination_ids = json_response_holder.destinations.id;
-int total_destinations = destination_ids.size();
-
-//verify if total number of destination diplayed per page is as specified(or in range)
-int per_page_range = Integer.parseInt(context.expand('${#TestCase#per_page}'));
-assert(total_destinations <= per_page_range && total_destinations != 0);
-
-
-// Pick random destination from response to get into packages in next steps.
-
-Random rand = new Random();
-int randomindex = rand.nextInt((total_destinations - 0)) + 0;
-
-
-log.info "randomindex : "+randomindex
-String random_destination_id = json_response_holder.destinations.id[randomindex].toString();
-String random_destinationname = json_response_holder.destinations.name[randomindex];
-messageExchange.modelItem.testCase.setPropertyValue("destination_id",random_destination_id);
-messageExchange.modelItem.testCase.setPropertyValue("destination_name",random_destinationname);
-messageExchange.modelItem.testCase.testSuite.setPropertyValue("destination_name",random_destinationname);
-
-
- ]]></scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="months" value="${#TestCase#months}"/>
-  <con:entry key="per_page" value="${#TestCase#per_page}"/>
-  <con:entry key="days" value="${#TestCase#number_of_days}"/>
-  <con:entry key="price_ranges" value="${#TestCase#price_ranges}"/>
-  <con:entry key="destination_type" value="${#TestCase#destination_type}"/>
-  <con:entry key="activity" value="${#TestCase#activity}"/>
-</con:parameters><con:parameterOrder><con:entry>days</con:entry><con:entry>per_page</con:entry><con:entry>result_type</con:entry><con:entry>activity</con:entry><con:entry>page_number</con:entry><con:entry>months</con:entry><con:entry>price_ranges</con:entry><con:entry>destination_type</con:entry><con:entry>sort_by</con:entry><con:entry>api_version</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="And when TT-Mobile token for package catalog is generated" id="6356d3b9-88de-4474-9689-8ae3d83bddb8" disabled="true"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v4/get_filtered_results?result_type=package_catalog&amp;destination=${#TestCase#destination_id}</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>+GfQhUBNqvML2/VHOSgTdT/ep4c0cY7YZirS1cRRDCk=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user can select the package for a destination selected" id="1a67822b-5917-4450-a844-7c74f0cd662d" disabled="true"><con:settings/><con:config service="PackageCatalogForADestination" resourcePath="/api/{api_version}/get_filtered_results" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user can select the package for a destination selected" id="609a0f5f-2282-4432-bf9b-fa6f91d85efd" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  <con:entry key="Cookie" value="${Given user login to application#Cookie}"/>
-  <con:entry key="TT-Mobile" value="${And when TT-Mobile token for package catalog is generated#hash_key}"/>
-  <con:entry key="Accept" value="application/json"/>
-  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v4/get_filtered_results</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="c418620c-0930-46e8-8665-1637907ebc5f" name="HTTP Status - 200!"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="4c4f49ff-534a-456e-9eec-4f5324c367ac" name="Verify &amp; Get package details"><con:configuration><scriptText>import groovy.json.JsonSlurper;
-import java.util.Random;
-
-// get the json response holder.
-String response = messageExchange.getResponseContent();
-def json_response_holder = new JsonSlurper().parseText(response);
-
-
-//verfiy the result type in response
-String result_type = json_response_holder.result_type;
-assert(result_type == "package_catalog");
-
-
-String destination_name = context.expand('${#TestCase#destination_name}');
-//verify total packges displayed should not be zero. 
-int total_packages = json_response_holder.packages.id.size();
-assert(total_packages != 0) : "No packages for destination " + destination_name;
-
-//Verify inclusions are there in response
-
-for(int i = 0;i &lt; total_packages; i++){
-int inclusion_count = json_response_holder.packages.inclusions[i].key.size();
-assert(inclusion_count != 0) : "Inclusion is not there for " + (i+1) + " package.";
-}
-
-//Pick up random package to continue further.
-Random rand = new Random();
-int randomindex = rand.nextInt((total_packages - 0) + 1) + 0;
-
-String selected_package_id = json_response_holder.packages.id[randomindex].toString();
-String selected_package_days = json_response_holder.packages.days[randomindex].toString();
-String selected_package_nights = json_response_holder.packages.nights[randomindex].toString();
-String selected_package_cities = json_response_holder.packages.cities[randomindex].toString();
-String selected_package_name = json_response_holder.packages.name[randomindex].toString();
-String selected_package_price_total = json_response_holder.packages.price_total[randomindex].toString();
-String package_heading = json_response_holder.packages.set_url[randomindex].toString().toLowerCase();
-messageExchange.modelItem.testCase.setPropertyValue("selected_package_id",selected_package_id);
-messageExchange.modelItem.testCase.setPropertyValue("selected_package_name",selected_package_name);
-messageExchange.modelItem.testCase.setPropertyValue("selected_package_price_total",selected_package_price_total);
-messageExchange.modelItem.testCase.setPropertyValue("selected_package_headline",package_heading);
-messageExchange.modelItem.testCase.setPropertyValue("selected_package_days",selected_package_days);
-messageExchange.modelItem.testCase.testSuite.setPropertyValue("selected_package_days",selected_package_days);
-messageExchange.modelItem.testCase.setPropertyValue("selected_package_nights",selected_package_nights);
-messageExchange.modelItem.testCase.setPropertyValue("selected_package_cities",selected_package_cities);
-
-
-// Also get the destinations from the package selected.
-
-String destinations =  json_response_holder.packages.destinations[randomindex].id;
-String destination_names = json_response_holder.packages.destinations[randomindex].name;
-destinations = destinations.replaceAll(" ","");
-destinations = destinations.replace("[","");
-destinations = destinations.replaceAll("]","");
-destination_names = destination_names.replaceAll(" ","");
-destination_names = destination_names.replace("[","");
-destination_names = destination_names.replaceAll("]","");
-messageExchange.modelItem.testCase.setPropertyValue("destinations",destinations);
-messageExchange.modelItem.testCase.setPropertyValue("destination_names",destination_names);
-
-String destinations_encoded = destinations.replaceAll(",","%2C");
-String destination_names_encoded = destination_names.replaceAll(",","%2C");
-messageExchange.modelItem.testCase.setPropertyValue("destinations_encoded",destinations_encoded);
-messageExchange.modelItem.testCase.setPropertyValue("destination_names_encoded",destination_names_encoded);
-
-
-
-
-
-
-
-
-</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttsuer</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="api_version" value="v4"/>
-  <con:entry key="destination" value="${#TestCase#destination_id}"/>
-</con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="And TT-Mobile token is fetched for package catalog filter" id="3a2aec61-4b92-4098-aafc-10f173ea5936" disabled="true"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v3/metadata/filter?filter_type=package_catalog</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>icWaQOJ9AwlPFssTkHKZtVqViE4J7W8uY5q9EHV6S6M=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="And package catalog filters get loaded in background" id="535f83f5-f564-499a-8684-b0788aff07db" disabled="true"><con:settings/><con:config service="FilterType" resourcePath="/api/{api_version}/metadata/filter" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="And package catalog filters get loaded in background" id="436ba333-2b44-4d4a-adc7-688847704b53" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  <con:entry key="Cookie" value="${Given user login to application#Cookie}"/>
-  <con:entry key="TT-Mobile" value="${And TT-Mobile token is fetched for package catalog filter#hash_key}"/>
-  <con:entry key="Accept" value="application/json"/>
-  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v3/metadata/filter</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="b1346a40-2687-413e-8080-95ef1e7d7398" name="HTTP Status - 200!"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="ee5f4dee-0162-47c2-b3a5-050cfd572b62" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
-
-String response = messageExchange.getResponseContent();
-def json_response_holder = new JsonSlurper().parseText(response);
-
-String filter_type = json_response_holder.filter_type;
-
-assert(filter_type == "package_catalog");
-
-String[] filter_titles = json_response_holder.filters.title;
-
-assert("Type of Destination" in filter_titles);
-assert("Categories" in filter_titles);
-assert("Duration(days)" in filter_titles);
-assert("Budget perperson (In Rs.)" in filter_titles);
-assert("Hotel Star Rating" in filter_titles);
-assert("Activities" in filter_titles);
-assert("" in filter_titles);
-
-
-int number_of_filters = filter_titles.size();
-
-for(int i = 0; i &lt; number_of_filters;i++){
-
-if(filter_titles[i] == "Type of Destination"){
-	String[] option_title = json_response_holder.filters.options[i].title;
-	int number_of_options = option_title.size();
-	assert(number_of_options == 2);
-	assert("India" in option_title);
-	assert("International" in option_title);
-}
-else if(filter_titles[i] == "Categories"){
-	String[] option_title = json_response_holder.filters.options[i].title;
-	int number_of_options = option_title.size();
-	assert(number_of_options == 2);
-	assert("Honeymoon" in option_title);
-	assert("Family" in option_title);
-}
-else if(filter_titles[i] == "Duration(days)"){
-	String[] option_title = json_response_holder.filters.options[i].title;
-	int number_of_options = option_title.size();
-	assert(number_of_options == 5);
-	assert("1-3" in option_title);
-	assert("4-6" in option_title);
-	assert("7-9" in option_title);
-	assert("10-12" in option_title);
-	assert(">12" in option_title);
-	
-}
-else if(filter_titles[i] == "Budget perperson (In Rs.)"){
-	String[] option_title = json_response_holder.filters.options[i].title;
-	int number_of_options = option_title.size();
-	assert(number_of_options == 8);
-	assert("Below 10,000" in option_title);
-	assert("10,000 - 20,000" in option_title);
-	assert("20,000 - 40,000" in option_title);
-	assert("40,000 - 60,000" in option_title);
-	assert("60,000 - 80,000" in option_title);
-	assert("80,000 - 1 Lac" in option_title);
-	assert("1 Lac - 2 Lac" in option_title);
-	assert("Above 2 Lac" in option_title);
-}
-else if(filter_titles[i] == "Hotel Star Rating"){
-	String[] option_title = json_response_holder.filters.options[i].title;
-	int number_of_options = option_title.size();
-	assert(number_of_options == 4);
-	assert("5 Star" in option_title);
-	assert("4 Star" in option_title);
-	assert("3 Star" in option_title);
-	assert("2 Star" in option_title);
-
-}
-else if(filter_titles[i] == "Activities"){
-	String[] option_title = json_response_holder.filters.options[i].title;
-	int number_of_options = option_title.size();
-	assert(number_of_options == 5);
-	assert("Adventure" in option_title);
-	assert("Nature" in option_title);
-	assert("Hill Station" in option_title);
-	assert("Religious" in option_title);
-	assert("Water Activities" in option_title);
-
-}
-else if(filter_titles[i] == ""){
-	String[] option_title = json_response_holder.filters.options[i].title;
-	String filter_name = json_response_holder.filters.param_name[i];
-	assert(filter_name == "sort_by");
-	
-	int number_of_options = option_title.size();
-	assert(number_of_options == 5);
-	assert("Popularity" in option_title);
-	assert("Price: Low To High" in option_title);
-	assert("Price: High To Low" in option_title);
-	assert("Duration: Low To High" in option_title);
-	assert("Duration: High To Low" in option_title);
-
-}
-
-	
-}
-</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttsuer</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="filter_type" value="package_catalog"/>
-  <con:entry key="api_version" value="v3"/>
-</con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="And TT-Mobile token is fetched for get package review" id="bcd86ae4-1cf7-41f1-afdf-0583fc7e8847" disabled="true"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v3/tour_packages/${#TestCase#selected_package_headline}/review?id=${#TestCase#selected_package_id}&amp;page_number=0</con:value></con:property><con:property><con:name>user_email</con:name><con:value/></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>vcpaRHaRDDvk6uO6CtySCtLo4N4AUTTlRSEeHexyW3g=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="user get package review" id="3cafeb81-3ba8-473b-8861-0160d7ed57df" disabled="true"><con:settings/><con:config service="GetPackageTestimonials" resourcePath="/api/v3/tour_packages/{package_name}/review" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="user get package review" id="7d27f5dc-c828-4701-b8f3-fbdae52a56db" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  <con:entry key="TT-Mobile" value="${And TT-Mobile token is fetched for get package review#hash_key}"/>
-  <con:entry key="Content-Type" value="application/json"/>
-  <con:entry key="Accept" value="application/json; charset=utf-8"/>
-  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v3/tour_packages/Luxury%20Mauritius%20Honeymoon%20Package/review</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="833d1f37-ff8b-4862-a3ec-77f4d1295b61" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="8d82c404-cc7e-4ffd-9abb-013febc4c4ca" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
-
-String response = messageExchange.getResponseContent();
-def json_response_holder = new JsonSlurper().parseText(response);
-
-def reviwername = json_response_holder.name;
-def loc = json_response_holder.loc;
-def time =  json_response_holder.time;
-def rating = json_response_holder.rating;
-def authpic = json_response_holder.author_pic;
-def review =  json_response_holder.review;
-
-
-for(int i=0; i&lt; reviwername.size();i++){
-	assert reviwername[i]!=null;
-	assert loc[i]!=null;
-	assert time[i]!=null;
-	assert rating[i]!=null;
-	assert review[i]!=null;
-}
-
-</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="id" value="${#TestCase#selected_package_id}"/>
-  <con:entry key="page_number" value="0"/>
-  <con:entry key="package_name" value="${#TestCase#selected_package_headline}"/>
-</con:parameters><con:parameterOrder><con:entry>package_name</con:entry><con:entry>id</con:entry><con:entry>page_number</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="And TT-Mobile token is fetched for get similiar packages" id="21d64403-d34e-47c7-ab48-700ae4c04585" disabled="true"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v4/get_similar_packages/${#TestCase#selected_package_id}</con:value></con:property><con:property><con:name>user_email</con:name><con:value/></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>XdddUcsAUBc63H31QXIzue2ddUDEVJtqrSgfbLPPqVY=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="user get similiar packages" id="552bfccb-a019-4c72-876f-8b9f99bb3e04" disabled="true"><con:settings/><con:config service="GetSimiliarPackages" resourcePath="/api/v4/get_similar_packages/{package_id}" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="user get similiar packages" id="419772c3-0fef-411e-b835-b403c2e5c15f" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  <con:entry key="Cookie" value="${#Given user login to application#Cookie}"/>
-  <con:entry key="TT-Mobile" value="${And TT-Mobile token is fetched for get similiar packages#hash_key}"/>
-  <con:entry key="Accept" value="application/json; charset=utf-8"/>
-  <con:entry key="Content-Type" value="application/json"/>
-  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v4/get_similar_packages/844</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="674865c8-ac74-47ee-b5d9-77f6cf1eec3e" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="f79aeeb7-3a4f-445a-83f1-63e5a14c2c45" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
-
-String response = messageExchange.getResponseContent();
-def json_response_holder = new JsonSlurper().parseText(response);
-
-def resulttype = json_response_holder.result_type;
-
-def packages  = json_response_holder.packages;
-
-for (int i=0; i&lt;packages.id.size(); i++){
-	assert packages.id[i]!=null : "package id is not available"
-}
-
-
-assert resulttype.equals("similar_seo_packages") : "result type should be similar_seo_packages but it is "+resulttype</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="package_id" value="${#TestCase#selected_package_id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="And TT-Mobile token is fetched for get package faq" id="ca11f792-b393-4a38-bfab-0174ba6676c1" disabled="true"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v3/tour_packages/${#TestCase#selected_package_headline}/faq</con:value></con:property><con:property><con:name>user_email</con:name><con:value/></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>pOowIYiSeH5XW/Ahdfx3/qyO4gnM0MmZ8oixMthUb6w=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="user get package faq" id="ef1691f7-74e7-43c4-874f-5cbd4380f601" disabled="true"><con:settings/><con:config service="GetPackageFAQ" resourcePath="/api/v3/tour_packages/{package_name}/faq" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="user get package faq" id="e91d2953-7d47-42d4-84e7-4fb6bd662788" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  <con:entry key="TT-Mobile" value="${And TT-Mobile token is fetched for get package faq#hash_key}"/>
-  <con:entry key="Content-Type" value="application/json"/>
-  <con:entry key="Accept" value="application/json; charset=utf-8"/>
-  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v3/tour_packages/8nights-9days-australia-family-tour/faq</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="d9bc88de-5961-45a5-8986-33fcf38d99d9" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="06f4c3f6-a3ae-40f9-9a2f-23f6b8d84e10" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
-
-String response = messageExchange.getResponseContent();
-def json_response_holder = new JsonSlurper().parseText(response);
-
-def resulttype = json_response_holder.result_type;
-
-def quetions  = json_response_holder.que;
-def answer = json_response_holder.ans;
-
-for (que in quetions){
-	assert que!=null : "quetions is not available"
-}
-for (ans in answer){
-	assert ans!=null : "answer is not available"
-}
-
-</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="package_name" value="${#TestCase#selected_package_headline}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>package_name</con:entry><con:entry>id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="When TT-Mobile for Request Form 1 is generated" id="6b2de2f3-c6e2-4061-882f-713dcbd340a8" disabled="true"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v1/requested_trips/new.json?destination_ids%5B%5D=${#TestCase#destinations_encoded}</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>B5o3dTm7YIUhIvP4uG3+agm8/YmEyPAzx7tbt8Ij/JI=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user can view and validate the request form 1" id="c4436e73-0d36-4956-a62c-0d11fee045cc" disabled="true"><con:settings/><con:config service="NewRequestForm1" resourcePath="/api/{api_version}/requested_trips/new.json" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user can view and validate the request form 1" id="196f7986-e711-407a-99fc-68aac4c6148a" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  <con:entry key="Cookie" value="${Given user login to application#Cookie}"/>
-  <con:entry key="TT-Mobile" value="${When TT-Mobile for Request Form 1 is generated#hash_key}"/>
-  <con:entry key="Accept" value="application/json"/>
-  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-api.ttdev.in/api/v1/requested_trips/new.json</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="7e151948-6891-4065-bebb-97d324cac3b8" name="HTTP Status - 200!"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="d2ad5c04-da74-4b2b-a46b-77cb32c5f9f9" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
-
-String response = messageExchange.getResponseContent();
-def json_response_holder = new JsonSlurper().parseText(response);
-
-
-int total_customization = json_response_holder.preferences.customization.size();
-
-//Verfiy the customization are there in response.
-
-assert(total_customization != 0);
-
-def cutomization_title = json_response_holder.preferences.customization.title;
-</scriptText></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="09742936-73fe-4fc4-a554-320814e6b83b" name="Get the start date"><con:configuration><scriptText>import java.util.Calendar;
-import java.text.SimpleDateFormat;
-
-Calendar cal = Calendar.getInstance();
-cal.add(Calendar.DATE, 7);
-SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-String formatted = format1.format(cal.getTime());
-messageExchange.modelItem.testCase.setPropertyValue("start_date",formatted);
-messageExchange.modelItem.testCase.testSuite.setPropertyValue("start_date",formatted);
-</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="destination_ids[]" value="${#TestCase#destinations}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>destination_ids[]</con:entry><con:entry>api_version</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="And TT-MObile for new request is generated" id="a5f47ec9-283c-4978-bc09-3620a4c8a2cd"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v1/requested_trips</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>Jslz6D4pQ5+KYUT+F9xOZx6sCipaaQ/o3y2ggdCj86c=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user requests a trip" id="8692233d-0ff5-4f97-b666-06848117ed8e"><con:settings/><con:config service="NewRequestedTrips" resourcePath="/api/{api_version}/requested_trips" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user requests a trip" id="4a456b39-a76e-4c09-a86d-280850ef8cf4" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+</script></con:config></con:testStep><con:testStep type="calltestcase" name="TT-Mobile token for all destinations" id="246b3e15-47b3-4ccd-bed4-870b810ad50f"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v2/trip_types/all_destinations</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>aIGNdSfr+9y/iQlTz5zCK8P8NAJvd+hrn3m7X4uaMgM=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="calltestcase" name="And TT-MObile for new request is generated" id="a5f47ec9-283c-4978-bc09-3620a4c8a2cd"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v1/requested_trips</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>XHPeVQdOdloVZ4Q5dcPURkYUKRbOczgPgNPEKycj4A8=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user requests a trip" id="8692233d-0ff5-4f97-b666-06848117ed8e"><con:settings/><con:config service="NewRequestedTrips" resourcePath="/api/{api_version}/requested_trips" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user requests a trip" id="4a456b39-a76e-4c09-a86d-280850ef8cf4" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="TT-Mobile" value="${And TT-MObile for new request is generated#hash_key}"/>
   <con:entry key="Accept" value="application/json"/>
   <con:entry key="Content-Type" value="application/json; charset=UTF-8"/>
@@ -921,7 +552,7 @@ messageExchange.modelItem.testCase.testSuite.setPropertyValue("RequestID",reques
 		messageExchange.modelItem.testCase.setPropertyValue("Cookie",cookie);
 		//messageExchange.modelItem.testCase.testSuite.setPropertyValue("Cookie",cookie);
 	}
-}</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v3" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="TT-MObile for Form 2" id="d5b1721e-d8e8-4c1f-ba41-55a5df92ffee"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v1/requested_trips/${#TestCase#RequestID}</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>put</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>6SPMk0p7oW2MQmsBqz1+YwLKFdxf0OlHZMM8Z/2aoJo=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script" id="888b054c-1435-41ef-8b7e-5ef710ae84c9"><con:settings/><con:config><script>String flight_option = context.expand('${#TestCase#flight_option}');
+}</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v3" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="TT-MObile for Form 2" id="d5b1721e-d8e8-4c1f-ba41-55a5df92ffee"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/api/v1/requested_trips/${#TestCase#RequestID}</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>put</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>dcrdwCiwAeNsQgIVIXDnc8tuGp1jCRYSAVexZ3rDQa0=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script" id="888b054c-1435-41ef-8b7e-5ef710ae84c9"><con:settings/><con:config><script>String flight_option = context.expand('${#TestCase#flight_option}');
 String flightString = "";
 if(flight_option.toLowerCase().equals("yes")){
 	flightString = "{\"customization_id\":23,\"options\":[{\"misc\":\"\",\"name\":\"Yes\",\"id\":97,\"tags\":\"\",\"val\":[]}]}";
@@ -929,7 +560,9 @@ if(flight_option.toLowerCase().equals("yes")){
 else{
 	flightString = "{\"customization_id\":21,\"options\":[{\"misc\":\"\",\"name\":\"Yes\",\"id\":97,\"tags\":\"\",\"val\":[]}]}";
 }
-testRunner.testCase.setPropertyValue("flightString",flightString);</script></con:config></con:testStep><con:testStep type="restrequest" name="Fill Form 2" id="8403ea57-510d-4380-8466-2eaa5ef60509"><con:settings/><con:config service="Form2" resourcePath="/api/{api_version}/requested_trips/{trip_id}" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Fill Form 2" id="95f300c6-767d-4da1-b88d-a747ccf3c18b" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+testRunner.testCase.setPropertyValue("flightString",flightString);
+
+</script></con:config></con:testStep><con:testStep type="restrequest" name="Fill Form 2" id="8403ea57-510d-4380-8466-2eaa5ef60509"><con:settings/><con:config service="Form2" resourcePath="/api/{api_version}/requested_trips/{trip_id}" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Fill Form 2" id="95f300c6-767d-4da1-b88d-a747ccf3c18b" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="Cookie" value="${#TestCase#Cookie}"/>
   <con:entry key="TT-Mobile" value="${TT-MObile for Form 2#hash_key}"/>
   <con:entry key="Content-Type" value="application/json; charset=UTF-8"/>
@@ -938,7 +571,32 @@ testRunner.testCase.setPropertyValue("flightString",flightString);</script></con
 </xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request>{"requested_trip":{"deviceId":"972382f502494aabbf2ae45d614f02af","adult":"${#TestCase#num_of_adults}","budget":"${#TestCase#budget}..${#TestCase#budget}","child":"0","currency":"Rupee","preferences":[{"customization_id":22,"options":[{"misc":"","name":"Yes","id":95,"tags":"","val":[]}]},{"customization_id":2,"options":[{"misc":"","name":"${#TestCase#hotel_rating}","id":8,"tags":"","val":[]}]},{"customization_id":24,"options":[{"misc":"","name":"No","id":100,"tags":"","val":[]}]},{"customization_id":43,"options":[{"misc":"","name":"in this month","id":204,"tags":"","val":[]}]},${#TestCase#flightString},{"customization_id":169,"options":[]}]}}</con:request><con:originalUri>http://admin.ttdev.in/api/v1/requested_trips/1234567</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="62e59291-2015-4279-b9a9-c914777c4c06" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
   <con:entry key="trip_id" value="${#TestCase#RequestID}"/>
   <con:entry key="api_version" value="v1"/>
-</con:parameters></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>traveler_apiendpoint</con:name><con:value>master.ttdev.in</con:value></con:property><con:property><con:name>trip_stage</con:name><con:value>2</con:value></con:property><con:property><con:name>to_loc</con:name><con:value>Goa</con:value></con:property><con:property><con:name>trip_days</con:name><con:value>10</con:value></con:property><con:property><con:name>num_of_adults</con:name><con:value>2</con:value></con:property><con:property><con:name>budget</con:name><con:value>7000</con:value></con:property><con:property><con:name>from_loc</con:name><con:value>Noida</con:value></con:property><con:property><con:name>user_email</con:name><con:value>test_1496658851223@mailinator.com</con:value></con:property><con:property><con:name>start_date</con:name><con:value>2017-06-12</con:value></con:property><con:property><con:name>RequestID</con:name><con:value>1684742</con:value></con:property><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CkkiD3Nlc3Npb25faWQGOgZFVEkiJTYzYzYyZTBmZmU5Y2Q0MWU2ZGFiNTlmNDljODI5ZDk0BjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpAyA1EUkiIiQyYSQxMCRTeHJxbVhPV0VUajhVSldkMU9XandlBjsAVEkiGGFsbG93X2N1c3RvbWl6YXRpb24GOwBGaQMGtRlJIgpmbGFzaAY7AFRvOiVBY3Rpb25EaXNwYXRjaDo6Rmxhc2g6OkZsYXNoSGFzaAk6CkB1c2VkbzoIU2V0BjoKQGhhc2h7ADoMQGNsb3NlZEY6DUBmbGFzaGVzewY6EnJ0cmlwX2NyZWF0ZWRUOglAbm93MA%3D%3D--b6243665c4aff43c7b72a9bd324ab162d2d47f74; path=/; HttpOnly</con:value></con:property><con:property><con:name>hotel_rating</con:name><con:value>3 Star</con:value></con:property><con:property><con:name>flight_option</con:name><con:value>yes</con:value></con:property><con:property><con:name>flightString</con:name><con:value>{"customization_id":23,"options":[{"misc":"","name":"Yes","id":97,"tags":"","val":[]}]}</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CkkiD3Nlc3Npb25faWQGOgZFVEkiJTliOTMxMDQxY2JjMjY3YzQwOGNjNTIyMmJlNmQxZDkwBjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA%2FG4CUkiIiQyYSQxMCRUWERtLzRpWXZKVW1kaDNSLkJyc011BjsAVEkiGGFsbG93X2N1c3RvbWl6YXRpb24GOwBGaQMnew5JIgpmbGFzaAY7AFRvOiVBY3Rpb25EaXNwYXRjaDo6Rmxhc2g6OkZsYXNoSGFzaAk6CkB1c2VkbzoIU2V0BjoKQGhhc2h7ADoMQGNsb3NlZEY6DUBmbGFzaGVzewY6EnJ0cmlwX2NyZWF0ZWRUOglAbm93MA%3D%3D--a269313f1156386929bd0def18aba324582bb57f; path=/; HttpOnly</con:value></con:property><con:property><con:name>RequestID</con:name><con:value>1684742</con:value></con:property><con:property><con:name>destination_name</con:name><con:value>Africa</con:value></con:property><con:property><con:name>selected_package_days</con:name><con:value>10</con:value></con:property><con:property><con:name>start_date</con:name><con:value>2016-12-15</con:value></con:property></con:properties><con:reportParameters/></con:testSuite><con:testSuite id="fdca761a-7dc9-4c44-8551-75593cd9d082" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1966b330-a53d-494b-ba1a-a687afdeabe8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="4afacfac-43d1-4460-8712-12aef9c0477c"><con:settings/><con:config><script>import java.security.MessageDigest;
+</con:parameters></con:restRequest></con:config></con:testStep><con:tearDownScript>import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
+
+
+List&lt;TestStepResult> results = testRunner.getResults();
+HashMap&lt;String,String> errordetails = new HashMap&lt;String,String>();
+
+boolean isFailed = false;
+for(TestStepResult stepResult in results){
+	String errorMessages = "";
+	if(stepResult.getStatus() != TestStepStatus.OK){
+		isFailed = true;
+		String teststep_name = stepResult.getTestStep().getLabel();
+		String[] messages = stepResult.getMessages();
+		for(String msg in messages){
+			errorMessages = errorMessages + msg;
+		}
+		errordetails.put(teststep_name,errorMessages);
+	}
+}
+for(String step in errordetails.keySet()){
+	String message = errordetails.get(step);
+	log.info(step + "==" + message);
+}
+
+</con:tearDownScript><con:properties><con:property><con:name>traveler_apiendpoint</con:name><con:value>master.ttdev.in</con:value></con:property><con:property><con:name>trip_stage</con:name><con:value>2</con:value></con:property><con:property><con:name>to_loc</con:name><con:value>Goa</con:value></con:property><con:property><con:name>trip_days</con:name><con:value>10</con:value></con:property><con:property><con:name>num_of_adults</con:name><con:value>2</con:value></con:property><con:property><con:name>budget</con:name><con:value>7000</con:value></con:property><con:property><con:name>from_loc</con:name><con:value>Noida</con:value></con:property><con:property><con:name>user_email</con:name><con:value>lorem_tt_test_ipsum_1504249478436@mailinator.com</con:value></con:property><con:property><con:name>start_date</con:name><con:value>2017-09-08</con:value></con:property><con:property><con:name>RequestID</con:name><con:value>1912597</con:value></con:property><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CkkiD3Nlc3Npb25faWQGOgZFVEkiJTgwYjM2ODFkYjI0ODJkMGNkMjE0ZDg0ZDA1NDQwMWJjBjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA09%2BE0kiIiQyYSQxMCQxa1hIcFpzVktXcDdRNUFuWnVZZmx1BjsAVEkiGGFsbG93X2N1c3RvbWl6YXRpb24GOwBGaQMVLx1JIgpmbGFzaAY7AFRvOiVBY3Rpb25EaXNwYXRjaDo6Rmxhc2g6OkZsYXNoSGFzaAk6CkB1c2VkbzoIU2V0BjoKQGhhc2h7ADoMQGNsb3NlZEY6DUBmbGFzaGVzewY6EnJ0cmlwX2NyZWF0ZWRUOglAbm93MA%3D%3D--4d73dd4cfe86d39bb6d95913671f883f04dc1389; path=/; HttpOnly</con:value></con:property><con:property><con:name>hotel_rating</con:name><con:value>3 Star</con:value></con:property><con:property><con:name>flight_option</con:name><con:value>yes</con:value></con:property><con:property><con:name>flightString</con:name><con:value>{"customization_id":23,"options":[{"misc":"","name":"Yes","id":97,"tags":"","val":[]}]}</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CkkiD3Nlc3Npb25faWQGOgZFVEkiJTliOTMxMDQxY2JjMjY3YzQwOGNjNTIyMmJlNmQxZDkwBjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA%2FG4CUkiIiQyYSQxMCRUWERtLzRpWXZKVW1kaDNSLkJyc011BjsAVEkiGGFsbG93X2N1c3RvbWl6YXRpb24GOwBGaQMnew5JIgpmbGFzaAY7AFRvOiVBY3Rpb25EaXNwYXRjaDo6Rmxhc2g6OkZsYXNoSGFzaAk6CkB1c2VkbzoIU2V0BjoKQGhhc2h7ADoMQGNsb3NlZEY6DUBmbGFzaGVzewY6EnJ0cmlwX2NyZWF0ZWRUOglAbm93MA%3D%3D--a269313f1156386929bd0def18aba324582bb57f; path=/; HttpOnly</con:value></con:property><con:property><con:name>RequestID</con:name><con:value>1912597</con:value></con:property><con:property><con:name>destination_name</con:name><con:value>Africa</con:value></con:property><con:property><con:name>selected_package_days</con:name><con:value>10</con:value></con:property><con:property><con:name>start_date</con:name><con:value>2016-12-15</con:value></con:property></con:properties><con:reportParameters/></con:testSuite><con:testSuite id="fdca761a-7dc9-4c44-8551-75593cd9d082" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1966b330-a53d-494b-ba1a-a687afdeabe8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="4afacfac-43d1-4460-8712-12aef9c0477c"><con:settings/><con:config><script>import java.security.MessageDigest;
 import org.codehaus.groovy.runtime.EncodingGroovyMethods;
 
 
@@ -977,7 +635,7 @@ String getUserDigest(String digest) {
    }
    return null;
 }
-</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>http://master.ttdev.in/api/v1/requested_trips/1684742</con:value></con:property><con:property><con:name>user_email</con:name><con:value>test_1496658851223@mailinator.com</con:value></con:property><con:property><con:name>request_type</con:name><con:value>put</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>6SPMk0p7oW2MQmsBqz1+YwLKFdxf0OlHZMM8Z/2aoJo=</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:testCase id="d6e38075-ad8f-4890-9379-2f1cb755b34d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="User press the search tab" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Given user get the TT-MObile token for search tab" id="75ded9eb-a813-4ba3-863d-9f02dd664f1f"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#Project#traveler_apiendpoint}/api/v3/metadata/filter?filter_type=search</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#Project#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>wrRXfah5FFVFQa8b3J8/Dfm6xot+TUK43fm+8eIPPsI=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="And search filter type is invoked" id="c582bfd1-ee48-40eb-ae4b-3f4844427f9d"><con:settings/><con:config service="FilterType" resourcePath="/api/{api_version}/metadata/filter" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="And search filter type is invoked" id="436ba333-2b44-4d4a-adc7-688847704b53" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>http://master.ttdev.in/api/v1/requested_trips/1912597</con:value></con:property><con:property><con:name>user_email</con:name><con:value>lorem_tt_test_ipsum_1504249478436@mailinator.com</con:value></con:property><con:property><con:name>request_type</con:name><con:value>put</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>dcrdwCiwAeNsQgIVIXDnc8tuGp1jCRYSAVexZ3rDQa0=</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:testCase id="d6e38075-ad8f-4890-9379-2f1cb755b34d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="User press the search tab" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Given user get the TT-MObile token for search tab" id="75ded9eb-a813-4ba3-863d-9f02dd664f1f"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>1966b330-a53d-494b-ba1a-a687afdeabe8</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#Project#traveler_apiendpoint}/api/v3/metadata/filter?filter_type=search</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#Project#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>wrRXfah5FFVFQa8b3J8/Dfm6xot+TUK43fm+8eIPPsI=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="And search filter type is invoked" id="c582bfd1-ee48-40eb-ae4b-3f4844427f9d"><con:settings/><con:config service="FilterType" resourcePath="/api/{api_version}/metadata/filter" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="And search filter type is invoked" id="436ba333-2b44-4d4a-adc7-688847704b53" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="TT-Mobile" value="${Given user get the TT-MObile token for search tab#hash_key}"/>
   &lt;con:entry key="Accept" value="application/json"/>
   &lt;con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
