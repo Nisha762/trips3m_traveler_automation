@@ -50,9 +50,11 @@
 			</health_check_tests_for_trip_type>
 			
 			<health_check_tests_for_sections_top_navigation>
-			<expected_titles>Tour Packages,Family Packages,Honeymoon Packages</expected_titles>
-			<expected_urls>/tour-packages,/family-packages,/honeymoon-packages</expected_urls>
-			<expected_sub_entities></expected_sub_entities>
+			<expected_titles_for_listing_type>Tour Packages,Family Packages,Honeymoon Packages</expected_titles_for_listing_type>
+			<expected_urls_for_listing_type>/tour-packages,/family-packages,/honeymoon-packages</expected_urls_for_listing_type>
+			<expected_sub_entities_for_listing_type>Indian Destinations,International Destinations</expected_sub_entities_for_listing_type>
+			<expected_titles_for_weekend_type>Weekend Getaways</expected_titles_for_weekend_type>
+			<expected_urls_for_weekend_type>/mktc/weekend-getaway-packages/</expected_urls_for_weekend_type>
 			</health_check_tests_for_sections_top_navigation>
 			
 			<health_check_tests_for_get_filters>
