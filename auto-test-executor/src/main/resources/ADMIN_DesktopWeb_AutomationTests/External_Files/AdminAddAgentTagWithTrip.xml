@@ -73,9 +73,7 @@ def is_tagged = json_response_holder.tag_added;
 //assert(is_activate == true) : "trip is not set to active"
 assert(is_tagged == true) : "trip is not tag to agent"
 
-messageExchange.modelItem.testCase.setPropertyValue("Cookie",context.expand('${Admin Login To Application#Cookie}'));
-
-assert false;</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+messageExchange.modelItem.testCase.setPropertyValue("Cookie",context.expand('${Admin Login To Application#Cookie}'));</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
   <con:entry key="rtrip_id" value="${#TestCase#request_id}"/>
   <con:entry key="delete_agent_tags" value="true"/>
   <con:entry key="tag_id" value="${#TestCase#Agent_TagID}"/>
