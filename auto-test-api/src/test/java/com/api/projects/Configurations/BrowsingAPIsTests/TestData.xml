@@ -55,12 +55,15 @@
 			<expected_sub_entities_for_listing_type>Indian Destinations,International Destinations</expected_sub_entities_for_listing_type>
 			<expected_titles_for_weekend_type>Weekend Getaways</expected_titles_for_weekend_type>
 			<expected_urls_for_weekend_type>/mktc/weekend-getaway-packages/</expected_urls_for_weekend_type>
+			<expected_titles_for_category_type>Categories</expected_titles_for_category_type>
+			<expected_subentities_for_categories_type>Adventure,Family,Nature,Honeymoon,Wildlife,Religious,Water Activities</expected_subentities_for_categories_type>
+			<expected_url_for_category_type>/Adventure-Places,/Family-Places,/Nature-Places,/Honeymoon-Places,/Wildlife-Places,/Religious-Places,/Water%20Activities-Places</expected_url_for_category_type>
+			<expected_subentities_for_destination_type>Indian Destinations,International Destinations</expected_subentities_for_destination_type>
 			</health_check_tests_for_sections_top_navigation>
 			
 			<health_check_tests_for_get_filters>
-			<expected_filters_for_desktop>Type of Destination,Categories,Duration,Budget per person (in Rs.),Hotel Star Ratings,Inclusions,Activities</expected_filters_for_desktop>
-			<expected_filters_for_mobile>Type of Destination,Categories,Duration,Budget per person (in Rs.),Hotel Star Ratings,Inclusions,Activities</expected_filters_for_mobile>
-			<expected_filters_for_app>Type of Destination,Categories,Duration,Budget per person (in Rs.),Hotel Star Ratings,Inclusions,Activities,month of travel</expected_filters_for_app>
+			<expected_filters_for_listing_page>Type of Destination,Categories,Duration,Budget per person (in Rs.),Hotel Star Ratings,Inclusions,Activities</expected_filters_for_listing_page>
+			<expected_filters_for_destination_catalog_page>Type of Destination,Categories,Duration,Budget per person (in Rs.),Hotel Star Ratings,Inclusions,Activities,month of travel</expected_filters_for_destination_catalog_page>
 			</health_check_tests_for_get_filters>
 	   </HealthCheckTest>
 </TestSuite>
