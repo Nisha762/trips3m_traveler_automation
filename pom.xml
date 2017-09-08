@@ -147,6 +147,7 @@
 								<value>user_email=${user_email}</value>
 								<value>api_endpoint=${api_endpoint}</value>
 								<value>user_password=${user_password}</value>
+								<value>httpverb=${httpverb}</value>
 							  </projectProperties>
 							<soapuiProperties>
 								<property>
