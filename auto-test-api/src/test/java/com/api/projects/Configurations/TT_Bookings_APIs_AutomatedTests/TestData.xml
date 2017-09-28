@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+   <TestSuite>
+     <Login>  
+      <tags>healthcheck</tags>
+     </Login> 
+      <RtripCreation>
+      <tags>healthcheck</tags>
+     </RtripCreation>
+     <AddingAgentTagandMarkingTripActive>
+      <tags>healthcheck</tags>
+     </AddingAgentTagandMarkingTripActive>
+     <AgentGiveQuote>
+      <tags>healthcheck</tags>
+     </AgentGiveQuote>
+     <Health_Check_Booking_PP_API>
+      <tags>healthcheck,kanupriya,kanu</tags>
+      <Health_Check_Cancel_Trip>
+        <mainreason>Not going cancel my plan,Not satisfied with the current quotes,Going but not booking on traveltriangle</mainreason>
+        <subreason>Due to personal reasons.,Going somewhere else.,Postponed my trip,Other reason.
+        </subreason>
+      <subreason1>Need better quality.,Need lower budget.</subreason1>
+      <subreason2>Have better offer/services from some other agent.,Booking myself without an agent.,TravelTriangle quotes didn't meet my requirements.,Didn't receive timely response from TravelTriangle agents.</subreason2>
+            </Health_Check_Cancel_Trip>
+      <Health_Check_Edit_Preferences>
+        <hotelneeded>95,96</hotelneeded>
+        <hotelcategory>6,7,8,32</hotelcategory>
+        <flightrequired>97,98</flightrequired>
+        <iwillbook>202,203,204,205</iwillbook>
+        <localexperience>101,102</localexperience>
+       <cabrequired>99,100</cabrequired>
+       <userinputforcabservices>English,Hindi</userinputforcabservices>
+        </Health_Check_Edit_Preferences>
+     </Health_Check_Booking_PP_API>
+   </TestSuite>
+</project>
