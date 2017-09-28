@@ -68,6 +68,9 @@
 		</profile>
 		<profile>
 		<id>apis_functional</id>
+			<properties>
+				<projectname>TT_APIs_AutomatedTests</projectname>
+			</properties>
 			<pluginRepositories>
 				<pluginRepository>
 					<id>smartbear-sweden-plugin-repository</id>
@@ -124,7 +127,7 @@
 						</dependency>
 					</dependencies>
 						<configuration>
-							<projectFile>${basedir}/auto-test-api/src/test/java/com/api/projects/TT_APIs_AutomatedTests.xml</projectFile>
+							<projectFile>${basedir}/auto-test-api/src/test/java/com/api/projects/${projectname}.xml</projectFile>
 							<!--<testSuite>IntegrationTestSuite</testSuite>-->
 							<!--<testCase></testCase>-->
 							<outputFolder>${project.build.directory}/surefire-reports</outputFolder>
@@ -141,9 +144,10 @@
 							  <projectProperties>
 								<value>execution_tag=${execution_tag}</value>
 								<value>traveler_apiendpoint=${traveler_apiendpoint}</value>
-								<value>traveler_apiendpoint=${traveler_apiendpoint}</value>
 								<value>user_email=${user_email}</value>
+								<value>api_endpoint=${api_endpoint}</value>
 								<value>user_password=${user_password}</value>
+								<value>httpverb=${httpverb}</value>
 							  </projectProperties>
 							<soapuiProperties>
 								<property>
