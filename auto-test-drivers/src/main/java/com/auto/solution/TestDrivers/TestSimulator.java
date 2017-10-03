@@ -621,6 +621,13 @@ public class TestSimulator {
  				String input_reference_file = testDataContents[0];
  				testSimulator.extractJSErrors(input_reference_file);
  			}
+ 			else if(stepAction.toLowerCase().equals("verifyinternallinks")){
+ 				if(testDataContents.length < 1){
+ 					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+ 				}
+ 				String urlSource = testDataContents[0];
+ 				testSimulator.verifyInternalLinkOnWebPage(urlSource);
+ 			}
  			else{
  				throw new NoSuchMethodException(Property.ERROR_MESSAGES.ER_NO_STEP_ACTION.getErrorMessage());
  			}
