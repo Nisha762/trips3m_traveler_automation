@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.2 r1790748">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -59,8 +59,6 @@
           </elementProp>
           <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/?pprod=${pprod}</stringProp>
@@ -69,8 +67,9 @@
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -98,18 +97,9 @@
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="How It Works Button" enabled="true">
+          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Explore package button is there?" enabled="true">
             <boolProp name="XPath.negate">false</boolProp>
-            <stringProp name="XPath.xpath">//a[@id=&apos;how-it-works-button&apos;]</stringProp>
-            <boolProp name="XPath.validate">false</boolProp>
-            <boolProp name="XPath.whitespace">false</boolProp>
-            <boolProp name="XPath.tolerant">true</boolProp>
-            <boolProp name="XPath.namespace">false</boolProp>
-          </XPathAssertion>
-          <hashTree/>
-          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Traveler Review Section" enabled="true">
-            <boolProp name="XPath.negate">false</boolProp>
-            <stringProp name="XPath.xpath">//div[@class=&apos;container testimonial-box&apos;]</stringProp>
+            <stringProp name="XPath.xpath">//button[contains(@class,&apos;wfull ripple btn-filled-pri-large&apos;)]</stringProp>
             <boolProp name="XPath.validate">false</boolProp>
             <boolProp name="XPath.whitespace">false</boolProp>
             <boolProp name="XPath.tolerant">true</boolProp>
@@ -117,15 +107,13 @@
           </XPathAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Testimonials" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Testimonials" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
           <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/testimonials/?pprod=${pprod}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -133,8 +121,9 @@
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -173,8 +162,6 @@
           </elementProp>
           <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/tour-packages/?pprod=${pprod}</stringProp>
@@ -183,8 +170,9 @@
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -216,18 +204,9 @@
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Package Listing section" enabled="true">
+          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Tour Packages Heading is there?" enabled="true">
             <boolProp name="XPath.negate">false</boolProp>
-            <stringProp name="XPath.xpath">//div[@id=&apos;package-listing&apos;]</stringProp>
-            <boolProp name="XPath.validate">false</boolProp>
-            <boolProp name="XPath.whitespace">false</boolProp>
-            <boolProp name="XPath.tolerant">true</boolProp>
-            <boolProp name="XPath.namespace">false</boolProp>
-          </XPathAssertion>
-          <hashTree/>
-          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Tour Packages Heading" enabled="true">
-            <boolProp name="XPath.negate">false</boolProp>
-            <stringProp name="XPath.xpath">//h1[contains(text(),&quot;Tour Packages&quot;)]</stringProp>
+            <stringProp name="XPath.xpath">//h1[contains(text(),&apos;Tour Packages&apos;)]</stringProp>
             <boolProp name="XPath.validate">false</boolProp>
             <boolProp name="XPath.whitespace">false</boolProp>
             <boolProp name="XPath.tolerant">true</boolProp>
@@ -235,12 +214,14 @@
           </XPathAssertion>
           <hashTree/>
           <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="package_count" enabled="true">
-            <stringProp name="XPathExtractor.default">NILL</stringProp>
+            <stringProp name="XPathExtractor.default">5</stringProp>
             <stringProp name="XPathExtractor.refname">package_count</stringProp>
-            <stringProp name="XPathExtractor.xpathQuery">count(//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;package_summary_on_listing_page&apos;)]//a[contains(@class,&apos;orange-square-btn view-details&apos;)])</stringProp>
+            <stringProp name="XPathExtractor.xpathQuery">count(//div[@class=&apos;clearfix mb15 p0 border&apos;])</stringProp>
             <boolProp name="XPathExtractor.validate">false</boolProp>
             <boolProp name="XPathExtractor.tolerant">true</boolProp>
             <boolProp name="XPathExtractor.namespace">false</boolProp>
+            <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+            <stringProp name="Sample.scope">all</stringProp>
           </XPathExtractor>
           <hashTree/>
           <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
@@ -252,17 +233,17 @@ String maxIndex = vars.get(&quot;package_count&quot;);
 Integer packagecount = Integer.parseInt(maxIndex);
 Integer random_index = Math.abs(new Random().nextInt() % (packagecount-1) + 1);
 vars.put(&quot;random_index&quot;,String.valueOf(random_index));
-log.info(maxIndex);
 log.info(String.valueOf(random_index));</stringProp>
           </BeanShellPostProcessor>
           <hashTree/>
           <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="tour_package_href" enabled="true">
-            <stringProp name="XPathExtractor.default">NILL</stringProp>
+            <stringProp name="XPathExtractor.default">1</stringProp>
             <stringProp name="XPathExtractor.refname">tour_package_showpage</stringProp>
-            <stringProp name="XPathExtractor.xpathQuery">//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;package_summary_on_listing_page&apos;)][${random_index}]//a[contains(@class,&apos;orange-square-btn view-details&apos;)]/@href</stringProp>
+            <stringProp name="XPathExtractor.xpathQuery">//div[contains(@class,&apos;clearfix mb15 p0 border&apos;)][${random_index}]//div[contains(@class,&apos;columns medium-8 pl0&apos;)]//a/@href</stringProp>
             <boolProp name="XPathExtractor.validate">false</boolProp>
             <boolProp name="XPathExtractor.tolerant">true</boolProp>
             <boolProp name="XPathExtractor.namespace">false</boolProp>
+            <stringProp name="XPathExtractor.matchNumber">0</stringProp>
           </XPathExtractor>
           <hashTree/>
         </hashTree>
@@ -272,8 +253,6 @@ log.info(String.valueOf(random_index));</stringProp>
           </elementProp>
           <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">${tour_package_showpage}/?pprod=${pprod}</stringProp>
@@ -282,8 +261,9 @@ log.info(String.valueOf(random_index));</stringProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -318,8 +298,6 @@ log.info(String.valueOf(random_index));</stringProp>
           </elementProp>
           <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/family-packages/?pprod=${pprod}</stringProp>
@@ -328,8 +306,9 @@ log.info(String.valueOf(random_index));</stringProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -361,18 +340,9 @@ log.info(String.valueOf(random_index));</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Package Listing section" enabled="true">
+          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Family Packages heading is there?" enabled="true">
             <boolProp name="XPath.negate">false</boolProp>
-            <stringProp name="XPath.xpath">//div[@id=&apos;package-listing&apos;]</stringProp>
-            <boolProp name="XPath.validate">false</boolProp>
-            <boolProp name="XPath.whitespace">false</boolProp>
-            <boolProp name="XPath.tolerant">true</boolProp>
-            <boolProp name="XPath.namespace">false</boolProp>
-          </XPathAssertion>
-          <hashTree/>
-          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Tour Packages Heading" enabled="true">
-            <boolProp name="XPath.negate">false</boolProp>
-            <stringProp name="XPath.xpath">//h1[contains(text(),&quot;Family Packages&quot;)]</stringProp>
+            <stringProp name="XPath.xpath">//h1[contains(text(),&apos;Family Packages&apos;)]</stringProp>
             <boolProp name="XPath.validate">false</boolProp>
             <boolProp name="XPath.whitespace">false</boolProp>
             <boolProp name="XPath.tolerant">true</boolProp>
@@ -380,12 +350,13 @@ log.info(String.valueOf(random_index));</stringProp>
           </XPathAssertion>
           <hashTree/>
           <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="package_count" enabled="true">
-            <stringProp name="XPathExtractor.default">NILL</stringProp>
+            <stringProp name="XPathExtractor.default">5</stringProp>
             <stringProp name="XPathExtractor.refname">family_package_count</stringProp>
-            <stringProp name="XPathExtractor.xpathQuery">count(//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;package_summary_on_listing_page&apos;)]//a[contains(@class,&apos;orange-square-btn view-details&apos;)])</stringProp>
+            <stringProp name="XPathExtractor.xpathQuery">count(//div[@class=&apos;clearfix mb15 p0 border&apos;])</stringProp>
             <boolProp name="XPathExtractor.validate">false</boolProp>
             <boolProp name="XPathExtractor.tolerant">true</boolProp>
             <boolProp name="XPathExtractor.namespace">false</boolProp>
+            <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
           </XPathExtractor>
           <hashTree/>
           <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
@@ -402,10 +373,11 @@ vars.put(&quot;family_random_index&quot;,String.valueOf(random_index));</stringP
           <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="family_package_href" enabled="true">
             <stringProp name="XPathExtractor.default">NILL</stringProp>
             <stringProp name="XPathExtractor.refname">family_package_showpage</stringProp>
-            <stringProp name="XPathExtractor.xpathQuery">//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;package_summary_on_listing_page&apos;)][${family_random_index}]//a[contains(@class,&apos;orange-square-btn view-details&apos;)]/@href</stringProp>
+            <stringProp name="XPathExtractor.xpathQuery">//div[contains(@class,&apos;clearfix mb15 p0 border&apos;)][${family_random_index}]//div[contains(@class,&apos;columns medium-8 pl0&apos;)]//a/@href</stringProp>
             <boolProp name="XPathExtractor.validate">false</boolProp>
             <boolProp name="XPathExtractor.tolerant">true</boolProp>
             <boolProp name="XPathExtractor.namespace">false</boolProp>
+            <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
           </XPathExtractor>
           <hashTree/>
         </hashTree>
@@ -415,8 +387,6 @@ vars.put(&quot;family_random_index&quot;,String.valueOf(random_index));</stringP
           </elementProp>
           <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">${family_package_showpage}/?pprod=${pprod}</stringProp>
@@ -425,8 +395,9 @@ vars.put(&quot;family_random_index&quot;,String.valueOf(random_index));</stringP
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -461,8 +432,6 @@ vars.put(&quot;family_random_index&quot;,String.valueOf(random_index));</stringP
           </elementProp>
           <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/honeymoon-packages/?pprod=${pprod}</stringProp>
@@ -471,8 +440,9 @@ vars.put(&quot;family_random_index&quot;,String.valueOf(random_index));</stringP
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -504,15 +474,6 @@ vars.put(&quot;family_random_index&quot;,String.valueOf(random_index));</stringP
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Package Listing section" enabled="true">
-            <boolProp name="XPath.negate">false</boolProp>
-            <stringProp name="XPath.xpath">//div[@id=&apos;package-listing&apos;]</stringProp>
-            <boolProp name="XPath.validate">false</boolProp>
-            <boolProp name="XPath.whitespace">false</boolProp>
-            <boolProp name="XPath.tolerant">true</boolProp>
-            <boolProp name="XPath.namespace">false</boolProp>
-          </XPathAssertion>
-          <hashTree/>
           <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Honeymoon Packages Heading" enabled="true">
             <boolProp name="XPath.negate">false</boolProp>
             <stringProp name="XPath.xpath">//h1[contains(text(),&quot;Honeymoon Packages&quot;)]</stringProp>
@@ -523,12 +484,13 @@ vars.put(&quot;family_random_index&quot;,String.valueOf(random_index));</stringP
           </XPathAssertion>
           <hashTree/>
           <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="package_count" enabled="true">
-            <stringProp name="XPathExtractor.default">NILL</stringProp>
+            <stringProp name="XPathExtractor.default">5</stringProp>
             <stringProp name="XPathExtractor.refname">honeymoon_package_count</stringProp>
-            <stringProp name="XPathExtractor.xpathQuery">count(//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;package_summary_on_listing_page&apos;)]//a[contains(@class,&apos;orange-square-btn view-details&apos;)])</stringProp>
+            <stringProp name="XPathExtractor.xpathQuery">count(//div[@class=&apos;clearfix mb15 p0 border&apos;])</stringProp>
             <boolProp name="XPathExtractor.validate">false</boolProp>
             <boolProp name="XPathExtractor.tolerant">true</boolProp>
             <boolProp name="XPathExtractor.namespace">false</boolProp>
+            <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
           </XPathExtractor>
           <hashTree/>
           <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
@@ -543,12 +505,13 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
           </BeanShellPostProcessor>
           <hashTree/>
           <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="honeymoon_package_href" enabled="true">
-            <stringProp name="XPathExtractor.default">NILL</stringProp>
+            <stringProp name="XPathExtractor.default">1</stringProp>
             <stringProp name="XPathExtractor.refname">honeymoon_package_showpage</stringProp>
-            <stringProp name="XPathExtractor.xpathQuery">//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;package_summary_on_listing_page&apos;)][${honeymoon_random_index}]//a[contains(@class,&apos;orange-square-btn view-details&apos;)]/@href</stringProp>
+            <stringProp name="XPathExtractor.xpathQuery">//div[contains(@class,&apos;clearfix mb15 p0 border&apos;)][${honeymoon_random_index}]//div[contains(@class,&apos;columns medium-8 pl0&apos;)]//a/@href</stringProp>
             <boolProp name="XPathExtractor.validate">false</boolProp>
             <boolProp name="XPathExtractor.tolerant">true</boolProp>
             <boolProp name="XPathExtractor.namespace">false</boolProp>
+            <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
           </XPathExtractor>
           <hashTree/>
         </hashTree>
@@ -558,8 +521,6 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
           </elementProp>
           <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">${honeymoon_package_showpage}/?pprod=${pprod}</stringProp>
@@ -568,8 +529,9 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -598,14 +560,12 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="weekend-getaway-packages" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="weekend-getaway-packages" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
           <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/mktc/weekend-getaway-packages/?pprod=${pprod}</stringProp>
@@ -614,8 +574,9 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -643,7 +604,7 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="weekend_gataway_breadcrumb" enabled="false">
+          <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="weekend_gataway_breadcrumb" enabled="true">
             <boolProp name="XPath.negate">false</boolProp>
             <stringProp name="XPath.xpath">//div[@id=&apos;breadcrumbs&apos;]//span[@itemprop=&apos;name&apos; and contains(text(),&apos;Weekend Getaways&apos;)]</stringProp>
             <boolProp name="XPath.validate">false</boolProp>
@@ -652,6 +613,18 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
             <boolProp name="XPath.namespace">false</boolProp>
           </XPathAssertion>
           <hashTree/>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="get package count" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">String responseAsString = prev.getResponseAsString();
+org.jsoup.nodes.Document doc = Jsoup.parse(responseAsString);
+org.jsoup.select.Elements allpackages = doc.select(&quot;//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;list-product-box&apos;)]&quot;);
+int package_count = allpackages.size();
+log.info(&quot;package_count = &quot;+String.valueOf(package_count))
+vars.put(&quot;package_count&quot;,String.valueOf(package_count));</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
           <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="package_count" enabled="false">
             <stringProp name="XPathExtractor.default">NILL</stringProp>
             <stringProp name="XPathExtractor.refname">weekend_package_count</stringProp>
@@ -659,9 +632,10 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
             <boolProp name="XPathExtractor.validate">false</boolProp>
             <boolProp name="XPathExtractor.tolerant">true</boolProp>
             <boolProp name="XPathExtractor.namespace">false</boolProp>
+            <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
           </XPathExtractor>
           <hashTree/>
-          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
@@ -669,17 +643,18 @@ vars.put(&quot;honeymoon_random_index&quot;,String.valueOf(random_index));</stri
 String maxIndex = vars.get(&quot;weekend_package_count&quot;);
 log.info(&quot;maxIndex&quot;+maxIndex);
 Integer packagecount = Integer.parseInt(maxIndex);
-Integer random_index = Math.abs(new Random().nextInt() % (packagecount-1) + 1);
+Integer random_index = Math. random() * packagecount + 1;
 vars.put(&quot;weekend_random_index&quot;,String.valueOf(random_index));</stringProp>
           </BeanShellPostProcessor>
           <hashTree/>
-          <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="weekend_package_href" enabled="false">
+          <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="weekend_package_href" enabled="true">
             <stringProp name="XPathExtractor.default">NILL</stringProp>
             <stringProp name="XPathExtractor.refname">weekend_package_showpage</stringProp>
             <stringProp name="XPathExtractor.xpathQuery">//div[@id=&apos;trip_package_list&apos;]//div[contains(@class,&apos;list-product-box&apos;)][${weekend_random_index}]//a[contains(@class,&apos;btn orange-brd-btn&apos;)]/@href</stringProp>
             <boolProp name="XPathExtractor.validate">false</boolProp>
             <boolProp name="XPathExtractor.tolerant">true</boolProp>
             <boolProp name="XPathExtractor.namespace">false</boolProp>
+            <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
           </XPathExtractor>
           <hashTree/>
         </hashTree>
@@ -689,8 +664,6 @@ vars.put(&quot;weekend_random_index&quot;,String.valueOf(random_index));</string
           </elementProp>
           <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">${weekend_package_showpage}</stringProp>
@@ -699,8 +672,9 @@ vars.put(&quot;weekend_random_index&quot;,String.valueOf(random_index));</string
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -729,52 +703,84 @@ vars.put(&quot;weekend_random_index&quot;,String.valueOf(random_index));</string
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller" enabled="true">
-          <stringProp name="WhileController.condition">${travel_to_destinations}</stringProp>
-        </WhileController>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="get destination and category data" enabled="true">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="script">import org.apache.jmeter.services.FileServer;
+ 
+//get path of current jmeter&apos;s script
+String path = FileServer.getFileServer().getBaseDir();
+
+
+String Filename = path+File.separator+&quot;TestData&quot;+File.separator+&quot;traveltodestinations.csv&quot;;
+
+String fileContents = new File(Filename).getText(&apos;UTF-8&apos;)
+
+def lines = 0  
+    fileContents.eachLine { line -&gt;
+        lines++
+        vars.put(&quot;destination_category_Line_&quot; + lines, line)
+    }
+vars.put(&quot;destination_category_data_length&quot;,lines.toString())   
+
+log.info(Filename + &quot; has &quot; + lines + &quot; lines.&quot;)</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="true">
+          <stringProp name="ForeachController.inputVal">destination_category_Line</stringProp>
+          <stringProp name="ForeachController.returnVal">destination_category_line_content</stringProp>
+          <boolProp name="ForeachController.useSeparator">true</boolProp>
+          <stringProp name="ForeachController.startIndex">1</stringProp>
+          <stringProp name="ForeachController.endIndex">${destination_category_data_length}</stringProp>
+        </ForeachController>
         <hashTree>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="filename">TestData/traveltodestinations.csv</stringProp>
-            <stringProp name="fileEncoding"></stringProp>
-            <stringProp name="variableNames">travel_to_destinations,category</stringProp>
-            <stringProp name="delimiter">,</stringProp>
-            <boolProp name="quotedData">false</boolProp>
-            <boolProp name="recycle">true</boolProp>
-            <boolProp name="stopThread">true</boolProp>
-            <stringProp name="shareMode">shareMode.thread</stringProp>
-          </CSVDataSet>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="process data" enabled="true">
+            <stringProp name="BeanShellSampler.query">String line_content=vars.get(&quot;destination_category_line_content&quot;);
+
+String[] content_split = line_content.split(&quot;,&quot;);
+
+int count = content_split.length;
+
+for(int i=0;i&lt;count;i++){
+	vars.put(&quot;destination_category&quot;+&quot;_&quot;+i,content_split[i]);
+}</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
           <hashTree/>
           <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
-            <stringProp name="IfController.condition">&quot;${category}&quot;!=&quot;&quot;</stringProp>
+            <stringProp name="IfController.condition">&quot;${destination_category_1}&quot;!=&quot;&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${category_pg}-Places" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${destination_category_1}-Places" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
               <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
               <stringProp name="HTTPSampler.port"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/${category}-Places/?pprod=${pprod}</stringProp>
+              <stringProp name="HTTPSampler.path">/${category_pg}-Places/?pprod=${pprod}</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
               <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
               <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <boolProp name="HTTPSampler.monitor">false</boolProp>
               <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
             </HTTPSamplerProxy>
             <hashTree>
               <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
                 <stringProp name="filename"></stringProp>
                 <stringProp name="parameters"></stringProp>
                 <boolProp name="resetInterpreter">false</boolProp>
-                <stringProp name="script">String category = vars.get(&quot;category&quot;);
-String category_updated = category.replace(&quot;%20&quot;,&quot;&quot;);
+                <stringProp name="script">String category = vars.get(&quot;destination_category_1&quot;);
+String category_updated = category.replace(&quot;%20&quot;,&quot; &quot;);
 vars.put(&quot;category_pg&quot;,category_updated);
 </stringProp>
               </BeanShellPreProcessor>
@@ -808,9 +814,9 @@ vars.put(&quot;category_pg&quot;,category_updated);
                 </collectionProp>
               </HeaderManager>
               <hashTree/>
-              <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Category loaded?" enabled="true">
+              <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="Heading is there?" enabled="true">
                 <boolProp name="XPath.negate">false</boolProp>
-                <stringProp name="XPath.xpath">//a[contains(@class,&apos;main-navigation-active&apos;) and contains(@href,&apos;${category}&apos;)]</stringProp>
+                <stringProp name="XPath.xpath">//h1[contains(@class,&apos;f32 pfc1 text-center pt24 pb24 fw7 mb0&apos;)]</stringProp>
                 <boolProp name="XPath.validate">false</boolProp>
                 <boolProp name="XPath.whitespace">false</boolProp>
                 <boolProp name="XPath.tolerant">true</boolProp>
@@ -819,32 +825,27 @@ vars.put(&quot;category_pg&quot;,category_updated);
               <hashTree/>
             </hashTree>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="travel-to-${travel_to_destinations}" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="travel-to-${destination_category_0}" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
             <stringProp name="HTTPSampler.domain">${endpoint}</stringProp>
             <stringProp name="HTTPSampler.port"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/travel-to/${travel_to_destinations}/?pprod=${pprod}</stringProp>
+            <stringProp name="HTTPSampler.path">/travel-to/${destination_category_0}/?pprod=${pprod}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
             <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <boolProp name="HTTPSampler.monitor">false</boolProp>
             <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
           </HTTPSamplerProxy>
           <hashTree>
             <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
               <collectionProp name="HeaderManager.headers">
-                <elementProp name="Referer" elementType="Header">
-                  <stringProp name="Header.name">Referer</stringProp>
-                  <stringProp name="Header.value">http://traveltriangle.com/</stringProp>
-                </elementProp>
                 <elementProp name="Accept-Language" elementType="Header">
                   <stringProp name="Header.name">Accept-Language</stringProp>
                   <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
@@ -868,14 +869,14 @@ vars.put(&quot;category_pg&quot;,category_updated);
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
-              <boolProp name="XPath.negate">false</boolProp>
-              <stringProp name="XPath.xpath">//input[@id=&apos;requested_trip_adminComments&apos; and contains(@value,&apos;${travel_to_destinations}&apos;)]</stringProp>
-              <boolProp name="XPath.validate">false</boolProp>
-              <boolProp name="XPath.whitespace">false</boolProp>
-              <boolProp name="XPath.tolerant">true</boolProp>
-              <boolProp name="XPath.namespace">false</boolProp>
-            </XPathAssertion>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="page loaded?" enabled="false">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="247360894">How to reach</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">2</intProp>
+            </ResponseAssertion>
             <hashTree/>
           </hashTree>
         </hashTree>
@@ -950,5 +951,9 @@ vars.put(&quot;category_pg&quot;,category_updated);
         <hashTree/>
       </hashTree>
     </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
   </hashTree>
 </jmeterTestPlan>
