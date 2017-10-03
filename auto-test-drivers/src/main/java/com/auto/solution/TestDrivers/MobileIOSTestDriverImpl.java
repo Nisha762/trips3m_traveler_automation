@@ -927,5 +927,11 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
 		
 	}
+
+	@Override
+	public void verifyInternalLinkOnWebPage(String urlSource) throws Exception {
+		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
+		
+	}
 }
 
