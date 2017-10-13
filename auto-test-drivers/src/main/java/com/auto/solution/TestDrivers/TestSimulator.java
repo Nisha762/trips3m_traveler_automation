@@ -609,7 +609,7 @@ public class TestSimulator {
  			else if(stepAction.toLowerCase().equalsIgnoreCase("iselementinemail")){
 
  				String cssQuery = objCurrentObjectDetails.getLocationOfTestObject();
- 				boolean isElementInMail = mailHandler.isElementThereInMailContent(cssQuery);
+ 				boolean isElementInMail = !(mailHandler.isElementThereInMailContent(cssQuery));
  				if(!isElementInMail){
  					throw new Exception(Property.ERROR_MESSAGES.ERR_IN_FINIDING_CONTENT_IN_MAIL.getErrorMessage().replace("{CSS_QUERY}",cssQuery));
  				}
