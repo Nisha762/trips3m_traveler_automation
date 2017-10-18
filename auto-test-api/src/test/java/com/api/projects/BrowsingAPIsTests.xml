@@ -102,10 +102,10 @@
 &lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/requested_trips/1713383</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
   <con:entry key="RTrip_id" value="1713383"/>
   <con:entry key="api_version" value="v1"/>
-</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>RTrip_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="5f65f85f-4990-4fdd-893b-8f0ca9722178" wadlVersion="http://wadl.dev.java.net/2009/02" name="SearchTerm" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="searches" path="/browsing/{api_version}/searches" id="0d0a6b24-1d01-433a-8d8b-3739cbabd001"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>term</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>limit</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="6b2e01a2-5a6a-4322-bc7f-63776562c496" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>RTrip_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="5f65f85f-4990-4fdd-893b-8f0ca9722178" wadlVersion="http://wadl.dev.java.net/2009/02" name="SearchTerm" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="searches" path="/browsing/{api_version}/searches" id="0d0a6b24-1d01-433a-8d8b-3739cbabd001"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>term</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>limit</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>default_list</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>all_destinations_list</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="6b2e01a2-5a6a-4322-bc7f-63776562c496" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
   &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
-&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="0953072c-fdd1-41fb-ae4d-8b33dd1d803e" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetToLocationInRtripForm" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://traveltriangle.com</con:endpoint></con:endpoints><con:resource name="to_locations" path="/browsing/{api_version}/searches/to_locations" id="d4cee53c-5252-4097-bf31-679b2840ff28"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>term</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>limit</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="4e5a880a-20ea-4411-a07d-4b6d1747f02f" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="4df4fd77-ba94-4263-acc8-52fccbacd276" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry><con:entry>default_list</con:entry><con:entry>all_destinations_list</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="0953072c-fdd1-41fb-ae4d-8b33dd1d803e" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetToLocationInRtripForm" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://traveltriangle.com</con:endpoint></con:endpoints><con:resource name="to_locations" path="/browsing/{api_version}/searches/to_locations" id="d4cee53c-5252-4097-bf31-679b2840ff28"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>term</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>limit</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="4e5a880a-20ea-4411-a07d-4b6d1747f02f" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="4df4fd77-ba94-4263-acc8-52fccbacd276" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
   &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
 &lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/to_locations</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
@@ -426,7 +426,7 @@ assert jsonHolder.data.breadcrumbs.size() == 0;
 </scriptText></con:configuration></con:assertion><con:credentials><con:username>api_user</con:username><con:password>api_user</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
   <con:entry key="api_version" value="${#Project#api_version}"/>
   <con:entry key="url" value="123"/>
-</con:parameters><con:parameterOrder><con:entry>url</con:entry><con:entry>api_version</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>breadcrumb_urls</con:name><con:value>tour-packages,tour-packages/kerala,family-packages,family-packages/vietnam,honeymoon-packages,honeymoon-packages/switzerland,honeymoon-packages/sikkim,tour-packages/sri-lanka,tour-packages/sri lanka,tour-packages/hongkong,tour-packages/hong-kong</con:value></con:property><con:property><con:name>url</con:name><con:value>tour-packages/hong-kong</con:value></con:property><con:property><con:name>expected_breadcrumb</con:name><con:value>[{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "International","url": "/tour-packages/international"},{"name": "Asia","url": "/tour-packages/asia"},{"name": "Hong Kong","url": "/tour-packages/hong-kong"}]</con:value></con:property><con:property><con:name>expected_breadcrumbs</con:name><con:value>[{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"}][{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "India","url": "/tour-packages/india"},{"name": "Kerala","url": "/tour-packages/kerala"}][{"name": "Home","url": "/"},{"name": "Family Packages","url": "/family-packages"}][{"name": "Home","url": "/"},{"name": "Family Packages","url": "/family-packages"},{"name": "International","url": "/family-packages/international"},{"name": "Asia","url": "/family-packages/asia"},{"name": "Vietnam","url": "/family-packages/vietnam"}][{"name": "Home","url": "/"},{"name": "Honeymoon Packages","url": "/honeymoon-packages"}][{"name": "Home","url": "/"},{"name": "Honeymoon Packages","url": "/honeymoon-packages"},{"name": "International","url": "/honeymoon-packages/international"},{"name": "Europe","url": "/honeymoon-packages/europe"},{"name": "Switzerland","url": "/honeymoon-packages/switzerland"}][{"name": "Home","url": "/"},{"name": "Honeymoon Packages","url": "/honeymoon-packages"},{"name": "India","url": "/honeymoon-packages/india"},{"name": "Sikkim - Gangtok - Darjeeling","url": "/honeymoon-packages/sikkim-gangtok-darjeeling"}][{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "International","url": "/tour-packages/international"},{"name": "Asia","url": "/tour-packages/asia"},{"name": "Sri Lanka","url": "/tour-packages/sri-lanka"}][{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "International","url": "/tour-packages/international"},{"name": "Asia","url": "/tour-packages/asia"},{"name": "Sri Lanka","url": "/tour-packages/sri-lanka"}][{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "International","url": "/tour-packages/international"},{"name": "Asia","url": "/tour-packages/asia"},{"name": "Hong Kong","url": "/tour-packages/hong-kong"}][{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "International","url": "/tour-packages/international"},{"name": "Asia","url": "/tour-packages/asia"},{"name": "Hong Kong","url": "/tour-packages/hong-kong"}]</con:value></con:property><con:property><con:name>package_show</con:name><con:value>http://traveltriangle.com/packages/6nights-7days-kerala-honeymoon-tour?id=658</con:value></con:property></con:properties></con:testCase><con:testCase id="f9cd388a-f42f-4c2a-a482-45181050e1db" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="health_check_tests_DestinationAPIs" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="groovy" name="get any random category to search" id="98bbd222-fe06-446e-9b37-f2a5bfe24bc8"><con:settings/><con:config><script>import java.util.Random;
+</con:parameters><con:parameterOrder><con:entry>url</con:entry><con:entry>api_version</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>breadcrumb_urls</con:name><con:value>tour-packages,tour-packages/kerala,family-packages,family-packages/vietnam,honeymoon-packages,honeymoon-packages/switzerland,honeymoon-packages/sikkim,tour-packages/sri-lanka,tour-packages/sri lanka,tour-packages/hongkong,tour-packages/hong-kong</con:value></con:property><con:property><con:name>url</con:name><con:value>tour-packages/hong-kong</con:value></con:property><con:property><con:name>expected_breadcrumb</con:name><con:value>[{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "International","url": "/tour-packages/international"},{"name": "Asia","url": "/tour-packages/asia"},{"name": "Hong Kong","url": "/tour-packages/hong-kong"}]</con:value></con:property><con:property><con:name>expected_breadcrumbs</con:name><con:value>[{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"}][{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "India","url": "/tour-packages/india"},{"name": "Kerala","url": "/tour-packages/kerala"}][{"name": "Home","url": "/"},{"name": "Family Packages","url": "/family-packages"}][{"name": "Home","url": "/"},{"name": "Family Packages","url": "/family-packages"},{"name": "International","url": "/family-packages/international"},{"name": "Asia","url": "/family-packages/asia"},{"name": "Vietnam","url": "/family-packages/vietnam"}][{"name": "Home","url": "/"},{"name": "Honeymoon Packages","url": "/honeymoon-packages"}][{"name": "Home","url": "/"},{"name": "Honeymoon Packages","url": "/honeymoon-packages"},{"name": "International","url": "/honeymoon-packages/international"},{"name": "Europe","url": "/honeymoon-packages/europe"},{"name": "Switzerland","url": "/honeymoon-packages/switzerland"}][{"name": "Home","url": "/"},{"name": "Honeymoon Packages","url": "/honeymoon-packages"},{"name": "India","url": "/honeymoon-packages/india"},{"name": "Sikkim - Gangtok - Darjeeling","url": "/honeymoon-packages/sikkim-gangtok-darjeeling"}][{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "International","url": "/tour-packages/international"},{"name": "Asia","url": "/tour-packages/asia"},{"name": "Sri Lanka","url": "/tour-packages/sri-lanka"}][{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "International","url": "/tour-packages/international"},{"name": "Asia","url": "/tour-packages/asia"},{"name": "Sri Lanka","url": "/tour-packages/sri-lanka"}][{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "International","url": "/tour-packages/international"},{"name": "Asia","url": "/tour-packages/asia"},{"name": "Hong Kong","url": "/tour-packages/hong-kong"}][{"name": "Home","url": "/"},{"name": "Tour Packages","url": "/tour-packages"},{"name": "International","url": "/tour-packages/international"},{"name": "Asia","url": "/tour-packages/asia"},{"name": "Hong Kong","url": "/tour-packages/hong-kong"}]</con:value></con:property><con:property><con:name>package_show</con:name><con:value>http://frontend.ttdev.in/packages/6nights-7days-kerala-honeymoon-tour?id=658</con:value></con:property></con:properties></con:testCase><con:testCase id="f9cd388a-f42f-4c2a-a482-45181050e1db" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="health_check_tests_DestinationAPIs" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="groovy" name="get any random category to search" id="98bbd222-fe06-446e-9b37-f2a5bfe24bc8"><con:settings/><con:config><script>import java.util.Random;
 
 String categories = context.expand('${#TestCase#category}');
 String destination_types = context.expand('${#TestCase#destination_type}');
@@ -1317,7 +1317,7 @@ testRunner.testCase.setPropertyValue("p_search",arr_p_search_values[i]);
 
 TestStep api_teststep = testRunner.testCase.getTestStepByName("search using p_search");
 TestStepResult results = api_teststep.run(testRunner,context);
-}</script></con:config></con:testStep><con:properties><con:property><con:name>package_count</con:name><con:value>10</con:value></con:property><con:property><con:name>seo_package_count</con:name><con:value>1</con:value></con:property><con:property><con:name>p_search</con:name><con:value>{"destination_type": ["India"],"category": ["Water Activities"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["4"],"inclusions": ["SharedCoach","Meals","Sightseeing","Private Cab"],"trip_types" :["Water Activities"]}</con:value></con:property><con:property><con:name>ids</con:name><con:value> 1617, 1618</con:value></con:property><con:property><con:name>id</con:name><con:value>747</con:value></con:property><con:property><con:name>psearch</con:name><con:value>{"destination_type": ["india"],"category": ["Family"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["4"],"inclusions": ["SharedCoach","Meals"],"trip_types" :["Adventure"]};{"destination_type": ["india"],"category": ["Honeymoon"],"days": ["1-3"],"price_ranges": ["30_000-60_000"],"hotel_ratings": ["3"],"inclusions": ["SharedCoach","Meals"],"trip_types" :["Romantic"]};{"destination_type": ["International"],"category": ["Wildlife"],"days": ["1-3"],"price_ranges": ["60_000-90_000"],"hotel_ratings": ["3"],"inclusions": ["SharedCoach","Meals","Transfers"],"trip_types" :["Adventure"]};{"destination_type": ["india"],"category": ["Nature"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["2"],"inclusions": ["SharedCoach","Meals"],"trip_types" :["Nature"]};{"destination_type": ["India"],"category": ["Water Activities"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["4"],"inclusions": ["SharedCoach","Meals","Sightseeing","Private Cab"],"trip_types" :["Water Activities"]}</con:value></con:property></con:properties></con:testCase><con:testCase id="29fe7908-19b0-4d00-9c4c-c2df9c5db4fb" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="health_check_tests_FAQ_APIs" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="restrequest" name="list the destination and get destination id" id="13ef4811-685d-4361-9d5a-64de0bb65cef"><con:settings/><con:config service="GetDestinationIndex" resourcePath="/browsing/{api_version}/destinations" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="list the destination and get destination id" id="5a0a0ca6-049b-4a6f-9710-78b015cf5418" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+}</script></con:config></con:testStep><con:properties><con:property><con:name>package_count</con:name><con:value>10</con:value></con:property><con:property><con:name>seo_package_count</con:name><con:value>1</con:value></con:property><con:property><con:name>p_search</con:name><con:value>{"destination_type": ["India"],"category": ["Water Activities"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["4"],"inclusions": ["SharedCoach","Meals","Sightseeing","Private Cab"],"trip_types" :["Water Activities"]}</con:value></con:property><con:property><con:name>ids</con:name><con:value> 1617, 1618</con:value></con:property><con:property><con:name>id</con:name><con:value>470</con:value></con:property><con:property><con:name>psearch</con:name><con:value>{"destination_type": ["india"],"category": ["Family"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["4"],"inclusions": ["SharedCoach","Meals"],"trip_types" :["Adventure"]};{"destination_type": ["india"],"category": ["Honeymoon"],"days": ["1-3"],"price_ranges": ["30_000-60_000"],"hotel_ratings": ["3"],"inclusions": ["SharedCoach","Meals"],"trip_types" :["Romantic"]};{"destination_type": ["International"],"category": ["Wildlife"],"days": ["1-3"],"price_ranges": ["60_000-90_000"],"hotel_ratings": ["3"],"inclusions": ["SharedCoach","Meals","Transfers"],"trip_types" :["Adventure"]};{"destination_type": ["india"],"category": ["Nature"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["2"],"inclusions": ["SharedCoach","Meals"],"trip_types" :["Nature"]};{"destination_type": ["India"],"category": ["Water Activities"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["4"],"inclusions": ["SharedCoach","Meals","Sightseeing","Private Cab"],"trip_types" :["Water Activities"]}</con:value></con:property></con:properties></con:testCase><con:testCase id="29fe7908-19b0-4d00-9c4c-c2df9c5db4fb" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="health_check_tests_FAQ_APIs" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="restrequest" name="list the destination and get destination id" id="13ef4811-685d-4361-9d5a-64de0bb65cef"><con:settings/><con:config service="GetDestinationIndex" resourcePath="/browsing/{api_version}/destinations" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="list the destination and get destination id" id="5a0a0ca6-049b-4a6f-9710-78b015cf5418" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
   &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
 &lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/destinations</con:originalUri><con:assertion type="GroovyScriptAssertion" id="c129a743-b24a-4b72-a4aa-928c697d17c6" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
@@ -2739,8 +2739,11 @@ assert jsonHolder.errors.size() == 0;
   <con:entry key="accountable_type" value="SeoPackages"/>
   <con:entry key="api_version" value="v1"/>
   <con:entry key="accountable_id" value="${#TestCase#weekend_seturl}"/>
-</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>accountable_type</con:entry><con:entry>accountable_id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>testimonial_id</con:name><con:value>26115</con:value></con:property><con:property><con:name>destination</con:name><con:value>Thailand</con:value></con:property><con:property><con:name>title</con:name><con:value>Trip to Thailand</con:value></con:property><con:property><con:name>rating</con:name><con:value>4.0</con:value></con:property><con:property><con:name>body</con:name><con:value>Great trip organised by Sumuk travels .. 
-Well organised and Hassel free trip..good experience with sumuk travels.</con:value></con:property><con:property><con:name>last_updated</con:name><con:value>2017-09-26T16:31:07+05:30</con:value></con:property><con:property><con:name>message</con:name><con:value>Sucess</con:value></con:property><con:property><con:name>destination_id</con:name><con:value>174</con:value></con:property><con:property><con:name>authorname</con:name><con:value>Bala Kumaran</con:value></con:property><con:property><con:name>designation</con:name><con:value>null</con:value></con:property><con:property><con:name>usr_location</con:name><con:value>Chennai</con:value></con:property><con:property><con:name>package_id</con:name><con:value>591</con:value></con:property><con:property><con:name>set_url</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">5nights-6days-bangkok-phuket-thailand-honeymoon-tour</con:value></con:property><con:property><con:name>weekend_seturl</con:name><con:value>Corbett_Luxury_Jungle_Getaway_1Night_2Days</con:value></con:property></con:properties></con:testCase><con:testCase id="ec34304c-660a-4b34-82a8-4c2e17db6025" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="health_check_tests_for_searches" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="groovy" name="Generate a Random search term" id="3592cf12-82c0-41a1-8fb7-ada57fdc50ea"><con:settings/><con:config><script>import org.apache.commons.lang.RandomStringUtils;
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>accountable_type</con:entry><con:entry>accountable_id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>testimonial_id</con:name><con:value>26493</con:value></con:property><con:property><con:name>destination</con:name><con:value>Thailand</con:value></con:property><con:property><con:name>title</con:name><con:value>Trip to Thailand</con:value></con:property><con:property><con:name>rating</con:name><con:value>4.0</con:value></con:property><con:property><con:name>body</con:name><con:value>Overall experience with travel triangle was very good..Everything was done accordingly and in time always.cabs came on time and found all the drivers very friendly.
+Pattaya was more enjoyable than Bangkok including the buffet breakfast. The breakfast at hotel howard square, Bangkok can be improved.
+Found the service of travel agent Miss Martina at Pattaya very helpful.very down to earth lady and always ready to help.
+However, we had to contact her even after reaching Bangkok as Mr Toom who was suppose to be our travel guide at Bangkok did not contact us even once.That made us a little upset as we were not aware of the citytour.
+However Mr Gagan Chaddha from india made all his efforts to help us in anyway he could..was really impressed by his timely help..5 stars to both </con:value></con:property><con:property><con:name>last_updated</con:name><con:value>2017-10-08T23:12:14+05:30</con:value></con:property><con:property><con:name>message</con:name><con:value>Sucess</con:value></con:property><con:property><con:name>destination_id</con:name><con:value>697</con:value></con:property><con:property><con:name>authorname</con:name><con:value>Bala Kumaran</con:value></con:property><con:property><con:name>designation</con:name><con:value>null</con:value></con:property><con:property><con:name>usr_location</con:name><con:value>Chennai</con:value></con:property><con:property><con:name>package_id</con:name><con:value>591</con:value></con:property><con:property><con:name>set_url</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">5nights-6days-bangkok-phuket-thailand-honeymoon-tour</con:value></con:property><con:property><con:name>weekend_seturl</con:name><con:value>Mcleodganj_Mountain_Camping_3Days_2Nights</con:value></con:property></con:properties></con:testCase><con:testCase id="ec34304c-660a-4b34-82a8-4c2e17db6025" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="health_check_tests_for_searches" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="groovy" name="Generate a Random search term" id="3592cf12-82c0-41a1-8fb7-ada57fdc50ea"><con:settings/><con:config><script>import org.apache.commons.lang.RandomStringUtils;
 import java.util.Random;
 int randomStringLength = 3
 String charset = (('a'..'d') + ('e'..'h')+('i'..'n')).join()
@@ -2783,8 +2786,10 @@ for(int i=0;i&lt;search_destinations.size();i++){
 assert listcount==search_destinations.size();</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
   <con:entry key="limit" value="10"/>
   <con:entry key="term" value="${#TestCase#valid_term}"/>
+  <con:entry key="all_destinations_list" value=""/>
   <con:entry key="api_version" value="${#Project#api_version}"/>
-</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="User search with out giving any search term" id="09aa0b03-657b-4369-aadf-c6e908c7f142"><con:settings/><con:config service="SearchTerm" resourcePath="/browsing/{api_version}/searches" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User search with out giving any search term" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="default_list" value=""/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry><con:entry>default_list</con:entry><con:entry>all_destinations_list</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="User search with out giving any search term" id="09aa0b03-657b-4369-aadf-c6e908c7f142"><con:settings/><con:config service="SearchTerm" resourcePath="/browsing/{api_version}/searches" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User search with out giving any search term" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
   &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
 &lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches</con:originalUri><con:assertion type="GroovyScriptAssertion" id="fd88706e-9d6c-41e9-a60f-b43a4eeb8070" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
@@ -2798,7 +2803,213 @@ assert success_flag == true;
 assert jsonHolder.errors.size() == 0;
 int count = jsonHolder.data.searches.key.size();
 assert count > 0
-</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>invalid_term</con:name><con:value>kcm</con:value></con:property><con:property><con:name>valid_term</con:name><con:value>bal</con:value></con:property><con:property><con:name>term</con:name><con:value>ke,an,him,jai,rajas,lad,maur,bal,goa</con:value></con:property></con:properties></con:testCase><con:testCase id="f575fcde-3afb-4e7a-8095-45403aa7aa54" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="health_check_tests_for_footer_section" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:description>TestCase generated for REST Resource [footer_section] located at [/browsing/{api_version}/footer_section]</con:description><con:settings/><con:testStep type="groovy" name="Get any random destination name,set url and category to search" id="26dd4466-acdf-473a-8c31-a41f9399407d"><con:settings/><con:config><script>import java.util.Random;
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="all_destinations_list" value=""/>
+  <con:entry key="api_version" value="v1"/>
+  <con:entry key="default_list" value=""/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry><con:entry>default_list</con:entry><con:entry>all_destinations_list</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="User searches the default list->True" id="8f26c180-5d8e-43c1-a8c1-c5594983801e"><con:settings/><con:config service="SearchTerm" resourcePath="/browsing/{api_version}/searches" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User searches the default list->True" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches</con:originalUri><con:assertion type="GroovyScriptAssertion" id="245a4a91-2193-434b-ac0a-1b0ff740c434" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def jsonHolder = new JsonSlurper().parseText(response);
+
+boolean success_flag = jsonHolder.success;
+assert success_flag == true;
+
+assert jsonHolder.errors.size() == 0;
+int count = jsonHolder.data.default_destinations.key.size();
+assert count >0
+boolean flag=false;
+String[] search_destinations = jsonHolder.data.default_destinations.key;
+String[] url=jsonHolder.data.default_destinations.url;
+String[] id=jsonHolder.data.default_destinations.id;
+String[] listing_path=jsonHolder.data.default_destinations.listing_path;
+for(int i=0;i&lt;search_destinations.size();i++){
+	
+	String expected_listing_path="/tour-packages/"+search_destinations[i];
+	String expected_url="/travel-to/"+id[i]+"-"+search_destinations[i];
+	log.info expected_url
+	log.info expected_listing_path
+	if (url[i]==expected_url &amp;&amp; listing_path[i]==expected_listing_path)
+	{
+		flag=true
+	}
+		
+}
+assert flag==true;</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="api_version" value="v1"/>
+  <con:entry key="default_list" value="true"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry><con:entry>default_list</con:entry><con:entry>all_destinations_list</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="User Searches with default list->false" id="3345d209-f212-484f-95d0-3d6d4e5a3765"><con:settings/><con:config service="SearchTerm" resourcePath="/browsing/{api_version}/searches" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User Searches with default list->false" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches</con:originalUri><con:assertion type="GroovyScriptAssertion" id="7fab33b0-a270-45f9-bf6b-8dca5d294989" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def jsonHolder = new JsonSlurper().parseText(response);
+
+boolean success_flag = jsonHolder.success;
+assert success_flag == true;
+
+assert jsonHolder.errors.size() == 0;
+int count = jsonHolder.data.searches.key.size();
+assert count ==5
+boolean flag=false;
+String[] search_destinations = jsonHolder.data.searches.key;
+String[] url=jsonHolder.data.searches.url;
+String[] id=jsonHolder.data.searches.id;
+for(int i=0;i&lt;search_destinations.size();i++){
+	search_destinations[i]=search_destinations[i].toLowerCase();
+	String expected_url="/tour-packages/";
+	String expected_url1="/travel-to/";
+	if( url[i].contains(search_destinations[i]))
+	{
+	if (url[i].contains(expected_url) || url[i].contains(expected_url1))
+	{
+		flag=true
+	}
+	}	
+}
+assert flag==true;</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="api_version" value="v1"/>
+  <con:entry key="default_list" value="false"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry><con:entry>default_list</con:entry><con:entry>all_destinations_list</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="User searched all destination list->True" id="6b58f475-b828-4808-a8d3-47955623dabd"><con:settings/><con:config service="SearchTerm" resourcePath="/browsing/{api_version}/searches" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User searched all destination list->True" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches</con:originalUri><con:assertion type="GroovyScriptAssertion" id="efb0343e-97dd-457f-82ea-77cc40594b04" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def jsonHolder = new JsonSlurper().parseText(response);
+
+boolean success_flag = jsonHolder.success;
+assert success_flag == true;
+
+assert jsonHolder.errors.size() == 0;
+int count = jsonHolder.data.searches.key.size();
+assert count >0
+boolean flag=false;
+String[] search_destinations = jsonHolder.data.searches.key;
+String[] url=jsonHolder.data.searches.url;
+String[] id=jsonHolder.data.searches.id;
+for(int i=0;i&lt;search_destinations.size();i++){
+	search_destinations[i]=search_destinations[i].toLowerCase();
+	String expected_url="/tour-packages/";
+	String expected_url1="/travel-to/";
+	if( url[i].contains(search_destinations[i]))
+	{
+	if (url[i].contains(expected_url) || url[i].contains(expected_url1))
+	{
+		flag=true
+	}
+	}	
+}
+assert flag==true;</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="all_destinations_list" value="true"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry><con:entry>default_list</con:entry><con:entry>all_destinations_list</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="User searched with all destination list->false" id="9029b316-dce1-470e-8918-93743a2a3d30"><con:settings/><con:config service="SearchTerm" resourcePath="/browsing/{api_version}/searches" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User searched with all destination list->false" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches</con:originalUri><con:assertion type="GroovyScriptAssertion" id="e7ecd2d0-1bba-4932-bf40-be89a096eb90" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def jsonHolder = new JsonSlurper().parseText(response);
+
+boolean success_flag = jsonHolder.success;
+assert success_flag == true;
+
+assert jsonHolder.errors.size() == 0;
+int count = jsonHolder.data.searches.key.size();
+assert count ==5
+boolean flag=false;
+String[] search_destinations = jsonHolder.data.searches.key;
+String[] url=jsonHolder.data.searches.url;
+String[] id=jsonHolder.data.searches.id;
+for(int i=0;i&lt;search_destinations.size();i++){
+	search_destinations[i]=search_destinations[i].toLowerCase();
+	String expected_url="/tour-packages/";
+	String expected_url1="/travel-to/";
+	if( url[i].contains(search_destinations[i]))
+	{
+	if (url[i].contains(expected_url) || url[i].contains(expected_url1))
+	{
+		flag=true
+	}
+	}	
+}
+assert flag==true;</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="all_destinations_list" value="false"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry><con:entry>default_list</con:entry><con:entry>all_destinations_list</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="User searched with all destination list false and default list true" id="dea0a975-af96-4476-b560-1910164c9d76"><con:settings/><con:config service="SearchTerm" resourcePath="/browsing/{api_version}/searches" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User searched with all destination list false and default list true" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches</con:originalUri><con:assertion type="GroovyScriptAssertion" id="85923e7a-133b-41d0-b250-69b662b2d232" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def jsonHolder = new JsonSlurper().parseText(response);
+
+boolean success_flag = jsonHolder.success;
+assert success_flag == true;
+
+assert jsonHolder.errors.size() == 0;
+int count = jsonHolder.data.default_destinations.key.size();
+assert count >0
+boolean flag=false;
+String[] search_destinations = jsonHolder.data.default_destinations.key;
+String[] url=jsonHolder.data.default_destinations.url;
+String[] id=jsonHolder.data.default_destinations.id;
+String[] listing_path=jsonHolder.data.default_destinations.listing_path;
+for(int i=0;i&lt;search_destinations.size();i++){
+	
+	String expected_listing_path="/tour-packages/"+search_destinations[i];
+	String expected_url="/travel-to/"+id[i]+"-"+search_destinations[i];
+	log.info expected_url
+	log.info expected_listing_path
+	if (url[i]==expected_url &amp;&amp; listing_path[i]==expected_listing_path)
+	{
+		flag=true
+	}
+		
+}
+assert flag==true;</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="all_destinations_list" value="false"/>
+  <con:entry key="api_version" value="v1"/>
+  <con:entry key="default_list" value="true"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry><con:entry>default_list</con:entry><con:entry>all_destinations_list</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="User searched with all destinations with search term given" id="679d2d5c-8a17-40cf-b3d7-05dd18d385dd"><con:settings/><con:config service="SearchTerm" resourcePath="/browsing/{api_version}/searches" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User searched with all destinations with search term given" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches</con:originalUri><con:assertion type="GroovyScriptAssertion" id="15512eff-2137-4cc1-9121-4d5d3a833928" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def jsonHolder = new JsonSlurper().parseText(response);
+
+boolean success_flag = jsonHolder.success;
+assert success_flag == true;
+
+assert jsonHolder.errors.size() == 0;
+int count = jsonHolder.data.searches.key.size();
+assert count >0
+boolean flag=false;
+String[] search_destinations = jsonHolder.data.searches.key;
+String[] url=jsonHolder.data.searches.url;
+String[] id=jsonHolder.data.searches.id;
+for(int i=0;i&lt;search_destinations.size();i++){
+	search_destinations[i]=search_destinations[i].toLowerCase();
+	String expected_url="/tour-packages/";
+	String expected_url1="/travel-to/";
+	if( url[i].contains(search_destinations[i]))
+	{
+	if (url[i].contains(expected_url) || url[i].contains(expected_url1))
+	{
+		flag=true
+	}
+	}	
+}
+assert flag==true;</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="term" value="ma"/>
+  <con:entry key="all_destinations_list" value="true"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry><con:entry>default_list</con:entry><con:entry>all_destinations_list</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>invalid_term</con:name><con:value>bnd</con:value></con:property><con:property><con:name>valid_term</con:name><con:value>an</con:value></con:property><con:property><con:name>term</con:name><con:value>ke,an,him,jai,rajas,lad,maur,bal,goa</con:value></con:property></con:properties></con:testCase><con:testCase id="f575fcde-3afb-4e7a-8095-45403aa7aa54" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="health_check_tests_for_footer_section" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:description>TestCase generated for REST Resource [footer_section] located at [/browsing/{api_version}/footer_section]</con:description><con:settings/><con:testStep type="groovy" name="Get any random destination name,set url and category to search" id="26dd4466-acdf-473a-8c31-a41f9399407d"><con:settings/><con:config><script>import java.util.Random;
 
 String destination_name = context.expand('${#TestCase#destination_names}');
 String[] parsed_destination_name = destination_name.split(",");
@@ -3565,7 +3776,7 @@ def jsonHolder = new JsonSlurper().parseText(response);
 
 boolean success_flag = jsonHolder.success;
 assert success_flag == true;
-assert jsonHolder.errors.size() == 0</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties><con:property><con:name>user_id</con:name><con:value>1330835</con:value></con:property></con:properties></con:testSuite><con:requirements/><con:properties><con:property><con:name>execution_tag</con:name><con:value>healthcheck</con:value></con:property><con:property><con:name>dbname</con:name><con:value/></con:property><con:property><con:name>api_endpoint</con:name><con:value>traveltriangle.com</con:value></con:property><con:property><con:name>httpverb</con:name><con:value>http</con:value></con:property><con:property><con:name>api_version</con:name><con:value>v1</con:value></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
+assert jsonHolder.errors.size() == 0</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties><con:property><con:name>user_id</con:name><con:value>1330835</con:value></con:property></con:properties></con:testSuite><con:requirements/><con:properties><con:property><con:name>execution_tag</con:name><con:value>healthcheck</con:value></con:property><con:property><con:name>dbname</con:name><con:value/></con:property><con:property><con:name>api_endpoint</con:name><con:value>frontend.ttdev.in</con:value></con:property><con:property><con:name>httpverb</con:name><con:value>http</con:value></con:property><con:property><con:name>api_version</con:name><con:value>v1</con:value></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
 import groovy.util.GroovyScriptEngine;
 import java.sql.DriverManager;
 import java.sql.Connection;
