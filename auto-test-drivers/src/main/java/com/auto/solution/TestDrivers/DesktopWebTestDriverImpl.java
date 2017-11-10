@@ -369,7 +369,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			//this.switchToMostRecentWindow();
 			
             	//	driver.navigate().to(updated_url);			
-			driver.navigate().to(endPoint);
+			//driver.navigate().to(endPoint);
 			
 			if(!Property.BrowserName.equals(Property.CHROME_KEYWORD))
 			driver.manage().window().maximize();
