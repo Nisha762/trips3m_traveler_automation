@@ -65,7 +65,7 @@ public class Utility {
 		teststep_details = teststep_details.replace("{TEST_OBJECT}", testObject);
 		teststep_details = teststep_details.replace("{TEST_DATA}", testData);
 		teststep_details = teststep_details.replace("{STATUS}", Property.StepStatus);
-		teststep_details = teststep_details.replace("{REMARKS}", Property.Remarks);
+		teststep_details = Property.Remarks == null ? teststep_details.replace("{REMARKS}", "") : teststep_details.replace("{REMARKS}", Property.Remarks);
 		teststep_details = teststep_details.replace("{EXECUTION_TIME}", Property.StepExecutionTime);
 		
 		return teststep_details;
