@@ -224,27 +224,34 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		for (WebElement link : anchortagOnPage) {
 		
 			String href = link.getAttribute("href");
-			hrefs.add(href);
+			if(href != null)
+				hrefs.add(href);
 		}
 		List<WebElement> linksOnPage = driver.findElements(By.xpath("//link"));
 		
 		for (WebElement link : linksOnPage) {
 			String href = link.getAttribute("href");
-			hrefs.add(href);
+			if(href != null)
+				hrefs.add(href);
 		}
 		List<WebElement> imgOnPage = driver.findElements(By.xpath("//img"));
 		for (WebElement image : imgOnPage) {
 			String data_src = image.getAttribute("data-src");
 			String src = image.getAttribute("src");
 			String data_original = image.getAttribute("data-original");
-			hrefs.add(data_src);
-			hrefs.add(src);
-			hrefs.add(data_original);
+				hrefs.add(data_src);
+				hrefs.add(src);
+				hrefs.add(data_original);
 		}
 		List<WebElement> metaOnPage = driver.findElements(By.xpath("//meta"));
 		for (WebElement meta : metaOnPage) {
 			String content = meta.getAttribute("content");
 			hrefs.add(content);
+		}
+		List<WebElement> scriptOnPage = driver.findElements(By.xpath("//script"));
+		for (WebElement script : scriptOnPage) {
+			String src = script.getAttribute("src");
+			hrefs.add(src);
 		}
 		
 		return hrefs;
@@ -355,14 +362,14 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	private void openEndPointInBrowser(String endPoint) throws Exception{
 		try{
 			wait = new WebDriverWait(driver, Long.parseLong(Property.SyncTimeOut));
-			String updated_url = endPoint.replace("http", "https");
-			updated_url = updated_url + "users/sign_in/";
+			//String updated_url = endPoint.replace("http", "https");
+			//updated_url = updated_url + "users/sign_in/";
 			driver.get(endPoint);
 			//this.deleteAllCookies();			
 			//this.switchToMostRecentWindow();
 			
-            		driver.navigate().to(updated_url);			
-			driver.navigate().to(endPoint);
+            	//	driver.navigate().to(updated_url);			
+			//driver.navigate().to(endPoint);
 			
 			if(!Property.BrowserName.equals(Property.CHROME_KEYWORD))
 			driver.manage().window().maximize();
@@ -1764,6 +1771,62 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throw e;
 		}
 	}
+	
+	@Override
+	public void verifyInternalLinkOnWebPage(String urlSource) throws Exception{
+		
+		try{			
+			HashMap<String, String> internalLinksWithStatus = new HashMap<String, String>();
+			
+			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
+			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", urlSource);
+			String sourceFileForBrokenLinks = fileLocation;
+			
+			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForBrokenLinks);
+			
+			for (String url : pageUrls) {
+				try{
+					System.out.println("Main Url -- " + url);
+					
+					driver.navigate().to(url);
+				
+					Thread.sleep(5000);
+					
+					if(!driver.getCurrentUrl().contains("https://")){
+						internalLinksWithStatus.put(url, "Not redirecting to HTTPs");
+					}
+					ArrayList<String> hrefs = this.getHyperRefrenceOnPage();
+				
+					for (String linkUrl : hrefs) {
+						if(linkUrl == null || linkUrl == "")
+							continue;
+						if(linkUrl.isEmpty())
+							continue;
+						try{
+							if(!linkUrl.toLowerCase().contains("https://")){
+								internalLinksWithStatus.put(linkUrl, "Non HTTPs link");
+							}
+							
+							System.out.println(linkUrl);							
+						}
+						catch(Exception e){
+							internalLinksWithStatus.put(linkUrl, "FAILED --" + e.getMessage().replaceAll("\\,"," "));
+						}
+					}					
+				}
+				catch(Exception e){
+					internalLinksWithStatus.put(url, "FAILED --" + e.getMessage());
+				}
+			}
+			
+			Utility.reportUrlsStatus(internalLinksWithStatus,rManager.getTestExecutionLogFileLocation().replace("{0}","BrokenLinks.csv"));
+		}
+		catch(Exception e){
+			throw e;
+		}
+	}
+	
+	
 	@Override
 	public void verifyAndReportSCO(String scoUrlSource) throws Exception{
 		try{

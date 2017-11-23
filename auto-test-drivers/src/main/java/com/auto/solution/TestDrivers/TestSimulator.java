@@ -609,7 +609,7 @@ public class TestSimulator {
  			else if(stepAction.toLowerCase().equalsIgnoreCase("iselementinemail")){
 
  				String cssQuery = objCurrentObjectDetails.getLocationOfTestObject();
- 				boolean isElementInMail = mailHandler.isElementThereInMailContent(cssQuery);
+ 				boolean isElementInMail = !(mailHandler.isElementThereInMailContent(cssQuery));
  				if(!isElementInMail){
  					throw new Exception(Property.ERROR_MESSAGES.ERR_IN_FINIDING_CONTENT_IN_MAIL.getErrorMessage().replace("{CSS_QUERY}",cssQuery));
  				}
@@ -620,6 +620,13 @@ public class TestSimulator {
  				}
  				String input_reference_file = testDataContents[0];
  				testSimulator.extractJSErrors(input_reference_file);
+ 			}
+ 			else if(stepAction.toLowerCase().equals("verifyinternallinks")){
+ 				if(testDataContents.length < 1){
+ 					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+ 				}
+ 				String urlSource = testDataContents[0];
+ 				testSimulator.verifyInternalLinkOnWebPage(urlSource);
  			}
  			else{
  				throw new NoSuchMethodException(Property.ERROR_MESSAGES.ER_NO_STEP_ACTION.getErrorMessage());

@@ -90,4 +90,6 @@ public interface TestDrivers {
 	public void resizeToDeafult() throws Exception;
 	
 	public void extractJSErrors(String inputURLReferenceFile) throws Exception;
+	
+	public void verifyInternalLinkOnWebPage(String urlSource) throws Exception;
 }
