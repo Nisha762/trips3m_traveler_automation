@@ -58,6 +58,15 @@
           <stringProp name="shareMode">shareMode.all</stringProp>
         </CSVDataSet>
         <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Page Number" enabled="true">
+          <stringProp name="maximumValue">8</stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <boolProp name="perThread">false</boolProp>
+          <stringProp name="randomSeed"></stringProp>
+          <stringProp name="variableName">page_number</stringProp>
+        </RandomVariableConfig>
+        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -685,7 +694,7 @@ vars.put(&quot;token&quot;,token);</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/agents/dash_element?action_id=pre_requirement&amp;page=1&amp;lazy_load=true</stringProp>
+          <stringProp name="HTTPSampler.path">/agents/dash_element?action_id=pre_requirement&amp;page=${page_number}&amp;lazy_load=true</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
@@ -755,7 +764,7 @@ vars.put(&quot;token&quot;,token);</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/agents/dash_element?action_id=quotation_followup_small_view&amp;link_id=quote_booked&amp;only_booked_quotes=1&amp;page=1&amp;quote_status=2&amp;lazy_load=true</stringProp>
+          <stringProp name="HTTPSampler.path">/agents/dash_element?action_id=quotation_followup_small_view&amp;link_id=quote_booked&amp;only_booked_quotes=1&amp;page=${page_number}&amp;quote_status=2&amp;lazy_load=true</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -825,7 +834,7 @@ vars.put(&quot;token&quot;,token);</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/agents/dashboard#payment</stringProp>
+          <stringProp name="HTTPSampler.path">agents/${agent_id}/payment?action_id=dash_payments&amp;page=${page_number}&amp;lazy_load=true&amp;_=1513152893230</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -911,7 +920,7 @@ vars.put(&quot;token&quot;,token);</stringProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
