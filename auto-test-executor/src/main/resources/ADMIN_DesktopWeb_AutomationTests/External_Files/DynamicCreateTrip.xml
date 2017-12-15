@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="PP_CreateTrip" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" lastOpened="2016-09-23T17:40:06.494+05:30" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="&lt;all>"/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Export JUnit Results with test properties" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="&lt;all>"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:interface xsi:type="con:RestService" id="53572fdf-f2d4-47d1-8bcf-cd7680d18add" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetBreadcrumbs" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="breadcrumbs" path="/browsing/{api_version}/breadcrumbs" id="dd799764-28ae-4184-b9c8-39515f03b1ea"><con:settings/><con:parameters><con:parameter><con:name>url</con:name><con:value>http://traveltriangle.com/tour-packages/europe</con:value><con:style>QUERY</con:style><con:default>http://traveltriangle.com/tour-packages/europe</con:default></con:parameter><con:parameter><con:name>api_version</con:name><con:value>v1</con:value><con:style>TEMPLATE</con:style><con:default>v1</con:default></con:parameter></con:parameters><con:method name="Method 1" id="2a04e86a-abf6-4a90-bbaa-581b95e0db77" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="3bbd328f-a9ba-4164-816c-9e4f4db57a67" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/breadcrumbs</con:originalUri><con:credentials><con:username>api_user</con:username><con:password>api_user</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="url" value="http://traveltriangle.com/honeymoon-packages/switzerland" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>url</con:entry><con:entry>api_version</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="a01da44b-da4c-48b9-be3b-62689a79ba8e" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetDestinationIndex" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="destinations" path="/browsing/{api_version}/destinations" id="39a20395-15c2-4348-834b-697ea5ccf97c"><con:settings/><con:parameters><con:parameter><con:name>category</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>weekendDestination</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>sort_by</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>sort_order</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>destination_type</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>search</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>search[months]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>search[days]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>search[price_ranges]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>search[activity]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>api_version</con:name><con:value>v1</con:value><con:style>TEMPLATE</con:style><con:default>v1</con:default></con:parameter></con:parameters><con:method name="Method 1" id="0b11cf68-27ee-44b8-ab31-f0f1e87cdc64" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="5a0a0ca6-049b-4a6f-9710-78b015cf5418" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/destinations</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="category" value="honeymoon"/>
+  <con:entry key="sort_by" value="price"/>
+  <con:entry key="weekendDestination" value="delhi"/>
+</con:parameters><con:parameterOrder><con:entry>category</con:entry><con:entry>weekendDestination</con:entry><con:entry>sort_by</con:entry><con:entry>sort_order</con:entry><con:entry>destination_type</con:entry><con:entry>search</con:entry><con:entry>search[months]</con:entry><con:entry>search[days]</con:entry><con:entry>search[price_ranges]</con:entry><con:entry>search[activity]</con:entry><con:entry>api_version</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="c0739492-ce8a-4153-8e38-0f0d40643e56" wadlVersion="http://wadl.dev.java.net/2009/02" name="ShowDestinationById" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:endpoint>http://traveltriangle.com</con:endpoint></con:endpoints><con:resource name="getDestinationDetails" path="/browsing/{api_version}/destinations/{id}" id="f8197a1f-94ba-43cc-b410-1a24c3de95d5"><con:settings/><con:parameters><con:parameter><con:name>id</con:name><con:value>destinationID</con:value><con:style>TEMPLATE</con:style><con:default>destinationID</con:default></con:parameter><con:parameter><con:name>api_version</con:name><con:value>v1</con:value><con:style>TEMPLATE</con:style><con:default>v1</con:default></con:parameter></con:parameters><con:method name="Method 1" id="9241bcd2-e9c0-4125-8258-d53b68362a73" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="6f4eb4a3-72e0-4fee-88d5-8ccd5f55c969" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/destinations/57</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="57" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="0f239f3b-dfb1-4c35-bab1-84e7cf451a00" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetFAQListing" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="faqs" path="/browsing/{apiVersion}/faqs" id="7ce54dbe-659c-4dd2-ab55-25d90512111d"><con:settings/><con:parameters><con:parameter><con:name>apiVersion</con:name><con:value>apiVersion</con:value><con:style>TEMPLATE</con:style><con:default>apiVersion</con:default></con:parameter><con:parameter><con:name>accountable_type</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>accountable_id</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="d1d00830-a640-452a-bfb3-50e5b65f6a7f" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="ea0e26a3-4ffb-4c73-918f-c79a0f22096f" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/faqs</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="apiVersion" value="v1"/>
+  <con:entry key="accountable_type" value="all"/>
+</con:parameters><con:parameterOrder><con:entry>apiVersion</con:entry><con:entry>accountable_type</con:entry><con:entry>accountable_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="0db78466-5350-4e25-80e0-8a60bd8bd505" wadlVersion="http://wadl.dev.java.net/2009/02" name="RequestCallBack" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://traveltriangle.com</con:endpoint></con:endpoints><con:resource name="request_callback" path="/browsing/{api_version}/request_callback" id="19a64d04-0aa7-4166-8571-d31ff7e3582b"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>user_id</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>quote_id</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>trip_id</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>feedback_through</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>phone_no</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>body</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>type_of_feedback</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="1a498f2f-18b2-4809-a00a-0fe6ee25c803" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="33626c7e-0ae9-468a-9d1f-ec339971c39f" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  &lt;con:entry key="Content-Type" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request>{
+	"feedback" : {
+		"body": "93874283472348",
+		"type_of_feedback" : "request_on_call"
+	}
+}</con:request><con:originalUri>http://traveltriangle.com/browsing/v1/request_callback</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="body" value="${TestCase#body}"/>
+  <con:entry key="type_of_feedback" value="request_on_call"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>user_id</con:entry><con:entry>quote_id</con:entry><con:entry>trip_id</con:entry><con:entry>feedback_through</con:entry><con:entry>phone_no</con:entry><con:entry>body</con:entry><con:entry>type_of_feedback</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="cb1c0995-9ab4-434e-b04e-d8bbe59ac4a1" wadlVersion="http://wadl.dev.java.net/2009/02" name="SubmitRequestCallBack" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://traveltriangle.com</con:endpoint></con:endpoints><con:resource name="request_callback" path="/browsing/{api_version}/request_callback" id="e55f75e5-e955-4110-a634-fefa7010ee72"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>body</con:name><con:style>TEMPLATE</con:style></con:parameter><con:parameter><con:name>type_of_feedback</con:name><con:style>TEMPLATE</con:style></con:parameter><con:parameter><con:name>user_id</con:name><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>quote_id</con:name><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>trip_id</con:name><con:style>QUERY</con:style></con:parameter></con:parameters><con:method name="Method 1" id="bc4a073e-1c87-41e3-b0c5-81cf9fee2e1d" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="4cfc73a0-66d1-4ca9-87e0-6857e225b7b7" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  &lt;con:entry key="Content-Type" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request>{
+    "feedback": {
+        "body": "6564543243",
+        "type_of_feedback": "request_on_call"
+    }
+}</con:request><con:originalUri>http://traveltriangle.com/browsing/v1/request_callback</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="trip_id" value="${#TestCase#trip_id}"/>
+  <con:entry key="body" value="${#TestCase#body}"/>
+  <con:entry key="quote_id" value="${#TestCase#quote_id}"/>
+  <con:entry key="user_id" value="${#TestCase#user_id}"/>
+  <con:entry key="type_of_feedback" value="request_on_call"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>body</con:entry><con:entry>type_of_feedback</con:entry><con:entry>user_id</con:entry><con:entry>quote_id</con:entry><con:entry>trip_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="9bae5439-a340-4426-b8f7-e0b532a6ab8c" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetFooterSection" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="footer_section" path="/browsing/{api_version}/footer_section" id="ccf384bc-63a6-4791-a63a-d6e21520efaf"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>page</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>destination_name</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>category</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>set_url</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="cb52c99a-980d-4a78-89c9-53f6c5d0720b" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="588d5946-2719-4f20-afe2-986f20a73dde" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/footer_section</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="page" value="ListingPage"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>page</con:entry><con:entry>destination_name</con:entry><con:entry>category</con:entry><con:entry>set_url</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="6f100434-8716-4b97-9949-38e0a7119cce" wadlVersion="http://wadl.dev.java.net/2009/02" name="SignUp" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="users" path="/browsing/{api_version}/users" id="30c40bf7-a320-47e3-afe8-37083d9227bb"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>user</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>user[name]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>user[email]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>user[password]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>user[password_confirmation]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>user[tnc]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>user[referer_code]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>user[phone_no]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>next_url</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="85626b3d-ea66-4ea5-ae76-74be1b899690" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="a6beb45c-266f-4793-9db0-eaa472a399dd" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/users</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="user[password_confirmation]" value="tt1234"/>
+  <con:entry key="user[tnc]" value="1"/>
+  <con:entry key="user[email]" value="bwcbeh@mailo.com"/>
+  <con:entry key="user[phone_no]" value="7654324354"/>
+  <con:entry key="next_url" value="true"/>
+  <con:entry key="user[password]" value="tt1234"/>
+  <con:entry key="user[name]" value="TestNayan"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>user</con:entry><con:entry>user[name]</con:entry><con:entry>user[email]</con:entry><con:entry>user[password]</con:entry><con:entry>user[password_confirmation]</con:entry><con:entry>user[tnc]</con:entry><con:entry>user[referer_code]</con:entry><con:entry>user[phone_no]</con:entry><con:entry>next_url</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="d0e0e8dc-0d9c-42a4-9e6b-adddcd2f5295" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetCustomizationAttributeOfRTrip" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="customize" path="/browsing/{api_version}/requested_trips/{Rtrip_id}/customize" id="430e92f1-5128-4ae0-b43c-2fd464f957e5"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>Rtrip_id</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/></con:parameter><con:parameter><con:name>allow_customization</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="9e9444cf-8b0e-4a80-8750-0835d368905a" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="c436e195-169d-414b-8277-f37c1747a0c3" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value="_trips3m_session=BAh7CUkiD3Nlc3Npb25faWQGOgZFVEkiJWEyMzM5ZWJkYzJmZjQ0NzgwZjlhZWQ2OGE2MzBjODY3BjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA0%2BEEUkiIiQyYSQxMCRiQUtVRWJsQUJkNnNxLkJQU2p5NDZPBjsAVEkiGGFsbG93X2N1c3RvbWl6YXRpb24GOwBGaQPnJBpJIgpmbGFzaAY7AFRvOiVBY3Rpb25EaXNwYXRjaDo6Rmxhc2g6OkZsYXNoSGFzaAk6CkB1c2VkbzoIU2V0BjoKQGhhc2h7ADoMQGNsb3NlZEY6DUBmbGFzaGVzewY6EnJ0cmlwX2NyZWF0ZWRUOglAbm93MA%3D%3D--e6fca56b71ca8cf2dfabaf9b242b6e8c152ee0f0; path=/; HttpOnly"/>
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/requested_trips//customize</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="Rtrip_id" value="1713383"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>Rtrip_id</con:entry><con:entry>allow_customization</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="7fa7238b-c011-4c77-bad7-9f64e715c794" wadlVersion="http://wadl.dev.java.net/2009/02" name="RequestedTripCreate" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="requested_trips" path="/browsing/{api_version}/requested_trips" id="b428353e-782e-45ff-80b7-59bbd5f0fd58"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>requested_trip</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[from_loc]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[to_loc]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[trip_days]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[start_date]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[trip_stage]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[email]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[phone_no]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[isd_code]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[budget]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[flight]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[hotels]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[cab]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[adminComments]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[addtl_info]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[from_complete]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>requested_trip[to_complete]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="4631d4e4-5a50-47fd-ad52-e6e61a6afdad" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="ed980cc2-ff4e-4692-98ac-dd55b10d3e7d" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>https://frontend.ttdev.in</con:endpoint><con:request>{
+        "requested_trip": {
+       "to_loc": "Kerala",
+       "from_loc": " Noida, Uttar Pradesh 201301, India",
+       "trip_days": 5,
+       "start_date": "15 september,2017",
+       "email": "gshaddgshadgjh@asdgas.sd",
+       "budget": "26500..28500",
+       "info": "jgjksakjdasgdjasd",
+       "addtl_info": "",
+       "phone_no": "",
+       "isd_code": "",
+       "adminComments": "#slider_organic #Form_filled_on http  ",
+       "trip_stage": "",
+       "flight": "",
+       "hotels": "",
+       "cab": "",
+       "from_complete": "",
+       "to_complete": ""
+
+  }
+}</con:request><con:originalUri>http://traveltriangle.com/browsing/v1/requested_trips</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>requested_trip</con:entry><con:entry>requested_trip[from_loc]</con:entry><con:entry>requested_trip[to_loc]</con:entry><con:entry>requested_trip[trip_days]</con:entry><con:entry>requested_trip[start_date]</con:entry><con:entry>requested_trip[trip_stage]</con:entry><con:entry>requested_trip[email]</con:entry><con:entry>requested_trip[phone_no]</con:entry><con:entry>requested_trip[isd_code]</con:entry><con:entry>requested_trip[budget]</con:entry><con:entry>requested_trip[flight]</con:entry><con:entry>requested_trip[hotels]</con:entry><con:entry>requested_trip[cab]</con:entry><con:entry>requested_trip[adminComments]</con:entry><con:entry>requested_trip[addtl_info]</con:entry><con:entry>requested_trip[from_complete]</con:entry><con:entry>requested_trip[to_complete]</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="d31ccbf4-d59a-4c90-a900-28f500a0824a" wadlVersion="http://wadl.dev.java.net/2009/02" name="RequestedTripUpdate" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="{RTrip_id}" path="/browsing/{api_version}/requested_trips/{RTrip_id}" id="565e5e20-18e4-4dc1-87e9-adba3840c0cf"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>RTrip_id</con:name><con:value>RTrip_id</con:value><con:style>TEMPLATE</con:style><con:default>RTrip_id</con:default></con:parameter></con:parameters><con:method name="Method 1" id="f92edee2-db58-44a7-a84e-1a536f6568fd" method="PUT"><con:settings/><con:parameters/><con:request name="Request 1" id="8ddc041a-6f7b-4367-9ffd-cebf56d6786e" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value="_trips3m_session=BAh7CUkiD3Nlc3Npb25faWQGOgZFVEkiJWEyMzM5ZWJkYzJmZjQ0NzgwZjlhZWQ2OGE2MzBjODY3BjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA0%2BEEUkiIiQyYSQxMCRiQUtVRWJsQUJkNnNxLkJQU2p5NDZPBjsAVEkiGGFsbG93X2N1c3RvbWl6YXRpb24GOwBGaQPnJBpJIgpmbGFzaAY7AFRvOiVBY3Rpb25EaXNwYXRjaDo6Rmxhc2g6OkZsYXNoSGFzaAk6CkB1c2VkbzoIU2V0BjoKQGhhc2h7ADoMQGNsb3NlZEY6DUBmbGFzaGVzewY6EnJ0cmlwX2NyZWF0ZWRUOglAbm93MA%3D%3D--e6fca56b71ca8cf2dfabaf9b242b6e8c152ee0f0; path=/; HttpOnly"/>
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/requested_trips/1713383</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="RTrip_id" value="1713383"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>RTrip_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="5f65f85f-4990-4fdd-893b-8f0ca9722178" wadlVersion="http://wadl.dev.java.net/2009/02" name="SearchTerm" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="searches" path="/browsing/{api_version}/searches" id="0d0a6b24-1d01-433a-8d8b-3739cbabd001"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>term</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>limit</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="6b2e01a2-5a6a-4322-bc7f-63776562c496" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="2f4542d0-49b6-43ba-a7da-adaa2de9ca96" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="0953072c-fdd1-41fb-ae4d-8b33dd1d803e" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetToLocationInRtripForm" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://traveltriangle.com</con:endpoint></con:endpoints><con:resource name="to_locations" path="/browsing/{api_version}/searches/to_locations" id="d4cee53c-5252-4097-bf31-679b2840ff28"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>term</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>limit</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="4e5a880a-20ea-4411-a07d-4b6d1747f02f" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="4df4fd77-ba94-4263-acc8-52fccbacd276" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>https://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/to_locations</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="limit" value="50"/>
+  <con:entry key="term" value="ke"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="c09b14be-2587-4bae-82dd-f71cf889b569" wadlVersion="http://wadl.dev.java.net/2009/02" name="SignIN" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="sign_in" path="/browsing/{api_version}/users/sign_in" id="2f075bad-af78-4423-8ca4-28bf0f03c776"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>user</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>user[email]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>user[password]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>user[remember_me]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>next_url</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="b41bbe6c-a8c1-451b-aed1-ff5f70402e2a" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="61c4407b-7251-407f-87b7-c2803df44e44" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://frontend</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/users/sign_in</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="user[email]" value="lorem_tt_test_ipsum@mailinator.com"/>
+  <con:entry key="next_url" value="true"/>
+  <con:entry key="user[password]" value="tt1234"/>
+  <con:entry key="api_version" value="v1"/>
+  <con:entry key="user[remember_me]" value="1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>user</con:entry><con:entry>user[email]</con:entry><con:entry>user[password]</con:entry><con:entry>user[remember_me]</con:entry><con:entry>next_url</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="8e908f06-233f-4f29-939d-604e83bcdc64" wadlVersion="http://wadl.dev.java.net/2009/02" name="SignOUT" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="sign_out" path="/browsing/{api_version}/users/sign_out" id="bfc23607-7827-401f-85bd-379f039068b5"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter></con:parameters><con:method name="Method 1" id="aae5146c-df4a-49f4-b59a-59db0b14a0cc" method="DELETE"><con:settings/><con:parameters/><con:request name="Request 1" id="3adfd5c6-3acf-47f0-ac1d-95e7240bf13f" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/users/sign_out</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="c81c5d76-847f-492b-91ed-f2ef38d3ed35" wadlVersion="http://wadl.dev.java.net/2009/02" name="TestimonialListing" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="testimonials" path="/browsing/{api_version}/testimonials" id="b9513dc8-de67-4d13-b9f3-fabb98372269"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>accountable_type</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>accountable_id</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter></con:parameters><con:method name="Method 1" id="04a795dc-c4ae-438e-b51e-e6409552211a" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="f7e1a343-95a9-43da-861d-56c2df9425a4" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/testimonials</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="accountable_type" value="Destination"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>accountable_type</con:entry><con:entry>accountable_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="df8189a1-b52f-4500-bc0b-e2d6ec95a915" wadlVersion="http://wadl.dev.java.net/2009/02" name="ShowTestimonialsByID" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="{testimonialID}" path="/browsing/{api_version}/testimonials/{testimonialID}" id="b8e1b648-4e8c-4dd5-afeb-ae38115e702d"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>testimonialID</con:name><con:value>testimonialID</con:value><con:style>TEMPLATE</con:style><con:default>testimonialID</con:default></con:parameter></con:parameters><con:method name="Method 1" id="93ab9073-5ab0-41a6-8fd6-903bdbe9bc34" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="15e425c7-30e9-4a00-b294-f6d6e28b8588" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/testimonials/22218</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="testimonialID" value="22218"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="e9d76a3f-08d2-4905-a56b-9ce20e50a766" wadlVersion="http://wadl.dev.java.net/2009/02" name="SEOPackageListing" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="packages" path="/browsing/{api_version}/packages" id="82066a89-2216-4669-9c39-558956e3320d"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>package_type</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>p_search</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>to_destination</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>sort_by</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>limit</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>offset</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>debug</con:name><con:style>QUERY</con:style></con:parameter></con:parameters><con:method name="Method 1" id="892510b9-35bd-426d-acd3-dea6b0418fbd" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="a272cbbf-5251-4a02-9784-904e60bc1ed0" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/packages</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="limit" value="10"/>
+  <con:entry key="p_search" value="{&quot;destination_type&quot;:[&quot;international&quot;],&quot;category&quot;:[&quot;honeymoon&quot;],&quot;days&quot;:[&quot;7-9&quot;],&quot;price_ranges&quot;:[],&quot;hotel_ratings&quot;:[&quot;4&quot;,&quot;5&quot;],&quot;inclusions&quot;:[&quot;SharedCoach&quot;,&quot;Meals&quot;],&quot;trip_types&quot;:[]}"/>
+  <con:entry key="to_destination" value="Switzerland"/>
+  <con:entry key="sort_by" value="popularity"/>
+  <con:entry key="package_type" value="seo"/>
+  <con:entry key="offset" value="1"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>package_type</con:entry><con:entry>p_search</con:entry><con:entry>to_destination</con:entry><con:entry>sort_by</con:entry><con:entry>limit</con:entry><con:entry>offset</con:entry><con:entry>debug</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="58ec3ba4-544d-40f1-acaf-a42116aeb492" wadlVersion="http://wadl.dev.java.net/2009/02" name="SEOPackageShowByID" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://traveltriangle.com</con:endpoint></con:endpoints><con:resource name="{package_id}" path="/browsing/{api_version}/packages/{id}" id="b11ef1b6-801b-4346-9457-f2d040414684"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>id</con:name><con:value>package_id</con:value><con:style>TEMPLATE</con:style><con:default>package_id</con:default></con:parameter><con:parameter><con:name>base_url</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="4bbdf129-5511-4c60-8131-5df3c28734b8" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="12fea15d-fc0f-4464-8b53-feda93b70366" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/packages/package_id</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="id" value="845"/>
+  <con:entry key="base_url" value="fhsyfbsbsjfsbfsbgkjs"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>id</con:entry><con:entry>base_url</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="806edbe5-6632-455c-940c-b04590f4fa74" wadlVersion="http://wadl.dev.java.net/2009/02" name="SEOSimilarPackagesShow" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://traveltriangle.com</con:endpoint></con:endpoints><con:resource name="similar_packages" path="/browsing/{api_version}/packages/{package_id}/similar_packages" id="ea786452-70fa-4bc0-b0fc-53778b4b7234"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>package_id</con:name><con:value>package_id</con:value><con:style>TEMPLATE</con:style><con:default>package_id</con:default></con:parameter></con:parameters><con:method name="Method 1" id="54b28fd2-d0d4-40f1-9066-f195aa96cd0d" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="5a2bc8fe-3f8c-4683-9f79-e9aa736eb7c6" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/packages/package_id/similar_packages</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="package_id" value="53"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="3b0dba51-b1dd-42e1-b709-3f197a70b5bd" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetUserDetails" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="user" path="/browsing/{api_version}/user" id="c44600d8-ec3d-4476-affc-0622f82b7e43"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter></con:parameters><con:method name="Method 1" id="759c1f0d-5f54-4a1b-a369-8cd981874c70" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="c0a638e2-b69b-4aec-8251-d1167d8bd9f1" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/user</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="32a2afbf-3305-493b-8f4f-841bbd8b3641" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetUserStatus" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="status" path="/browsing/{api_version}/user/status" id="67015f9b-4db5-4a9b-85f2-bff33dafde9f"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter></con:parameters><con:method name="Method 1" id="f117ea14-eb31-4ae5-b0a9-6f28cb0134d4" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="b230cbef-72bc-4c4d-bef9-67b038e961a1" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/user/status</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="dbce1763-0acf-4e2e-b7de-743f12668e3f" wadlVersion="http://wadl.dev.java.net/2009/02" name="DestinationAttaractions" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>${#TestCase#httpverb}://${#TestCase#api_endpoint}</con:endpoint></con:endpoints><con:resource name="attractions" path="/browsing/{api_version}/destinations/{destination_id}/attractions" id="8db35b3a-a179-4b10-8e3a-8f29b59d9b85"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>destination_id</con:name><con:value>destination_id</con:value><con:style>TEMPLATE</con:style><con:default>destination_id</con:default></con:parameter></con:parameters><con:method name="Method 1" id="7726b9e7-4bd2-4a22-84d5-181bc43dcc43" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="5f3f8750-ee08-4668-8e16-a328777167dc" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#TestCase#httpverb}://${#TestCase#api_endpoint}</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="8e0f6ad0-7766-4f83-bd44-fead5ede8a53" wadlVersion="http://wadl.dev.java.net/2009/02" name="IVR" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="Ivr" path="/browsing/{api_version}/ivr" id="cc07627d-8870-4618-986b-0ecc9a3be547"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>sid</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>mobile_no</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>dtmf</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>question_no</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>client_api_token</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Ivr 1" id="15990148-3033-4d12-a001-f8284ca5d2fe" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>404</con:status><con:params/><con:element xmlns:ivr="http://traveltriangle.com/browsing/api_version/ivr">ivr:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/dtmf; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>ext/dtmf</con:mediaType><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>text/dtmf</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="38b611e0-ee46-4f37-a109-648d0bc1ef76" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://traveltriangle.com</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/api_version/ivr</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="sid" value="2323"/>
+  <con:entry key="client_api_token" value="0826fcdf45d0283630aefabbd374f2ed6215d703"/>
+  <con:entry key="question_no" value="1"/>
+  <con:entry key="dtmf" value="1"/>
+  <con:entry key="api_version" value="v1"/>
+  <con:entry key="mobile_no" value="99898989898"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>sid</con:entry><con:entry>mobile_no</con:entry><con:entry>dtmf</con:entry><con:entry>question_no</con:entry><con:entry>client_api_token</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="c191a358-004f-4d6c-a4ad-91645c3e027a" wadlVersion="http://wadl.dev.java.net/2009/02" name="Compare Packages" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>${#TestCase#httpverb}://${#TestCase#api_endpoint}</con:endpoint></con:endpoints><con:resource name="Compare" path="/browsing/{api_version}/packages/compare{pdf}" id="fa5e26e2-4ff0-4be4-8e33-cff9c90d601f"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>ids</con:name><con:value>ids</con:value><con:style>QUERY</con:style><con:default>ids</con:default></con:parameter><con:parameter><con:name>pdf</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/></con:parameter></con:parameters><con:method name="Compare packages" id="c8223bb4-06e1-44c9-9e83-23576e17b390" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>404</con:status><con:params/><con:element xmlns:c438="http://traveltriangle.com/browsing/v1/packages/compare/597%2C438">c438:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:c438="http://traveltriangle.com/browsing/v1/packages/compare/597%2C438">c438:Response</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/pdf</con:mediaType><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>503</con:status><con:params/><con:element>html</con:element></con:representation><con:request name="Request 1" id="f16fa5d9-498a-4608-9b9d-d05848d3c65f" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="x-client-api-token" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  &lt;con:entry key="Authorization" value="Basic dHR1c2VyOnR0dXNlcg=="/>
+  &lt;con:entry key="x-client-debug-token" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/api_version/packages/compare</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="ids" value="597,438"/>
+  <con:entry key="pdf" value=""/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>ids</con:entry><con:entry>pdf</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="5b028914-953c-4b45-88cc-1684492cd234" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetHTMLTags" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>${#TestCase#httpverb}://${#TestCase#api_endpoint}</con:endpoint></con:endpoints><con:resource name="Html_tags" path="/browsing/{api_version}/html_tags" id="b090dded-a3a7-43ea-8370-06a17aa55a5f"><con:settings/><con:parameters><con:parameter><con:name>trip_type_id</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>destination_id</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>level</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>api_version</con:name><con:style>TEMPLATE</con:style></con:parameter></con:parameters><con:method name="Html_tags" id="4c19885b-d8f3-48c4-8ea8-2aa1dfb97362" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:trav="http://traveltriangle.com/">trav:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>404</con:status><con:params/><con:element xmlns:trav="http://traveltriangle.com/">trav:Fault</con:element></con:representation><con:request name="Request 1" id="7e4ec146-3f3d-4f05-8527-767f671797b1" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="x-client-api-token" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  &lt;con:entry key="Authorization" value="Basic dHR1c2VyOnR0dXNlcg=="/>
+  &lt;con:entry key="x-client-debug-token" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="destination_id" value="2"/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>trip_type_id</con:entry><con:entry>destination_id</con:entry><con:entry>level</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="2f4058c8-d196-4c52-b818-92f91ae3f8f8" wadlVersion="http://wadl.dev.java.net/2009/02" name="Search to location" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints/><con:resource name="To_locations" path="/browsing/{api_version}/searches/to_locations" id="f3ca17b5-419b-4fca-b40a-9277d0bae3a5"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter><con:parameter><con:name>term</con:name><con:style>QUERY</con:style></con:parameter><con:parameter><con:name>limit</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter></con:parameters><con:method name="search location" id="41300da4-fe23-45bd-bbf4-7f07553188e8" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>404</con:status><con:params/><con:element xmlns:to="http://traveltriangle.com/browsing/v1/searches/to_locationsapi_version">to:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:to="http://traveltriangle.com/browsing/v1/searches/to_locationsapi_version">to:Response</con:element></con:representation><con:request name="Request 1" id="48068e45-8069-4914-98bb-1bd98b4275d1" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="x-client-api-token" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  &lt;con:entry key="x-client-debug-token" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveltriangle.com/browsing/v1/searches/to_locationsapi_version</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="limit" value=""/>
+  <con:entry key="api_version" value="v1"/>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>term</con:entry><con:entry>limit</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="b0d49b79-6649-4270-9301-3100ab4d9e4f" wadlVersion="http://wadl.dev.java.net/2009/02" name="Update Password" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints/><con:resource name="Password" path="/browsing/v1/users/password" id="3fba44b5-7233-48a7-af04-7f1a707d846e"><con:settings/><con:parameters/><con:method name="Password 1" id="2fdc2142-f2f2-4a15-81b0-3d1d906d181d" method="POST"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>404</con:status><con:params/><con:element xmlns:pas="http://traveltriangle.com/browsing/v1/users/password">pas:Fault</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>503</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:pas="http://traveltriangle.com/browsing/v1/users/password">pas:Response</con:element></con:representation><con:request name="Request 1" id="7110f257-4240-42af-8c0b-f18cedf1c34f" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#traveler_apiendpoint}</con:endpoint><con:request>{
+	"user" : {
+		"email": "lorem_tt_test_ipsum@mailinator.com"
+		
+	}
+}</con:request><con:originalUri>http://traveltriangle.com/browsing/v1/users/password</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request></con:method></con:resource></con:interface><con:testSuite id="8f11a599-cdbd-475b-bdc3-c2e187c57c60" name="CreateTrip"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="7159d54f-f287-4f9b-83f1-7fb87bbcae07" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateTripScenario" searchProperties="true"><con:settings/><con:testStep type="groovy" name="StartDate" id="8783af86-723c-4fe6-8772-cf13d787be1a"><con:settings/><con:config><script>import java.util.Calendar;
+import java.text.SimpleDateFormat;
+
+Calendar cal = Calendar.getInstance();
+cal.add(Calendar.DATE, 7);
+SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+String formatted = format1.format(cal.getTime());
+testRunner.testCase.setPropertyValue("start_date",formatted);
+//messageExchange.modelItem.testCase.testSuite.setPropertyValue("start_date",formatted);</script></con:config></con:testStep><con:testStep type="groovy" name="UserEmail" id="9fcb773f-eb69-42fd-b61b-2c7af0852f2c"><con:settings/><con:config><script>import java.text.SimpleDateFormat;
+import java.util.Random;
+import org.apache.commons.lang.RandomStringUtils;
+
+String charset = (('A'..'Z') + ('0'..'9')).join();
+Integer length = 9;
+String randomString = RandomStringUtils.random(length, charset.toCharArray());
+String[] domains = ["gmail","mail","hotmail","ymail","yahoo","expo","tt"]
+Random random = new Random();
+int domain_index = random.nextInt(domains.size());
+String domain = domains[domain_index];
+
+//Get the Email.
+String Email="test"+randomString.toLowerCase()+"@"+domain+".com";
+testRunner.testCase.setPropertyValue("user_email",Email);
+</script></con:config></con:testStep><con:testStep type="restrequest" name="REST Request" id="c346b40b-2245-4796-9613-f80bcbc49c93"><con:settings/><con:config service="RequestedTripCreate" resourcePath="/browsing/{api_version}/requested_trips" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request" id="ed980cc2-ff4e-4692-98ac-dd55b10d3e7d" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>https://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request>{
+        "requested_trip": {
+       "to_loc": "${#TestCase#to_loc}",
+       "from_loc": "${#TestCase#from_loc}",
+       "trip_days": "${#TestCase#trip_days}",
+       "start_date": "${#TestCase#start_date}",
+       "email": "${#TestCase#user_email}",
+       "budget": "${#TestCase#budget}",
+       "info": "jgjksakjdasgdjasd",
+       "addtl_info": "",
+       "adult": "${#TestCase#num_of_adults}",
+       "phone_no": "${#TestCase#phone_no}",
+       "isd_code": "",
+       "adminComments": "#slider_organic #Form_filled_on http  ",
+       "trip_stage": "${#TestCase#trip_stage}",
+       "flight": "",
+       "hotels": "",
+       "cab": "",
+       "from_complete": "",
+       "to_complete": ""
+
+  }
+}</con:request><con:originalUri>http://traveltriangle.com/browsing/v1/requested_trips</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="570e718d-b62a-4cb0-ac53-ef499e123f21" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="f090fcf7-e7f6-43bc-b614-15a456615a85" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+
+
+//Get the request ID created.
+String request_id = json_response_holder.data.requested_trip.id;
+messageExchange.modelItem.testCase.setPropertyValue("RequestID",request_id);
+messageExchange.modelItem.testCase.testSuite.setPropertyValue("RequestID",request_id)
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>requested_trip</con:entry><con:entry>requested_trip[from_loc]</con:entry><con:entry>requested_trip[to_loc]</con:entry><con:entry>requested_trip[trip_days]</con:entry><con:entry>requested_trip[start_date]</con:entry><con:entry>requested_trip[trip_stage]</con:entry><con:entry>requested_trip[email]</con:entry><con:entry>requested_trip[phone_no]</con:entry><con:entry>requested_trip[isd_code]</con:entry><con:entry>requested_trip[budget]</con:entry><con:entry>requested_trip[flight]</con:entry><con:entry>requested_trip[hotels]</con:entry><con:entry>requested_trip[cab]</con:entry><con:entry>requested_trip[adminComments]</con:entry><con:entry>requested_trip[addtl_info]</con:entry><con:entry>requested_trip[from_complete]</con:entry><con:entry>requested_trip[to_complete]</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>traveler_apiendpoint</con:name><con:value>admin-qa1.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>testf7rkdk5oo@yahoo.com</con:value></con:property><con:property><con:name>start_date</con:name><con:value>2017-12-20</con:value></con:property><con:property><con:name>RequestID</con:name><con:value>2199166</con:value></con:property><con:property><con:name>to_loc</con:name><con:value>Kerala</con:value></con:property><con:property><con:name>phone_no</con:name><con:value/></con:property><con:property><con:name>from_loc</con:name><con:value>Noida</con:value></con:property><con:property><con:name>trip_days</con:name><con:value>5</con:value></con:property><con:property><con:name>budget</con:name><con:value>3500</con:value></con:property><con:property><con:name>num_of_adults</con:name><con:value>2</con:value></con:property><con:property><con:name>trip_stage</con:name><con:value>3</con:value></con:property></con:properties></con:testCase><con:properties><con:property><con:name>RequestID</con:name><con:value>2199166</con:value></con:property></con:properties></con:testSuite><con:requirements/><con:properties><con:property><con:name>execution_tag</con:name><con:value>healthcheck</con:value></con:property><con:property><con:name>dbname</con:name><con:value/></con:property><con:property><con:name>traveler_apiendpoint</con:name><con:value>frontend.ttdev.in</con:value></con:property><con:property><con:name>httpverb</con:name><con:value>https</con:value></con:property><con:property><con:name>api_version</con:name><con:value>v1</con:value></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
+import groovy.util.GroovyScriptEngine;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoDatabase;
+
+////////////////////// Functions /////////////////////////
+
+def filterList(commaSperatedListContent){
+	def list = commaSperatedListContent.split(",");
+	def filteredList = [];
+	list.each(){
+	def entry = it.toLowerCase().replaceAll("^\\s+", "");
+	entry = entry.trim();
+	if(entry != ""){
+	filteredList.add(entry);}	
+	}
+	return filteredList;
+}
+
+def customListCompare(list1,list2){
+	//list1 is the list of tags that are given by user to execute.
+	//list2 is the list of tags for specific test suite.
+	boolean isRunnable = false;
+	for(int l1 in 0 .. list1.size()-1)
+	{
+		def inputTag = list1.get(l1);		
+		for(int l2 in 0 .. list2.size()-1){
+			
+			if(inputTag.toString() == list2.get(l2).toString()){
+				isRunnable =  true;
+				break;
+			}
+		}
+		if(isRunnable){
+			break;
+		}
+	}
+	return isRunnable;
+}
+///////////////////// Function //////////////////////////////////////////////
+
+log.info "Start execution";
+def projDir = context.expand('${projectDir}')
+try{
+File propFile =new File(projDir + "/Configurations/" + project.getName() + "/" + project.getName() + ".properties");
+log.info propFile;
+boolean isDeleted = propFile.delete();
+log.info isDeleted;
+}
+catch(Exception e){log.info e.getMessage();}
+
+
+
+def execution_Tag = project.getPropertyValue("execution_tag");
+
+log.info "Test Execution Base Tag : "+ execution_Tag;
+
+//Fetch the tags to execute the required test suites.
+def filteredTags = filterList(execution_Tag) ;
+
+def Conf_input = "";
+
+log.info "Reading the Configuration file.....";
+
+try{
+
+Conf_input = new File(projDir + "/Configurations/" + project.getName() + "/TestData.xml");
+
+def parser = new XmlParser(); //Get XML Parser.
+
+def Configuration = parser.parse(Conf_input);//Point parser to configration file.
+
+context.Configuration = Configuration;
+
+}
+catch(Exception e){
+		assert false : "Error in reading configuration file -- " + e.getMessage();
+}
+
+def testSuiteListToExecute = [];
+
+log.info "Fetching Test-Scenarios to execute....";
+
+def testSuites = project.getTestSuiteList();
+
+//Enable all TestSuites.
+for(j in 0 .. testSuites.size()-1){
+	//log.info testSuites.get(j).getName();
+	testSuites.get(j).setDisabled(false); 
+}
+//Decide which test suites to execute and eventually disabled the non-relevant test suites.
+		for(i in 0 .. testSuites.size()-1) {
+   			def testSuiteName = testSuites.get(i).getName();
+   			def tags = context.Configuration.TestSuite."${testSuiteName}".tags.text()
+   			def testSuiteTags = filterList(tags);
+   			   			
+   			if(filteredTags == null || filteredTags.empty){
+   				break;
+   			}
+   			else{
+   				if(testSuiteTags == null || testSuiteTags.empty){
+   					testSuites.get(i).setDisabled(true);
+   				}
+   				else{
+   					def isRunnable = customListCompare(filteredTags,testSuiteTags);
+   					log.info testSuiteName+":::"+isRunnable
+   					if(!isRunnable){
+   						testSuites.get(i).setDisabled(true);
+   					}
+   				}
+   			}
+   			
+		}
+
+
+// Load Databases.
+log.info"Loading Databases........";
+
+int index = 1;
+
+String[] db_Names = project.getPropertyValue("dbname").split(",");
+
+for(String db_Name in db_Names){
+
+db_Name = db_Name.trim();
+
+if(db_Name == ""){break;}
+
+context.dbName = db_Name;
+
+String dbConnectionString = "";
+
+String dbDriver = "";
+
+String dbType = "";
+
+try{
+	String databaseCollectionFile_Location = projDir + "/Configurations/" + project.getName() + "/DataBases.csv";
+	
+	BufferedReader reader = new BufferedReader(new FileReader(databaseCollectionFile_Location));
+	
+	String lineInFile = reader.readLine();
+		
+		while(lineInFile != null){
+		
+		String[] lineContents = lineInFile.split(",");
+		
+		if(lineContents[0] == context.dbName){
+			dbType = lineContents[1]
+			dbDriver = lineContents[2];
+			dbConnectionString = lineContents[3];
+			break;
+		}
+		lineInFile = reader.readLine();
+		}
+}
+catch(Exception e){
+	log.info "Couldn't load database from 'Databases' repo.Please review the file again!!" + e.getMessage();
+}
+context.dbDriver = dbDriver
+
+context.dbConnectionString = dbConnectionString
+
+log.info "Connecting to : [" + context.dbName + "] ................";
+
+log.info "DB Connection String --" + dbConnectionString;
+
+if(dbType.toLowerCase().contains("mongo")){
+	try{
+	MongoClient mongoClient = new MongoClient(new MongoClientURI(context.dbConnectionString));
+   	
+     context.dbConnection = mongoClient;
+	if(context.mongoConnection == null){
+     context.mongoConnection = mongoClient;}
+     else{
+     	String mongoConnectionString = "mongoConnection" + index;
+     	log.info mongoConnectionString;
+     	context."${mongoConnectionString}" = mongoClient;
+     }
+	}
+	catch(Exception e){
+		runner.fail("Couldn't connect to application DB -- " + context.dbName + " " + e.getMessage());
+	}
+}
+else if(dbType.toLowerCase().contains("mysql")){
+	if(context.dbName != "" &amp;&amp; context.dbName != null){
+	try{
+		com.eviware.soapui.support.GroovyUtils.registerJdbcDriver(context.dbDriver )
+		
+		def connection = DriverManager.getConnection(context.dbConnectionString);
+		context.dbConnection = connection;
+		if(context.mysqlConnection == null){
+     		context.mysqlConnection = connection;}
+     	else{
+     		String mysqlConnectionString = "mysqlConnection" + index;
+     		context."${mysqlConnectionString}" = connection;
+    		 }
+		context.statement = connection.createStatement();
+	}
+	catch(Exception e){
+			runner.fail("Couldn't connect to application DB -- " + context.dbName + " " + e.getMessage());	
+	}
+}
+}
+index++;
+}
+log.info "Loading utilities......";
+//create an instance of generic utilities.
+try{
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+String path = projDir + "/ext/";
+
+GroovyScriptEngine gse = new GroovyScriptEngine(path) ;
+externalScript = gse.loadScriptByName("Utilities.groovy")
+instance = externalScript.newInstance()
+context.utility = instance ; 
+}
+catch(Exception e){
+	log.info "Unable to initialize framework utility, error being -- " + e.getMessage();
+}
+
+log.info"Preparing test data ..............";
+
+context.Configuration.children().each{
+	if(it.name() == "TestSuite"){
+		it.children().each{
+	String testSuiteNameInConf = it.name();
+	
+	it.children().each{
+		if(it.name() != "tags"){			
+			String testCaseNameInConf = it.name();
+			
+			it.children().each{
+				try{
+					//log.info testSuiteNameInConf+":::"+testCaseNameInConf+":::"+it.name()+":::"+it.text()
+					project.getTestSuiteByName(testSuiteNameInConf).getTestCaseByName(testCaseNameInConf).setPropertyValue(it.name(), it.text());
+					}
+				catch(Exception e){ }
+			}
+		}
+	}
+}
+}
+}</con:beforeRunScript><con:afterRunScript>import com.eviware.soapui.model.testsuite.TestSuiteRunner;
+import com.eviware.soapui.model.testsuite.TestCaseRunner;
+import com.eviware.soapui.model.testsuite.TestRunner.Status;
+
+def projDir = context.expand('${projectDir}')
+// Get the Execution tag.
+String executiontag = project.getPropertyValue("execution_tag");
+
+//Start Time
+def projectstartTime = new Date(runner.getStartTime());
+
+//Time Taken
+def pr_timeTaken = runner.getTimeTaken();
+
+int testcasespassed = 0;
+int testcasesfailed = 0;
+int testcasesexecuted = 0;
+List&lt;String> testCaseNameFailed = new ArrayList&lt;String>();
+//Number Of test cases passed/failed/didn't run.
+def List&lt;TestSuiteRunner> testSuiteRunners = runner.getResults()
+
+for(TestSuiteRunner suiterunner in testSuiteRunners){
+	String testSuiteName = suiterunner.getTestSuite().getName();
+	List&lt;TestCaseRunner> testcaserunners = suiterunner.getResults();
+	for(TestCaseRunner testcaserunner in testcaserunners){
+		Status status = testcaserunner.getStatus();
+		 String testcasename = testcaserunner.getTestCase().getName();
+		if(status == Status.FINISHED){
+			testcasespassed++;
+		}
+		if(status == Status.FAILED){
+			testcasesfailed++;
+			testCaseNameFailed.add(testcasename);
+		}
+		log.info status;
+	}
+}
+testcasesexecuted = testcasespassed + testcasesfailed;
+def percentPassed = (testcasespassed / testcasesexecuted) * 100;
+percentPassed = Math.round(percentPassed * 100) / 100
+String testCaseFailedInStringFormat = "";
+for(String testCaseFailed in testCaseNameFailed){
+	if(testCaseFailedInStringFormat == ""){
+		testCaseFailedInStringFormat = testCaseFailed;
+	}
+	else{
+	testCaseFailedInStringFormat = testCaseFailedInStringFormat + "," + testCaseFailed}
+}
+
+// create a property file.
+try{
+File propFile =new File(projDir + "/Configurations/" + project.getName() + "/" + project.getName() + ".properties");
+propFile.delete();
+boolean isCreated = propFile.createNewFile();
+log.info isCreated;
+Properties props = new Properties();
+props.load(propFile.newDataInputStream());
+props.setProperty("testgroup",executiontag);
+props.setProperty("StartTime",projectstartTime.toString());
+props.setProperty("timetaken",pr_timeTaken.toString());
+props.setProperty("testexecuted",testcasesexecuted.toString());
+props.setProperty("testcasespassed",testcasespassed.toString());
+props.setProperty("testcasesfailed",testcasesfailed.toString());
+props.setProperty("persentpassed",percentPassed.toString());
+props.setProperty("testCaseFailedInStringFormat",testCaseFailedInStringFormat);
+props.store(propFile.newWriter(), null)
+}
+catch(Exception e){
+	log.info "Error in storing test execution data"  + e.getMessage();
+}
+</con:afterRunScript><con:sensitiveInformation/><con:authRepository/><con:tags/></con:soapui-project>
