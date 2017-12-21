@@ -624,7 +624,7 @@ vars.put(&quot;token&quot;,token);</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/agents/dash_element?action_id=rapid_fire&amp;link_id=traveler_replied&amp;lazy_load=true&amp;_=1513152893225</stringProp>
+          <stringProp name="HTTPSampler.path">/agents/dash_element?action_id=rapid_fire&amp;link_id=traveler_replied&amp;lazy_load=false&amp;_=1513152893225</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -974,7 +974,7 @@ vars.put(&quot;token&quot;,token);</stringProp>
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename"></stringProp>
+          <stringProp name="filename">/home/tt/Downloads/5u_1.jtl</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
