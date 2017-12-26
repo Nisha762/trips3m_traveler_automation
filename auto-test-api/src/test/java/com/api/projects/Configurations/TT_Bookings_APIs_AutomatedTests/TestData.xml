@@ -17,8 +17,8 @@
       <tags>healthcheck,kanupriya,kanu</tags>
       <Health_Check_Cancel_Trip>
         <mainreason>Not going cancel my plan,Not satisfied with the current quotes,Going but not booking on traveltriangle</mainreason>
-        <subreason>Due to personal reasons.,Going somewhere else.,Postponed my trip,Other reason.
-        </subreason>
+        <subreasons>Due to personal reasons.,Going somewhere else.,Postponed my trip,Other reason.
+        </subreasons>
       <subreason1>Need better quality.,Need lower budget.</subreason1>
       <subreason2>Have better offer/services from some other agent.,Booking myself without an agent.,TravelTriangle quotes didn't meet my requirements.,Didn't receive timely response from TravelTriangle agents.</subreason2>
             </Health_Check_Cancel_Trip>
@@ -31,6 +31,28 @@
        <cabrequired>99,100</cabrequired>
        <userinputforcabservices>English,Hindi</userinputforcabservices>
         </Health_Check_Edit_Preferences>
+     <Health_Check_Reject_Quote>
+      <reject_reason>1,2,3,4,5,6</reject_reason>
+      <reject_reason_textbox>Test</reject_reason_textbox>
+     </Health_Check_Reject_Quote>
+     <Health_Check_Reject_Quote_After_Invoice_Creation>
+      <reject_reason>1,2,3,4,5,6</reject_reason>
+      <reject_reason_textbox>Test</reject_reason_textbox>
+     </Health_Check_Reject_Quote_After_Invoice_Creation>
+     <Health_Check_Request_More_Quote>
+      <requestmorequote_reason>0,1,2,3,4,5</requestmorequote_reason>
+      <Other_reason>Test</Other_reason>
+     </Health_Check_Request_More_Quote>
+     <Health_Check_Edit_Contact> 
+     <isd_code>+91,+41</isd_code>
+     </Health_Check_Edit_Contact>
+     <Health_Check_QD_Request_Call_Back>
+      <optionid>1,2,3,4</optionid>
+     </Health_Check_QD_Request_Call_Back>
+     <Health_Check_TravelerChatHistory>
+      <title>hi,hello,test,test1</title>
+      <comment>test,test1,test2,test3</comment>
+     </Health_Check_TravelerChatHistory>
      </Health_Check_Booking_PP_API>
    </TestSuite>
 </project>
