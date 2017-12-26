@@ -240,24 +240,39 @@ cal.add(Calendar.DATE, 7);
 SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 String formatted = format1.format(cal.getTime());
 testRunner.testCase.setPropertyValue("start_date",formatted);
-//messageExchange.modelItem.testCase.testSuite.setPropertyValue("start_date",formatted);</script></con:config></con:testStep><con:testStep type="restrequest" name="REST Request" id="c346b40b-2245-4796-9613-f80bcbc49c93"><con:settings/><con:config service="RequestedTripCreate" resourcePath="/browsing/{api_version}/requested_trips" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request" id="ed980cc2-ff4e-4692-98ac-dd55b10d3e7d" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+//messageExchange.modelItem.testCase.testSuite.setPropertyValue("start_date",formatted);</script></con:config></con:testStep><con:testStep type="groovy" name="UserEmail" id="9fcb773f-eb69-42fd-b61b-2c7af0852f2c"><con:settings/><con:config><script>import java.text.SimpleDateFormat;
+import java.util.Random;
+import org.apache.commons.lang.RandomStringUtils;
+
+String charset = (('A'..'Z') + ('0'..'9')).join();
+Integer length = 9;
+String randomString = RandomStringUtils.random(length, charset.toCharArray());
+String[] domains = ["gmail","mail","hotmail","ymail","yahoo","expo","tt"]
+Random random = new Random();
+int domain_index = random.nextInt(domains.size());
+String domain = domains[domain_index];
+
+//Get the Email.
+String Email="test"+randomString.toLowerCase()+"@"+domain+".com";
+testRunner.testCase.setPropertyValue("user_email",Email);
+</script></con:config></con:testStep><con:testStep type="restrequest" name="REST Request" id="c346b40b-2245-4796-9613-f80bcbc49c93"><con:settings/><con:config service="RequestedTripCreate" resourcePath="/browsing/{api_version}/requested_trips" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request" id="ed980cc2-ff4e-4692-98ac-dd55b10d3e7d" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
   &lt;con:entry key="Accept" value="application/json"/>
 &lt;/xml-fragment></con:setting></con:settings><con:endpoint>https://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request>{
         "requested_trip": {
-       "to_loc": "${#TestCase#to_locale}",
-       "from_loc": " Noida, Uttar Pradesh 201301, India",
-       "trip_days": "5",
+       "to_loc": "${#TestCase#to_loc}",
+       "from_loc": "${#TestCase#from_loc}",
+       "trip_days": "${#TestCase#trip_days}",
        "start_date": "${#TestCase#start_date}",
        "email": "${#TestCase#user_email}",
-       "budget": "24000.0",
+       "budget": "${#TestCase#budget}",
        "info": "jgjksakjdasgdjasd",
        "addtl_info": "",
-       "adult": "2",
-       "phone_no": "",
+       "adult": "${#TestCase#num_of_adults}",
+       "phone_no": "${#TestCase#phone_no}",
        "isd_code": "",
        "adminComments": "#slider_organic #Form_filled_on http  ",
-       "trip_stage": "",
+       "trip_stage": "${#TestCase#trip_stage}",
        "flight": "",
        "hotels": "",
        "cab": "",
@@ -276,7 +291,7 @@ def json_response_holder = new JsonSlurper().parseText(response);
 String request_id = json_response_holder.data.requested_trip.id;
 messageExchange.modelItem.testCase.setPropertyValue("RequestID",request_id);
 messageExchange.modelItem.testCase.testSuite.setPropertyValue("RequestID",request_id)
-</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>requested_trip</con:entry><con:entry>requested_trip[from_loc]</con:entry><con:entry>requested_trip[to_loc]</con:entry><con:entry>requested_trip[trip_days]</con:entry><con:entry>requested_trip[start_date]</con:entry><con:entry>requested_trip[trip_stage]</con:entry><con:entry>requested_trip[email]</con:entry><con:entry>requested_trip[phone_no]</con:entry><con:entry>requested_trip[isd_code]</con:entry><con:entry>requested_trip[budget]</con:entry><con:entry>requested_trip[flight]</con:entry><con:entry>requested_trip[hotels]</con:entry><con:entry>requested_trip[cab]</con:entry><con:entry>requested_trip[adminComments]</con:entry><con:entry>requested_trip[addtl_info]</con:entry><con:entry>requested_trip[from_complete]</con:entry><con:entry>requested_trip[to_complete]</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>RequestID</con:name><con:value>2247330</con:value></con:property><con:property><con:name>user_email</con:name><con:value>lorem_tt_test_ipsum111@mailinator.com</con:value></con:property><con:property><con:name>traveler_apiendpoint</con:name><con:value>bookings-qa2.ttdev.in</con:value></con:property><con:property><con:name>start_date</con:name><con:value>2018-01-02</con:value></con:property><con:property><con:name>to_locale</con:name><con:value>Singapore</con:value></con:property></con:properties></con:testCase><con:properties><con:property><con:name>RequestID</con:name><con:value>2247330</con:value></con:property></con:properties></con:testSuite><con:requirements/><con:properties><con:property><con:name>execution_tag</con:name><con:value>healthcheck</con:value></con:property><con:property><con:name>dbname</con:name><con:value/></con:property><con:property><con:name>traveler_apiendpoint</con:name><con:value>frontend.ttdev.in</con:value></con:property><con:property><con:name>httpverb</con:name><con:value>https</con:value></con:property><con:property><con:name>api_version</con:name><con:value>v1</con:value></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>requested_trip</con:entry><con:entry>requested_trip[from_loc]</con:entry><con:entry>requested_trip[to_loc]</con:entry><con:entry>requested_trip[trip_days]</con:entry><con:entry>requested_trip[start_date]</con:entry><con:entry>requested_trip[trip_stage]</con:entry><con:entry>requested_trip[email]</con:entry><con:entry>requested_trip[phone_no]</con:entry><con:entry>requested_trip[isd_code]</con:entry><con:entry>requested_trip[budget]</con:entry><con:entry>requested_trip[flight]</con:entry><con:entry>requested_trip[hotels]</con:entry><con:entry>requested_trip[cab]</con:entry><con:entry>requested_trip[adminComments]</con:entry><con:entry>requested_trip[addtl_info]</con:entry><con:entry>requested_trip[from_complete]</con:entry><con:entry>requested_trip[to_complete]</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>traveler_apiendpoint</con:name><con:value>admin-qa1.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>testf7rkdk5oo@yahoo.com</con:value></con:property><con:property><con:name>start_date</con:name><con:value>2017-12-20</con:value></con:property><con:property><con:name>RequestID</con:name><con:value>2199166</con:value></con:property><con:property><con:name>to_loc</con:name><con:value>Kerala</con:value></con:property><con:property><con:name>phone_no</con:name><con:value/></con:property><con:property><con:name>from_loc</con:name><con:value>Noida</con:value></con:property><con:property><con:name>trip_days</con:name><con:value>5</con:value></con:property><con:property><con:name>budget</con:name><con:value>3500</con:value></con:property><con:property><con:name>num_of_adults</con:name><con:value>2</con:value></con:property><con:property><con:name>trip_stage</con:name><con:value>3</con:value></con:property></con:properties></con:testCase><con:properties><con:property><con:name>RequestID</con:name><con:value>2199166</con:value></con:property></con:properties></con:testSuite><con:requirements/><con:properties><con:property><con:name>execution_tag</con:name><con:value>healthcheck</con:value></con:property><con:property><con:name>dbname</con:name><con:value/></con:property><con:property><con:name>traveler_apiendpoint</con:name><con:value>frontend.ttdev.in</con:value></con:property><con:property><con:name>httpverb</con:name><con:value>https</con:value></con:property><con:property><con:name>api_version</con:name><con:value>v1</con:value></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
 import groovy.util.GroovyScriptEngine;
 import java.sql.DriverManager;
 import java.sql.Connection;
