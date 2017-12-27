@@ -18,48 +18,48 @@ import com.auto.solution.FileManager.CsvManager;
 public class TestSimulator {
 
  	private HashMap<String, String> objDefInfo = new HashMap<String, String>();
- 	
+
  	private String[] testDataContents = null;
- 	
+
  	private  TestDrivers testSimulator = null;
- 	
+
  	private CsvManager csvManager = null;
- 	
+
  	private ResourceManager rm;
- 	
+
  	private InvokeAPI api_caller = null;
- 	
+
  	private RecoveryObjectsMapper objMapper = null;
- 	
+
  	private EmailNotificationHandler mailHandler = null;
- 	
+
  	public TestSimulator(ResourceManager rmanager){
- 		
+
  		this.rm = rmanager;
- 		
+
  		this.csvManager = new CsvManager(this.rm);
- 		
- 		api_caller = new InvokeAPI(rmanager);	
- 		
+
+ 		api_caller = new InvokeAPI(rmanager);
+
  		mailHandler = new EmailNotificationHandler(rm);
  	}
- 	
+
  	public void setTestObjectInfo(HashMap<String, String> currentTestObjectInfo){
  		this.objDefInfo = null;
- 		
+
  		this.objDefInfo = currentTestObjectInfo;
  	}
- 	
+
  	public void consumeTestObjectsNameToSkipDuringRecovery(RecoveryObjectsMapper objMapper){
 		this.objMapper = new RecoveryObjectsMapper();
 		this.objMapper = objMapper;
 	}
 
- 	
+
  	public void enableTestDriver(String testDriverKey){
- 		
+
  		testSimulator = null;
- 		
+
  		if(testDriverKey.contains(Property.DESKTOP_WEB_TESTDRIVER_KEYWORD)){
  			testSimulator = new DesktopWebTestDriverImpl(this.rm);
  			((DesktopWebTestDriverImpl)testSimulator).setRecoveryObjectMapper(this.objMapper);
@@ -75,39 +75,39 @@ public class TestSimulator {
  	    	testSimulator = new MobileIOSTestDriverImpl(this.rm);
  	    }
  	}
- 	
+
  	private void prepareTestData(String testData){
  		this.testDataContents = null;
- 		this.testDataContents = testData.split(Property.TESTDATA_SEPERATOR);			
+ 		this.testDataContents = testData.split(Property.TESTDATA_SEPERATOR);
  	}
- 	
- 	
+
+
  	public void simulateTestStep(String stepAction,String testData,String testObject, String strategyModifier,boolean isReusableTestKeyword){
- 		
+
  		if(isReusableTestKeyword){
  			return;
  		}
  		Property.CURRENT_TESTSTEP = stepAction;
- 		
+
  		prepareTestData(testData);
- 		
+
  		TestObjectDetails objCurrentObjectDetails = new TestObjectDetails(this.objDefInfo);
- 		
+
  		testSimulator.injectTestObjectDetail(objCurrentObjectDetails); // Setting up the object definition.
- 		
+
  		Property.StepExecutionTime = Utility.getCurrentDateAndTimeInStringFormat();
- 		
+
  		//If Ignore option is enabled then Ignore the test step.
  		if(Property.LIST_STRATEGY_KEYWORD.contains(Property.STRATEGY_KEYWORD.IGNORE_STEP.toString())){
  			Property.Remarks = Property.ERROR_MESSAGES.STEP_IGNORED.getErrorMessage();
  			Property.StepStatus =  Property.PASS;
  			return;
  		}
- 		
+
  		try{
  			if(stepAction.toLowerCase().equals("initializeapp")){
- 				
- 				//TODO : Replace the STep description with actual test data used. 
+
+ 				//TODO : Replace the STep description with actual test data used.
  					String URL = "";
  					try{
  						URL = this.testDataContents[0];
@@ -121,7 +121,7 @@ public class TestSimulator {
  					testSimulator.initializeApp(URL);
  			}
  			else if(stepAction.toLowerCase().equals("check")){
- 				testSimulator.check();				
+ 				testSimulator.check();
  			}
  			else if(stepAction.toLowerCase().equals("uncheck")){
  				testSimulator.uncheck();
@@ -129,36 +129,36 @@ public class TestSimulator {
  			else if(stepAction.toLowerCase().equals("sendkey") ){
  				String textToType = "";
  				try{
- 					textToType = this.testDataContents[0];					      
+ 					textToType = this.testDataContents[0];
  				}
  			catch(ArrayIndexOutOfBoundsException ae){
  				throw new Exception(Property.ERROR_MESSAGES.ER_MISSING_TESTDATA.getErrorMessage());
  			}
  				Utility.setKeyValueToGlobalVarMap(testObject, textToType);
- 				
- 				testSimulator.sendKey(textToType);	
+
+ 				testSimulator.sendKey(textToType);
  			}
- 			
+
  			else if(stepAction.toLowerCase().equals("uploadfile")){
  				String fileToUpload = "";
  				try{
- 					fileToUpload = this.testDataContents[0];					      
+ 					fileToUpload = this.testDataContents[0];
  				}
  			catch(ArrayIndexOutOfBoundsException ae){
  				throw new Exception(Property.ERROR_MESSAGES.ER_MISSING_TESTDATA.getErrorMessage());
  			}
  				Utility.setKeyValueToGlobalVarMap(testObject, fileToUpload);
- 				
+
  				testSimulator.uploadFile(fileToUpload);
  			}
- 			
+
  			else if(stepAction.toLowerCase().equals("navigateurl")){
  				String URL = "";
- 				
+
  				try{
- 					
+
  					URL = this.testDataContents[0];
- 					
+
  					if(URL.equals("")){
  						throw new Exception(Property.ERROR_MESSAGES.ER_MISSING_TESTDATA.getErrorMessage());
  					}
@@ -166,7 +166,7 @@ public class TestSimulator {
  			catch(ArrayIndexOutOfBoundsException ae){
  				throw new Exception(Property.ERROR_MESSAGES.ER_MISSING_TESTDATA.getErrorMessage());
  			}
- 				
+
  				testSimulator.navigateURL(URL);
  			}
  			else if(stepAction.toLowerCase().equals("isresourceloaded")){
@@ -175,7 +175,7 @@ public class TestSimulator {
  			else if(stepAction.toLowerCase().equals("istextpresent")){
  				String textToVerify = "";
  				try{
- 					textToVerify = this.testDataContents[0];		      
+ 					textToVerify = this.testDataContents[0];
  					if(textToVerify.equals("")){
  						throw new Exception(Property.ERROR_MESSAGES.ER_MISSING_TESTDATA.getErrorMessage());
  					}
@@ -183,7 +183,7 @@ public class TestSimulator {
  			catch(ArrayIndexOutOfBoundsException ae){
  				throw new Exception(Property.ERROR_MESSAGES.ER_MISSING_TESTDATA.getErrorMessage());
  			}
- 								
+
  				testSimulator.isTextPresent(textToVerify);
  			}
  			else if(stepAction.toLowerCase().equals("click")){
@@ -237,12 +237,12 @@ public class TestSimulator {
  				}
  				String expectedTestElementAttribute = testDataContents[1];
  				testSimulator.verifyTestElementAttribute(propertyToVerify, expectedTestElementAttribute);
- 				
+
  				}
  				catch(Exception e){
  					throw e;
  				}
- 				
+
  			}
  			else if(stepAction.equalsIgnoreCase("verifytestelementattributenotpresent")){
  				try{
@@ -255,12 +255,12 @@ public class TestSimulator {
  				}
  				String expectedTestElementAttribute = testDataContents[1];
  				testSimulator.verifyTestElementAttributeNotPresent(propertyToVerify, expectedTestElementAttribute);
- 				
+
  				}
  				catch(Exception e){
  					throw e;
  				}
- 				
+
  			}
  			else if(stepAction.equalsIgnoreCase("hover")){
  				testSimulator.hover();
@@ -304,14 +304,14 @@ public class TestSimulator {
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
  			String outputValue	= Utility.replaceAll(testDataContents[1], testDataContents[2]);
- 			Utility.setKeyValueToGlobalVarMap(testDataContents[0], outputValue);		
+ 			Utility.setKeyValueToGlobalVarMap(testDataContents[0], outputValue);
  			}
  			else if(stepAction.equalsIgnoreCase("fetchValueFromVariable")){
  				if(testDataContents.length < 4){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
  			String outputValue	= Utility.splitAndReturnIndexedValue(testDataContents[1], testDataContents[2], testDataContents[3]);
- 			Utility.setKeyValueToGlobalVarMap(testDataContents[0], outputValue);		
+ 			Utility.setKeyValueToGlobalVarMap(testDataContents[0], outputValue);
  			}
  			else if(stepAction.equalsIgnoreCase("assertoninputvalue")){
  				if(testDataContents.length != 1){
@@ -321,7 +321,7 @@ public class TestSimulator {
  					boolean bFlag ;
  					bFlag = Utility.assertOnInputValue(testDataContents[0]);
  					if(!bFlag){
- 						String errMessage = ERROR_MESSAGES.ERR_TESTDATA_MATCH.getErrorMessage().replace("{ACTUAL_STRING}", testDataContents[0]);					
+ 						String errMessage = ERROR_MESSAGES.ERR_TESTDATA_MATCH.getErrorMessage().replace("{ACTUAL_STRING}", testDataContents[0]);
  						throw new Exception(errMessage);
  					}
  				}
@@ -329,8 +329,8 @@ public class TestSimulator {
  			else if(stepAction.equalsIgnoreCase("verifyPdfText")){
  				if(testDataContents.length < 2){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
- 				}	
- 				String tempFile = null; 
+ 				}
+ 				String tempFile = null;
  				try{
  				tempFile =	rm.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}", testDataContents[0]);
  				tempFile =  tempFile.replace("{PROJECT_NAME}", Property.PROJECT_NAME);
@@ -384,7 +384,7 @@ public class TestSimulator {
  				String pageAttribute = testDataContents[0];
  				String expectedValue = testDataContents[1];
  				testSimulator.verifyPageAttribute(pageAttribute, expectedValue);
- 				
+
  			}
  			else if(stepAction.toLowerCase().equals("getpageproperties")){
  				if(testDataContents.length < 2){
@@ -411,7 +411,7 @@ public class TestSimulator {
  				String navigationOption = testDataContents[0].trim();
  				testSimulator.browserNavigation(navigationOption);
  			}
- 			
+
  			else if(stepAction.equalsIgnoreCase("executequery")){
  				if(testDataContents.length == 1){
  					String query = testDataContents[0].trim();
@@ -431,7 +431,7 @@ public class TestSimulator {
  				if(testDataContents.length != 1){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
- 
+
  				String collectionName;
  				String collectionIndex;
  				String globalMapKeyToStoreData;
@@ -446,8 +446,8 @@ public class TestSimulator {
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
  				AccessResultsetData.fetchResultSetData(collectionName, collectionIndex, globalMapKeyToStoreData);
- 				
- 			}		
+
+ 			}
  			else if(stepAction.equalsIgnoreCase("verifyscocontents")){
  				if(testDataContents.length != 1){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
@@ -479,44 +479,44 @@ public class TestSimulator {
  				else{
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
- 				
+
  			}
- 			
+
  			else if(stepAction.toLowerCase().equalsIgnoreCase("deleteCompletefile")){
  				if(testDataContents.length > 1){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
  				csvManager.deleteWholeCsvFromTheFolder(testDataContents);
  			}
- 			
+
  			else if(stepAction.toLowerCase().equalsIgnoreCase("replaceinfile")){
  				if(testDataContents.length != 4){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
  				csvManager.replaceAnyValueInCsv(testDataContents);
  			}
- 			
+
  			else if(stepAction.toLowerCase().equalsIgnoreCase("verifyinfile")){
  				if(testDataContents.length != 4){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
  				csvManager.verifyAnyValueInCsv(testDataContents);
  			}
- 
+
  			else if(stepAction.toLowerCase().equalsIgnoreCase("deleteanyvalueinfile")){
  				if(testDataContents.length != 3){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
  				csvManager.deleteAnyValueInCsv(testDataContents);
  			}
- 			
+
  			else if(stepAction.toLowerCase().equalsIgnoreCase("appendinfile")){
  				if(testDataContents.length != 2){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
  				csvManager.appendAnyValueInCsv(testDataContents);
  			}
- 			
+
  			else if(stepAction.toLowerCase().equalsIgnoreCase("getelementdimension")){
  				 				String dimension = testSimulator.getElementDimension();
  				 				Utility.setKeyValueToGlobalVarMap(testObject, dimension);
@@ -530,9 +530,9 @@ public class TestSimulator {
  				if(testDataContents.length > 1){
  					try{
  					    //key=value || key=value.
- 					
+
  						String[] key_value_pairs = testDataContents[1].split(Pattern.quote("||"));
- 				
+
  						for (String key_value_pair : key_value_pairs) {
  							String keyValue = key_value_pair.trim();
  							String[] keyValueSplitted = keyValue.split("=");
@@ -540,13 +540,13 @@ public class TestSimulator {
  							String value = keyValueSplitted[1].trim();
  							propertiesMap.put(key, value);
  							}
- 						
+
  					}
  					catch(Exception e){
  						throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage() + "--"  + e.getMessage());
  					}
  				}
- 				
+
  				api_caller.setAPIProjectReference(soapui_project_name, propertiesMap);
  				Thread api_thread = new Thread(api_caller);
  				api_thread.setDaemon(true);
@@ -562,7 +562,7 @@ public class TestSimulator {
  					for (String prop : out_key_value_pairs) {
  						outProp.add(prop);
 					}
- 					
+
  					HashMap<String, String> outputPropertiesMap = api_caller.getTestCaseProperty(outProp);
  					if(outputPropertiesMap != null)
  					{
@@ -572,8 +572,8 @@ public class TestSimulator {
  					}
  				}
  				}
- 				
- 				
+
+
  			}
  			else if(stepAction.toLowerCase().equalsIgnoreCase("resizecurrentwindow")){
  				if(testDataContents.length != 2){
@@ -581,9 +581,9 @@ public class TestSimulator {
  				}
  				int x_coordinates = Integer.parseInt(testDataContents[0]);
  				int y_coordinates = Integer.parseInt(testDataContents[1]);
- 				
+
  				testSimulator.resizeCurrentWindow(x_coordinates, y_coordinates);
- 				
+
  			}
  			else if(stepAction.toLowerCase().equalsIgnoreCase("resizetodeafult")){
  				testSimulator.resizeToDeafult();
@@ -592,19 +592,19 @@ public class TestSimulator {
  				testSimulator.shutdown();
  			}
  			else if(stepAction.toLowerCase().equalsIgnoreCase("emailnotificationreceived")){
- 				
+
  				if(testDataContents.length < 1){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
- 				String email_id = Utility.getValueForKeyFromGlobalVarMap("email_server_name"); 				
- 				String email_password = Utility.getValueForKeyFromGlobalVarMap("email_server_password"); 				
- 				mailHandler.connectToMailServerInbox(email_id, email_password); 				
- 				String email_subject_pattern = testDataContents[0]; 				
- 				boolean emailReceived = mailHandler.isEmailSentToIndox(email_subject_pattern); 				
+ 				String email_id = Utility.getValueForKeyFromGlobalVarMap("email_server_name");
+ 				String email_password = Utility.getValueForKeyFromGlobalVarMap("email_server_password");
+ 				mailHandler.connectToMailServerInbox(email_id, email_password);
+ 				String email_subject_pattern = testDataContents[0];
+ 				boolean emailReceived = mailHandler.isEmailSentToIndox(email_subject_pattern);
  				if(!emailReceived){
  					throw new Exception(Property.ERROR_MESSAGES.ERR_IN_GETTING_EMAIL_CONTENTS_BY_SUBJECT.getErrorMessage() + email_subject_pattern);
  				}
- 				
+
  			}
  			else if(stepAction.toLowerCase().equalsIgnoreCase("iselementinemail")){
 
@@ -628,6 +628,12 @@ public class TestSimulator {
  				String urlSource = testDataContents[0];
  				testSimulator.verifyInternalLinkOnWebPage(urlSource);
  			}
+      else if(stepAction.toLowerCase().equalsIgnoreCase("switchtonewtab")){
+        testSimulator.switchToNewTab();
+      }
+      else if(stepAction.toLowerCase().equalsIgnoreCase("closetab")){
+        testSimulator.closeTab();
+      }
  			else{
  				throw new NoSuchMethodException(Property.ERROR_MESSAGES.ER_NO_STEP_ACTION.getErrorMessage());
  			}
@@ -644,15 +650,15 @@ public class TestSimulator {
  			}
  		}
  		this.takeSnapshots();
- 		
+
  	}
- 	
+
  	private void takeSnapshots(){
  		String snapShotName = "";
  		if(Property.DEBUG_MODE.contains("off") && Property.DEBUG_MODE.contains("strict")){ 	}
- 		
+
  		else if(!Property.DEBUG_MODE.contains("on") && Property.StepStatus == Property.FAIL ){snapShotName = testSimulator.saveSnapshotAndHighlightTarget(false);}
- 		
+
  		else if(Property.DEBUG_MODE.contains("on")){
  			snapShotName = testSimulator.saveSnapshotAndHighlightTarget(true);
  		}

@@ -65,39 +65,39 @@ import com.auto.solution.TestDrivers.RecoveryHandling.RecoverySupportForSelenium
 public class MobileWebTestDriverImpl implements TestDrivers{
 
 	private static RecoverySupportForSeleniumDriver recoverySupportHandle = null;
-	
+
 	private DesiredCapabilities driverCapability = new DesiredCapabilities();
-	
+
 	private boolean isRemoteExecution = false;
-	
+
 	private String appiumUrlForExecution = "";
-	
+
 	private  static AppiumDriver driver = null;
-	
+
 	private static WebDriverWait wait = null;
-	
+
 	private WebElement actualTestElement = null;
-	
+
 	private boolean getTestObjectList = false;
-	
+
 	private ArrayList<WebElement> testObjectList = new ArrayList<WebElement>();
-	
+
 	private TestObjectDetails testObjectInfo = null;
-	
+
 	private ResourceManager rManager;
-	
+
 	private RecoveryObjectsMapper objMapper;
-	
+
 	public ArrayList<String> recoveryObjectsToSkip = new ArrayList<String>();
-	
+
 	MobileWebTestDriverImpl(ResourceManager rmanager) {
 		this.rManager = rmanager;
 	}
-	
+
 	private File highlightElement(WebElement element) throws Exception {
 		File fileSnapshot  = null;
 		try{
-			
+
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].style.border='4px groove Red'", element);
 			fileSnapshot = this.getScreenshot();
@@ -107,26 +107,26 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 			throw e;
 		}
 		return fileSnapshot;
-		
+
 	}
-	
+
 	    private ArrayList<String> getHyperRefrenceOfAllLinksOnPage(){
-			
+
 			ArrayList<String> hrefs = new ArrayList<String>();
-			
+
 			List<WebElement> linksOnPage = driver.findElements(By.xpath("//a"));
-			
+
 			for (WebElement link : linksOnPage) {
-			
+
 				String href = link.getAttribute("href");
 				hrefs.add(href);
 			}
-			
+
 			return hrefs;
 		}
-	    
+
 	private Object executeJavaScriptOnBrowserInstance(WebElement testElement,String javaScriptSnippet) throws Exception{
-		
+
 		JavascriptExecutor jsExecutor = null;
 		Object jsResult = null;
 		try{
@@ -140,31 +140,31 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		}
 		return jsResult;
 	}
-	
+
 	@Override
 	public void injectTestObjectDetail(TestObjectDetails objDetails) {
 		this.testObjectInfo = objDetails;
-		
+
 	}
 
 	private void loadAndSetDriverCapabilities() throws Exception{
 		try{
-		
+
 			Set<String> inputKeys = Property.globalVarMap.keySet();
-			
+
 			for (String capabilitykey : inputKeys) {
 				if(capabilitykey.contains(Property.DRIVER_CAPABILITY_KEYWORD)){
 					String capabilityValue = Property.globalVarMap.get(capabilitykey);
-					
+
 					String actualCapabilityName = capabilitykey.replace(Property.DRIVER_CAPABILITY_KEYWORD + ".", "");
-					
+
 					if(capabilityValue.toLowerCase().contains("null"))
 					{capabilityValue = "";}
-					
+
 					if(actualCapabilityName.equalsIgnoreCase("app")){
 						capabilityValue = "";
 					    }
-					
+
 					driverCapability.setCapability(actualCapabilityName, capabilityValue);
 				}
 			}
@@ -173,7 +173,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 			throw new Exception(ERROR_MESSAGES.ER_IN_LOADING_DRIVER_CAPABILITIES.getErrorMessage() + e.getMessage());
 		}
 	}
-	
+
 	private void captureExecutionDetails(){
 		if(Property.IsRemoteExecution.equalsIgnoreCase("true")){
 			this.appiumUrlForExecution = Property.RemoteURL + "/wd/hub";
@@ -182,7 +182,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 			this.appiumUrlForExecution = "http://127.0.0.1:4723/wd/hub";
 		}
 	}
-	
+
 	public void swipe(){
 //		int screenWidth = 0;
 //		int screenHight = 0;
@@ -191,18 +191,18 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 //				.getWidth())) / 2;
 //		screenHight = Integer.valueOf(String.valueOf(screenSize
 //				.getHeight())) / 2;
-//		
+//
 //		if(this.testObjectFrameDetails.trim().toLowerCase().contains("up")){
-//			driver.swipe(screenWidth, (2*screenHight)-100, screenWidth, screenHight, 2000);	
+//			driver.swipe(screenWidth, (2*screenHight)-100, screenWidth, screenHight, 2000);
 //		}else if(this.testObjectFrameDetails.trim().toLowerCase().contains("down")){
-//			driver.swipe(screenWidth, screenHight, screenWidth, (2*screenHight)-100, 2000);	
+//			driver.swipe(screenWidth, screenHight, screenWidth, (2*screenHight)-100, 2000);
 //		}
-	 
+
 	}
-	
-	public void swipetoElementVisible(String swipeType) throws Exception{	
+
+	public void swipetoElementVisible(String swipeType) throws Exception{
 		int currentTime = 0;
-		try {	
+		try {
 			int timeOut =Integer.parseInt(Property.SyncTimeOut);
 			actualTestElement =  getActualTestObject();
 			while(actualTestElement == null && currentTime < timeOut ){
@@ -210,16 +210,16 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 				Thread.sleep(1000);
 				actualTestElement =  getActualTestObject();
 				currentTime++;
-			}	
-		}catch(Exception ex){	
+			}
+		}catch(Exception ex){
 			String errMessage = Property.ERROR_MESSAGES.ERR_IN_SWIPING_TO_OBJECT.getErrorMessage().replaceAll("{TIME}",String.valueOf(currentTime));
 			throw new Exception(errMessage + ex.getMessage());
-			
+
 		}
 	}
 
 	private String getPageAttribute(String attributeName) throws Exception{
-		
+
 		String attributeValue = "";
 		try {
 			if(attributeName.toLowerCase().contains("url")){
@@ -240,10 +240,10 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		}
 		return attributeValue;
 	}
-	
+
 	private void performKeyBoardAction(String Key,WebElement testElement) throws Exception{
 		try {
-			
+
 			if(Key.equalsIgnoreCase("enter")){
 				testElement.sendKeys(Keys.ENTER);
 			}
@@ -272,7 +272,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 				throw e;
 		}
 }
-	
+
 	private WebElement getTestObject(String locatingStrategy,String location){
 		List<WebElement> testElements = null;
 		WebElement testElement = null;
@@ -298,50 +298,50 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 			else if(locatingStrategy.toLowerCase().contains("text")){
 				testElements = driver.findElements(By.linkText(location));
 			}
-			
+
 			if(this.getTestObjectList){
 				this.testObjectList.clear();
 				this.testObjectList = (ArrayList<WebElement>) testElements;
 			}
 			String[] filtersForTestObject = testObjectInfo.getFiltersAppliedOnTestObject().split(",");
-			
-			
-			for (WebElement testObject : testElements) {				
-			
+
+
+			for (WebElement testObject : testElements) {
+
 				boolean testObjectValidForFilters = true;
-				
+
 				for (String filter : filtersForTestObject) {
 					if(filter.equals("")){filter = FILTERS.IS_DISPLAYED.getFilter();}
-					
+
 					if(filter.toLowerCase().contains(FILTERS.IS_ENABLED.getFilter())){
 						if(!testObject.isEnabled()){testObjectValidForFilters = false; break;}
 					}
-				
+
 					if(filter.toLowerCase().contains(FILTERS.IS_CLICKABLE.getFilter())){
 						if(!isClickable(testObject)){testObjectValidForFilters = false; break;}
 					}
-					
+
 					if(filter.toLowerCase().contains(FILTERS.IS_DISPLAYED.getFilter())){
 						if(!testObject.isDisplayed()){testObjectValidForFilters = false; break;}
 					}
 				}
-				
+
 				if(testObjectValidForFilters){
 					testElement = testObject;
 					break;
 				}
 			}
-			
+
 		}
 		catch(Exception e){
 			return null;
 		}
 		return testElement;
 	}
-	
-	
+
+
 	public static boolean isClickable(WebElement testObject){
-			
+
 			try
 			{
 			   WebDriverWait wait = new WebDriverWait(driver, 1);
@@ -353,12 +353,12 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 			  return false;
 			}
 		}
-	
-	private boolean  waitForJStoLoad() {	
-		
+
+	private boolean  waitForJStoLoad() {
+
 		//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class='js-loaded']")));
-			
-			
+
+
 			ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
 			      @Override
 			      public Boolean apply(WebDriver driver) {
@@ -372,7 +372,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 			        }
 			      }
 			    };
-		
+
 			    // wait for Javascript to load
 			    ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
 			      @Override
@@ -382,7 +382,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 			        	return jsExecutor.executeScript("return document.readyState").toString().equals("complete");
 			      }
 			    };
-		
+
 			  return wait.until(jQueryLoad) && wait.until(jsLoad);
 
 	}
@@ -399,27 +399,27 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 				//Nothing to do.
 			}
 		}
-	
+
     private WebElement waitAndGetTestObject(Boolean isWaitRequiredToFetchTheTestObject) throws NoSuchElementException,Exception{
 		try{
 			switchToMostRecentWindow();
-			
+
 			driver.switchTo().defaultContent();
-			
-			waitForJStoLoad();			
-			
+
+			waitForJStoLoad();
+
 			if(Property.LIST_STRATEGY_KEYWORD.contains(Property.STRATEGY_KEYWORD.NOWAIT.toString())){
 				isWaitRequiredToFetchTheTestObject = false;
 			}
 			String locatingStrategyForObject = testObjectInfo.getLocatingStrategyOfTestObject();
-			
+
 			String locationOfObject = testObjectInfo.getLocationOfTestObject();
-			
+
 			if(((locatingStrategyForObject=="")||locatingStrategyForObject==null)&&((locationOfObject=="")||locationOfObject==null))
 							{
 								throw new Exception(Property.ERROR_MESSAGES.ER_GETTING_TESTOBJECT.getErrorMessage());
 							}
-			
+
 			if(isWaitRequiredToFetchTheTestObject){
 					wait.until(new ExpectedCondition<WebElement>() {
 							public WebElement apply(WebDriver d) {
@@ -434,7 +434,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 					});
 					try{
 					recoverySupportHandle.doRecoveryForSpecialObjectsWithHigherPriority(this.objMapper);
-					
+
 					if(actualTestElement==null)
 						recoverySupportHandle.doRecovery(this.objMapper);
 					}
@@ -461,19 +461,19 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		}
 		return actualTestElement;
 	}
-	
+
 	private WebElement getActualTestObject(){
-		WebElement testElement = null;		
-		
+		WebElement testElement = null;
+
 		String locatingStrategyForObject = testObjectInfo.getLocatingStrategyOfTestObject();
-		
+
 		String locationOfObject = testObjectInfo.getLocationOfTestObject();
-		
+
 		testElement = this.getTestObject(locatingStrategyForObject, locationOfObject);
-			
-		return testElement;					
+
+		return testElement;
 	}
-	
+
 	private  void deleteAllCookies() {
 		try {
 			//driver.manage().deleteAllCookies();
@@ -489,103 +489,103 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		}
 
 	}
-	
+
 	private void setCookies(){
 		try{
 			boolean isCookieSet = false;
-			int browserCookieTrial = 0;	
+			int browserCookieTrial = 0;
 			HashMap<String, HashMap<String, String>> cookies = Utility.getBrowserCookiesMap();
 			if(cookies.size() > 0 ){
 				try{
 					browserCookieTrial = Integer.parseInt(Property.BROWSER_COOKIE_TRIAL);
 				}catch(Exception ex){
-					
+
 				}
-				
+
 				while(!isCookieSet && browserCookieTrial >= 0){
 					browserCookieTrial --;
 					for (String cookieKey : cookies.keySet()) {
 						Cookie cookie = null;
 						if(cookies.get(cookieKey).containsKey(Property.COOKIE_DOMAIN_NAME))
 							cookie = new Cookie(cookieKey, cookies.get(cookieKey).get(Property.COOKIE_VALUE),cookies.get(cookieKey).get(Property.COOKIE_DOMAIN_NAME),null,null);
-						else 
+						else
 							cookie = new Cookie(cookieKey, cookies.get(cookieKey).get(Property.COOKIE_VALUE));
-					
-						driver.manage().addCookie(cookie);	 
+
+						driver.manage().addCookie(cookie);
 					}
 					driver.navigate().refresh();
-				
+
 					for (String cookieKey : cookies.keySet()) {
 						boolean isCookieFound = false;
 						Cookie browserCookie =  driver.manage().getCookieNamed(cookieKey);
 							    if(browserCookie.getName().equalsIgnoreCase(cookieKey) && browserCookie.getValue().equalsIgnoreCase(cookies.get(cookieKey).get(Property.COOKIE_VALUE))){
 							    	isCookieFound = true;
 					}
-						  
+
 					if(!isCookieFound){
 						isCookieSet = false;
 						break;
 					}else{
 						isCookieSet = true;
 					}
-						  
+
 				}
-					
-					
-					
+
+
+
 			}
 		}
-			
+
 	}
 		catch(Exception e){
 			//Nothing to throw.
 		}
 	}
 
-	
-	
+
+
 	private void openEndPointInBrowser(String endPoint) throws Exception{
 		try{
 			wait = new WebDriverWait(driver, Long.parseLong(Property.SyncTimeOut));
-			
+
 			driver.get(endPoint);
-			
+
 			//driver.manage().window().maximize();
 		}
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
-	
+
 	private int validateUrlStatus(String url){
-		
+
 		int url_status = 000;
 		HttpClient client = HttpClientBuilder.create().build();
-		
+
 		HttpGet request = new HttpGet(url);
-		
+
 		try {
-			
+
 			HttpResponse response = client.execute(request);
-			
+
 			url_status = response.getStatusLine().getStatusCode();
-			
+
 		} catch (Exception e) {
 				}
 		return url_status;
 	}
-	
-	
+
+
 	public void setRecoveryObjectMapper(RecoveryObjectsMapper objMapper){
 		this.objMapper = new RecoveryObjectsMapper();
 		this.objMapper = objMapper;
 	}
-	
+
 	@Override
 	public void initializeApp(String endpoint) throws MalformedURLException,
 			Exception {
-		try{	
+		try{
 			this.loadAndSetDriverCapabilities();
 			this.captureExecutionDetails();
 			driver = new AndroidDriver(new URL(this.appiumUrlForExecution), driverCapability);
@@ -598,7 +598,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -610,14 +610,14 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		catch(NoSuchElementException ne){
 			throw ne;
 		}
-		
+
 		try{
 			this.performKeyBoardAction(Key, testElement);
 		}
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -630,7 +630,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 			throw ne;
 		}
 		try{
-			
+
 			if(!Boolean.parseBoolean(testElement.getAttribute("checked"))){
 				testElement.click();
 			}
@@ -638,7 +638,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -650,7 +650,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		catch(NoSuchElementException ne){
 			throw ne;
 		}
-		
+
 		try{
 			if(Boolean.parseBoolean(testElement.getAttribute("checked"))){
 				testElement.click();
@@ -659,14 +659,14 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
 	public void sendKey(String text) throws NoSuchElementException, Exception {
 		WebElement testElement = null;
 		try{
-			testElement = this.waitAndGetTestObject(true);				
+			testElement = this.waitAndGetTestObject(true);
 		}
 		catch(NoSuchElementException ne){
 			throw ne;
@@ -675,11 +675,11 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 						try{
 			testElement.clear();}
 			catch(Exception e){}
-			testElement.sendKeys(text);	
+			testElement.sendKeys(text);
 		}
 		catch(Exception e){
 			throw e;
-		}		
+		}
 	}
 
 	@Override
@@ -690,7 +690,7 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -709,20 +709,20 @@ public class MobileWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
 	public void isTextPresent(String text) throws Exception {
 WebElement testElement = null;
-		
+
 		try{
 			testElement = this.waitAndGetTestObject(true);
 		}
 		catch(NoSuchElementException ne){
 			testElement = null;
 		}
-		
+
 		String ObjectText = "";
 		try{
 		if(testElement == null){
@@ -735,12 +735,12 @@ WebElement testElement = null;
 				String msgException = Property.ERROR_MESSAGES.ER_ASSERTION.getErrorMessage().replace("{ACTUAL_DATA}",ObjectText);
 				msgException = msgException.replace("{$TESTDATA}", text);
 				throw new Exception(msgException);
-			}		
+			}
 		}
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -748,10 +748,10 @@ WebElement testElement = null;
 		WebElement testElement = null;
 		try{
 			testElement = this.waitAndGetTestObject(true);
-			
+
 			try{
 			this.executeJavaScriptOnBrowserInstance(testElement, "arguments[0].focus()");
-			
+
 			testElement.click();
 			}catch(Exception ex){
 				if(ex.getMessage().toLowerCase().contains("element is not clickable")){
@@ -760,9 +760,9 @@ WebElement testElement = null;
 				}else{
 					throw ex;
 				}
-//				
+//
 			}
-			
+
 		}
 		catch(NoSuchElementException ne){
 			throw ne;
@@ -770,7 +770,7 @@ WebElement testElement = null;
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -786,13 +786,13 @@ WebElement testElement = null;
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
 	public void closeAllBrowsersWindow() throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -806,12 +806,12 @@ WebElement testElement = null;
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
 	public void isObjectNotThere() throws Exception {
-		WebElement testElement = this.waitAndGetTestObject(false);	
+		WebElement testElement = this.waitAndGetTestObject(false);
 		try {
 			if(testElement != null){
 				String errMessage = Property.ERROR_MESSAGES.TESTOBJECT_IS_THERE.getErrorMessage().replace("{IS_DISPALYED}", String.valueOf(testElement.isDisplayed()));
@@ -820,7 +820,7 @@ WebElement testElement = null;
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -834,7 +834,7 @@ WebElement testElement = null;
 			catch(Exception e){
 			 //nothing to do here!
 			}
-			
+
 			Object snippetResult = this.executeJavaScriptOnBrowserInstance(testElement, eventCodeSnippet);
 			if(snippetResult != null){
 			codeSnippetOutput = snippetResult.toString();}
@@ -857,7 +857,7 @@ WebElement testElement = null;
                 throw new Exception(ERROR_MESSAGES.ER_GET_TESTOBJECT.getErrorMessage());
             }
             Select objSelect = new Select(testElement);
-            
+
             //select particular option.
             try{
                 p = Pattern.compile("\\[(.*?)\\]");
@@ -867,7 +867,7 @@ WebElement testElement = null;
                 }else{
                     value = itemToSelect;
                 }
-                
+
                 if(itemToSelect.toLowerCase().contains("value[")){
                     objSelect.selectByValue(value);
                 }else if(itemToSelect.toLowerCase().contains("text[")){
@@ -889,20 +889,20 @@ WebElement testElement = null;
                         throw new Exception(ERROR_MESSAGES.ER_COULDNOT_SELECT_VALUE.getErrorMessage().replace("{$OPTION}", value));
                     }
                 }
-                
+
             }
             catch(Exception e)
             {
-                throw new Exception(ERROR_MESSAGES.ER_COULDNOT_SELECT_VALUE.getErrorMessage().replace("{$OPTION}", value));    
+                throw new Exception(ERROR_MESSAGES.ER_COULDNOT_SELECT_VALUE.getErrorMessage().replace("{$OPTION}", value));
             }
-            
+
             selectedOption = objSelect.getFirstSelectedOption().getText().toString().trim();
             return selectedOption;
         }
         catch(Exception e){
             throw e;
         }
-        
+
     }
 
 	@Override
@@ -910,9 +910,9 @@ WebElement testElement = null;
 			throws Exception {
 		try{
 			WebElement testElement = this.waitAndGetTestObject(true);
-			
+
 			String attributeValue = "";
-			
+
 			if(propertyToFetch.equalsIgnoreCase("tag") || propertyToFetch.equalsIgnoreCase("tagname")){
 				attributeValue = testElement.getTagName();
 			}
@@ -929,7 +929,7 @@ WebElement testElement = null;
 			else{
 				attributeValue = testElement.getAttribute(propertyToFetch);
 			}
-			
+
 			return attributeValue;
 			}
 			catch(NullPointerException ne){
@@ -948,10 +948,10 @@ WebElement testElement = null;
 			errMessage = errMessage.replace("{ACTUAL}", actualTestElementProperty);
 			throw new Exception(errMessage);
 		}
-		
-		
+
+
 	}
-	
+
 	@Override
 	public void verifyTestElementAttribute(String propertyToVerify,
 			String expectedValueOfProperty) throws Exception {
@@ -961,26 +961,26 @@ WebElement testElement = null;
 			errMessage = errMessage.replace("{ACTUAL}", actualTestElementProperty);
 			throw new Exception(errMessage);
 		}
-		
+
 	}
 
 	@Override
 	public void hover() throws Exception {
 		try{
-			
+
 			WebElement testElement = this.waitAndGetTestObject(true);
-			
+
 			Actions builder = new Actions(driver);
-			
+
 			builder.moveToElement(testElement);
-			
+
 			builder.build().perform();
-						
+
 		}
 		catch(Exception e){
 			throw new Exception(ERROR_MESSAGES.ER_HOVER_TO_ELEMENT.getErrorMessage() + " -- " + e.getMessage());
 		}
-		
+
 	}
 
 	@Override
@@ -991,9 +991,9 @@ WebElement testElement = null;
 			catch(Exception e){
 				// nothing to throw.
 			}
-		
+
 	}
-	
+
 	private File getScreenshot() throws Exception {
 		File srcFile;
 		try {
@@ -1011,12 +1011,12 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 	/*
 	 * For Debug Mode  OFF : take screenshots for FAILED test steps only
 	 * FOr Debug MOde ON : take screenshots for ALL the test step irrespective of its status.
-	 * For DebugMode  Strict Off : don't take screenshot at all. 
+	 * For DebugMode  Strict Off : don't take screenshot at all.
 	 */
 	File fileContainingSnapshot = null;
 	File destinationFileThatWillContainSnapshot =  null;
 	String screeShotFileName = "";
-	try{			
+	try{
 		if(highlight){
 			try{
 				JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1026,12 +1026,12 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 			}
 			catch(Exception e){ //nothing to do.
 				}
-			}				
+			}
 		else{
-		fileContainingSnapshot = this.getScreenshot();}				
-		
+		fileContainingSnapshot = this.getScreenshot();}
+
 		if(fileContainingSnapshot != null){
-		
+
 			String modifiedStepExecutionTimeString = Property.StepExecutionTime.replace("/", "");
 			modifiedStepExecutionTimeString = modifiedStepExecutionTimeString.replace(":", "");
 			modifiedStepExecutionTimeString = modifiedStepExecutionTimeString.replace(" ", "");
@@ -1048,28 +1048,28 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 
 	@Override
 	public void waitUntilObjectIsThere() throws Exception {
-		
+
 		wait.until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver d) {
-				boolean isObjectNotPresent = true;		
+				boolean isObjectNotPresent = true;
 				try {
 						actualTestElement =  getActualTestObject();
 						if(actualTestElement != null){ isObjectNotPresent = false;}
 						else{isObjectNotPresent =  true ;}
 						return isObjectNotPresent;
-					} catch (Exception e) {					
+					} catch (Exception e) {
 					}
 				return isObjectNotPresent;
 			}
 	});
-		
-		
+
+
 	}
 
 	@Override
 	public String getTestObjectCount() throws Exception {
 		int testObjectCount = 0;
-		
+
 		try {
 			this.getTestObjectList = true;
 			this.waitAndGetTestObject(true);
@@ -1077,7 +1077,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 		} catch (Exception e) {
 			testObjectCount = 0;
 		}
-		
+
 		return String.valueOf(testObjectCount);
 	}
 
@@ -1088,7 +1088,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -1106,7 +1106,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -1135,17 +1135,17 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 		 try {
 			 	currentURL = driver.getPageSource();
 			    Element doc1 =  Jsoup.parse(currentURL).body();
-	            productContainer =  Xsoup.compile(xpathForProdContainer).evaluate(doc1).getElements();		           
+	            productContainer =  Xsoup.compile(xpathForProdContainer).evaluate(doc1).getElements();
 	            if(productContainer.size() == 0){
 	            	String errMessage = ERROR_MESSAGES.ERR_NO_PRODUCT_FOUND_ON_CATALOG.getErrorMessage();
 	            	throw new Exception(errMessage);
-	            }	            	
+	            }
 		        else{
 		        	eachProd = productContainer.get(0).getElementsByAttributeValueContaining("data-product-id", "INDFAS");
 	            	for(Element prod : eachProd){
 	        			tag = Xsoup.compile(xpathForSort).evaluate(prod).getElements();
 	        			try{
-	        				
+
 	            			if(sortText.equalsIgnoreCase("desc")){
 	            				if( tag.size() == 0){
 	            					String errMessage = ERROR_MESSAGES.ERR_TAG_NOT_FOUND_AFTER_SORTING.getErrorMessage().replace("{SORT_SELECTED}", sortText);
@@ -1161,11 +1161,11 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 			        						errMessage = errMessage.replace("{PRICE_FOUND}", String.valueOf(priceOfOneProd));
 			        						throw new Exception(errMessage);
 		            					}
-		            						
+
 		            				}
 		            				tempVar = priceOfOneProd;
 	            				}
-	            			}	            			
+	            			}
 	            			else if(sortText.equalsIgnoreCase("asc")){
 	            				if( tag.size() == 0)
 	            					throw new Exception("Price Tag Not found for product "+prod.attr("data-product-id"));
@@ -1220,7 +1220,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 			        						throw new Exception(errMessage);
 	            						}
 	            					}
-	            					
+
 	            				}
 	            			}
 	            			else{
@@ -1228,35 +1228,35 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 	        						String errMessage = ERROR_MESSAGES.ERR_TAG_NOT_FOUND_AFTER_SORTING.getErrorMessage().replace("{SORT_SELECTED}", sortText);
 	        						errMessage = errMessage.replace("{SKU}", prod.attr("data-product-id"));
 	        						throw new Exception(errMessage);
-	        					}	     
+	        					}
 	            			}
-	        			
+
 	        			}
 	        			catch(Exception ex){
 	        				throw ex;
 	        			}
 	        	}
 	    	}
-	            
+
 		 }
 		 catch(Exception e){
 			 throw e;
 		 }
-		
+
 	}
-	
+
 	@Override
 	public void verifyAndReportRedirectdUrls() throws Exception{
 
 		try{
 			HashMap<String, String> redirectedUrls = new HashMap<String, String>();
-			
+
 			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
 			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}","ApplicationURLSourceForRedirectedUrls.csv");
 			String sourceFileForBrokenLinks = fileLocation;
-			
+
 			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForBrokenLinks);
-			
+
 			for (String url : pageUrls) {
 				try{
 					if(!url.contains("http")){
@@ -1264,7 +1264,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 					}
 					driver.navigate().to(url);
 					String redirectedUrl = this.getPageAttribute("url");
-					
+
 					if(!redirectedUrl.equalsIgnoreCase(url) && !redirectedUrl.equalsIgnoreCase(url + "/")){
 						redirectedUrls.put(url, "Error -- Redirecting to " + redirectedUrl);
 					}
@@ -1276,7 +1276,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 					redirectedUrls.put(url, "FAILED -- Couldn't navigate to URL");
 				}
 			}
-			
+
 			Utility.reportUrlsStatus(redirectedUrls,rManager.getTestExecutionLogFileLocation().replace("{0}", "RedirectedUrls.csv"));
 		}
 		catch(Exception e){
@@ -1284,32 +1284,32 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 		}
 	}
 
-	
+
 	@Override
 	public void verifyAndReportBrokenLinksFromPages(String urlSource) throws Exception{
-		
-		
-		try{			
+
+
+		try{
 			HashMap<String, String> brokenUrls = new HashMap<String, String>();
-			
+
 			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
 			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", urlSource);
 			String sourceFileForBrokenLinks = fileLocation;
-			
+
 			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForBrokenLinks);
-			
+
 			for (String url : pageUrls) {
 				try{
 					if(!url.contains("http")){
 						url = "http://" + url;
 					}
-				
+
 					driver.navigate().to(url);
-				
+
 					ArrayList<String> hrefs = this.getHyperRefrenceOfAllLinksOnPage();
-				
+
 					for (String linkUrl : hrefs) {
-						
+
 						try{
 						if(linkUrl.contains("#")){
 							brokenUrls.put(linkUrl, "ERROR -- Contains # in hyper reference");
@@ -1321,25 +1321,25 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 							 brokenUrls.put(linkUrl, String.valueOf(url_status));
 						 }
 						}
-					
+
 						}
 						catch(Exception e){
 							brokenUrls.put(linkUrl, "FAILED --" + e.getMessage());
 						}
-					}				
+					}
 				}
 				catch(Exception e){
 					brokenUrls.put(url, "FAILED --" + e.getMessage());
 				}
 			}
-			
+
 			Utility.reportUrlsStatus(brokenUrls,rManager.getTestExecutionLogFileLocation().replace("{0}","BrokenLinks.csv"));
 		}
 		catch(Exception e){
 			throw e;
 		}
-	}	
-			
+	}
+
 	@Override
 	public void browserNavigation(String navigationOption) throws Exception
 	{
@@ -1359,20 +1359,20 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 			throw e;
 		}
 	}
-	
+
 	@Override
 	public void verifyAndReportSCO(String scoUrlSource) throws Exception{
 		try{
 			String SEO_Article = testObjectInfo.getLocationOfTestObject();
-			
+
 			HashMap<String, String> SEOURLS_STATUS = new HashMap<String, String>();
-			
+
 			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
 			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", scoUrlSource);
 			String sourceFileForSEOUrls = fileLocation;
-			
+
 			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForSEOUrls);
-			
+
 			for (String url : pageUrls) {
 				try{
 					if(!url.contains("http")){
@@ -1398,21 +1398,21 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 				else{
 					SEOURLS_STATUS.put(url, "OK");
 				}
-				
+
 				}
 				catch(Exception e){
 					SEOURLS_STATUS.put(url, "FAILED :: NO SEO Content Found");
 				}
-				
+
 			}
 			String outputFileName = "SEOStatus_" + Utility.getCurrentTimeStampInAlphaNumericFormat() + ".csv";
 			Utility.reportUrlsStatus(SEOURLS_STATUS, rManager.getTestExecutionLogFileLocation().replace("{0}", outputFileName));
 		}
 		catch(Exception e){
-			
+
 		}
 	}
-	
+
 	@Override
 	public void handleAlert(String option) throws Exception
 	{
@@ -1438,7 +1438,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 			throw e;
 		}
 	}
-	
+
 	public void uploadFile(String text)throws NoSuchElementException,Exception{
 		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
 	}
@@ -1447,13 +1447,13 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 	public void verifyAndReportSectionLinks(String sectionName,String sectionvalue)
 			throws Exception {
 		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
-		
+
 	}
-	
+
 	public void clickOnCo_ordinates(int i,int j) throws Exception{
 		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
 	}
-	
+
 	@Override
 	 	public String getElementDimension() throws NoSuchElementException, Exception {
 	 		WebElement testElement = null;
@@ -1463,7 +1463,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 	 		catch(NoSuchElementException ne){
 	 			throw ne;
 	 		}
-	 		
+
 	 		try{
 	 			int width = testElement.getSize().getWidth();
 	 			int height = testElement.getSize().getHeight();
@@ -1472,30 +1472,42 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 	 		catch(Exception e){
 	 			throw e;
 	 		}
-	 		
+
 	 	}
 
 	@Override
 	public void resizeCurrentWindow(int x_coord, int y_coord) throws Exception {
 		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
-		
+
 	}
 
 	@Override
 	public void resizeToDeafult() throws Exception {
 		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
-		
+
 	}
 
 	@Override
 	public void extractJSErrors(String inputURLReferenceFile) throws Exception {
 		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
-		
+
 	}
 
 	@Override
 	public void verifyInternalLinkOnWebPage(String urlSource) throws Exception {
 		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
-		
+
+	}
+
+	@Override
+	public void switchToNewTab() throws Exception {
+		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
+
+	}
+
+	@Override
+	public void closeTab() throws Exception {
+		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
+
 	}
 }

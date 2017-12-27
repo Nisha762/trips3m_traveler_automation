@@ -81,42 +81,42 @@ import org.codehaus.jackson.JsonGenerator;
 public class DesktopWebTestDriverImpl implements TestDrivers{
 
 	private static RecoverySupportForSeleniumDriver recoverySupportHandle = null;
-	
+
 	private String browserName = "";
-	
+
 	private boolean isRemoteExecution = false;
-	
+
 	private boolean isSauceLabExecution = false;
-	
+
 	private String remoteURL = "";
-	
+
 	private static  WebDriver driver = null;
-	
+
 	private static WebDriverWait wait = null;
-	
+
     private WebElement actualTestElement = null;
-    
+
     private ArrayList<WebElement> testObjectsList = new ArrayList<WebElement>();
-    
+
     private boolean getTestObjectList = false;
-    
+
     private ResourceManager rManager;
-    
+
     private TestObjectDetails testObjectInfo = null;
-    
+
     private RecoveryObjectsMapper objMapper = null;
-    
+
     DesktopWebTestDriverImpl(ResourceManager rManager) {
 		this.rManager = rManager;
 	}
-	
-	
+
+
     private void scroll(){
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("window.scrollBy(0,1500)", "");
 		sleep(500);
     }
-    
+
     private File getScreenshot() throws Exception{
     	File srcFile;
     	try {
@@ -127,9 +127,9 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		}
 		return srcFile;
 	}
-    
+
 	private Object executeJavaScriptOnBrowserInstance(WebElement testElement,String javaScriptSnippet) throws Exception{
-		
+
 		JavascriptExecutor jsExecutor = null;
 		Object jsResult = null;
 		try{
@@ -143,22 +143,22 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		}
 		return jsResult;
 	}
-	
+
 	private void ExtractAndLogJSErrors(JsonGenerator jsonGenerator,String url) throws Exception {
         try{
         	LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
-        	
+
 
         	//jsonGenerator.writeObjectFieldStart("details");
-        	
+
         	jsonGenerator.writeStringField("URL", url);
-        	
-        	jsonGenerator.writeObjectFieldStart("err");          	
-        	
+
+        	jsonGenerator.writeObjectFieldStart("err");
+
     		jsonGenerator.writeFieldName("SEVERE");
-    		
+
     		jsonGenerator.writeStartArray();
-        	
+
     		for (LogEntry entry : logEntries) {
         		String err_type = entry.getLevel().toString();
         		if(err_type.toLowerCase().equals("severe")){
@@ -166,26 +166,26 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
         		}
         	}
         	jsonGenerator.writeEndArray();
-    		
+
         	jsonGenerator.writeFieldName("WARNING");
-    		
+
         	jsonGenerator.writeStartArray();
-        	
+
         	for (LogEntry entry : logEntries) {
-        		String err_type = entry.getLevel().toString();        		
+        		String err_type = entry.getLevel().toString();
         		if(err_type.toLowerCase().equals("warning")){
         			jsonGenerator.writeString(entry.getMessage());
         		}
         	}
         	jsonGenerator.writeEndArray();
-        	
+
         	jsonGenerator.writeEndObject();
         }
         catch(Exception e){
         	throw e;
         }
     }
-	
+
     private void switchToMostRecentWindow() {
 		try {
 
@@ -198,11 +198,11 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			//Nothing to do.
 		}
 	}
-    
+
     private File highlightElement(WebElement element) throws Exception {
 		File fileSnapshot  = null;
 		try{
-			
+
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].style.border='4px groove Red'", element);
 			fileSnapshot = this.getScreenshot();
@@ -212,23 +212,23 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throw e;
 		}
 		return fileSnapshot;
-		
+
 	}
-    
+
     private ArrayList<String> getHyperRefrenceOnPage(){
-		
+
 		ArrayList<String> hrefs = new ArrayList<String>();
-		
+
 		List<WebElement> anchortagOnPage = driver.findElements(By.xpath("//a"));
-		
+
 		for (WebElement link : anchortagOnPage) {
-		
+
 			String href = link.getAttribute("href");
 			if(href != null)
 				hrefs.add(href);
 		}
 		List<WebElement> linksOnPage = driver.findElements(By.xpath("//link"));
-		
+
 		for (WebElement link : linksOnPage) {
 			String href = link.getAttribute("href");
 			if(href != null)
@@ -253,17 +253,17 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			String src = script.getAttribute("src");
 			hrefs.add(src);
 		}
-		
+
 		return hrefs;
 	}
-    
+
     /**
 	 * @author Nayan
 	 * </br><b> Description : </b></br> This will fetch all the user inputs regarding the execution. Like Remote Execution details, Browser details, SauceLab Execution details.
 	 */
 	private void fetchUserInputs(){
 		System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
-		
+
 		this.browserName = Property.BrowserName;
 		if(Property.IsRemoteExecution.equalsIgnoreCase("true")){
 			this.isRemoteExecution = true;
@@ -281,7 +281,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			this.isRemoteExecution = false;
 		}
 	}
-	
+
 	/**
 	 * @author Nayan
 	 * Delete all the cookies of current browser session.
@@ -301,59 +301,59 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		}
 
 	}
-	
+
 	private void setCookies(){
 		try{
 			boolean isCookieSet = false;
-			int browserCookieTrial = 0;	
+			int browserCookieTrial = 0;
 			HashMap<String, HashMap<String, String>> cookies = Utility.getBrowserCookiesMap();
 			if(cookies.size() > 0 ){
 				try{
 					browserCookieTrial = Integer.parseInt(Property.BROWSER_COOKIE_TRIAL);
 				}catch(Exception ex){
-					
+
 				}
-				
+
 				while(!isCookieSet && browserCookieTrial >= 0){
 					browserCookieTrial --;
 					for (String cookieKey : cookies.keySet()) {
 						Cookie cookie = null;
 						if(cookies.get(cookieKey).containsKey(Property.COOKIE_DOMAIN_NAME))
 							cookie = new Cookie(cookieKey, cookies.get(cookieKey).get(Property.COOKIE_VALUE),cookies.get(cookieKey).get(Property.COOKIE_DOMAIN_NAME),null,null);
-						else 
+						else
 							cookie = new Cookie(cookieKey, cookies.get(cookieKey).get(Property.COOKIE_VALUE));
-					
-						driver.manage().addCookie(cookie);	 
+
+						driver.manage().addCookie(cookie);
 					}
 					driver.navigate().refresh();
-				
+
 					for (String cookieKey : cookies.keySet()) {
 						boolean isCookieFound = false;
 						Cookie browserCookie =  driver.manage().getCookieNamed(cookieKey);
 							    if(browserCookie.getName().equalsIgnoreCase(cookieKey) && browserCookie.getValue().equalsIgnoreCase(cookies.get(cookieKey).get(Property.COOKIE_VALUE))){
 							    	isCookieFound = true;
 					}
-						  
+
 					if(!isCookieFound){
 						isCookieSet = false;
 						break;
 					}else{
 						isCookieSet = true;
 					}
-						  
+
 				}
-					
-					
-					
+
+
+
 			}
 		}
-			
+
 	}
 		catch(Exception e){
 			//Nothing to throw.
 		}
 	}
-	
+
 	/**
 	 * @author Nayan
 	 * @param endPoint - String value of URL.
@@ -365,24 +365,24 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			//String updated_url = endPoint.replace("http", "https");
 			//updated_url = updated_url + "users/sign_in/";
 			driver.get(endPoint);
-			//this.deleteAllCookies();			
+			//this.deleteAllCookies();
 			//this.switchToMostRecentWindow();
-			
-            	//	driver.navigate().to(updated_url);			
+
+            	//	driver.navigate().to(updated_url);
 			//driver.navigate().to(endPoint);
-			
+
 			if(!Property.BrowserName.equals(Property.CHROME_KEYWORD))
 			driver.manage().window().maximize();
 		}
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
-	
-	
+
+
 	private String getPageAttribute(String attributeName) throws Exception{
-		
+
 		String attributeValue = "";
 		try {
 			if(attributeName.toLowerCase().contains("url")){
@@ -403,10 +403,10 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		}
 		return attributeValue;
 	}
-	
+
 	private void performKeyBoardAction(String Key,WebElement testElement) throws Exception{
 		try {
-			
+
 			if(Key.equalsIgnoreCase("enter")){
 				testElement.sendKeys(Keys.ENTER);
 			}
@@ -438,7 +438,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 				throw e;
 		}
 }
-	
+
 	private WebElement getTestObject(String locatingStrategy,String location){
 		List<WebElement> testElements = null;
 		WebElement testElement = null;
@@ -464,52 +464,52 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			else if(locatingStrategy.toLowerCase().contains("text")){
 				testElements = driver.findElements(By.linkText(location));
 			}
-			
+
 			if(this.getTestObjectList){
 				this.testObjectsList.clear();
 				this.testObjectsList = (ArrayList<WebElement>) testElements;
 			}
-			
+
 			String[] filtersForTestObject = testObjectInfo.getFiltersAppliedOnTestObject().split(",");
-			
-			
-			for (WebElement testObject : testElements) {				
-			
+
+
+			for (WebElement testObject : testElements) {
+
 				boolean testObjectValidForFilters = true;
-				
+
 				for (String filter : filtersForTestObject) {
 					if(filter.equals("")){filter = FILTERS.IS_DISPLAYED.getFilter();}
-					
+
 					if(filter.toLowerCase().contains(FILTERS.IS_ENABLED.getFilter())){
 						if(!testObject.isEnabled()){testObjectValidForFilters = false; break;}
 					}
-					
+
 					if(filter.toLowerCase().contains(FILTERS.IS_CLICKABLE.getFilter())){
 						if(!isClickable(testObject)){testObjectValidForFilters = false; break;}
 					}
-				
+
 					if(filter.toLowerCase().contains(FILTERS.IS_DISPLAYED.getFilter())){
 						if(!testObject.isDisplayed()){testObjectValidForFilters = false; break;}
 					}
-					
-					
+
+
 				}
-				
+
 				if(testObjectValidForFilters){
 					testElement = testObject;
 					break;
 				}
 			}
-			
+
 		}
 		catch(Exception e){
 			return null;
 		}
 		return testElement;
 	}
-	
-	private boolean waitForJStoLoad() {	
-//	  try{  
+
+	private boolean waitForJStoLoad() {
+//	  try{
 //	  wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class='js-loaded']")));
 //	  }
 //	  catch(TimeoutException te){
@@ -528,7 +528,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		        }
 		      }
 		    };
-	
+
 		    // wait for Javascript to load
 		    ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
 		      @Override
@@ -538,12 +538,12 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		        	return jsExecutor.executeScript("return document.readyState").toString().equals("complete");
 		      }
 		    };
-	
+
 		  return wait.until(jQueryLoad) && wait.until(jsLoad);
 	}
-	
+
 	public static boolean isClickable(WebElement testObject){
-		
+
 		try
 		{
 		   wait.until(ExpectedConditions.elementToBeClickable(testObject));
@@ -554,9 +554,9 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		  return false;
 		}
 	}
-	
+
 	private WebElement getFrameForTestObjectOnTheBasisOfFrameDetails(String[] locatorDetailsOfFrame){
-		
+
 		WebElement frameWebElement = null;
 		try {
 			String frameLocatingStrategy = locatorDetailsOfFrame[0].trim();
@@ -567,64 +567,64 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		}
 		return frameWebElement;
 	}
-	
+
 	private void switchToTestObjectFrame() throws NoSuchFrameException{
 		try {
-			
+
 			if(testObjectInfo.getFramedetailsOfTestObject().contains(Property.Frame_Details_Seperator)){
 				String[] parsedLocatorDetailsofFrameForTestObject = testObjectInfo.getFramedetailsOfTestObject().split(Property.Frame_Details_Seperator);
 				WebElement frameWebElement = getFrameForTestObjectOnTheBasisOfFrameDetails(parsedLocatorDetailsofFrameForTestObject);
 				driver.switchTo().frame(frameWebElement);
 			}
-						
-		} 
+
+		}
 		catch(NullPointerException ne){
-			//nothing to do 
+			//nothing to do
 		}
 		catch (Exception e) {
 			String errMessage = ERROR_MESSAGES.ER_WHILE_SWITCHING_TO_FRAME.getErrorMessage().replace("{FRAME_DETAILS}", testObjectInfo.getFramedetailsOfTestObject());
 			throw new NoSuchFrameException(errMessage);
 		}
 	}
-	
+
 	private WebElement getActualTestObject(){
-		WebElement testElement = null;		
-		
+		WebElement testElement = null;
+
 		String 	locatingStrategyForObject = testObjectInfo.getLocatingStrategyOfTestObject();
-		
+
 		String locationOfObject = testObjectInfo.getLocationOfTestObject();
-		
+
 		testElement = this.getTestObject(locatingStrategyForObject, locationOfObject);
-			
-		return testElement;					
+
+		return testElement;
 	}
 
 	private WebElement waitAndGetTestObject(Boolean isWaitRequiredToFetchTheTestObject) throws NoSuchElementException, Exception{
-	
-		
+
+
 		try{
-			
+
 			switchToMostRecentWindow();
-			
+
 			driver.switchTo().defaultContent();
-			
+
 			this.switchToTestObjectFrame();
-			
+
 			//this.waitForJStoLoad();
-			
+
 			if(Property.LIST_STRATEGY_KEYWORD.contains(Property.STRATEGY_KEYWORD.NOWAIT.toString())){
 				isWaitRequiredToFetchTheTestObject = false;
 			}
-			
+
 			String locatingStrategyForObject = testObjectInfo.getLocatingStrategyOfTestObject();
-			
+
 			String locationOfObject = testObjectInfo.getLocationOfTestObject();
-			
+
 			if(((locatingStrategyForObject=="")||locatingStrategyForObject==null)&&((locationOfObject=="")||locationOfObject==null))
 			{
 				throw new Exception(Property.ERROR_MESSAGES.ER_GETTING_TESTOBJECT.getErrorMessage());
 			}
-			
+
 			if(isWaitRequiredToFetchTheTestObject){
 					wait.until(new ExpectedCondition<WebElement>() {
 							public WebElement apply(WebDriver d) {
@@ -639,7 +639,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 					});
 					try{
 					recoverySupportHandle.doRecoveryForSpecialObjectsWithHigherPriority(this.objMapper);
-					
+
 					if(actualTestElement==null)
 						recoverySupportHandle.doRecovery(this.objMapper);
 					}
@@ -677,75 +677,75 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			if(actualTestElement==null)
 					throw new NoSuchElementException(Property.ERROR_MESSAGES.ER_GET_TESTOBJECT.getErrorMessage());
 		}
-		
+
 		return actualTestElement;
 	}
-	
+
 	private int validateUrlStatus(String url){
-		
+
 		int url_status = 000;
 		HttpClient client = HttpClientBuilder.create().build();
-		
+
 		HttpGet request = new HttpGet(url);
-		
+
 		try {
-			
+
 			HttpResponse response = client.execute(request);
-			
+
 			url_status = response.getStatusLine().getStatusCode();
-			
+
 		} catch (Exception e) {
 				}
 		return url_status;
 	}
-	
+
 	public void setRecoveryObjectMapper(RecoveryObjectsMapper objMapper){
 		this.objMapper = new RecoveryObjectsMapper();
 		this.objMapper = objMapper;
 	}
-	
+
 	public void waitUntilObjectIsThere(){
-		
+
 		driver.switchTo().defaultContent();
-		
+
 		this.switchToTestObjectFrame();
-		
+
 		wait.until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver d) {
-				boolean isObjectNotPresent = true;		
+				boolean isObjectNotPresent = true;
 				try {
 						actualTestElement =  getActualTestObject();
 						if(actualTestElement != null){ isObjectNotPresent = false;}
 						return isObjectNotPresent;
-					} catch (Exception e) {					
+					} catch (Exception e) {
 					}
 				return isObjectNotPresent;
 			}
 	});
-		
+
 	}
-	
-	
+
+
 	@Override
 	public void injectTestObjectDetail(TestObjectDetails objDetails) {
 		this.testObjectInfo = objDetails;
-		
+
 	}
 
 	@Override
 	public void initializeApp(String endpoint) throws MalformedURLException,Exception {
-		
+
 		try{
 					//Get all the related Info.
 						fetchUserInputs();
 						DesiredCapabilities executionCapabilities = new DesiredCapabilities();
 						executionCapabilities.setJavascriptEnabled(true);
 						executionCapabilities.setPlatform(Platform.ANY);
-						
-										
+
+
 						if(isRemoteExecution){
 								String remoteUrl = this.remoteURL + "/wd/hub";
-			
+
 								URL uri = new URL(remoteUrl);
 								executionCapabilities.setCapability("webdriver.remote.quietExceptions", true);
 								if(this.browserName.contains(Property.FIREFOX_KEYWORD)){
@@ -754,7 +754,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									remoteProfile.setAcceptUntrustedCertificates(true);
 									remoteProfile.setEnableNativeEvents(true);
 									remoteProfile.setPreference("browser.download.folderList", 2);
-									remoteProfile.setPreference("browser.download.manager.showWhenStarting", false);									
+									remoteProfile.setPreference("browser.download.manager.showWhenStarting", false);
 									remoteProfile.setPreference("browser.download.dir",
 											Utility.getAbsolutePath(rManager.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}","").
 													replace("{PROJECT_NAME}", Property.PROJECT_NAME)));
@@ -767,8 +767,8 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,"
 											+ "application/xml");
 									// We can also add extension to firefox profile if needed in future.
-									executionCapabilities.setBrowserName("firefox");									
-									executionCapabilities.setCapability("firefox_profile", remoteProfile.toString());									
+									executionCapabilities.setBrowserName("firefox");
+									executionCapabilities.setCapability("firefox_profile", remoteProfile.toString());
 								}
 								else if(this.browserName.contains(Property.INTERNET_EXPLORER_KEYWORD)){
 									executionCapabilities.setBrowserName("internet explorer");
@@ -808,7 +808,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									ffProfile.setAcceptUntrustedCertificates(true);
 									ffProfile.setEnableNativeEvents(true);
 									ffProfile.setPreference("browser.download.folderList", 2);
-									ffProfile.setPreference("browser.download.manager.showWhenStarting", false);									
+									ffProfile.setPreference("browser.download.manager.showWhenStarting", false);
 									ffProfile.setPreference("browser.download.dir",
 											Utility.getAbsolutePath(rManager.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}","").
 													replace("{PROJECT_NAME}", Property.PROJECT_NAME)));
@@ -821,8 +821,8 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,"
 											+ "application/xml");
 									// We can also add extension to firefox profile if needed in future.
-									executionCapabilities.setBrowserName("firefox");									
-									executionCapabilities.setCapability("firefox_profile", ffProfile.toString());	
+									executionCapabilities.setBrowserName("firefox");
+									executionCapabilities.setCapability("firefox_profile", ffProfile.toString());
 									driver = new FirefoxDriver(executionCapabilities);
 								}
 								else if(this.browserName.contains(Property.INTERNET_EXPLORER_KEYWORD)){
@@ -833,7 +833,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 								else if(this.browserName.contains(Property.CHROME_KEYWORD)){
 								    if(!Property.OSString.toLowerCase().contains("window"))
 								    	Property.CHROME_EXECUTABLE = Property.CHROME_EXECUTABLE_SH;
-								    	
+
 									executionCapabilities = DesiredCapabilities.chrome();
 									Map<String,Object> profile=new HashMap<String,Object>();
 									profile.put("disable-popup-blocking", "true");
@@ -847,11 +847,11 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									options.setExperimentalOption("prefs", profile);
 									executionCapabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
 									executionCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
-									
+
 									LoggingPreferences loggingprefs = new LoggingPreferences();
 									loggingprefs.enable(LogType.BROWSER, Level.WARNING);
 									executionCapabilities.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
-									
+
 									ChromeDriverService service = new ChromeDriverService.Builder()
 									.usingAnyFreePort()
 									.usingDriverExecutable(new File(rManager.getChromeDriverExecutibleLocation()))
@@ -867,15 +867,15 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 								else{
 									throw new Exception(Property.ERROR_MESSAGES.ER_SPECIFY_BROWSER.getErrorMessage());
 								}
-								
+
 								}
-						
+
 						// Open the URL to respective Browser
 						this.openEndPointInBrowser(endpoint);
 						this.setCookies();
 						recoverySupportHandle = new RecoverySupportForSeleniumDriver(driver,rManager);
 						Utility.addObjectToGlobalObjectCollection(Property.TEST_DRIVER_KEY, driver);
-						
+
 		}
 		catch(MalformedURLException me){
 			throw me;
@@ -883,7 +883,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -895,18 +895,18 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(NoSuchElementException ne){
 			throw ne;
 		}
-		
+
 		try{
 			this.performKeyBoardAction(Key, testElement);
 		}
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void check() throws Exception{
@@ -918,7 +918,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throw ne;
 		}
 		try{
-			
+
 			if(!testElement.isSelected()){
 				testElement.click();
 			}
@@ -937,7 +937,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(NoSuchElementException ne){
 			throw ne;
 		}
-		
+
 		try{
 			if(testElement.isSelected()){
 				testElement.click();
@@ -955,7 +955,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	public void sendKey(String text) throws NoSuchElementException, Exception {
 		WebElement testElement = null;
 		try{
-			testElement = this.waitAndGetTestObject(true);	;			
+			testElement = this.waitAndGetTestObject(true);	;
 		}
 		catch(NoSuchElementException ne){
 			throw ne;
@@ -964,44 +964,44 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			try{
 			testElement.clear();}
 			catch(Exception e){}
-			testElement.sendKeys(text);			
+			testElement.sendKeys(text);
 		}
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
-	
+
 	public void uploadFile(String text) throws NoSuchElementException, Exception {
-		
+
 		String file = null;
-		
+
 		if(Utility.isAbsolute(text)){ //follow path as given.
 			file = text;
 		}
 		else{ //path relative to project external folder.
 		file =	rManager.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}", text);
-		
+
 		file =  file.replace("{PROJECT_NAME}", Property.PROJECT_NAME);
 		file = Utility.getAbsolutePath(file);
 		}
-		
+
 		WebElement testElement = null;;
 		try{
-			testElement = this.waitAndGetTestObject(true);;			
+			testElement = this.waitAndGetTestObject(true);;
 		}
 		catch(NoSuchElementException ne){
 			throw ne;
 		}
 		try{
-			testElement.sendKeys(file);			
+			testElement.sendKeys(file);
 		}
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
-	
+
 
 	@Override
 	public void navigateURL(String URL) throws Exception {
@@ -1011,7 +1011,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -1030,13 +1030,13 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
 	public void isTextPresent(String text) throws Exception {
 		WebElement testElement = null;
-		
+
 		try{
 			testElement = this.waitAndGetTestObject(true);
 		}
@@ -1046,7 +1046,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			}
 			testElement = null;
 		}
-		
+
 		String ObjectText = "";
 		try{
 		if(testElement == null){
@@ -1059,12 +1059,12 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 				String msgException = Property.ERROR_MESSAGES.ER_ASSERTION.getErrorMessage().replace("{ACTUAL_DATA}",ObjectText);
 				msgException = msgException.replace("{$TESTDATA}", text);
 				throw new Exception(msgException);
-			}		
+			}
 		}
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -1072,10 +1072,10 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		WebElement testElement = null;
 		try{
 			testElement = this.waitAndGetTestObject(true);
-			
+
 			try{
 			this.executeJavaScriptOnBrowserInstance(testElement, "arguments[0].focus()");
-			
+
 			testElement.click();
 			}catch(Exception ex){
 				if(ex.getMessage().toLowerCase().contains("element is not clickable")){
@@ -1084,9 +1084,9 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 				}else{
 					throw ex;
 				}
-//				
+//
 			}
-			
+
 		}
 		catch(NoSuchElementException ne){
 			throw ne;
@@ -1094,7 +1094,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -1113,12 +1113,12 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 				driver.switchTo().window(window);
 				driver.close();
 			}
-			
+
 		}
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -1128,17 +1128,17 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		if(testElement == null){
 			throw new Exception(Property.ERROR_MESSAGES.ER_ELEMENT_NOT_PRESENT.getErrorMessage());
 		}
-		
+
 		}
 		catch(Exception e){
 			throw e;
 		}
-		
+
 	}
-	
+
 	public void isObjectNotThere() throws Exception{
-				
-		WebElement testElement = this.waitAndGetTestObject(false);		
+
+		WebElement testElement = this.waitAndGetTestObject(false);
 		try {
 			if(testElement != null){
 				String errMessage = Property.ERROR_MESSAGES.TESTOBJECT_IS_THERE.getErrorMessage().replace("{IS_DISPALYED}", String.valueOf(testElement.isDisplayed()));
@@ -1151,7 +1151,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 
 	@Override
 	public String fireEvents(String eventCodeSnippet) throws Exception {
-		
+
 		String codeSnippetOutput = "";
 		try{
 			WebElement testElement = null;
@@ -1161,7 +1161,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			catch(Exception e){
 			 //nothing to do here!
 			}
-			
+
 			Object snippetResult = this.executeJavaScriptOnBrowserInstance(testElement, eventCodeSnippet);
 			if(snippetResult != null){
 			codeSnippetOutput = snippetResult.toString();}
@@ -1169,7 +1169,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			throw e;
 		}
-		return codeSnippetOutput;		
+		return codeSnippetOutput;
 	}
 
 	@Override
@@ -1184,7 +1184,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
                 throw new Exception(ERROR_MESSAGES.ER_GET_TESTOBJECT.getErrorMessage());
             }
             Select objSelect = new Select(testElement);
-            
+
             //select particular option.
             try{
                 p = Pattern.compile("\\[(.*?)\\]");
@@ -1194,7 +1194,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
                 }else{
                     value = itemToSelect;
                 }
-                
+
                 if(itemToSelect.toLowerCase().contains("value[")){
                     objSelect.selectByValue(value);
                 }else if(itemToSelect.toLowerCase().contains("text[")){
@@ -1214,20 +1214,20 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
                         throw new Exception(ERROR_MESSAGES.ER_COULDNOT_SELECT_VALUE.getErrorMessage().replace("{$OPTION}", value));
                     }
                 }
-                
+
             }
             catch(Exception e)
             {
-                throw new Exception(ERROR_MESSAGES.ER_COULDNOT_SELECT_VALUE.getErrorMessage().replace("{$OPTION}", value));    
+                throw new Exception(ERROR_MESSAGES.ER_COULDNOT_SELECT_VALUE.getErrorMessage().replace("{$OPTION}", value));
             }
-            
+
             selectedOption = objSelect.getFirstSelectedOption().getText().toString().trim();
             return selectedOption;
         }
         catch(Exception e){
             throw e;
         }
-        
+
     }
 
 
@@ -1236,9 +1236,9 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throws Exception {
 		try{
 		WebElement testElement = this.waitAndGetTestObject(true);
-		
+
 		String attributeValue = "";
-		
+
 		if(propertyToFetch.equalsIgnoreCase("tag") || propertyToFetch.equalsIgnoreCase("tagname")){
 			attributeValue = testElement.getTagName();
 		}
@@ -1274,11 +1274,11 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			errMessage = errMessage.replace("{ACTUAL}", actualTestElementProperty);
 			throw new Exception(errMessage);
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	@Override
 	public void verifyTestElementAttribute(String propertyToVerify,String expectedValueOfProperty) throws Exception {
 		String actualTestElementProperty = this.getTestElementAttribute(propertyToVerify);
@@ -1287,10 +1287,10 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			errMessage = errMessage.replace("{ACTUAL}", actualTestElementProperty);
 			throw new Exception(errMessage);
 		}
-		
-		
+
+
 	}
-	
+
 	@Override
 	public String getPageProperties(String propertyName) throws Exception{
 		String actualProperty = "";
@@ -1305,20 +1305,20 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	@Override
 	public void hover() throws Exception {
 		try{
-			
+
 			WebElement testElement = this.waitAndGetTestObject(true);
-			
+
 			Actions builder = new Actions(driver);
-			
+
 			builder.moveToElement(testElement);
-			
+
 			builder.build().perform();
-						
+
 		}
 		catch(Exception e){
 			throw new Exception(ERROR_MESSAGES.ER_HOVER_TO_ELEMENT.getErrorMessage() + " -- " + e.getMessage());
 		}
-		
+
 	}
 
 	@Override
@@ -1329,21 +1329,21 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		catch(Exception e){
 			// nothing to throw.
 		}
-		
+
 	}
 
-	
+
 	@Override
 	public String saveSnapshotAndHighlightTarget(boolean highlight) {
 		/*
 		 * For Debug Mode  OFF : take screenshots for FAILED test steps only
 		 * FOr Debug MOde ON : take screenshots for ALL the test step irrespective of its status.
-		 * For DebugMode  Strict Off : don't take screenshot at all. 
+		 * For DebugMode  Strict Off : don't take screenshot at all.
 		 */
 		File fileContainingSnapshot = null;
 		File destinationFileThatWillContainSnapshot =  null;
 		String screeShotFileName = "";
-		try{			
+		try{
 			if(highlight){
 				try{
 					JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1353,12 +1353,12 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 				}
 				catch(Exception e){ //nothing to do.
 					}
-				}				
+				}
 			else{
-			fileContainingSnapshot = this.getScreenshot();}				
-			
+			fileContainingSnapshot = this.getScreenshot();}
+
 			if(fileContainingSnapshot != null){
-			
+
 				String modifiedStepExecutionTimeString = Property.StepExecutionTime.replace("/", "");
 				modifiedStepExecutionTimeString = modifiedStepExecutionTimeString.replace(":", "");
 				modifiedStepExecutionTimeString = modifiedStepExecutionTimeString.replace(" ", "");
@@ -1376,7 +1376,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	@Override
 	public void swipetoElementVisible(String swipeType) throws Exception{
 		int currentTime = 0;
-		try {	
+		try {
 			scroll();
 /*			int timeOut =Integer.parseInt(Property.SyncTimeOut);
 			actualTestElement =  getActualTestObject();
@@ -1394,34 +1394,34 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 				currentTime++;
 				displayed = actualTestElement.isDisplayed();
 			}*/
-			
-		}catch(Exception ex){	
+
+		}catch(Exception ex){
 			String errMessage = Property.ERROR_MESSAGES.ERR_IN_SWIPING_TO_OBJECT.getErrorMessage().replaceAll("{TIME}",String.valueOf(currentTime));
 			throw new Exception(errMessage + ex.getMessage());
-			
+
 		}
 	}
-	
+
 	@Override
 	public String getTestObjectCount() throws Exception {
-		
+
 		int testObjectCount = 0;
-		
-		try {		
+
+		try {
 			this.getTestObjectList = true;
 			this.waitAndGetTestObject(true);
-			testObjectCount = this.testObjectsList.size();		
+			testObjectCount = this.testObjectsList.size();
 		} catch (Exception e) {
 			testObjectCount = 0;
 		}
-		
+
 		return String.valueOf(testObjectCount);
-		
+
 	}
 
 	@Override
 	public void refresh() throws Exception {
-		
+
 		try {
 			driver.navigate().refresh();
 		} catch (Exception e) {
@@ -1444,7 +1444,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -1462,17 +1462,17 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		 try {
 			 	currentURL = driver.getPageSource();
 			    Element doc1 =  Jsoup.parse(currentURL).body();
-	            productContainer =  Xsoup.compile(xpathForProdContainer).evaluate(doc1).getElements();		           
+	            productContainer =  Xsoup.compile(xpathForProdContainer).evaluate(doc1).getElements();
 	            if(productContainer.size() == 0){
 	            	String errMessage = ERROR_MESSAGES.ERR_NO_PRODUCT_FOUND_ON_CATALOG.getErrorMessage();
 	            	throw new Exception(errMessage);
-	            }	            	
+	            }
 		        else{
 		        	eachProd = productContainer.get(0).getElementsByAttributeValueContaining("data-product-id", "INDFAS");
 	            	for(Element prod : eachProd){
 	        			tag = Xsoup.compile(xpathForSort).evaluate(prod).getElements();
 	        			try{
-	        				
+
 	            			if(sortText.equalsIgnoreCase("desc")){
 	            				if( tag.size() == 0){
 	            					String errMessage = ERROR_MESSAGES.ERR_TAG_NOT_FOUND_AFTER_SORTING.getErrorMessage().replace("{SORT_SELECTED}", sortText);
@@ -1488,11 +1488,11 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			        						errMessage = errMessage.replace("{PRICE_FOUND}", String.valueOf(priceOfOneProd));
 			        						throw new Exception(errMessage);
 		            					}
-		            						
+
 		            				}
 		            				tempVar = priceOfOneProd;
 	            				}
-	            			}	            			
+	            			}
 	            			else if(sortText.equalsIgnoreCase("asc")){
 	            				if( tag.size() == 0)
 	            					throw new Exception("Price Tag Not found for product "+prod.attr("data-product-id"));
@@ -1547,7 +1547,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			        						throw new Exception(errMessage);
 	            						}
 	            					}
-	            					
+
 	            				}
 	            			}
 	            			else{
@@ -1555,35 +1555,35 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	        						String errMessage = ERROR_MESSAGES.ERR_TAG_NOT_FOUND_AFTER_SORTING.getErrorMessage().replace("{SORT_SELECTED}", sortText);
 	        						errMessage = errMessage.replace("{SKU}", prod.attr("data-product-id"));
 	        						throw new Exception(errMessage);
-	        					}	     
+	        					}
 	            			}
-	        			
+
 	        			}
 	        			catch(Exception ex){
 	        				throw ex;
 	        			}
 	        	}
 	    	}
-	            
+
 		 }
 		 catch(Exception e){
 			 throw e;
 		 }
-		
+
 	}
-	
+
 	@Override
 	public void verifyAndReportRedirectdUrls() throws Exception{
 
 		try{
 			HashMap<String, String> redirectedUrls = new HashMap<String, String>();
-			
+
 			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
 			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}","SourceForRedirectedUrls.csv");
 			String sourceFileForBrokenLinks = fileLocation;
-			
+
 			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForBrokenLinks);
-			
+
 			for (String url : pageUrls) {
 				try{
 					if(!url.contains("http")){
@@ -1591,7 +1591,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 					}
 					driver.navigate().to(url);
 					String redirectedUrl = this.getPageAttribute("url");
-					
+
 					if(!redirectedUrl.equalsIgnoreCase(url) && !redirectedUrl.equalsIgnoreCase(url + "/")){
 						redirectedUrls.put(url, "Error -- Redirecting to " + redirectedUrl);
 					}
@@ -1603,7 +1603,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 					redirectedUrls.put(url, "FAILED -- Couldn't navigate to URL");
 				}
 			}
-			
+
 			Utility.reportUrlsStatus(redirectedUrls,rManager.getTestExecutionLogFileLocation().replace("{0}", "RedirectedUrls.csv"));
 		}
 		catch(Exception e){
@@ -1618,25 +1618,25 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	 *  sectionValue is xpath of the section
 	 * @see com.auto.solution.TestDrivers.TestDrivers#verifyAndReportSectionLinks(java.lang.String, java.lang.String)
 	 */
-	
+
 	@Override
 	public void verifyAndReportSectionLinks(String sectionName, String sectionValue) throws Exception{
 		try{
 			String PageNotFoundLocator = testObjectInfo.getLocationOfTestObject();
-			
+
 			HashMap<String, String> brokenUrls = new HashMap<String, String>();;
 			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
 			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", "ApplicationURLSourceForCatagory.csv");
 			String sourceFileForBrokenLinks = fileLocation;
-			
+
 			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForBrokenLinks);
-			
+
 			for (String url : pageUrls) {
 				HashMap<String, String> catagorySectionHrefs = new HashMap<String, String>();
 				try{
 					driver.navigate().to(url);
 					addAndUpdateLinks(catagorySectionHrefs,url,sectionValue);
-						try{		
+						try{
 							while(catagorySectionHrefs.containsValue(Property.Pending)){
 								for (String hrefKey : catagorySectionHrefs.keySet()) {
 									if(catagorySectionHrefs.get(hrefKey).equalsIgnoreCase(Property.Pending)){
@@ -1649,7 +1649,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 													}
 												}
 												catch(Exception ne){
-													
+
 												}
 											try{
 												String curURL = driver.getCurrentUrl();
@@ -1657,37 +1657,37 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 													brokenUrls.put(hrefKey, curURL);
 												}
 											}catch(Exception ex){
-												
+
 											}
 										}
 										catch(Exception ne){
-											
+
 										}
 										addAndUpdateLinks(catagorySectionHrefs,hrefKey,sectionValue);
 										break;
 									}
 								}
 							}
-						
-						
+
+
 						}
 						catch(Exception e){
 							brokenUrls.put(url, "FAILED --" + e.getMessage());
 						}
-							
+
 				}
 				catch(Exception e){
 					brokenUrls.put(url, "FAILED --" + e.getMessage());
 				}
 			}
-			
+
 			Utility.reportUrlsStatus(brokenUrls,rManager.getTestExecutionLogFileLocation().replace("{0}", sectionName+"_BrokenLinks.csv"));
 		}
 		catch(Exception e){
 			throw e;
 		}
 	}
-	
+
 	private void addAndUpdateLinks(HashMap<String, String> catagorySectionHrefs,String hrefKey,String sectionType)throws Exception{
 		try{
 			catagorySectionHrefs.put(hrefKey, Property.Verified);
@@ -1698,45 +1698,45 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		    	  if(!catagorySectionHrefs.containsKey(hrefValue))
 		    		  catagorySectionHrefs.put(hrefValue, Property.Pending);
 		    	  }catch(Exception ex){
-		    		  
+
 		    	  }
 		      }
-			
+
 		}catch(Exception ex){
 			throw ex;
 		}
-		
-	}	
-	
+
+	}
+
 	@Override
 	public void verifyAndReportBrokenLinksFromPages(String urlSource) throws Exception{
-		
-		try{			
+
+		try{
 			HashMap<String, String> brokenUrls = new HashMap<String, String>();
-			
+
 			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
 			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", urlSource);
 			String sourceFileForBrokenLinks = fileLocation;
-			
+
 			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForBrokenLinks);
-			
+
 			for (String url : pageUrls) {
 				try{
 					if(!url.contains("http")){
 						url = "http://" + url;
 					}
 					url = url.replace("http", "https");
-					
+
 					System.out.println("Main Url -- " + url);
-					
+
 					driver.navigate().to(url);
-					
+
 					Thread.sleep(10000);
-					
+
 					ArrayList<String> hrefs = this.getHyperRefrenceOnPage();
-				
+
 					for (String linkUrl : hrefs) {
-						
+
 						try{
 							if(linkUrl==null){
 								continue;
@@ -1744,7 +1744,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 							if(!linkUrl.contains("https")){
 								linkUrl = linkUrl.replaceAll("http", "https");
 							}
-							
+
 //							if(linkUrl.contains("#")){
 //								brokenUrls.put(linkUrl, "ERROR -- Contains # in hyper reference");
 //								continue;
@@ -1758,45 +1758,45 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 							brokenUrls.put(linkUrl, "FAILED --" + e.getMessage().replaceAll("\\,"," "));
 						}
 						System.out.println("\t" + "URL--" + linkUrl);
-					}					
+					}
 				}
 				catch(Exception e){
 					brokenUrls.put(url, "FAILED --" + e.getMessage());
 				}
 			}
-			
+
 			Utility.reportUrlsStatus(brokenUrls,rManager.getTestExecutionLogFileLocation().replace("{0}","BrokenLinks.csv"));
 		}
 		catch(Exception e){
 			throw e;
 		}
 	}
-	
+
 	@Override
 	public void verifyInternalLinkOnWebPage(String urlSource) throws Exception{
-		
-		try{			
+
+		try{
 			HashMap<String, String> internalLinksWithStatus = new HashMap<String, String>();
-			
+
 			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
 			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", urlSource);
 			String sourceFileForBrokenLinks = fileLocation;
-			
+
 			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForBrokenLinks);
-			
+
 			for (String url : pageUrls) {
 				try{
 					System.out.println("Main Url -- " + url);
-					
+
 					driver.navigate().to(url);
-				
+
 					Thread.sleep(5000);
-					
+
 					if(!driver.getCurrentUrl().contains("https://")){
 						internalLinksWithStatus.put(url, "Not redirecting to HTTPs");
 					}
 					ArrayList<String> hrefs = this.getHyperRefrenceOnPage();
-				
+
 					for (String linkUrl : hrefs) {
 						if(linkUrl == null || linkUrl == "")
 							continue;
@@ -1806,40 +1806,40 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 							if(!linkUrl.toLowerCase().contains("https://")){
 								internalLinksWithStatus.put(linkUrl, "Non HTTPs link");
 							}
-							
-							System.out.println(linkUrl);							
+
+							System.out.println(linkUrl);
 						}
 						catch(Exception e){
 							internalLinksWithStatus.put(linkUrl, "FAILED --" + e.getMessage().replaceAll("\\,"," "));
 						}
-					}					
+					}
 				}
 				catch(Exception e){
 					internalLinksWithStatus.put(url, "FAILED --" + e.getMessage());
 				}
 			}
-			
+
 			Utility.reportUrlsStatus(internalLinksWithStatus,rManager.getTestExecutionLogFileLocation().replace("{0}","BrokenLinks.csv"));
 		}
 		catch(Exception e){
 			throw e;
 		}
 	}
-	
-	
+
+
 	@Override
 	public void verifyAndReportSCO(String scoUrlSource) throws Exception{
 		try{
 			String SEO_Article = testObjectInfo.getLocationOfTestObject();
-			
+
 			HashMap<String, String> SEOURLS_STATUS = new HashMap<String, String>();
-			
+
 			String fileLocation = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
 			fileLocation = fileLocation.replace("{EXTERNAL_FILE_NAME}", scoUrlSource);
 			String sourceFileForSEOUrls = fileLocation;
-			
+
 			ArrayList<String> pageUrls = Utility.getPageUrlsInListFormatFromCSV(sourceFileForSEOUrls);
-			
+
 			for (String url : pageUrls) {
 				try{
 					if(!url.contains("http")){
@@ -1865,18 +1865,18 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 				else{
 					SEOURLS_STATUS.put(url, "OK");
 				}
-				
+
 				}
 				catch(Exception e){
 					SEOURLS_STATUS.put(url, "FAILED :: NO SEO Content Found");
 				}
-				
+
 			}
 			String outputFileName = "SEOStatus_" + Utility.getCurrentTimeStampInAlphaNumericFormat() + ".csv";
 			Utility.reportUrlsStatus(SEOURLS_STATUS, rManager.getTestExecutionLogFileLocation().replace("{0}", outputFileName));
 		}
 		catch(Exception e){
-			
+
 		}
 	}
 	@Override
@@ -1898,7 +1898,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throw e;
 		}
 	}
-	
+
 	@Override
 	public void handleAlert(String option) throws Exception
 	{
@@ -1925,7 +1925,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throw e;
 		}
 	}
-	
+
 	@Override
  	public String getElementDimension() throws NoSuchElementException, Exception {
  		WebElement testElement = null;
@@ -1935,7 +1935,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
  		catch(NoSuchElementException ne){
  			throw ne;
  		}
- 		
+
  		try{
  			int width = testElement.getSize().getWidth();
  			int height = testElement.getSize().getHeight();
@@ -1944,13 +1944,13 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
  		catch(Exception e){
  			throw e;
  		}
- 		
+
  	}
 
 	public void clickOnCo_ordinates(int i,int j) throws Exception{
 		throw new Exception(ERROR_MESSAGES.FEATURE_NOT_IMPLEMENTED.getErrorMessage());
 	}
-	
+
 	@Override
 	public void resizeToDeafult() throws Exception{
 		try{
@@ -1963,7 +1963,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 
 	@Override
 	public void resizeCurrentWindow(int x_coord, int y_coord) throws Exception {
-		
+
 		try{
 		Dimension targetWindowDimension = new Dimension(x_coord, y_coord);
 		driver.manage().window().setSize(targetWindowDimension);
@@ -1973,46 +1973,65 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		}
 	}
 
+	@Override
+	public void switchToNewTab() {
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("window.open();");
+		sleep(500);
+		for(String winHandle : driver.getWindowHandles()){
+		driver.switchTo().window(winHandle);
+		}
+	}
+
+	@Override
+	public void closeTab() {
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("window.close();");
+		sleep(500);
+		for(String winHandle : driver.getWindowHandles()){
+		driver.switchTo().window(winHandle);
+		}
+	}
 
 	@Override
 	public void extractJSErrors(String inputUrlReferenceFile) throws Exception {
-		
+
 		JsonGenerator jsonGenerator = null;
-		
-		try{			
+
+		try{
 			String input_file_location = Utility.getValueForKeyFromGlobalVarMap("dumpurlfile") == null ? "" : Utility.getValueForKeyFromGlobalVarMap("dumpurlfile");
-			
+
 			if(input_file_location.equals("")){
-			
+
 				input_file_location = rManager.getLocationForExternalFilesInResources().replace("{PROJECT_NAME}", Property.PROJECT_NAME);
-			
+
 				input_file_location = input_file_location.replace("{EXTERNAL_FILE_NAME}", inputUrlReferenceFile);;
 			}
-			
+
 			File input_file = new File(input_file_location);
-			
+
 			BufferedReader br = new BufferedReader(new FileReader(input_file));
-			
+
 			String url = "";
-			
+
 			String logFileName = "JSError_" + Utility.getCurrentTimeStampInAlphaNumericFormat() + ".json";
-			
+
 			String logFile = rManager.getTestExecutionLogFileLocation().replace("{0}", logFileName);;
-			
-			jsonGenerator = Utility.createJsonFile(logFile);		
+
+			jsonGenerator = Utility.createJsonFile(logFile);
 			jsonGenerator.writeStartObject();
 			Integer index = 1;
-			while ((url = br.readLine()) != null) {	
-			
+			while ((url = br.readLine()) != null) {
+
 				jsonGenerator.writeObjectFieldStart(String.valueOf(index));
 				//jsonGenerator.writeStartObject();
 				String actual_url = Property.ApplicationURL + url;
-				driver.navigate().to(actual_url);				
+				driver.navigate().to(actual_url);
 				this.ExtractAndLogJSErrors(jsonGenerator,actual_url);
 				jsonGenerator.writeEndObject();
 				index++;
-			}	
-			
+			}
+
 		}
 		catch(Exception e){
 			throw e;
@@ -2024,8 +2043,8 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			jsonGenerator.close();
 			}
 		}
-		
+
 	}
-	
+
 }
 
