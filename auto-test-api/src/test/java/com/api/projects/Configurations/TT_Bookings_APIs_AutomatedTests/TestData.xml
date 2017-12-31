@@ -53,6 +53,21 @@
       <title>hi,hello,testhi,test1hello</title>
       <comment>test,test1,test2,test3</comment>
      </Health_Check_TravelerChatHistory>
+     <Health_Check_TravelerAgentChat>
+      <userplatform>Not_mobile</userplatform>
+      <travelercomment>test,test1,test2,test3</travelercomment>
+      <agentcomment>quote,quote1,quote2,quote3</agentcomment>
+      <chattitle>hello</chattitle>
+      <agenttitle>hi</agenttitle>
+     </Health_Check_TravelerAgentChat>
+     <Health_Check_Trip_Feedback>
+      <ttrecommend>1,2,3,4,5,6,7,8,9,10</ttrecommend>
+     <hoteloptions>Location,Room comfort and quality,Cleanliness and ambience,Staff behaviour,Meal quality</hoteloptions>
+     <caboptions>Communication with driver,Driver's Behaviour,Timeliness,Ride Comfort,Cab Cleanliness</caboptions>
+     <agentratingoptions>Politeness,Destination Guidance,Voucher/Ticket Delivery,Pre trip responsiveness and support,On trip coordination</agentratingoptions>
+     <othertext>test,test1,test2</othertext>
+     <rating>1,2,3,4,5</rating>
+     </Health_Check_Trip_Feedback>
      </Health_Check_Booking_PP_API>
    </TestSuite>
 </project>
