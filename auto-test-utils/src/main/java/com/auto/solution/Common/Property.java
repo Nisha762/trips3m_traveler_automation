@@ -18,7 +18,11 @@ public class Property {
 
 	public static String PROPERTY_FILE_SUMMARY = "summary.properties";
 	
+	public static String StrategyString = "";
+	
 	public static String DB_CONNECT_FLAG_KEY = "dbconnectionrequired";
+	
+	public static String MAIL_CONTENT_KEY = "mail_content";
 	
 	public static String REPORTXSLFILE = "Report.xsl"; 
 	
@@ -366,7 +370,8 @@ public class Property {
 		EXACT_MATCH("exactmatch"),
 		OPTIONAL("optional"),
 		CRITICAL("critical"),
-		NOWAIT("nowait");
+		NOWAIT("nowait"),
+		DATACOUNT("datacount");
 		
 		private String strategy;
 		private STRATEGY_KEYWORD(String strategyKeyword){
