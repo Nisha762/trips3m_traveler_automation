@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="e01036e4-e7cc-4711-835c-ff289029dd9d" activeEnvironment="Default" name="CfeeAndCheckoutFee" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="ca7f0134-ebae-4b61-891d-02ac1c60e35b" wadlVersion="http://wadl.dev.java.net/2009/02" name="CfeeAndCheckoutFee" type="rest" definitionUrl="bookings/v1/rt_applied_charges?requested_trip_id=1016713&amp;currency=Rupee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="rt_applied_charges" path="/bookings/v1/rt_applied_charges?requested_trip_id={request_id}&amp;currency=Rupee" id="2ad5bec1-0c2d-47b7-ace4-c238cf60ea1e"><con:settings/><con:parameters><con:parameter><con:name>currency</con:name><con:value>Rupee</con:value><con:style>QUERY</con:style><con:default>Rupee</con:default></con:parameter><con:parameter><con:name>request_id</con:name><con:style>TEMPLATE</con:style></con:parameter></con:parameters><con:method name="Method 1" id="931a24bc-f49b-4eb0-98fd-f70596481b60" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="090967c6-5005-4671-a6ed-cedb891756af" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:originalUri>https://null///bookings/v1/rt_applied_charges</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="currency" value="" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>currency</con:entry><con:entry>request_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="e1a513f9-1b72-439d-a079-7fd3fe67db08" wadlVersion="http://wadl.dev.java.net/2009/02" name="SignIn" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints/><con:resource name="sign_in" path="/users/sign_in" id="d2bd3329-29fd-41f3-b5fa-56168d6200be"><con:settings/><con:parameters/><con:method name="Method 1" id="3fe57372-68e8-41a4-8923-f48a5db9113a" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:request name="Request 1" id="098afb37-2502-414c-bdf6-87b1960632fc" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://${#Project#traveler_apiendpoint}</con:endpoint><con:request>{"login_type":"json","user":{"email":"testing1112015a@rediffmail.com","password":"testing00000007"}}</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="b53dc3bb-2b72-4b33-8882-2a888a0ca869" name="CfeeAndCheckoutFee"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="e9fc6f59-3779-45bd-8cff-6e03865681e8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Fetch cfee and checkout fee detail" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Given user gets the hash key" id="eb81325b-b8b6-4ea6-a3f1-b599cded371a"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>e12fb07b-88ae-4971-ac08-72bfd580c9b9</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>https://${#TestCase#endpoint}/users/sign_in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>GR486AYqjPUnYu76T+mzDogFbAgwY7Rz90tp9bQbIjs=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user logged in successfully with correct credentials" id="fd5f3fc3-eca7-4052-ab58-9c78ef541d13"><con:settings/><con:config service="SignIn" resourcePath="/users/sign_in" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user logged in successfully with correct credentials" id="098afb37-2502-414c-bdf6-87b1960632fc" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="TT-Mobile" value="${Given user gets the hash key#hash_key}"/>
+  &lt;con:entry key="Content-Type" value="application/json; charset=utf-8"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>https://${#TestCase#endpoint}</con:endpoint><con:request>{"login_type":"json","user":{"email":"${#TestCase#user_email}","password":"${#TestCase#user_password}"}}</con:request><con:originalUri>https://null///users/sign_in</con:originalUri><con:assertion type="GroovyScriptAssertion" id="fe62d3b9-3aac-49dc-b952-6c90efafab68" name="get cookies detail"><con:configuration><scriptText>for(String cookie in messageExchange.getResponseHeaders()["Set-Cookie"]){
+	if(cookie.contains("_trips3m_session")){
+		messageExchange.modelItem.testCase.setPropertyValue("Cookie",cookie);
+	}
+}</scriptText></con:configuration></con:assertion><con:assertion type="Simple Contains" id="0bb6a428-e4f2-4fe3-bacf-5178dee392dc" name="Contains"><con:configuration><token>${#TestCase#user_email}</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="46be2cd5-2eb4-4ced-9ce6-b290bb577926" name="Get user details"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+String user_id = json_response_holder.current_user.id.toString();
+
+String auth_key = json_response_holder.current_user.pubnub_auth.auth_key;
+
+messageExchange.modelItem.testCase.setPropertyValue("user_id",user_id);
+
+messageExchange.modelItem.testCase.setPropertyValue("auth_key",auth_key);</scriptText></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="789feddf-7776-4ea2-9fec-469d9bc7c9fe" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="Get the hash for fetching cfee details" id="3c258c7e-c189-44c2-9296-3bf14ee1778b"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>e12fb07b-88ae-4971-ac08-72bfd580c9b9</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>https://${#TestCase#endpoint}/bookings/v1/rt_applied_charges?requested_trip_id=${#TestCase#request_id}&amp;currency=Rupee</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>gRKF9fSaoWK3xhlpxUZif4SUS4vqqEN0AegbMRSRMaY=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user is able to fetch correct Cfee and checkout fee details" id="440882a7-8918-42f6-84cb-0524ad308865"><con:settings/><con:config service="CfeeAndCheckoutFee" resourcePath="/bookings/v1/rt_applied_charges?requested_trip_id={request_id}&amp;currency=Rupee" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user is able to fetch correct Cfee and checkout fee details" id="090967c6-5005-4671-a6ed-cedb891756af" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  <con:entry key="TT-Mobile" value="${Get the hash for fetching cfee details#hash_key}"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="Content-Type" value="application/json; charset=UTF-8"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>https://${#TestCase#endpoint}</con:endpoint><con:request/><con:originalUri>http://null///bookings/v1/rt_applied_charges</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="ba9161a2-31a9-445f-b44d-12f5380182f0" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="e0ef566e-2f80-4667-8286-86449b8fa450" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def is_activate = json_response_holder.is_activate;
+String cfee_amount = json_response_holder.data.cfee_amount;
+
+String checkout_fee_amount = json_response_holder.data.checkout_fee_amount;
+
+String checkout_fee_text_msg = json_response_holder.data.checkout_fee_text_msg;
+String admin_checkout_fee_msg = json_response_holder.data.admin_checkout_fee_msg;
+assert(cfee_amount!= null):"cfee not generated"
+assert(checkout_fee_amount!= null):"checkout_fee_amount not generated"
+
+messageExchange.modelItem.testCase.setPropertyValue("cfee_amount",String.valueOf(cfee_amount));
+log.info cfee_amount;
+messageExchange.modelItem.testCase.setPropertyValue("checkout_fee_amount",String.valueOf(checkout_fee_amount));
+log.info checkout_fee_amount;
+messageExchange.modelItem.testCase.setPropertyValue("checkout_fee_text_msg",String.valueOf(checkout_fee_text_msg));
+log.info checkout_fee_text_msg;
+messageExchange.modelItem.testCase.setPropertyValue("admin_checkout_fee_msg",String.valueOf(admin_checkout_fee_msg));
+log.info admin_checkout_fee_msg;</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="request_id" value="${#TestCase#request_id}"/>
+  <con:entry key="currency" value=""/>
+</con:parameters><con:parameterOrder><con:entry>currency</con:entry><con:entry>request_id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>user_email</con:name><con:value>lorem_tt_test_ipsum@mailinator.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value>tt1234</con:value></con:property><con:property><con:name>request_id</con:name><con:value>2223025</con:value></con:property><con:property><con:name>endpoint</con:name><con:value>bookings-qa2.ttdev.in</con:value></con:property><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJWZmYTRmOTYzNjI2MTJmNGMyZGMzNWU5MmY5ODk1Y2JjBjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA7SLDkkiIiQyYSQxMCRnRVJiZ3drZTNBZU0zQ0EwWVAzbWcuBjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVA%3D%3D--502da4e29c1b45041bea339413cf00e93bc8cbc8; path=/; HttpOnly</con:value></con:property><con:property><con:name>user_id</con:name><con:value>953268</con:value></con:property><con:property><con:name>auth_key</con:name><con:value>75c78998026011e7904f06304046af90</con:value></con:property><con:property><con:name>cfee_amount</con:name><con:value>300.0</con:value></con:property><con:property><con:name>checkout_fee_amount</con:name><con:value>150.0</con:value></con:property><con:property><con:name>checkout_fee_text_msg</con:name><con:value>*An additional one-time checkout fee of Rupee 150.0 will also be
+     charged if you pay via Credit Card/ Net Banking/ Wallets/ PayU Money/ PayTM/ EMI Credit Card</con:value></con:property><con:property><con:name>admin_checkout_fee_msg</con:name><con:value>An additional checkout fee of Rupee
+    150.0 will be charged once if the traveler
+    selects to pay via Credit Card/ Net Banking/ Wallets/ PayU Money/ PayTM/ EMI Credit Card,
+
+    Tip: Make a pitch to traveler to make all payments via
+    Debit Card/ NEFT
+    to save these additional charges.</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="4f950310-8018-4757-bc29-7fdaccc21147" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="e12fb07b-88ae-4971-ac08-72bfd580c9b9" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="ed761748-9708-42d0-8500-d82158ee53dc"><con:settings/><con:config><script>import java.security.MessageDigest;
+import org.codehaus.groovy.runtime.EncodingGroovyMethods;
+
+
+String requestUrl = context.expand('${#TestCase#request_url}');
+String userEmail = context.expand('${#TestCase#user_email}');
+String requestType = context.expand('${#TestCase#request_type}');
+log.info requestUrl;
+String digest;
+
+if( requestType == "get" ){
+  	digest = requestUrl; 
+} else {
+digest = userEmail + requestType;
+}
+
+digest = getUserDigest(digest); //this is final digest
+
+log.info digest;
+testRunner.testCase.setPropertyValue("hash_key",digest);
+
+String getUserDigest(String digest) {
+   String TT_S_KEY = "DAFAC0A55F50A75558B778035E3C9A8BDF03AF1E4C2124D2CD5DD42092EFD32E";
+   try {
+       digest = TT_S_KEY + digest;
+       MessageDigest msgDigest = MessageDigest.getInstance("SHA-256");
+       msgDigest.update(digest.getBytes());
+       EncodingGroovyMethods encodeObj = new EncodingGroovyMethods();
+       //digest = new String(Base64.encode(msgDigest.digest(), Base64.DEFAULT));
+       digest = encodeObj.encodeBase64(msgDigest.digest()).toString();
+       if (digest.length() > 164) {
+           digest = digest.substring(0, 163);
+       }
+       return digest;
+   } catch (Exception e) {
+       log.info e.getMessage();
+   }
+   return null;
+}
+</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>https://bookings-qa2.ttdev.in/bookings/v1/rt_applied_charges?requested_trip_id=2223025&amp;currency=Rupee</con:value></con:property><con:property><con:name>user_email</con:name><con:value>lorem_tt_test_ipsum@mailinator.com</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>gRKF9fSaoWK3xhlpxUZif4SUS4vqqEN0AegbMRSRMaY=</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
