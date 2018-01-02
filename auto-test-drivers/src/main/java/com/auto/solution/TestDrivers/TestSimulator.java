@@ -568,8 +568,8 @@ public class TestSimulator {
  						for (String key_value_pair : key_value_pairs) {
  							String keyValue = key_value_pair.trim();
  							int index = key_value_pair.indexOf("=");
- 							String key = keyValue.substring(0, index-1);
- 							String value = keyValue.substring(index+1,keyValue.length()-1);
+ 							String key = keyValue.substring(0, index);
+ 							String value = keyValue.substring(index+1,keyValue.length());
  							System.out.println(value);
  							propertiesMap.put(key, value);
  							}
