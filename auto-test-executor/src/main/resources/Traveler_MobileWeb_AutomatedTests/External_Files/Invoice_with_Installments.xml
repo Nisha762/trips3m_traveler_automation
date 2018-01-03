@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="b749435a-dded-4ee9-a8db-23d7dd8aa341" activeEnvironment="Default" name="Invoice with installments" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="ca66ad06-d6c8-4da6-80a6-fed935c45dd1" wadlVersion="http://wadl.dev.java.net/2009/02" name="SendInvoice" type="rest" definitionUrl="SendInvoice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="send_invoice.json" path="/api/v4/invoices/send_invoice.json" id="0c3d285a-17c6-45b0-a31f-a3ebcc4f09f1"><con:settings/><con:parameters><con:parameter><con:name>id</con:name><con:value>{invoiceID}</con:value><con:style>QUERY</con:style><con:default>{invoiceID}</con:default></con:parameter><con:parameter><con:name>security_auth_token</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="7998744e-fc00-4598-b6ff-90ef5928e6a4" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="f6caecf1-4d30-43fa-befc-b960089a1fca" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value=""/>
+  <con:entry key="TT-Mobile" value=""/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="Content-Type" value="application/json; charset=utf-8"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.agentnotifier"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#Project#traveler_apiendpoint}</con:endpoint><con:request/><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#invoiceID}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>id</con:entry><con:entry>security_auth_token</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="0fdef33b-9e28-47ef-ac83-0d08a94e5c99" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetPrefilledInvoiceData" type="rest" definitionUrl="GetPreFilledInvoiceData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="prefill_invoice_data.json" path="/api/v4/invoices/prefill_invoice_data.json" id="c8238d13-228e-4311-a01e-955dc440060e"><con:settings/><con:parameters><con:parameter><con:name>quote_id</con:name><con:value>{quoteid}</con:value><con:style>QUERY</con:style><con:default>{quoteid}</con:default></con:parameter><con:parameter><con:name>security_auth_token</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="1d3aa21c-a361-43c6-b364-1d6c5d5b6669" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="3308e9a7-53a5-4ef8-ae63-f9e5a1622bc3" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value="Cookie"/>
+  <con:entry key="TT-Mobile" value="hash_key"/>
+  <con:entry key="Content-Type" value="application/json"/>
+  <con:entry key="Accept" value="application/json; charset=utf-8"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.agentnotifier"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request/><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder><con:entry>quote_id</con:entry><con:entry>security_auth_token</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="c41cfb6a-4250-40c3-be4d-ec986a323abd" wadlVersion="http://wadl.dev.java.net/2009/02" name="SyncInvoiceComissionPayment" type="rest" definitionUrl="SyncInvoiceComissionPayment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="sync_invoice_commission_payments.json" path="/api/v4/invoices/sync_invoice_commission_payments.json" id="c8756e92-c9a5-474e-b2b5-e55936f6073a"><con:settings/><con:parameters><con:parameter><con:name>security_auth_token</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="5bcbfbfb-216a-4e66-906b-75c14ce9506e" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="5d6f78f8-8c0c-4e5f-8eee-b74bef32bb50" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value=""/>
+  <con:entry key="TT-Mobile" value=""/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="Content-Type" value="application/json; charset=utf-8"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.agentnotifier"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#Project#traveler_apiendpoint}</con:endpoint><con:request>{"agent_commision":7.5,"invoice":{"address":"abc, delhi, new delhi, India - 110069","agent_earning":5916.4501953125,"agent_id":759117,"discount":0.0,"discount_traveller":0,"email":"ttprodagent@gmail.com","flight_amount":1000,"id":"85615","payments_attributes":[{"_destroy":false,"from_traveler":5000.0,"id":"311251","is_editable":true,"method":"Payment Gateway","scheduled_date":"2017-08-17","status":"Scheduled","traveler_currency":"Rupee","user_id":759117},{"_destroy":false,"from_traveler":1234.0,"id":"311252","is_editable":true,"method":"Payment Gateway","scheduled_date":"2017-08-17","status":"Scheduled","traveler_currency":"Rupee","user_id":759117}],"phone_no":"+919810494625","quote_id":"3344918","requested_trip_id":1833909,"invoices_deliverables_attributes":[{"deliverable_id":1,"id":"135968","_destroy":false},{"deliverable_id":2,"id":"135969","_destroy":false},{"deliverable_id":3,"id":"135970","_destroy":false},{"deliverable_id":4,"id":"135971","_destroy":false},{"deliverable_id":5,"id":"135972","_destroy":false},{"deliverable_id":7,"_destroy":false},{"deliverable_id":6,"_destroy":false}],"toc":"&lt;p>Please be informed that, we may contact you on regular intervals during your tour through phone calls. This is to ensure that you are doing great during your tour, or to know if at all there is any issue with the vehicle/driver, hotels, houseboat etc. Timely updates from you will help us rectifying the issues if any. We will not be considering or entertaining any grievances/complaints/ reviews on issues which are not addressed to us during the tour. We will not be responsible for Preponing or Postponing of travelling time / delays / waiting time related to Bandh, Hartal, strikes etc. Only 1 each of arrival and departure transfers will be applied. Museums, Art galleries and any other institutions which are under the ARCHAEOLOGICAL DEPT: will remain closed on all Mondays.&lt;/p>","traveller_fullname":"Ios","traveller_phone_no":"+917556436963","trip_details":"Name: Ios\_r\nAdult(s): 0\_r\nChild: 0\_r\nDestination: Kerala\_r\n","ttcommission":317.54998779296875,"visa_cost":1000,"voucher_days":3},"selectPayment":2}</con:request><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder><con:entry>security_auth_token</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="9963f8c9-0222-4e69-94f9-7fbd010e393a" wadlVersion="http://wadl.dev.java.net/2009/02" name="CreateInvoice" type="rest" definitionUrl="CreateInvoice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="create_invoice.json" path="/api/v4/invoices/create_invoice.json" id="e9c01b90-614d-4232-a6f7-767f57351826"><con:settings/><con:parameters><con:parameter><con:name>security_auth_token</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="2da168fd-51c0-4a9b-9f5b-66e0971a9ff5" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="db8527b7-ae32-48b0-b671-886243b9db2b" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value="Cookie"/>
+  <con:entry key="TT-Mobile" value="hash_key"/>
+  <con:entry key="Content-Type" value="application/json"/>
+  <con:entry key="Accept" value="application/json; charset=utf-8"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#Project#traveler_apiendpoint}</con:endpoint><con:request>{"agent_commision":7.5,"invoice":{"address":"abc, delhi, new delhi, India - 110069","agent_earning":5916.4501953125,"agent_id":759117,"discount":0.0,"discount_traveller":0,"email":"ttprodagent@gmail.com","flight_amount":1000,"id":"85615","payments_attributes":[{"_destroy":false,"from_traveler":5000.0,"id":"311251","is_editable":true,"method":"Payment Gateway","scheduled_date":"2017-08-17","status":"Scheduled","traveler_currency":"Rupee","user_id":759117},{"_destroy":false,"from_traveler":1234.0,"id":"311252","is_editable":true,"method":"Payment Gateway","scheduled_date":"2017-08-17","status":"Scheduled","traveler_currency":"Rupee","user_id":759117}],"phone_no":"+919810494625","quote_id":"3344918","requested_trip_id":1833909,"invoices_deliverables_attributes":[{"deliverable_id":1,"id":"135968","_destroy":false},{"deliverable_id":2,"id":"135969","_destroy":false},{"deliverable_id":3,"id":"135970","_destroy":false},{"deliverable_id":4,"id":"135971","_destroy":false},{"deliverable_id":5,"id":"135972","_destroy":false},{"deliverable_id":7,"_destroy":false},{"deliverable_id":6,"_destroy":false}],"toc":"&lt;p>Please be informed that, we may contact you on regular intervals during your tour through phone calls. This is to ensure that you are doing great during your tour, or to know if at all there is any issue with the vehicle/driver, hotels, houseboat etc. Timely updates from you will help us rectifying the issues if any. We will not be considering or entertaining any grievances/complaints/ reviews on issues which are not addressed to us during the tour. We will not be responsible for Preponing or Postponing of travelling time / delays / waiting time related to Bandh, Hartal, strikes etc. Only 1 each of arrival and departure transfers will be applied. Museums, Art galleries and any other institutions which are under the ARCHAEOLOGICAL DEPT: will remain closed on all Mondays.&lt;/p>","traveller_fullname":"Ios","traveller_phone_no":"+917556436963","trip_details":"Name: Ios\_r\nAdult(s): 0\_r\nChild: 0\_r\nDestination: Kerala\_r\n","ttcommission":317.54998779296875,"visa_cost":1000,"voucher_days":3},"selectPayment":2}</con:request><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder><con:entry>security_auth_token</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="85e34c97-7a92-47fa-91b6-0f647b147b5d" wadlVersion="http://wadl.dev.java.net/2009/02" name="SignIn" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints/><con:resource name="sign_in" path="/users/sign_in" id="0784ffba-5809-456f-816b-41d13f20cec4"><con:settings/><con:parameters/><con:method name="Method 1" id="d18e4dd3-73e3-43c5-a60c-2a13fb1645a9" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:sign="https://bookings-qa2.ttdev.in/users/sign_in">sign:Response</con:element></con:representation><con:request name="Request 1" id="d48036e9-2723-4f97-a0ee-06529a15591e" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://${#Project#traveler_apiendpoint}</con:endpoint><con:request>{"login_type":"json","user":{"email":"testing1112015a@rediffmail.com","password":"testing00000007"}}</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="c717ee01-5c74-4474-b690-fd46885a3f8f" name="Invoice with Installments"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="c946bb2b-26fe-417a-840b-e957a47f82ee" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Invoice with installments" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="hash for login" id="e3eabd28-5ec0-4a48-bbb1-753fa5909e97"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>e645db98-32b0-4b49-a92d-3a19e14d32a2</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>https://${#TestCase#endpoint}/users/sign_in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>moebPtN2nZl9eM39PpWrKKv70v5s0VEQ/wk0h1VNY48=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="user logged in successfully" id="688e9871-d03f-4b32-b8a4-d8ceab813e90"><con:settings/><con:config service="SignIn" resourcePath="/users/sign_in" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="user logged in successfully" id="d48036e9-2723-4f97-a0ee-06529a15591e" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="TT-Mobile" value="${hash for login#hash_key}"/>
+  &lt;con:entry key="Content-Type" value="application/json;charset=UTF-8"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>https://${#TestCase#endpoint}</con:endpoint><con:request>{"login_type":"json","user":{"email":"${#TestCase#user_email}","password":"${#TestCase#user_password}"}}</con:request><con:originalUri>https://bookings-qa2.ttdev.in/users/sign_in</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="2eecb06b-b005-4a51-95c6-8d1d7f309af9" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="2ba26ab5-f58f-4111-b2ee-12386c1e5fa4" name="user gets cookie"><con:configuration><scriptText>for(String cookie in messageExchange.getResponseHeaders()["Set-Cookie"]){
+	if(cookie.contains("_trips3m_session")){
+		messageExchange.modelItem.testCase.setPropertyValue("Cookie",cookie);
+	}
+}</scriptText></con:configuration></con:assertion><con:assertion type="Simple Contains" id="5ae5bbae-3c64-47ae-8145-d45beddc1d4b" name="Contains"><con:configuration><token>${#TestCase#user_email}</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="a3a3c4bd-7c02-4a8f-b762-bb91849fdbc8" name="Fetches user details"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+String user_id = json_response_holder.current_user.id.toString();
+
+String auth_key = json_response_holder.current_user.pubnub_auth.auth_key;
+
+messageExchange.modelItem.testCase.setPropertyValue("user_id",user_id);
+
+messageExchange.modelItem.testCase.setPropertyValue("auth_key",auth_key);</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="hash for prefilled invoice data" id="7ef636e0-8b45-4bf2-8942-31e13a721942"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>e645db98-32b0-4b49-a92d-3a19e14d32a2</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/api/v4/invoices/prefill_invoice_data.json?quote_id=${#TestCase#quoteId}</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>19AXa1x8vl5QFD4Gx0gqyO0IGF/uAF4V8wGT0s/HTds=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="agent get prefilled invoice data" id="0731cee0-8d9c-42c3-b8bc-6260415c4e9d"><con:settings/><con:config service="GetPrefilledInvoiceData" resourcePath="/api/v4/invoices/prefill_invoice_data.json" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="agent get prefilled invoice data" id="3308e9a7-53a5-4ef8-ae63-f9e5a1622bc3" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  <con:entry key="TT-Mobile" value="${hash for prefilled invoice data#hash_key}"/>
+  <con:entry key="Content-Type" value="application/json; charset=utf-8"/>
+  <con:entry key="Accept" value="application/json; "/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.agentnotifier"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request/><con:originalUri>http://bookings-qa2.ttdev.in/api/v4/invoices/prefill_invoice_data.json</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="00b16f54-d168-46b0-9fab-4039fc8fdd7f" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="87ac9061-b3b0-4ca5-9d9a-aaa62cc56b73" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def deliverablesAgent = json_response_holder.deliverables_agent.deliverable_id;
+def agentCommision = json_response_holder.agent_commision;
+def selectPayment = json_response_holder.selectPayment;
+def quoteID = json_response_holder.invoice.quote_id;
+def agentID = json_response_holder.invoice.agent_id;
+def invoiceID = json_response_holder.invoice.invoice_id;
+def invoiceTravellerFullName = json_response_holder.invoice.traveller_fullname;
+def invoiceTravellerPhnNo = json_response_holder.invoice.traveller_phone_no;
+def invoiceAgentEarning = json_response_holder.invoice.agent_earning;
+def requestedTripID = json_response_holder.invoice.requested_trip_id;
+def invoiceDiscount = json_response_holder.invoice.discount;
+if(invoiceDiscount==null){
+	invoiceDiscount = 0.0;
+}
+def invoicecfee = json_response_holder.invoice.cfee;
+def invoiceDiscountTraveller = json_response_holder.invoice.discount_traveller;
+def invoiceFlightAmount = json_response_holder.invoice.flight_amount;
+def invoiceVisaCost = json_response_holder.invoice.visa_cost;
+def invoiceTTComission = json_response_holder.invoice.ttcommission;
+def invoiceVoucherDays = json_response_holder.invoice.voucher_days;
+def invoiceTOC = json_response_holder.invoice.toc;
+def invoiceTripDetails = json_response_holder.invoice.trip_details;
+def invoiceEmail = json_response_holder.invoice.email;
+def invoicePhoneNumber = json_response_holder.invoice.phone_no;
+def invoiceAddress = json_response_holder.invoice.address;
+
+messageExchange.modelItem.testCase.setPropertyValue("deliverablesAgent",deliverablesAgent[0].toString());
+//messageExchange.modelItem.testCase.setPropertyValue("selectPayment",selectPayment.toString());
+messageExchange.modelItem.testCase.setPropertyValue("quoteID",quoteID.toString());
+messageExchange.modelItem.testCase.setPropertyValue("agentID",agentID.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceID",invoiceID.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceTravellerFullName",invoiceTravellerFullName.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceTravellerPhnNo",invoiceTravellerPhnNo.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceAgentEarning",invoiceAgentEarning.toString());
+messageExchange.modelItem.testCase.setPropertyValue("requestedTripID",requestedTripID.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceDiscount",invoiceDiscount.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceDiscountTraveller",invoiceDiscountTraveller.toString());
+//messageExchange.modelItem.testCase.setPropertyValue("invoicecfee",invoicecfee.toString());
+//log.info invoicecfee
+messageExchange.modelItem.testCase.setPropertyValue("invoiceFlightAmount",invoiceFlightAmount.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceVisaCost",invoiceVisaCost.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceTTComission",invoiceTTComission.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceVoucherDays",invoiceVoucherDays.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceTOC",invoiceTOC.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceTripDetails",invoiceTripDetails.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceEmail",invoiceEmail.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoicePhoneNumber",invoicePhoneNumber.toString());
+messageExchange.modelItem.testCase.setPropertyValue("invoiceAddress",invoiceAddress.toString());
+messageExchange.modelItem.testCase.setPropertyValue("agentCommision",agentCommision.toString());
+
+
+def paymentsAttributesID = json_response_holder.invoice.payments_attributes.id[0];
+def paymentsAttributesFromTraveler = json_response_holder.invoice.payments_attributes.from_traveler[0];
+log.info paymentsAttributesFromTraveler
+def paymentsAttributesInvoiceTravelerCurrency = json_response_holder.invoice.payments_attributes.traveler_currency[0];
+def paymentsAttributesInvoiceScheduleDate = json_response_holder.invoice.payments_attributes.scheduled_date[0];
+def paymentsAttributesInvoiceDestroy = json_response_holder.invoice.payments_attributes.__destroy[0];
+def paymentsAttributesInvoiceStatus = json_response_holder.invoice.payments_attributes.status[0];
+def paymentsAttributesInvoiceUserID = json_response_holder.invoice.payments_attributes.user_id[0];
+def paymentsAttributesInvoiceMethod = json_response_holder.invoice.payments_attributes.method[0];
+def paymentsAttributesInvoiceTDR = json_response_holder.invoice.payments_attributes.tdr[0];
+def paymentsAttributesInvoicePG = json_response_holder.invoice.payments_attributes.pg[0];
+def paymentsAttributesInvoiceMode = json_response_holder.invoice.payments_attributes.mode[0];
+def paymentsAttributesFromTravelerActual = json_response_holder.invoice.payments_attributes.from_traveler_actual[0];
+def paymentsAttributesInvoiceDescription = json_response_holder.invoice.payments_attributes.description[0];
+def paymentsAttributesInvoiceIsEditable = json_response_holder.invoice.payments_attributes.is_editable[0];
+
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesID",paymentsAttributesID.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesFromTraveler",paymentsAttributesFromTraveler.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoiceTravelerCurrency",paymentsAttributesInvoiceTravelerCurrency.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoiceScheduleDate",paymentsAttributesInvoiceScheduleDate.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoiceDestroy",paymentsAttributesInvoiceDestroy.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoiceStatus",paymentsAttributesInvoiceStatus.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoiceUserID",paymentsAttributesInvoiceUserID.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoiceMethod",paymentsAttributesInvoiceMethod.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoiceTDR",paymentsAttributesInvoiceTDR.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoicePG",paymentsAttributesInvoicePG.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoiceMode",paymentsAttributesInvoiceMode.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesFromTravelerActual",paymentsAttributesFromTravelerActual.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoiceDescription",paymentsAttributesInvoiceDescription.toString());
+messageExchange.modelItem.testCase.setPropertyValue("paymentsAttributesInvoiceIsEditable",paymentsAttributesInvoiceIsEditable.toString());
+
+String today = new Date().format('yyyy-MM-dd');
+messageExchange.modelItem.testCase.setPropertyValue("todayDate",today);
+
+
+</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="quote_id" value="${#TestCase#quoteId}"/>
+  <con:entry key="security_auth_token" value="ekxnfvoxefmpelbvzuerofqmtcffxxcuwengpdrvwwgrbajkrk"/>
+</con:parameters><con:parameterOrder><con:entry>quote_id</con:entry><con:entry>security_auth_token</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="hash for syncing invoice payment" id="75355c18-e43a-4431-b099-1e5f96b14202"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>e645db98-32b0-4b49-a92d-3a19e14d32a2</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/api/v4/invoices/sync_invoice_commission_payments.json</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>moebPtN2nZl9eM39PpWrKKv70v5s0VEQ/wk0h1VNY48=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="sync invoice commission payment" id="4599a56c-4353-4c31-bd9c-81f56754c182"><con:settings/><con:config service="SyncInvoiceComissionPayment" resourcePath="/api/v4/invoices/sync_invoice_commission_payments.json" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="sync invoice commission payment" id="5d6f78f8-8c0c-4e5f-8eee-b74bef32bb50" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value="${TestCase#Cookie}"/>
+  <con:entry key="TT-Mobile" value="${hash for syncing invoice payment#hash_key}"/>
+  <con:entry key="Content-Type" value="application/json; charset=utf-8"/>
+  <con:entry key="Accept" value="application/json;"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.agentnotifier"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request>{
+  "agent_commission_charged": ${#TestCase#agentCommision},
+  "discount": ${#TestCase#invoiceDiscount},
+  "discount_traveller": ${#TestCase#invoiceDiscountTraveller},
+  "flight_amount": ${#TestCase#invoiceFlightAmount},
+  "payments_attributes": [
+    {
+      "_destroy": ${#TestCase#paymentsAttributesInvoiceDestroy},
+      "from_traveler": ${#TestCase#paymentsAttributesFromTraveler},
+      "is_editable": ${#TestCase#paymentsAttributesInvoiceIsEditable},
+      "scheduled_date": "${#TestCase#todayDate}",
+      "status": "${#TestCase#paymentsAttributesInvoiceStatus}",
+      "traveler_currency": "${#TestCase#paymentsAttributesInvoiceTravelerCurrency}",
+      "user_id": ${#TestCase#paymentsAttributesInvoiceUserID}
+    }
+  ],
+  "quote_id": "${#TestCase#quoteId}",
+  "visa_cost": ${#TestCase#invoiceVisaCost}
+}</con:request><con:originalUri>http://null///api/v4/invoices/sync_invoice_commission_payments.json</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="12700fe3-d072-4dfc-833d-3e047f195197" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="91d8afb8-a6c3-4cb8-a8bd-3f3b3353c87c" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def netAmount = json_response_holder.net_amount;
+def landPackagecCost = json_response_holder.land_package_cost;
+def commisionAmount = json_response_holder.commision_amount;
+def amountPayToYou = json_response_holder.amount_payable_to_you;
+def agentCommissionCharged = json_response_holder.agent_commission_charged;</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="security_auth_token" value="ekxnfvoxefmpelbvzuerofqmtcffxxcuwengpdrvwwgrbajkrk" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>security_auth_token</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="agent get the hash key for create invoice" id="6366615b-efff-4cb3-8edb-ea6e75c8138b"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>e645db98-32b0-4b49-a92d-3a19e14d32a2</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/api/v4/invoices/create_invoice.json</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>moebPtN2nZl9eM39PpWrKKv70v5s0VEQ/wk0h1VNY48=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="agent creates invoice" id="059561a8-b770-45f3-bf79-0ef684e17eed"><con:settings/><con:config service="CreateInvoice" resourcePath="/api/v4/invoices/create_invoice.json" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="agent creates invoice" id="db8527b7-ae32-48b0-b671-886243b9db2b" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  <con:entry key="TT-Mobile" value="${agent get the hash key for create invoice#hash_key}"/>
+  <con:entry key="Accept" value="application/json; charset=utf-8"/>
+  <con:entry key="Content-Type" value="application/json"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request>{
+	"agent_commision": "${#TestCase#agentCommision}",
+	"invoice": {
+		"address": "",
+		"agent_earning": "${#TestCase#invoiceAgentEarning}",
+		"agent_id": "${#TestCase#agentID}",
+		"discount": "${#TestCase#invoiceDiscount}",
+		"discount_traveller": "${#TestCase#invoiceDiscountTraveller}",
+		"email": "${#TestCase#invoiceEmail}",
+		"flight_amount": 0.0,
+		"payments_attributes": [{
+				"_destroy": false,
+				"from_traveler": "${#TestCase#paymentsAttributesFromTraveler}",
+				"is_editable": "${#TestCase#paymentsAttributesInvoiceIsEditable}",
+				"scheduled_date": "${#TestCase#todayDate}",
+				"status": "${#TestCase#paymentsAttributesInvoiceStatus}",
+				"traveler_currency": "${#TestCase#paymentsAttributesInvoiceTravelerCurrency}",
+				"user_id": "${#TestCase#paymentsAttributesInvoiceUserID}"
+			},
+
+			{
+				"_destroy": false,
+				"from_traveler": "${#TestCase#paymentsAttributesFromTraveler}",
+				"is_editable": "${#TestCase#paymentsAttributesInvoiceIsEditable}",
+				"scheduled_date": "${#TestCase#todayDate}",
+				"status": "${#TestCase#paymentsAttributesInvoiceStatus}",
+				"traveler_currency": "${#TestCase#paymentsAttributesInvoiceTravelerCurrency}",
+				"user_id": "${#TestCase#paymentsAttributesInvoiceUserID}"
+			}
+		],
+		"phone_no": "${#TestCase#invoicePhoneNumber}",
+		"quote_id": "${#TestCase#quoteId}",
+		"requested_trip_id": "${#TestCase#requestedTripID}",
+		"invoices_deliverables_attributes": [{
+			"deliverable_id": "${#TestCase#deliverablesAgent}",
+			"_destroy": false
+		}],
+		"toc": "snnsnssnsnsnccbvdjvb",
+		"traveller_fullname": "${#TestCase#invoiceTravellerFullName}",
+		"traveller_phone_no": "${#TestCase#invoiceTravellerPhnNo}",
+		"trip_details": "abcd",
+		"ttcommission": "${#TestCase#invoiceTTComission}",
+		"visa_cost": "${#TestCase#invoiceVisaCost}",
+		"voucher_days": "${#TestCase#invoiceVoucherDays}"
+	},
+	"selectPayment": "${#TestCase#selectPayment}"
+}</con:request><con:originalUri>http://bookings-qa2.ttdev.in/api/v4/invoices/create_invoice.json</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="9c814951-756e-49de-ba73-3c2fa1b56dcf" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="17a20621-4d08-4545-873b-86ae6070355b" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def success = json_response_holder.success;
+
+assert success == true:" success is not true"
+
+def invoiceID = json_response_holder.invoice_id;
+
+messageExchange.modelItem.testCase.setPropertyValue("invoiceID",invoiceID.toString());</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="security_auth_token" value="ekxnfvoxefmpelbvzuerofqmtcffxxcuwengpdrvwwgrbajkrk" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>security_auth_token</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="calltestcase" name="hash key for send invoice" id="457fe91d-7152-40d2-bd59-f6ed39a1b5fb"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>e645db98-32b0-4b49-a92d-3a19e14d32a2</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/api/v4/invoices/create_invoice.json</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>QDn8SSfrWl1tITkPiPKdDjfKsjtRPSsJl3PmAD6EQEw=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="agent send invoice to user" id="ebf6f7ff-a07c-4d42-bf80-bfa71f569438"><con:settings/><con:config service="SendInvoice" resourcePath="/api/v4/invoices/send_invoice.json" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="agent send invoice to user" id="f6caecf1-4d30-43fa-befc-b960089a1fca" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  <con:entry key="TT-Mobile" value="${hash key for send invoice#hash_key}"/>
+  <con:entry key="Content-Type" value="application/json; charset=utf-8"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.agentnotifier"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request/><con:originalUri>http://bookings-qa2.ttdev.in/api/v4/invoices/send_invoice.json</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="52200b07-8d88-48fa-bbd0-43618d1c6aba" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="d3ea3608-6266-4647-bf99-6424b8ad7704" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def success = json_response_holder.success;
+def message = json_response_holder.message;
+
+
+assert success==true:"Success is not true"
+assert message == "Mail Triggered" : "Message should be Mail Triggered but it is "+message</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="id" value="${#TestCase#invoiceID}"/>
+  <con:entry key="security_auth_token" value="ekxnfvoxefmpelbvzuerofqmtcffxxcuwengpdrvwwgrbajkrk"/>
+</con:parameters><con:parameterOrder><con:entry>id</con:entry><con:entry>security_auth_token</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>endpoint</con:name><con:value>bookings-qa2.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>ttprodagent@gmail.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value>ttprodagent123</con:value></con:property><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJThiY2E5NjIzYWZlMDZlYTdjYmY0NWM5ZTBiNmYyMDRlBjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA02VC0kiIiQyYSQxMCRteVpCaVBIR210dHR2NEp0RzlCQXh1BjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVA%3D%3D--455ea5df5fe108cca9c3e9859364fde41e5b36ba; path=/; HttpOnly</con:value></con:property><con:property><con:name>user_id</con:name><con:value>759117</con:value></con:property><con:property><con:name>auth_key</con:name><con:value>c5209aa8aa7b11e68ada0e2443afcf25</con:value></con:property><con:property><con:name>quoteId</con:name><con:value>4148834</con:value></con:property><con:property><con:name>deliverablesAgent</con:name><con:value>1</con:value></con:property><con:property><con:name>selectPayment</con:name><con:value>2</con:value></con:property><con:property><con:name>agentID</con:name><con:value>759117</con:value></con:property><con:property><con:name>invoiceID</con:name><con:value>110188</con:value></con:property><con:property><con:name>invoiceTravellerFullName</con:name><con:value>Loreum NPTm</con:value></con:property><con:property><con:name>invoiceTravellerPhnNo</con:name><con:value>8883281593</con:value></con:property><con:property><con:name>invoiceAgentEarning</con:name><con:value>3764.0</con:value></con:property><con:property><con:name>requestedTripID</con:name><con:value>2263936</con:value></con:property><con:property><con:name>invoiceDiscount</con:name><con:value>0.0</con:value></con:property><con:property><con:name>invoiceDiscountTraveller</con:name><con:value>0</con:value></con:property><con:property><con:name>invoiceFlightAmount</con:name><con:value>0.0</con:value></con:property><con:property><con:name>invoiceVisaCost</con:name><con:value>0</con:value></con:property><con:property><con:name>invoiceTTComission</con:name><con:value>236.0</con:value></con:property><con:property><con:name>invoiceVoucherDays</con:name><con:value>3</con:value></con:property><con:property><con:name>invoiceTOC</con:name><con:value>null</con:value></con:property><con:property><con:name>invoiceTripDetails</con:name><con:value>Name: Loreum NPTm
+Adult(s): 0
+Child: 0
+Destination: Bali
+</con:value></con:property><con:property><con:name>invoiceEmail</con:name><con:value>ttprodagent@gmail.com</con:value></con:property><con:property><con:name>invoicePhoneNumber</con:name><con:value>+919810494625</con:value></con:property><con:property><con:name>invoiceAddress</con:name><con:value>abc, delhi, new delhi, India - 110069</con:value></con:property><con:property><con:name>agentCommision</con:name><con:value>5.9</con:value></con:property><con:property><con:name>paymentsAttributesID</con:name><con:value>null</con:value></con:property><con:property><con:name>paymentsAttributesFromTraveler</con:name><con:value>4000.0</con:value></con:property><con:property><con:name>paymentsAttributesInvoiceTravelerCurrency</con:name><con:value>Rupee</con:value></con:property><con:property><con:name>paymentsAttributesInvoiceScheduleDate</con:name><con:value>null</con:value></con:property><con:property><con:name>paymentsAttributesInvoiceDestroy</con:name><con:value>false</con:value></con:property><con:property><con:name>paymentsAttributesInvoiceStatus</con:name><con:value>Scheduled</con:value></con:property><con:property><con:name>paymentsAttributesInvoiceUserID</con:name><con:value>759117</con:value></con:property><con:property><con:name>paymentsAttributesInvoiceMethod</con:name><con:value>null</con:value></con:property><con:property><con:name>paymentsAttributesInvoiceTDR</con:name><con:value>null</con:value></con:property><con:property><con:name>paymentsAttributesInvoicePG</con:name><con:value>null</con:value></con:property><con:property><con:name>paymentsAttributesInvoiceMode</con:name><con:value>null</con:value></con:property><con:property><con:name>paymentsAttributesFromTravelerActual</con:name><con:value>null</con:value></con:property><con:property><con:name>paymentsAttributesInvoiceDescription</con:name><con:value>null</con:value></con:property><con:property><con:name>paymentsAttributesInvoiceIsEditable</con:name><con:value>true</con:value></con:property><con:property><con:name>todayDate</con:name><con:value>2018-01-02</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="f26fa431-b7a9-4489-997a-d44dc216f52c" name="Reusable" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="e645db98-32b0-4b49-a92d-3a19e14d32a2" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="68b4e910-b49d-4097-ba5b-9257634b68e1"><con:settings/><con:config><script>import java.security.MessageDigest;
+import org.codehaus.groovy.runtime.EncodingGroovyMethods;
+
+
+String requestUrl = context.expand('${#TestCase#request_url}');
+String userEmail = context.expand('${#TestCase#user_email}');
+String requestType = context.expand('${#TestCase#request_type}');
+log.info requestUrl;
+String digest;
+
+if( requestType == "get" ){
+  	digest = requestUrl; 
+} else {
+digest = userEmail + requestType;
+}
+
+digest = getUserDigest(digest); //this is final digest
+
+log.info digest;
+testRunner.testCase.setPropertyValue("hash_key",digest);
+
+String getUserDigest(String digest) {
+   String TT_S_KEY = "DAFAC0A55F50A75558B778035E3C9A8BDF03AF1E4C2124D2CD5DD42092EFD32E";
+   try {
+       digest = TT_S_KEY + digest;
+       MessageDigest msgDigest = MessageDigest.getInstance("SHA-256");
+       msgDigest.update(digest.getBytes());
+       EncodingGroovyMethods encodeObj = new EncodingGroovyMethods();
+       //digest = new String(Base64.encode(msgDigest.digest(), Base64.DEFAULT));
+       digest = encodeObj.encodeBase64(msgDigest.digest()).toString();
+       if (digest.length() > 164) {
+           digest = digest.substring(0, 163);
+       }
+       return digest;
+   } catch (Exception e) {
+       log.info e.getMessage();
+   }
+   return null;
+}
+</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>http://bookings-qa2.ttdev.in/api/v4/invoices/create_invoice.json</con:value></con:property><con:property><con:name>user_email</con:name><con:value>ttprodagent@gmail.com</con:value></con:property><con:property><con:name>request_type</con:name><con:value>get</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>QDn8SSfrWl1tITkPiPKdDjfKsjtRPSsJl3PmAD6EQEw=</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

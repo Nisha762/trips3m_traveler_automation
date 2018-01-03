@@ -18,6 +18,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -215,6 +217,26 @@ public class Utility {
 		else {
 			return ActualValue.contains(ExpectedValue);
 		}
+	}
+	
+	public static Integer getDataCountFromStrategy(String StrategyString) throws Exception{
+		Integer datacount = 0;
+		try{
+		Pattern p = Pattern.compile("\\{([^}]*)\\}");;
+			Matcher m = p.matcher(StrategyString);
+			while (m.find()) {
+				String strategyKey = Property.STRATEGY_KEYWORD.DATACOUNT.toString().toLowerCase();
+			  if(m.group(1).contains(strategyKey)){
+				  String numberInString = m.group(1).replace(strategyKey, "");
+				  datacount = Integer.parseInt(numberInString);
+				  break;
+				  }
+			}
+		}
+		catch(Exception e){
+			throw e;
+		}
+			return datacount;
 	}
 
 	
