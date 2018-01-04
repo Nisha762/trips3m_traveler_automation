@@ -92,4 +92,8 @@ public interface TestDrivers {
 	public void extractJSErrors(String inputURLReferenceFile) throws Exception;
 	
 	public void verifyInternalLinkOnWebPage(String urlSource) throws Exception;
+	
+	public void switchToNewTab() throws Exception;
+
+	public void closeTab() throws Exception;
 }

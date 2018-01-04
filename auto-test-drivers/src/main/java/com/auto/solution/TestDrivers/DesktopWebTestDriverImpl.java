@@ -1972,6 +1972,26 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			throw e;
 		}
 	}
+	
+	@Override
+	public void switchToNewTab() {
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("window.open();");
+		sleep(500);
+		for(String winHandle : driver.getWindowHandles()){
+		driver.switchTo().window(winHandle);
+		}
+	}
+
+	@Override
+	public void closeTab() {
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("window.close();");
+		sleep(500);
+		for(String winHandle : driver.getWindowHandles()){
+		driver.switchTo().window(winHandle);
+		}
+	}
 
 
 	@Override

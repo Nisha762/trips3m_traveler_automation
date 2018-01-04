@@ -661,6 +661,12 @@ public class TestSimulator {
  				String urlSource = testDataContents[0];
  				testSimulator.verifyInternalLinkOnWebPage(urlSource);
  			}
+ 			else if(stepAction.toLowerCase().equalsIgnoreCase("switchtonewtab")){
+ 		        testSimulator.switchToNewTab();
+ 		    }
+ 		      else if(stepAction.toLowerCase().equalsIgnoreCase("closetab")){
+ 		        testSimulator.closeTab();
+ 		    }
  			else{
  				throw new NoSuchMethodException(Property.ERROR_MESSAGES.ER_NO_STEP_ACTION.getErrorMessage());
  			}
