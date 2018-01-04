@@ -664,7 +664,7 @@ public class TestSimulator {
  			else if(stepAction.toLowerCase().equalsIgnoreCase("switchtonewtab")){
  		        testSimulator.switchToNewTab();
  		    }
- 		      else if(stepAction.toLowerCase().equalsIgnoreCase("closetab")){
+ 		    else if(stepAction.toLowerCase().equalsIgnoreCase("closetab")){
  		        testSimulator.closeTab();
  		    }
  			else{
