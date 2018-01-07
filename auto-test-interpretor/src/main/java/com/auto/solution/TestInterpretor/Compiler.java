@@ -46,7 +46,7 @@ public class Compiler implements ICompiler{
 	
 	private void prepareStrategyForTestStep(String strategyString){
 		Property.LIST_STRATEGY_KEYWORD.clear();
-		
+		Property.StrategyString = strategyString;
 		for(STRATEGY_KEYWORD keyword : STRATEGY_KEYWORD.values()){
 			if(strategyString.toLowerCase().contains(keyword.getStartegy())){
 				Property.LIST_STRATEGY_KEYWORD.add(keyword.toString());

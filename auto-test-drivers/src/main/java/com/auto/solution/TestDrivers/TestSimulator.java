@@ -3,7 +3,10 @@ package com.auto.solution.TestDrivers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.poi.util.SystemOutLogger;
 
 import com.auto.solution.Common.EmailNotificationHandler;
 import com.auto.solution.Common.Property;
@@ -76,9 +79,38 @@ public class TestSimulator {
  	    }
  	}
  	
- 	private void prepareTestData(String testData){
+ 	private void prepareTestData(String testData) throws Exception{
  		this.testDataContents = null;
- 		this.testDataContents = testData.split(Property.TESTDATA_SEPERATOR);			
+ 		ArrayList<String> datalist = new ArrayList<String>();
+ 		int count = 0;
+ 		int datacount = 0;
+ 		if(Property.StrategyString.contains(Property.STRATEGY_KEYWORD.DATACOUNT.toString().toLowerCase())){
+ 			try{
+ 				
+ 			datacount = Utility.getDataCountFromStrategy(Property.StrategyString);
+ 			}
+ 			catch(Exception e){
+ 				throw new Exception(Property.ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage() + "--" +e.getMessage()); 
+ 			}
+ 		}
+ 		String[] tempDataList = testData.split(Property.TESTDATA_SEPERATOR);
+ 		if(datacount != 0){
+ 			String ignoredHashData = "";
+ 			while(count != datacount-1){
+ 				datalist.add(tempDataList[count]);
+ 				count++;
+ 			}
+ 			for(int index = count;index < tempDataList.length;index++){
+ 				ignoredHashData = ignoredHashData + tempDataList[index] + Property.TESTDATA_SEPERATOR;;
+ 			}
+ 			datalist.add(ignoredHashData);
+ 			this.testDataContents = datalist.toArray(new String[0]);
+ 		}
+ 		else{
+ 			this.testDataContents = tempDataList;
+ 		}
+ 		
+ 		 		
  	}
  	
  	
@@ -89,7 +121,7 @@ public class TestSimulator {
  		}
  		Property.CURRENT_TESTSTEP = stepAction;
  		
- 		prepareTestData(testData);
+ 		//prepareTestData(testData);
  		
  		TestObjectDetails objCurrentObjectDetails = new TestObjectDetails(this.objDefInfo);
  		
@@ -105,6 +137,7 @@ public class TestSimulator {
  		}
  		
  		try{
+ 			prepareTestData(testData);
  			if(stepAction.toLowerCase().equals("initializeapp")){
  				
  				//TODO : Replace the STep description with actual test data used. 
@@ -532,12 +565,12 @@ public class TestSimulator {
  					    //key=value || key=value.
  					
  						String[] key_value_pairs = testDataContents[1].split(Pattern.quote("||"));
- 				
  						for (String key_value_pair : key_value_pairs) {
  							String keyValue = key_value_pair.trim();
- 							String[] keyValueSplitted = keyValue.split("=");
- 							String key = keyValueSplitted[0].trim();
- 							String value = keyValueSplitted[1].trim();
+ 							int index = key_value_pair.indexOf("=");
+ 							String key = keyValue.substring(0, index);
+ 							String value = keyValue.substring(index+1,keyValue.length());
+ 							System.out.println(value);
  							propertiesMap.put(key, value);
  							}
  						
