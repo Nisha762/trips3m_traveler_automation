@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
    <TestSuite>
-     <Login>  
-      <tags>healthcheck</tags>
-     </Login> 
-      <RtripCreation>
-      <tags>healthcheck</tags>
-     </RtripCreation>
-     <AddingAgentTagandMarkingTripActive>
-      <tags>healthcheck</tags>
-     </AddingAgentTagandMarkingTripActive>
-     <AgentGiveQuote>
-      <tags>healthcheck</tags>
-     </AgentGiveQuote>
-     <SignUp>
-      <tags>healthcheck</tags>
-    </SignUp>
-     <AgentCreateInvoice>
-       <tags>healthcheck</tags>
-     </AgentCreateInvoice>
      <Health_Check_Booking_PP_API>
       <tags>healthcheck</tags>
       <Health_Check_Cancel_Trip>
