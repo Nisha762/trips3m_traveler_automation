@@ -58,8 +58,8 @@
 			<expected_titles_for_weekend_type>Weekend Getaways</expected_titles_for_weekend_type>
 			<expected_urls_for_weekend_type>/mktc/weekend-getaway-packages/</expected_urls_for_weekend_type>
 			<expected_titles_for_category_type>Categories</expected_titles_for_category_type>
-			<expected_subentities_for_categories_type>Adventure,Family,Nature,Honeymoon,Wildlife,Religious,Water Activities</expected_subentities_for_categories_type>
-			<expected_url_for_category_type>/Adventure-Places,/Family-Places,/Nature-Places,/Honeymoon-Places,/Wildlife-Places,/Religious-Places,/Water%20Activities-Places</expected_url_for_category_type>
+			<expected_subentities_for_categories_type>Seasonal Packages,Adventure,Family,Nature,Honeymoon,Wildlife,Religious,Water Activities</expected_subentities_for_categories_type>
+			<expected_url_for_category_type>/seasonal-packages,/Adventure-Places,/Family-Places,/Nature-Places,/Honeymoon-Places,/Wildlife-Places,/Religious-Places,/Water%20Activities-Places</expected_url_for_category_type>
 			<expected_subentities_for_destination_type>Indian Destinations,International Destinations</expected_subentities_for_destination_type>
 			</health_check_tests_for_sections_top_navigation>
 			
