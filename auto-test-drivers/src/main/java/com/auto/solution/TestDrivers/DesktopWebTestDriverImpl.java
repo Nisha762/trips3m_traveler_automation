@@ -45,7 +45,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.CapabilityType;
@@ -547,6 +550,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 		try
 		{
 		   wait.until(ExpectedConditions.elementToBeClickable(testObject));
+		   //wait.until
 		   return true;
 		}
 		catch (Exception e)
@@ -739,8 +743,12 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 					//Get all the related Info.
 						fetchUserInputs();
 						DesiredCapabilities executionCapabilities = new DesiredCapabilities();
-						executionCapabilities.setJavascriptEnabled(true);
-						executionCapabilities.setPlatform(Platform.ANY);
+						ChromeOptions options = new ChromeOptions();
+						//options.setJavascriptEnabled(true);
+						options.setCapability("chrome.switches", Arrays.asList("--enable-javascript"));
+						//options.setPlatform(Platform.ANY);
+						options.setCapability("platform", Platform.ANY);
+						
 						
 										
 						if(isRemoteExecution){
@@ -749,30 +757,35 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 								URL uri = new URL(remoteUrl);
 								executionCapabilities.setCapability("webdriver.remote.quietExceptions", true);
 								if(this.browserName.contains(Property.FIREFOX_KEYWORD)){
-									FirefoxProfile remoteProfile = new FirefoxProfile();
-									remoteProfile.setAssumeUntrustedCertificateIssuer(false);
-									remoteProfile.setAcceptUntrustedCertificates(true);
-									remoteProfile.setEnableNativeEvents(true);
-									remoteProfile.setPreference("browser.download.folderList", 2);
-									remoteProfile.setPreference("browser.download.manager.showWhenStarting", false);									
-									remoteProfile.setPreference("browser.download.dir",
+									FirefoxOptions remoteoptions = new FirefoxOptions();
+									//remoteProfile.setAssumeUntrustedCertificateIssuer(false);
+									remoteoptions.setAcceptInsecureCerts(false);
+									//remoteoptions.setAcceptUntrustedCertificates(true);
+									//remoteoptions.setEnableNativeEvents(true);
+									remoteoptions.addPreference("browser.download.folderList", 2);
+									remoteoptions.addPreference("browser.download.manager.showWhenStarting", false);									
+									remoteoptions.addPreference("browser.download.dir",
 											Utility.getAbsolutePath(rManager.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}","").
 													replace("{PROJECT_NAME}", Property.PROJECT_NAME)));
-									remoteProfile.setPreference("browser.helperApps.neverAsk.openFile",
+									remoteoptions.addPreference("browser.helperApps.neverAsk.openFile",
 											"text/csv,application/x-msexcel,application/excel,application/x-excel,"
 											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,"
 											+ "application/msword,application/xml");
-									remoteProfile.setPreference("browser.helperApps.neverAsk.saveToDisk",
+									remoteoptions.addPreference("browser.helperApps.neverAsk.saveToDisk",
 											"text/csv,application/x-msexcel,application/excel,application/x-excel,"
 											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,"
 											+ "application/xml");
 									// We can also add extension to firefox profile if needed in future.
-									executionCapabilities.setBrowserName("firefox");									
-									executionCapabilities.setCapability("firefox_profile", remoteProfile.toString());									
+									//executionCapabilities.setBrowserName("firefox");
+									remoteoptions.setCapability("BROWSER_NAME", "firefox");
+									//executionCapabilities.setCapability("firefox_profile", remoteProfile.toString());	
+									remoteoptions.setCapability("firefox_profile", remoteoptions.toString());
+									driver = new RemoteWebDriver(uri, remoteoptions);
 								}
 								else if(this.browserName.contains(Property.INTERNET_EXPLORER_KEYWORD)){
 									executionCapabilities.setBrowserName("internet explorer");
 									executionCapabilities.setCapability("ignoreProtectedModeSettings", true);
+									driver = new RemoteWebDriver(uri, executionCapabilities);
 								}
 								else if(this.browserName.contains(Property.CHROME_KEYWORD)){
 									executionCapabilities = DesiredCapabilities.chrome();
@@ -782,20 +795,21 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									profile.put("download.directory_upgrade", "true");
 									profile.put("download.prompt_for_download", "false");
 									profile.put("plugins.plugins_disabled", Arrays.asList("Chrome PDF Viewer"));
-									ChromeOptions options = new ChromeOptions();
+									//ChromeOptions options = new ChromeOptions();
 									options.addArguments("--disable-extensions");
 									options.addArguments("start-maximized");
 									options.setExperimentalOption("prefs", profile);
-									executionCapabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
-									executionCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+									options.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
+									options.setCapability(ChromeOptions.CAPABILITY, options);
 									LoggingPreferences loggingprefs = new LoggingPreferences();
 									loggingprefs.enable(LogType.BROWSER, Level.WARNING);
-									executionCapabilities.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
+									options.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
+									driver = new RemoteWebDriver(uri, options);
 								}
 								else{
 									throw new Exception(Property.ERROR_MESSAGES.ER_SPECIFY_BROWSER.getErrorMessage());
 								}
-								driver = new RemoteWebDriver(uri, executionCapabilities);
+								
 						}
 						else if(isSauceLabExecution){
 								//SauceLabExecution.
@@ -803,27 +817,38 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 						else{
 								//LocalHost Execution.
 								if(this.browserName.contains(Property.FIREFOX_KEYWORD)){
-									FirefoxProfile ffProfile = new FirefoxProfile();
-									ffProfile.setAssumeUntrustedCertificateIssuer(false);
-									ffProfile.setAcceptUntrustedCertificates(true);
-									ffProfile.setEnableNativeEvents(true);
-									ffProfile.setPreference("browser.download.folderList", 2);
-									ffProfile.setPreference("browser.download.manager.showWhenStarting", false);									
-									ffProfile.setPreference("browser.download.dir",
+									//FirefoxProfile ffProfile = new FirefoxProfile();
+									FirefoxOptions ffprofile=new FirefoxOptions();
+									//FirefoxProfile ffProfile=ffprofile.getProfile();
+									
+									//ffProfile.setAssumeUntrustedCertificateIssuer(false);
+									ffprofile.setAcceptInsecureCerts(false);
+									//ffProfile.setAcceptUntrustedCertificates(true);
+									//ffProfile.setEnableNativeEvents(true);
+									//ffProfile.setPreference("browser.download.folderList", 2);
+									ffprofile.addPreference("browser.download.folderList", 2);
+									//ffProfile.setPreference("browser.download.manager.showWhenStarting", false);
+									ffprofile.addPreference("browser.download.manager.showWhenStarting", false);
+									ffprofile.addPreference("browser.download.dir",
 											Utility.getAbsolutePath(rManager.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}","").
 													replace("{PROJECT_NAME}", Property.PROJECT_NAME)));
-									ffProfile.setPreference("browser.helperApps.neverAsk.openFile",
+									ffprofile.addPreference("browser.helperApps.neverAsk.openFile",
 											"text/csv,application/x-msexcel,application/excel,application/x-excel,"
 											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,"
 											+ "application/msword,application/xml");
-									ffProfile.setPreference("browser.helperApps.neverAsk.saveToDisk",
+									ffprofile.addPreference("browser.helperApps.neverAsk.saveToDisk",
 											"text/csv,application/x-msexcel,application/excel,application/x-excel,"
 											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,"
 											+ "application/xml");
 									// We can also add extension to firefox profile if needed in future.
-									executionCapabilities.setBrowserName("firefox");									
-									executionCapabilities.setCapability("firefox_profile", ffProfile.toString());	
-									driver = new FirefoxDriver(executionCapabilities);
+									executionCapabilities.setBrowserName("firefox");
+									//executionCapabilities.setCapability("firefox_profile", ffProfile.toString());
+									ffprofile.setCapability("firefox_profile", ffprofile.toString());
+									
+									
+									GeckoDriverService geckoservice=new GeckoDriverService.Builder().usingAnyFreePort().usingDriverExecutable(new File(rManager.getgeckoDriverExecutibleLocation())).build();
+									geckoservice.start();
+									driver = new FirefoxDriver(geckoservice, ffprofile);
 								}
 								else if(this.browserName.contains(Property.INTERNET_EXPLORER_KEYWORD)){
 									executionCapabilities.setBrowserName("internet explorer");
@@ -834,30 +859,31 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 								    if(!Property.OSString.toLowerCase().contains("window"))
 								    	Property.CHROME_EXECUTABLE = Property.CHROME_EXECUTABLE_SH;
 								    	
-									executionCapabilities = DesiredCapabilities.chrome();
+									//executionCapabilities = DesiredCapabilities.chrome();
+								    
 									Map<String,Object> profile=new HashMap<String,Object>();
 									profile.put("disable-popup-blocking", "true");
 									profile.put("download.default_directory",Utility.getAbsolutePath(rManager.getLocationForExternalFilesInResources().replace("{EXTERNAL_FILE_NAME}","").replace("{PROJECT_NAME}", Property.PROJECT_NAME)));
 									profile.put("download.directory_upgrade", "true");
 									profile.put("download.prompt_for_download", "false");
 									profile.put("plugins.plugins_disabled", Arrays.asList("Chrome PDF Viewer"));
-									ChromeOptions options = new ChromeOptions();
+									//ChromeOptions options = new ChromeOptions();
 									options.addArguments("--disable-extensions");
 									options.addArguments("start-maximized");
 									options.setExperimentalOption("prefs", profile);
-									executionCapabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
-									executionCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+									options.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
+									options.setCapability(ChromeOptions.CAPABILITY, options);
 									
 									LoggingPreferences loggingprefs = new LoggingPreferences();
 									loggingprefs.enable(LogType.BROWSER, Level.WARNING);
-									executionCapabilities.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
+									options.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
 									
 									ChromeDriverService service = new ChromeDriverService.Builder()
 									.usingAnyFreePort()
 									.usingDriverExecutable(new File(rManager.getChromeDriverExecutibleLocation()))
 									.build();
 									service.start();
-									driver = new ChromeDriver(service, executionCapabilities);
+									driver = new ChromeDriver(service, options);
 								}
 								else if(this.browserName.contains(Property.PHANTOM_KEYWORD)){
 									executionCapabilities = DesiredCapabilities.phantomjs();
