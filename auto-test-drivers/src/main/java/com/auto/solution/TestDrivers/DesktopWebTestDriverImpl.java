@@ -817,6 +817,9 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 						else{
 								//LocalHost Execution.
 								if(this.browserName.contains(Property.FIREFOX_KEYWORD)){
+									
+									if(!Property.OSString.toLowerCase().contains("window"))
+								    	Property.GECKO_EXECUTABLE = Property.GECKO_EXECUTABLE_SH;
 									//FirefoxProfile ffProfile = new FirefoxProfile();
 									FirefoxOptions ffprofile=new FirefoxOptions();
 									//FirefoxProfile ffProfile=ffprofile.getProfile();
