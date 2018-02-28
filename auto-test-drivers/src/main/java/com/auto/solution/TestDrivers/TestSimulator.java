@@ -554,7 +554,7 @@ public class TestSimulator {
  				 				String dimension = testSimulator.getElementDimension();
  				 				Utility.setKeyValueToGlobalVarMap(testObject, dimension);
  				 			}
- 			else if(stepAction.toLowerCase().equalsIgnoreCase("invokeapi")){
+ 			else if(stepAction.toLowerCase().equalsIgnoreCase("invokeapi") ){
  				if(testDataContents.length < 1){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
  				}
@@ -608,6 +608,45 @@ public class TestSimulator {
  				
  				
  			}
+ 			
+ 			// my changes here
+ 			
+ 			else if(stepAction.toLowerCase().equalsIgnoreCase("setFilterOn") ){
+ 				HashMap<String, String> propertiesMap=Utility.setFilterOn(testDataContents);
+ 				String soapui_project_name =Property.Filter_Project_Name ;
+ 				if (soapui_project_name.equals(""))
+ 				{
+ 					throw new Exception(ERROR_MESSAGES.ERR_FILTER_PROJECT_NAME_IS_NULL.getErrorMessage());
+ 				}
+ 				api_caller.setAPIProjectReference(soapui_project_name, propertiesMap);
+ 				Thread api_thread = new Thread(api_caller);
+ 				api_thread.setDaemon(true);
+ 				api_thread.start();
+ 				api_thread.join();
+ 				List<String> statusDetails = api_caller.getListOfApisTestCaseStatus();
+ 				if(statusDetails.get(0) == "FAILED"){
+ 					throw new Exception(statusDetails.get(1));
+ 				}
+ 				if(testDataContents.length == 3){
+ 					String[] out_key_value_pairs = testDataContents[2].split(Pattern.quote("||"));
+ 					List <String> outProp = new ArrayList<String>();
+ 					for (String prop : out_key_value_pairs) {
+ 						outProp.add(prop);
+ 				}
+ 					
+ 					HashMap<String, String> outputPropertiesMap = api_caller.getTestCaseProperty(outProp);
+ 					if(outputPropertiesMap != null)
+ 					{
+ 					for (String property_key : outputPropertiesMap.keySet()) {
+ 						String property_value = outputPropertiesMap.get(property_key);
+ 						Utility.setKeyValueToGlobalVarMap(property_key, property_value);
+ 					}
+ 				}
+ 				}
+ 				
+ 			}
+ 		
+ 		
  			else if(stepAction.toLowerCase().equalsIgnoreCase("resizecurrentwindow")){
  				if(testDataContents.length != 2){
  					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
@@ -691,4 +730,5 @@ public class TestSimulator {
  		}
  		Property.StepSnapShot = snapShotName;
  	}
+ 	
 }

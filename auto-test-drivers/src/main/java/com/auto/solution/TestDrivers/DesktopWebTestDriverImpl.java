@@ -362,14 +362,20 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 	private void openEndPointInBrowser(String endPoint) throws Exception{
 		try{
 			wait = new WebDriverWait(driver, Long.parseLong(Property.SyncTimeOut));
-			//String updated_url = endPoint.replace("http", "https");
-			//updated_url = updated_url + "users/sign_in/";
-			driver.get(endPoint);
-			//this.deleteAllCookies();			
-			//this.switchToMostRecentWindow();
 			
-            	//	driver.navigate().to(updated_url);			
-			//driver.navigate().to(endPoint);
+			String updated_blog_url=endPoint;
+			String updated_url = endPoint.replace("http", "https");
+			updated_url = updated_url + "users/sign_in/";
+			updated_blog_url=updated_blog_url+"blog/api/v1_get_blogs.php";
+			driver.get(endPoint);
+			this.deleteAllCookies();			
+			this.switchToMostRecentWindow();
+			driver.navigate().to(updated_blog_url);
+			driver.navigate().to(endPoint);
+			driver.navigate().to(updated_url);
+			driver.navigate().to(endPoint);
+           
+			
 			
 			if(!Property.BrowserName.equals(Property.CHROME_KEYWORD))
 			driver.manage().window().maximize();
