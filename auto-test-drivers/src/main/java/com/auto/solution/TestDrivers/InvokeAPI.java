@@ -18,6 +18,7 @@ import com.eviware.soapui.model.support.PropertiesMap;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestRunner.Status;
+import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestSuite;
 
 public class InvokeAPI extends Thread{
@@ -62,7 +63,14 @@ public class InvokeAPI extends Thread{
 		Status status = testRunner.getStatus();
 		
 		String reason = testRunner.getReason();
-		
+		String testStep_msg="";
+		int msg_index=0;
+		List<TestStepResult> testResults= testRunner.getResults();
+		for (TestStepResult testStepResult : testResults) {
+			String[] msg = testStepResult.getMessages();
+			testStep_msg=testStep_msg.concat(msg[msg_index]);
+		}
+		reason=reason.concat(testStep_msg);
 		testCaseStatusWithReason.add(status.toString());
 		
 		testCaseStatusWithReason.add(reason);
