@@ -357,7 +357,7 @@ public class Property {
 		ERR_IN_FINIDING_CONTENT_IN_MAIL("Couldn't find element with query - '{CSS_QUERY}' in mail content"),
 		ERR_GETTING_MAIL_CONTENT("Unable to parse Email Content, contact admin!"),
 		ERR_STARTING_ACTIVITY("Error in starting app activity - "),
-		ERR_FILTER_PROJECT_NAME_IS_NULL("The project name is NULL.Please specify project name in Property");
+		ERR_FILTER_PROJECT_NAME_IS_NULL("The project name is empty.Please specify project name in Property");
 		private String errorKeyword;
 		private ERROR_MESSAGES(String ErrorKeyword){
 			this.errorKeyword= ErrorKeyword;

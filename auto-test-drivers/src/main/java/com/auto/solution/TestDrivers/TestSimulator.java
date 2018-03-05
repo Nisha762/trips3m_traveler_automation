@@ -612,7 +612,7 @@ public class TestSimulator {
  			// my changes here
  			
  			else if(stepAction.toLowerCase().equalsIgnoreCase("setFilterOn") ){
- 				HashMap<String, String> propertiesMap=Utility.setFilterOn(testDataContents);
+ 				HashMap<String, String> propertiesMap=Utility.getPropertiesFromTestData(testDataContents);
  				String soapui_project_name =Property.Filter_Project_Name ;
  				if (soapui_project_name.equals(""))
  				{

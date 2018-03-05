@@ -739,13 +739,15 @@ public class Utility {
 	      return FilenameUtils.getPrefixLength(path) != 0;
 	   }
 
-	public static HashMap<String, String> setFilterOn(String[] testDataContents) throws Exception
+	public static HashMap<String, String> getPropertiesFromTestData(String[] testDataContents) throws Exception
 	{
 		if(testDataContents.length < 1){
 				throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
 			}
 			HashMap<String, String> propertiesMap = new HashMap<String, String>();
 			String key_value=testDataContents[0];
+			String apiendpoint=Property.globalVarMap.get("apiendpoint");
+			propertiesMap.put("api_endpoint",apiendpoint);
 			if(testDataContents.length >= 1){
 				try{
 				    //key=value || key=value.
@@ -760,11 +762,6 @@ public class Utility {
 						propertiesMap.put(key, value);
 						
 						}
-					
-					String apiendpoint=Property.globalVarMap.get("apiendpoint");
-					propertiesMap.put("api_endpoint",apiendpoint);
-					System.out.println("api_endpoint is:"+apiendpoint);
-					
 					}
 				catch(Exception e){
 					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage() + "--"  + e.getMessage());
