@@ -71,7 +71,6 @@ public class InvokeAPI extends Thread{
 			if(msg.length>0 && msg!=null)
 			{
 			testStep_msg=testStep_msg.concat(msg[msg_index++]);
-			System.out.print("This message"+testStep_msg);
 			reason=reason.concat(testStep_msg);
 		}
 		}
