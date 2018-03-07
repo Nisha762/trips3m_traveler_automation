@@ -45,10 +45,6 @@ public class ResourceManager {
 		String chromedriver_location = this.resourceBasePath + FileSeperator + Property.CHROME_EXECUTABLE;
 		return chromedriver_location;
 	}
-	public String getgeckoDriverExecutibleLocation(){
-		String geckodriver_location = this.resourceBasePath + FileSeperator + Property.GECKO_EXECUTABLE;
-		return geckodriver_location;
-	}
 	public String getTestExecutionLogFileLocation(){
 		String logFileLocation = (this.targetBasePath + FileSeperator + "Execution_Log" + FileSeperator + "{0}").replace(" ", "");
 		return logFileLocation; 
