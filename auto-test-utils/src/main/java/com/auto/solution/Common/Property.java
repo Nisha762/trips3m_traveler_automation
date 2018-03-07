@@ -71,8 +71,6 @@ public class Property {
 	public static String TEST_MANAGEMENT_USERNAME = "";
 	
 	public static String CHROME_EXECUTABLE = "chromedriver.exe";
-	public static String GECKO_EXECUTABLE="geckodriver.exe";
-	public static String GECKO_EXECUTABLE_SH="geckodriver";
 	
 	public static String CHROME_EXECUTABLE_SH = "chromedriver";
 
