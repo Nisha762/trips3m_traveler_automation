@@ -61,18 +61,17 @@ public class InvokeAPI extends Thread{
 		TestCaseRunner testRunner = soapui_testcase.run(mapOfProperties, false);
 		
 		Status status = testRunner.getStatus();
-		
-		String reason = testRunner.getReason();
+		String reason = "";
+		reason = (testRunner.getReason() == null) ? "" : testRunner.getReason();
 		String testStep_msg="";
-		int msg_index=0;
+		
 		List<TestStepResult> testResults= testRunner.getResults();
 		for (TestStepResult testStepResult : testResults) {
 			String[] msg = testStepResult.getMessages();
-			if(msg.length>0 && msg!=null)
-			{
-			testStep_msg=testStep_msg.concat(msg[msg_index++]);
-			reason=reason.concat(testStep_msg);
-		}
+			for (String message : msg) {
+				testStep_msg=testStep_msg.concat(message);
+				reason=reason.concat(testStep_msg);
+			}
 		}
 		
 		testCaseStatusWithReason.add(status.toString());
