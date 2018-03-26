@@ -748,7 +748,7 @@ public class Utility {
 			String key_value=testDataContents[0];
 			String apiendpoint=Property.globalVarMap.get("apiendpoint");
 			propertiesMap.put("api_endpoint",apiendpoint);
-			if(testDataContents.length >= 1){
+			if(testDataContents.length > 1){
 				try{
 				    //key=value || key=value.
 				
@@ -769,9 +769,17 @@ public class Utility {
 				
 			}
 			return propertiesMap;
-			 
-			
-	
+	}
+			public static List<String> setOutputProperties(String[] testDataContents) throws Exception
+			{
+				List <String> outProp = new ArrayList<String>();	
+				if(testDataContents.length == 2){
+				String[] out_key_value_pairs = testDataContents[1].split(Pattern.quote("||"));
+				for (String prop : out_key_value_pairs) {
+					outProp.add(prop);
+					}
+			}
+			return outProp;
 	}
 }	
 	

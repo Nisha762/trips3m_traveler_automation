@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="3957ca12-809d-421c-8f4f-e36d1f94ec43" activeEnvironment="Default" name="PackageSearch" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="b26f6c00-d1e8-48c0-a8b3-b1d8b54710f3" wadlVersion="http://wadl.dev.java.net/2009/02" name="Package_search" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>${#Project#httpverb}://${Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="Packages" path="/browsing/{api_version}/packages" id="36081d27-2ddb-4794-bf1e-e8d1e9da3f04"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>v1</con:value><con:style>TEMPLATE</con:style><con:default>v1</con:default></con:parameter><con:parameter><con:name>package_type</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>to_destination</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>preview_package_id</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>cache</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>sort_by</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>analyse</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>p_search</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>limit</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>offset</con:name><con:style>QUERY</con:style></con:parameter></con:parameters><con:method name="Packages 1" id="39841474-0000-402a-a36d-7695db44b027" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>503</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="bccb12e8-5f83-47de-8b77-58ec6d9877ed" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project id="3957ca12-809d-421c-8f4f-e36d1f94ec43" activeEnvironment="Default" name="PackageSearch" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="b26f6c00-d1e8-48c0-a8b3-b1d8b54710f3" wadlVersion="http://wadl.dev.java.net/2009/02" name="Package_search" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>${#Project#httpverb}://${Project#api_endpoint}</con:endpoint></con:endpoints><con:resource name="Packages" path="/browsing/{api_version}/packages" id="36081d27-2ddb-4794-bf1e-e8d1e9da3f04"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>v1</con:value><con:style>TEMPLATE</con:style><con:default>v1</con:default></con:parameter><con:parameter><con:name>package_type</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>to_destination</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>preview_package_id</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>cache</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>sort_by</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>analyse</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>p_search</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>limit</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter><con:parameter><con:name>offset</con:name><con:style>QUERY</con:style></con:parameter></con:parameters><con:method name="Packages 1" id="39841474-0000-402a-a36d-7695db44b027" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>503</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="bccb12e8-5f83-47de-8b77-58ec6d9877ed" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
   &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
-&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#api_endpoint}</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${Project#apiendpoint}</con:endpoint><con:request/><con:originalUri>http://browsing-qa1.ttdev.in/browsing/v1/packages</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
   <con:entry key="cache" value=""/>
   <con:entry key="analyse" value=""/>
   <con:entry key="limit" value=""/>
@@ -15,7 +15,7 @@
 </con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>package_type</con:entry><con:entry>to_destination</con:entry><con:entry>preview_package_id</con:entry><con:entry>cache</con:entry><con:entry>sort_by</con:entry><con:entry>analyse</con:entry><con:entry>p_search</con:entry><con:entry>limit</con:entry><con:entry>offset</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:testSuite id="9f09e5e4-365c-4239-9341-fe032253b0cd" name="Package_search TestSuite"><con:description>TestSuite generated for REST Service [Package_search]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="afb4a8b8-8691-409f-b042-017018e816b8" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Packages TestCase" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:description>TestCase generated for REST Resource [Packages] located at [/browsing/{api_version}/packages]</con:description><con:settings/><con:testStep type="restrequest" name="Request 1" id="35252778-b3a5-4f31-9f9e-f58d5e040f63"><con:settings/><con:config service="Package_search" resourcePath="/browsing/{api_version}/packages" methodName="Packages 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Request 1" id="bccb12e8-5f83-47de-8b77-58ec6d9877ed" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
   &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
-&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#TestCase#api_endpoint}</con:endpoint><con:request/><con:originalUri>http://null///browsing/v1/packages</con:originalUri><con:assertion type="GroovyScriptAssertion" id="add8564e-df80-408d-8c1c-7ee88ffe2202" name="Script Assertion"><con:configuration><scriptText><![CDATA[import groovy.json.JsonSlurper;
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${#Project#httpverb}://${#Project#apiendpoint}</con:endpoint><con:request/><con:originalUri>http://null///browsing/v1/packages</con:originalUri><con:assertion type="GroovyScriptAssertion" id="add8564e-df80-408d-8c1c-7ee88ffe2202" name="Script Assertion"><con:configuration><scriptText><![CDATA[import groovy.json.JsonSlurper;
 
 String response = messageExchange.getResponseContent();
 def jsonHolder = new JsonSlurper().parseText(response);
@@ -52,9 +52,12 @@ if (destination_count>0)
 	String max_day=day_ar[1].replaceAll("\\D+","");
 
 	//fetch hotel ratings
-
+	
 	String expected_hotel_rating=jsonHolder1.hotel_ratings;
+	if(expected_hotel_rating!=null)
+	{
 	expected_hotel_rating=expected_hotel_rating.replaceAll("\\D+","");
+	}
 
 	//fetch activities
 	def expected_activities=jsonHolder1.trip_types;
@@ -63,13 +66,16 @@ if (destination_count>0)
 	
 String[] actual_days=jsonHolder.data.packages.days;
 String[] actual_budget=jsonHolder.data.packages.discounted_price;
-String[] actual_pkg_id=jsonHolder.data.packages_without_filter.id;
-String[] actual_hotel_rating=jsonHolder.data.packages_without_filter.family_packages;
-int package_size = jsonHolder.data.packages_without_filter.family_packages.size();
+String[] actual_pkg_id=jsonHolder.data.packages.id;
+String[] actual_hotel_rating=jsonHolder.data.packages.family_packages;
+int package_size = jsonHolder.data.packages.family_packages.size();
+//compare actual hotel ratings with expected
 
+if(expected_hotel_rating!=null)
+	{
 ArrayList<String> firstValues = new ArrayList<String>();
 for(int index = 0;index < package_size;index++){
-HashMap<String,String[]> map1=jsonHolder.data.packages_without_filter.family_packages[index];
+HashMap<String,String[]> map1=jsonHolder.data.packages.family_packages[index];
 for (String key in map1.keySet()){
 	
 	 firstValues.add(map1.get(key)[0]);
@@ -82,24 +88,26 @@ for(int index_fv=0;index_fv<firstValues.size();index_fv++)
 }
 
 assert hotel_count>=actual_hotel_rating.size():"Hotel filter did not work";
-
+	}
 //compare actual values to expected values and setting individual flags
 
 for(int i=0;i<actual_pkg_id.size();i++)
 {
-	log.info actual_pkg_id.size()
+	
 	if(Integer.parseInt(actual_days[i])<=Integer.parseInt(max_day) && Integer.parseInt(actual_days[i])>=Integer.parseInt(min_day))
 	day_flag=true;
-	log.info Integer.parseInt(actual_days[i])
+	
 if(Float.valueOf(actual_budget[i])<=Float.valueOf(max_price) && Float.valueOf(actual_budget[i])>=Float.valueOf(min_price))
 budget_flag=true;
 def inclusions=jsonHolder.data.packages.inclusions[i].key;
 def inclusions_available=jsonHolder.data.packages.inclusions[i].available;
+if(expected_inclusions!=null)
+{
 def common=inclusions.intersect(expected_inclusions);
 assert common.size()>0 :"Inclusion filter did not work"
+}
 def actual_activities=jsonHolder.data.packages.trip_types[i].name;
-log.info "actual activities" + actual_activities
-log.info "expected activities" + expected_activities
+
 def common_activities=expected_activities.intersect(actual_activities);
 assert common_activities.size()>0 :"activities filter did not work";
 }
@@ -107,7 +115,10 @@ assert common_activities.size()>0 :"activities filter did not work";
 assert day_flag==true : "day filter didn't work";
 assert budget_flag==true :"budget filter did'nt work";
 }
-
+String package_ids=jsonHolder.data.packages.id.toString();
+package_ids=package_ids.replace("[","");
+package_ids=package_ids.replace("]","");
+messageExchange.modelItem.testCase.setPropertyValue("package_ids",package_ids);
 
 
 
@@ -120,4 +131,4 @@ assert budget_flag==true :"budget filter did'nt work";
   <con:entry key="sort_by" value=""/>
   <con:entry key="api_version" value="v1"/>
   <con:entry key="package_type" value="seo"/>
-</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>package_type</con:entry><con:entry>to_destination</con:entry><con:entry>preview_package_id</con:entry><con:entry>cache</con:entry><con:entry>sort_by</con:entry><con:entry>analyse</con:entry><con:entry>p_search</con:entry><con:entry>limit</con:entry><con:entry>offset</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>p_search</con:name><con:value>{"destination_type": ["india"],"category": ["family"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"hotel_ratings": ["4"],"inclusions": ["shared_coach","meals"],"trip_types" :["Nature"]}</con:value></con:property><con:property><con:name>api_endpoint</con:name><con:value/></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties><con:property><con:name>api_endpoint</con:name><con:value>browsing-qa1.ttdev.in</con:value></con:property><con:property><con:name>httpverb</con:name><con:value>http</con:value></con:property><con:property><con:name>api_version</con:name><con:value>v1</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+</con:parameters><con:parameterOrder><con:entry>api_version</con:entry><con:entry>package_type</con:entry><con:entry>to_destination</con:entry><con:entry>preview_package_id</con:entry><con:entry>cache</con:entry><con:entry>sort_by</con:entry><con:entry>analyse</con:entry><con:entry>p_search</con:entry><con:entry>limit</con:entry><con:entry>offset</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>p_search</con:name><con:value>{"destination_type": ["india","International"],"category": ["Family"],"days": ["7-9"],"price_ranges": ["20_000-40_000"],"trip_types" :["Adventure"]}</con:value></con:property><con:property><con:name>api_endpoint</con:name><con:value>browsing-qa2.ttdev.in</con:value></con:property><con:property><con:name>package_ids</con:name><con:value>443, 5209, 221, 71, 665, 6291, 6284, 672, 2634, 618</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties><con:property><con:name>apiendpoint</con:name><con:value>traveltriangle.com</con:value></con:property><con:property><con:name>httpverb</con:name><con:value>http</con:value></con:property><con:property><con:name>api_version</con:name><con:value>v1</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
