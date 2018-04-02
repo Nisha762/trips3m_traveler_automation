@@ -137,7 +137,7 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 			this.appiumUrlForExecution = Property.RemoteURL + "/wd/hub";
 		}
 		else{
-			this.appiumUrlForExecution = "http://127.0.0.1:4727/wd/hub";
+			this.appiumUrlForExecution = "http://127.0.0.1:4723/wd/hub";
 		}
 	}
 	
