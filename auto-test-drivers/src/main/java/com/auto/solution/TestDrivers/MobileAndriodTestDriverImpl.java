@@ -1,12 +1,17 @@
 package com.auto.solution.TestDrivers;
 
+import io.appium.java_client.MobileDriver;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -54,6 +59,8 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 	private String appiumUrlForExecution = "";
 	
 	private  static AndroidDriver driver = null;
+	
+	private static TouchAction action=null;
 	
 	private static WebDriverWait wait = null;
 	
@@ -144,13 +151,16 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 				.getHeight())) / 2;
 		
 		if(swipeType.trim().toLowerCase().contains("up")){
-			driver.swipe(screenWidth, (2*screenHight)-240, screenWidth, screenHight, 2000);	
+			//driver.swipe(screenWidth, (2*screenHight)-240, screenWidth, screenHight, 2000);	
+			action.press(PointOption.point(0, (2*screenHight)-100)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(0, 1)).release().perform();
 		}else if(swipeType.trim().toLowerCase().contains("down")){
-			driver.swipe(screenWidth, screenHight, screenWidth, (2*screenHight)-100, 2000);	
+			//driver.swipe(screenWidth, screenHight, screenWidth, (2*screenHight)-100, 2000);
+			action.press(PointOption.point(0, screenHight)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(5000))).moveTo(PointOption.point(0, (2*screenHight)-100)).release().perform();;
 		}
 		else if(swipeType.trim().toLowerCase().contains("left")){
 			
-			driver.swipe((2*screenWidth)-100, screenHight, 20, screenHight, 2000);
+			//driver.swipe((2*screenWidth)-100, screenHight, 20, screenHight, 2000);
+			action.press(PointOption.point((2*screenWidth)-50, 0)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(5000))).moveTo(PointOption.point(1, 0)).release().perform();
 		}
 	 
 	}
@@ -168,7 +178,8 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 				Thread.sleep(1000);
 				actualTestElement =  getActualTestObject();
 				currentTime++;
-			}	
+			}
+			
 			}
 			else{
 				swipe(swipeType);
@@ -375,6 +386,7 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 			wait = new WebDriverWait(driver, Long.parseLong(Property.SyncTimeOut));
 			recoverySupportHandle = new RecoverySupportForSeleniumDriver(driver,rManager);
 			Utility.addObjectToGlobalObjectCollection(Property.TEST_DRIVER_KEY, driver);
+			action = new TouchAction((MobileDriver<WebElement>)driver);
 		}
 		catch(Exception e){
 			throw e;
@@ -468,7 +480,10 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 		
 		String deepLinkURL=Property.ApplicationURL+URL;
 		try {
-		driver.startActivity(Property.APP_PACKAGE, Property.APP_ACTIVITY, Property.APP_PACKAGE, Property.APP_ACTIVITY_LIST, "", "", "", " -a android.intent.action.VIEW -d "+deepLinkURL );
+			Activity activity=new Activity(Property.APP_PACKAGE, Property.APP_ACTIVITY);
+			activity.setIntentAction(" -a android.intent.action.VIEW -d "+deepLinkURL);
+			driver.startActivity(activity);
+		//driver.startActivity(Property.APP_PACKAGE, Property.APP_ACTIVITY, Property.APP_PACKAGE, Property.APP_ACTIVITY_LIST, "", "", "", " -a android.intent.action.VIEW -d "+deepLinkURL );
 		} 
 		catch (Exception e) {
 		throw new Exception(Property.ERROR_MESSAGES.ERR_STARTING_ACTIVITY.getErrorMessage() + e.getMessage());
@@ -960,7 +975,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 			
 			}
 			
-			TouchAction action = new TouchAction(driver);
+			
 			
 			action.tap(x_coordinates, y_coordinates).perform();
 		}
