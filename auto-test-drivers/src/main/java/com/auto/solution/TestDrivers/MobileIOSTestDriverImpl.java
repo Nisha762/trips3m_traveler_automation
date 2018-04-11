@@ -1,12 +1,17 @@
 package com.auto.solution.TestDrivers;
 
+import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -48,6 +53,8 @@ public class MobileIOSTestDriverImpl implements TestDrivers{
 	private String appiumUrlForExecution = "";
 	
 	private  static IOSDriver driver = null;
+	
+	private TouchAction action=null;
 	
 	private static WebDriverWait wait = null;
 	
@@ -326,6 +333,7 @@ public class MobileIOSTestDriverImpl implements TestDrivers{
 			driver = new IOSDriver(new URL(this.appiumUrlForExecution), driverCapability);
 			wait = new WebDriverWait(driver, Long.parseLong(Property.SyncTimeOut));
 			Utility.addObjectToGlobalObjectCollection(Property.TEST_DRIVER_KEY, driver);
+			action = new TouchAction((MobileDriver<WebElement>)driver);
 		}
 		catch(Exception e){
 			throw e;
@@ -801,7 +809,7 @@ public String saveSnapshotAndHighlightTarget(boolean highlight) {
 				screenWidth = screenWidth*2-skipSize;
 				swipeValue = 0;
 			}
-			driver.swipe(screenWidth + swipeValue, screenHight, skipSize, screenHight, 2000);
+			action.press(PointOption.point((2*screenWidth)-50, 0)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(5000))).moveTo(PointOption.point(1, 0)).release().perform();
 			
 		
 
