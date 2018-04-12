@@ -790,7 +790,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 											"text/csv,application/x-msexcel,application/excel,application/x-excel,"
 											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,"
 											+ "application/xml");
-									if(enableAgentSwitch.equalsIgnoreCase("true")) {
+									if(enableAgentSwitch!=null && enableAgentSwitch.equalsIgnoreCase("true")) {
 										remoteoptions.addPreference("general.useragent.override",agentName);
 									}
 									// We can also add extension to firefox profile if needed in future.
@@ -821,7 +821,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 //									options.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
 //									options.setCapability(ChromeOptions.CAPABILITY, options);
 									options.addArguments("--enable-javascript");
-									if(enableAgentSwitch.equalsIgnoreCase("true")) {
+									if(enableAgentSwitch!=null && enableAgentSwitch.equalsIgnoreCase("true")) {
 										options.addArguments("--user-agent="+agentName);
 									}
 //									LoggingPreferences loggingprefs = new LoggingPreferences();
@@ -866,7 +866,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 											"text/csv,application/x-msexcel,application/excel,application/x-excel,"
 											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,"
 											+ "application/xml");
-									if(enableAgentSwitch.equalsIgnoreCase("true")) {
+									if(enableAgentSwitch!=null && enableAgentSwitch.equalsIgnoreCase("true")) {
 										ffprofile.addPreference("general.useragent.override",agentName);
 									}
 									
@@ -902,7 +902,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									options.setExperimentalOption("prefs", profile);
 									
 									
-									if(enableAgentSwitch.equalsIgnoreCase("true")) {
+									if(enableAgentSwitch!=null && enableAgentSwitch.equalsIgnoreCase("true")) {
 										options.addArguments("--user-agent="+agentName);
 									}
 									
