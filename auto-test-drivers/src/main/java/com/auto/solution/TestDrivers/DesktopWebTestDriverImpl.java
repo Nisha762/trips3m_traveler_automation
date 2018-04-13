@@ -816,6 +816,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									//ChromeOptions options = new ChromeOptions();
 									options.addArguments("--disable-extensions");
 									options.addArguments("start-maximized");
+									options.addArguments("disable-infobars");
 									options.setExperimentalOption("prefs", profile);
 									options.addArguments("--ignore-certificate-errors");
 //									options.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
@@ -900,7 +901,7 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									options.addArguments("--disable-extensions");
 									options.addArguments("start-maximized");
 									options.setExperimentalOption("prefs", profile);
-									
+									options.addArguments("disable-infobars");
 									
 									if(enableAgentSwitch!=null && enableAgentSwitch.equalsIgnoreCase("true")) {
 										options.addArguments("--user-agent="+agentName);
