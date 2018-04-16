@@ -152,10 +152,10 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 		
 		if(swipeType.trim().toLowerCase().contains("up")){
 			//driver.swipe(screenWidth, (2*screenHight)-240, screenWidth, screenHight, 2000);	
-			action.press(PointOption.point(0, (2*screenHight)-100)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(0, 1)).release().perform();
+			action.press(PointOption.point(screenWidth,  (2*screenHight)-240)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(screenWidth, screenHight)).release().perform();
 		}else if(swipeType.trim().toLowerCase().contains("down")){
 			//driver.swipe(screenWidth, screenHight, screenWidth, (2*screenHight)-100, 2000);
-			action.press(PointOption.point(0, screenHight)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(5000))).moveTo(PointOption.point(0, (2*screenHight)-100)).release().perform();;
+			action.press(PointOption.point(screenWidth, screenHight)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(screenWidth, (2*screenHight)-100)).release().perform();;
 		}
 		else if(swipeType.trim().toLowerCase().contains("left")){
 			
@@ -480,10 +480,25 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 		
 		String deepLinkURL=Property.ApplicationURL+URL;
 		try {
-			Activity activity=new Activity(Property.APP_PACKAGE, Property.APP_ACTIVITY);
-			activity.setIntentAction(" -a android.intent.action.VIEW -d "+deepLinkURL);
-			driver.startActivity(activity);
-		//driver.startActivity(Property.APP_PACKAGE, Property.APP_ACTIVITY, Property.APP_PACKAGE, Property.APP_ACTIVITY_LIST, "", "", "", " -a android.intent.action.VIEW -d "+deepLinkURL );
+			System.out.println(Property.globalVarMap.get("drivercapability.appActivity"));
+			System.out.println(Property.globalVarMap.get("drivercapability.appPackage"));
+			
+			
+			Activity activity=new Activity(Property.globalVarMap.get("drivercapability.appPackage"), Property.globalVarMap.get("drivercapability.appActivity"));
+		
+			activity.setAppWaitPackage(Property.globalVarMap.get("drivercapability.appPackage"));
+			activity.setAppWaitActivity(Property.APP_ACTIVITY_LIST);
+			activity.setIntentAction("-a android.intent.action.VIEW -d"+deepLinkURL);
+			
+			activity.setIntentCategory("");
+			activity.setIntentFlags("");
+			activity.setOptionalIntentArguments("");
+			activity.setStopApp(true);
+			
+			
+		
+			driver.startActivity(activity);;
+//		driver.startActivity(Property.APP_PACKAGE, Property.APP_ACTIVITY, Property.APP_PACKAGE, Property.APP_ACTIVITY_LIST, "", "", "", " -a android.intent.action.VIEW -d "+deepLinkURL );
 		} 
 		catch (Exception e) {
 		throw new Exception(Property.ERROR_MESSAGES.ERR_STARTING_ACTIVITY.getErrorMessage() + e.getMessage());
