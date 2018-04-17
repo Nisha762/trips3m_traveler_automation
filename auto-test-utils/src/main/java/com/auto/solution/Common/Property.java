@@ -71,6 +71,8 @@ public class Property {
 	public static String TEST_MANAGEMENT_USERNAME = "";
 	
 	public static String CHROME_EXECUTABLE = "chromedriver.exe";
+	public static String GECKO_EXECUTABLE="geckodriver.exe";
+	public static String GECKO_EXECUTABLE_SH="geckodriver";
 	
 	public static String CHROME_EXECUTABLE_SH = "chromedriver";
 
@@ -182,7 +184,6 @@ public class Property {
 	public static String StepStatus = "";
 	
 	public static String ApplicationURL = "";
-	
 	
 	public static String TESTDATA_SEPERATOR = "#";
 	
@@ -357,7 +358,8 @@ public class Property {
 		ERR_IN_FINIDING_CONTENT_IN_MAIL("Couldn't find element with query - '{CSS_QUERY}' in mail content"),
 		ERR_GETTING_MAIL_CONTENT("Unable to parse Email Content, contact admin!"),
 		ERR_STARTING_ACTIVITY("Error in starting app activity - "),
-		ERR_FILTER_PROJECT_NAME_IS_NULL("The project name is empty.Please specify project name in Property");
+		ERR_FILTER_PROJECT_NAME_IS_NULL("The project name is empty.Please specify project name in Property"), 
+		ERR_IN_RESIZE_WINDOW_FORMATE("resize window format is worng -  resize window parameter format is {PARAMETER_FORMATE}");
 		private String errorKeyword;
 		private ERROR_MESSAGES(String ErrorKeyword){
 			this.errorKeyword= ErrorKeyword;
