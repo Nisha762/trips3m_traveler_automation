@@ -28,6 +28,8 @@ public class TestEngine {
 	private TestEngineHelper engineHelper;
 	
 	private Utility utils;
+	
+	private ConnectDatabase dbConnection;
 		
 	private Boolean IsAnyTestStepFailedDuringExecution = false;
 	
@@ -298,6 +300,10 @@ public class TestEngine {
 			
 			engineHelper.updateTargetAndResourcesIfProvided(rManager);
 			
+			dbConnection =  new ConnectDatabase(rManager);
+			
+			dbConnection.loadDBFile();
+			
 			utils = new Utility(rManager);
 			
 			utils.loadPropertiesDefinedForExecution();
@@ -309,6 +315,8 @@ public class TestEngine {
 			Utility.storeSystemPropertiesToGlobalVarMap(systemProperties);
 			
 			Utility.showAllTestEnginePropertiesOnConsole();
+			
+			
 			
 			IsWriteStep = true;	
 			
