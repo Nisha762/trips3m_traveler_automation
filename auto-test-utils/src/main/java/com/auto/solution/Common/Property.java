@@ -254,6 +254,8 @@ public class Property {
 	
 	public static String Filter_Project_Name = "PackageSearch";
 	
+	public static String EMAIL_CONTENT= "emailContent";// Asif changes 
+	
 	public static String TEST_STEP_LOG_ENTRY = "------------------------------------------------------------------------------------\n" + 
 	 "Test Step Description : {TEST_STEP_NAME} \n" + "Test Step Action : {TEST_STEP_ACTION} \n" + "Test object : {TEST_OBJECT} \n" + 
 	 "Test Data used -- '{TEST_DATA}' \n" + "Status : {STATUS} \n" + "Remarks : {REMARKS} \n" + "Execution Time : {EXECUTION_TIME} \n" +

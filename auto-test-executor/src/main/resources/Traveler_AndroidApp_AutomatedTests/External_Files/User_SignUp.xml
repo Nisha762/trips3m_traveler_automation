@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="121780a0-47e6-4f32-90b0-c563da459844" activeEnvironment="Default" name="User_SignUp" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="b03435dc-ced9-4b84-a5b1-2fcb9b480cae" wadlVersion="http://wadl.dev.java.net/2009/02" name="" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://bookings-app1.ttdev.in</con:endpoint></con:endpoints><con:resource name="Users" path="/users" id="7ec553ef-e1a5-4597-b91c-77b0fff7d176"><con:settings/><con:parameters/><con:method name="Users 1" id="2b645239-9b84-4fc7-aaef-00b773faf0a5" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>500</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:user="http://bookings-app1.ttdev.in/users">user:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>422</con:status><con:params/><con:element xmlns:user="http://bookings-app1.ttdev.in/users">user:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="cf32a7a8-b2f8-47ca-a9f7-9cdf977532a5" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://bookings-app1.ttdev.in</con:endpoint><con:request/><con:originalUri>http://bookings-app1.ttdev.in/users</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="e3a16144-7dc7-4548-9760-f3b0f83aba0c" name="UserSignUp"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a5528ef0-4402-48e9-866c-abe530027282" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="User_SignUp_To_Application" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Given user gets TT-Mobile for Sign UP" id="a52b6c89-5bf8-4963-a59f-d65cd8585ff0"><con:settings/><con:config xsi:type="con:RunTestCaseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>0c321544-a86a-410e-8452-0866251cda65</con:targetTestCase><con:properties><con:property><con:name>hash_key</con:name><con:value>/tC1EUjnPJaZFu0gN70Ps1zAetNvW9xRrhs5h+jm9r0=</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#uniqueemail}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>request_url</con:name><con:value>https://${#TestCase#apiendpoint}/users</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>PARALLELL</con:runMode></con:config></con:testStep><con:testStep type="groovy" name="And get the unique email for sign up" id="2d780e16-a610-4e7f-b4f2-719feaf6b3e3"><con:settings/><con:config><script>String uniqueemail = "tttest" + String.valueOf(System.currentTimeMillis()) + "@mailinator.com";
+String uniemailencoded = uniqueemail.replace("@","%40");
+testRunner.testCase.setPropertyValue("uniemailencoded", uniemailencoded);
+testRunner.testCase.setPropertyValue("uniqueemail", uniqueemail);
+testRunner.testCase.setPropertyValue("uniquepassword", "123456");</script></con:config></con:testStep><con:testStep type="restrequest" name="Then user sign up to application" id="da0add91-dee8-44af-865f-8435f0785bb4" disabled="true"><con:settings/><con:config service="" methodName="Users 1" resourcePath="/users" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user sign up to application" id="a876b26b-0ec2-4876-b8c5-31a6eff91e73" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="TT-Mobile" value="${Given user gets TT-Mobile for Sign UP}"/>
+  <con:entry key="User-Agent" value="${#Project#user_agent}"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="Content-Type" value="application/json; charset=UTF-8"/>
+  <con:entry key="AppIdentifier" value="com.traveltriangle.traveller"/>
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://${#TestCase#api_endpoint}</con:endpoint><con:request>{"commit":"Sign Up \u0026 Continue","user":{"confirmPassword":"${#TestCase#uniquepassword}","email":"${#TestCase#uniqueemail}","name":"Testautomation","password":"${#TestCase#uniquepassword}","role_ids":["5"],"tnc":"1"}}</con:request><con:originalUri>http://bookings-app1.ttdev.in/users</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="1ea22fa3-48c0-4383-aac0-a4bc858d61e7" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="89ecedf5-7b9f-4311-be4a-1cbe4ee46b2b" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+import java.util.Random;
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+String user_id= json_response_holder.current_user.id.toString();
+String email=json_response_holder.current_user.email.toString();
+
+
+messageExchange.modelItem.testCase.setPropertyValue("user_id",user_id);
+messageExchange.modelItem.testCase.setPropertyValue("email_id",email);</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>uniemailencoded</con:name><con:value>tttest1523879162307%40mailinator.com</con:value></con:property><con:property><con:name>api_endpoint</con:name><con:value>bookings-app1.ttdev.in</con:value></con:property><con:property><con:name>uniqueemail</con:name><con:value>tttest1523879162307@mailinator.com</con:value></con:property><con:property><con:name>uniquepassword</con:name><con:value>123456</con:value></con:property><con:property><con:name>user_first_name</con:name><con:value>Testautomation</con:value></con:property><con:property><con:name>user_id</con:name><con:value>1708198</con:value></con:property><con:property><con:name>email_id</con:name><con:value>tttest1523534263197@mailinator.com</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="57a7a208-aea8-4f68-8127-8c722bc843bb" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="0c321544-a86a-410e-8452-0866251cda65" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="07a5d6f9-11a8-4fe1-b318-2903c7a0b8c3"><con:settings/><con:config><script>import java.security.MessageDigest;
+import org.codehaus.groovy.runtime.EncodingGroovyMethods;
+
+
+String requestUrl = context.expand('${#TestCase#request_url}');
+String userEmail = context.expand('${#TestCase#user_email}');
+String requestType = context.expand('${#TestCase#request_type}');
+log.info requestUrl;
+String digest;
+
+if( requestType == "get" ){
+  	digest = requestUrl; 
+} else {
+digest = userEmail + requestType;
+}
+
+digest = getUserDigest(digest); //this is final digest
+
+log.info digest;
+testRunner.testCase.setPropertyValue("hash_key",digest);
+
+String getUserDigest(String digest) {
+   String TT_S_KEY = "DAFAC0A55F50A75558B778035E3C9A8BDF03AF1E4C2124D2CD5DD42092EFD32E";
+   try {
+       digest = TT_S_KEY + digest;
+       MessageDigest msgDigest = MessageDigest.getInstance("SHA-256");
+       msgDigest.update(digest.getBytes());
+       EncodingGroovyMethods encodeObj = new EncodingGroovyMethods();
+       //digest = new String(Base64.encode(msgDigest.digest(), Base64.DEFAULT));
+       digest = encodeObj.encodeBase64(msgDigest.digest()).toString();
+       if (digest.length() > 164) {
+           digest = digest.substring(0, 163);
+       }
+       return digest;
+   } catch (Exception e) {
+       log.info e.getMessage();
+   }
+   return null;
+}
+</script></con:config></con:testStep><con:properties><con:property><con:name>hash_key</con:name><con:value>uRjgB/HGti4pPSZev/WdEoxpXQFfGvD+Y4foN8mhYLA=</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#Project#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>request_url</con:name><con:value>https://${#Project#traveler_apiendpoint}/users</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties><con:property><con:name>api_endpoint</con:name><con:value>bookings-app1.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>lorem_tt_test_ipsum@mailinator.com</con:value></con:property><con:property><con:name>user_agent</con:name><con:value>Apache-HttpClient/4.1.1 (java 1.5)</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

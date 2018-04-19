@@ -69,6 +69,7 @@ public class EmailNotificationHandler {
 			throw new Exception(Property.ERROR_MESSAGES.ERR_GETTING_MAIL_CONTENT.getErrorMessage());	
 			}
 			FileUtils.writeStringToFile(new File(htmlFileName), html_content);
+			Utility.setKeyValueToGlobalVarMap(Property.EMAIL_CONTENT,html_content.replaceAll("\\R"," "));  //Asif changes
 			}
 			catch(Exception e){
 			throw e;
@@ -137,12 +138,13 @@ public class EmailNotificationHandler {
 				Pattern pattern = Pattern.compile(email_subject_pattern);
 				if(pattern.matcher(msg_subject).matches()){
 					matched_msg = message;
-					break;
+					//break;
 				}
 			}
 			if(matched_msg == null){
 				return false;
 			}
+			this.storeEmailHtmlContentToFile(); // Asif changes 
 		return true;
 		
 		}
@@ -174,9 +176,4 @@ public class EmailNotificationHandler {
 		
 	}
 	
-	
-	
-	
-	
-	
-}
+	}
