@@ -254,6 +254,8 @@ public class Property {
 	
 	public static String Filter_Project_Name = "PackageSearch";
 	
+	public static String MAIL_CONTENT="mailContent";
+	
 	public static String TEST_STEP_LOG_ENTRY = "------------------------------------------------------------------------------------\n" + 
 	 "Test Step Description : {TEST_STEP_NAME} \n" + "Test Step Action : {TEST_STEP_ACTION} \n" + "Test object : {TEST_OBJECT} \n" + 
 	 "Test Data used -- '{TEST_DATA}' \n" + "Status : {STATUS} \n" + "Remarks : {REMARKS} \n" + "Execution Time : {EXECUTION_TIME} \n" +
@@ -265,8 +267,7 @@ public class Property {
 			+".PaymentBrowserActivity,.PaymentNewBrowserActivity,.QuoteSelectionActivity,.CompareQuoteActivity,.ComparePackageActivity,.VouchersActivity,"
 			+".AttachmentBuilderActivity,com.soundcloud.android.crop.CropImageActivity, .AgentProfileDetailActivity,.WishlistActivity,.CallbackRequestActivity,.PackageDetailActivity,com.paytm.pgsdk.PaytmPGActivity,"
 			+".ProfileActivity,.InvoiceActivity,.PackageItineraryActivity,.PackageListActivity,.DestinationCatalogActivity,.InAppBrowserActivity,.HotelDetailActivity,.QuoteAccommodationActivity,.OffersActivity,.RequestCallbackActivity";
-	
-	
+		
 	
 	public static ArrayList<String > LIST_STRATEGY_KEYWORD = new ArrayList<String>();
 	

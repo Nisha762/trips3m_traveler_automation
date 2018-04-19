@@ -17,6 +17,7 @@ import javax.mail.Store;
 import javax.mail.search.ComparisonTerm;
 import javax.mail.search.ReceivedDateTerm;
 import javax.mail.search.SearchTerm;
+import javax.swing.text.Utilities;
 
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
@@ -69,6 +70,7 @@ public class EmailNotificationHandler {
 			throw new Exception(Property.ERROR_MESSAGES.ERR_GETTING_MAIL_CONTENT.getErrorMessage());	
 			}
 			FileUtils.writeStringToFile(new File(htmlFileName), html_content);
+			Utility.setKeyValueToGlobalVarMap(Property.MAIL_CONTENT, html_content);
 			}
 			catch(Exception e){
 			throw e;
@@ -137,12 +139,13 @@ public class EmailNotificationHandler {
 				Pattern pattern = Pattern.compile(email_subject_pattern);
 				if(pattern.matcher(msg_subject).matches()){
 					matched_msg = message;
-					break;
+					//break;
 				}
 			}
 			if(matched_msg == null){
 				return false;
 			}
+			this.storeEmailHtmlContentToFile();
 		return true;
 		
 		}

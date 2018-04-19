@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="GetTemplateFromNS" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" lastOpened="2016-09-23T17:40:06.494+05:30" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d7c48414-9b1d-49d0-b44b-a92a9a748dbb" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetTemplateFromNS" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://${#Project#traveler_apiendpoint}}</con:endpoint></con:endpoints><con:resource name="NotificationServices" path="/service-ns/api/v1/message_templates/{event_id}" id="948afba5-5ffc-4440-a549-d192ff653635"><con:settings/><con:parameters><con:parameter><con:name>event_id</con:name><con:value>49</con:value><con:style>TEMPLATE</con:style><con:default>49</con:default></con:parameter></con:parameters><con:method name="Method to get template" id="c7528823-614f-4e0c-9b32-84a978bf12a5" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="d64103bc-b669-42bf-befd-5fb67bf06081" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  <con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="Content-Type" value="application/json; charset=UTF-8"/>
+</xml-fragment>]]></con:setting><con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@follow-redirects">true</con:setting></con:settings><con:endpoint>http://${#Project#traveler_apiendpoint}}</con:endpoint><con:request>{"login_type":"json","user":{"admin_user[email]":"mohit.jain@traveltriangle.com","admin_user[password]":"mohitjain@A1"}}</con:request><con:originalUri>http://traveler-api.ttdev.in/users/sign_in</con:originalUri><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="event_id" value="49" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>event_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:testSuite id="9fc8815e-c6d9-47b6-962d-dfc3c04d0423" name="GetNotificationTemplate"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="16865839-07a3-4d5d-aff3-bc09595f8bf3" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="GetTemplate" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="User fetch the raw email contents from CMS and replace tokens" id="fe9bb79d-7410-493f-8938-63ef3e6cb17b"><con:settings/><con:config service="GetTemplateFromNS" methodName="Method to get template" resourcePath="/service-ns/api/v1/message_templates/{event_id}" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User fetch the raw email contents from CMS and replace tokens" id="55632a5e-ad0a-4e8b-ae12-9dd447c981db" mediaType="application/json" postQueryString="false" sslKeystore=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Authorization" value="${#TestCase#auth_key}"/>
+  <con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  <con:entry key="AuthorizationCode" value="12333"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  <con:entry key="Content-Type" value="application/json; charset=utf-8"/>
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request>{"login_type":"json","admin_user[email]":"${#TestCase#user_email}","admin_user[password]":"${#TestCase#user_password}"}</con:request><con:originalUri>http://traveler-api.ttdev.in/users/sign_in</con:originalUri><con:assertion type="Simple Contains" id="dcd47f93-5282-4b7f-a6bf-743b2a7e0455" name="success status is true"><con:configuration><token>true</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="e7d7bd92-1d43-400b-8111-eca1329e2326" name="Get the response cookie"><con:configuration><scriptText>for(String cookie in messageExchange.getResponseHeaders()["Set-Cookie"]){
+	if(cookie.contains("_trips3m_session")){
+		messageExchange.modelItem.testCase.setPropertyValue("Cookie",cookie);
+	}
+}</scriptText></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="e82e5c34-ea46-4a38-a619-eb6b38d59a51" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="62d0a48c-a693-4775-a02a-1f9c8ec99f74" name="FetchRawContent"><con:configuration><scriptText>import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import groovy.json.JsonSlurper;
+import groovy.transform.Field;
+import groovy.json.*;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def mail_content_edit = json_response_holder.data.message_template.raw_template;
+
+//def tk = context.expand('${#TestCase#tokens}')
+def tk = messageExchange.modelItem.testCase.getPropertyValue('tokens');
+
+def tokens = new JsonSlurper().parseText(tk)
+log.info tokens
+
+for (item in tokens) {
+  def regex = "\\{\\{${item.key}}\\}";
+  //log.info regex;
+  def subst = item.value;
+ // log.info subst;
+  mail_content_edit = mail_content_edit.replaceAll(regex,subst);
+  //log.info mail_content_edit;
+}
+log.info mail_content_edit;
+messageExchange.modelItem.testCase.setPropertyValue("mail_content_edit",String.valueOf(mail_content_edit));
+</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:preemptive>false</con:preemptive><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="event_id" value="${#TestCase#event_id}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>event_id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJWNjOWNjNzBiMjg4MTdmYmU5OTU4NTJhOGIwMzdkNDQyBjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA06VC0kiIiQyYSQxMCQ3a2dhQTZJc2Z1UXVYYzRsQzFiQXNlBjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVA%3D%3D--6e2ea47234c43b7535add83ebc6c3b5efe809815; path=/; HttpOnly</con:value></con:property><con:property><con:name>endpoint</con:name><con:value>notifications-ns.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>mohit.jain@traveltriangle.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value>mohitjain@A1</con:value></con:property><con:property><con:name>auth_key</con:name><con:value>8c880e30388b11e78aec1273ca74b26e</con:value></con:property><con:property><con:name>event_id</con:name><con:value>49</con:value></con:property><con:property><con:name>mail_contents</con:name><con:value/></con:property><con:property><con:name>mail_content_edit</con:name><con:value><![CDATA[<table style="display: block; width: 100%;">
+<tbody style="display: block; width: 100%;">
+<tr style="display: block; width: 100%;"><td style="display: block; width: 100%;">
+
+<!-- ############################ -->
+<table style="display:block; width: 94%;
+    padding: 10px 3% 10px 3%; background: url('https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/Party_poppers.png') no-repeat;
+    background-size:100% auto; background-position: center bottom;">
+  <tbody style="display:block; width:100%;">
+  <tr style="display:block; width:100%;">
+    <td style="font-weight:bold;font-size: 14px;color: #3e3e3e; display:block; width:100%; padding: 0;">
+      <p style="margin:0;">Hi Testjzzgxgnk,</p>
+    </td>
+  </tr>
+  <tr style="display:block; width:100%;">
+    <td style="text-align:center; display:block; width:100%; padding: 0;">
+      <h2 style="margin-bottom:0; font-size: 32px;font-weight: 900;
+      line-height: 1.25;text-align: center;color: #20a397;">Welcome to Travel Triangle</h2>
+      <p style="margin: 5px 0 40px;font-size: 14px;
+      color: #3e3e3e;">We will help you design and book amazing holiday packages.</p>
+    </td>
+  </tr>
+</tbody>
+</table>
+<table style="display:block;width: 94%; padding: 10px 3% 10px 3%;">
+  <tbody style="display:block; width:100%;">
+  <tr style="display:block; width:100%;">
+    <td style="display:block; width:100%; padding: 0;">
+      <p style="margin: 0 0 10px; text-align:center; font-size: 14px;
+      color: #3e3e3e; width:92%">Let's begin by providing you your login details:</p>
+    </td>
+  </tr>
+  <tr style="display:block; width:100%;">
+    <td style="border:1px solid #b2b2b2; padding:22px;
+    margin-bottom: 30px; box-sizing:border-box; display:block;">
+      <table style="display:block; width:100%;">
+        <tbody style="display:block; width:100%;">
+        <tr style="display:block; width:100%;">
+          <td style="display:inline-block; width:20%;  padding: 0; margin:0px">
+            <img src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/loginlockicon.png"
+             style="display:block; max-width:100%;">
+          </td>
+          <td style="display:inline-block; width:76%; padding: 0;">
+            <p style="margin: 0 0 15px 30px; font-size: 14px;
+            color: #3e3e3e; font-weight:900;">Username: <span
+            style="color:#2196f3;">testjzzg1xgnk@mail.com</span></p>
+            <p style="margin: 0 0 25px 30px; font-size: 14px;
+            color: #3e3e3e; font-weight:900;">Password: <span>xwvYjT</span></p>
+            <a href="{{login_url}}" style="background:#fe5246;
+            color: #fff;border-radius: 2px;    padding: 17px 0px;
+            text-decoration: none;font-size: 14px;max-width: 320px;
+            width: 100%;display: inline-block;text-align: center;">Login</a>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+    </td>
+  </tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr style="display:block; width:100%;">
+<td  style="display:block; width:100%; padding: 0;">
+<table style="text-align:center; background:#f2f2f2;padding: 20px 0px 40px;
+width: 100%;">
+  <tbody style="display:block; width:100%;">
+  <tr style="display:block; width:100%;">
+    <td style="display:block; width:100%; padding: 0;">
+      <h2 style="font-size:20px; color:#20a397;margin-bottom: 30px;">Why Travel Triangle?</h2>
+    </td>
+  </tr>
+  <tr style="display:block; width:100%;">
+    <td style="width:29%; display:inline-block;  padding: 0;">
+        <span style="display:block; height:50px; padding-top:20px;">
+        <img src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/Selectyourpackage.png"
+        style="display:block;
+        margin: 0 auto; max-width:100%;"></span>
+      <p style="margin:0 0 4px; font-size: 14px; font-weight:bold;
+      color: #3e3e3e;">Select your package</p>
+      <span style="font-weight:normal; font-size:13px;
+      color: #3e3e3e;">& tell us your prefrences</span>
+    </td>
+    <td style="width:2%; display:inline-block; padding: 0;">
+      <img src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/Arrow.png" style="display:block;
+       width:20px; margin: 0 auto;  width:20px;">
+    </td>
+    <td style="width:29%; display:inline-block; padding: 0;">
+      <span style="display:block; height:70px;"><img
+      src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/freequotes.png" style="display:block;
+      margin: 0 auto; max-width:100%;"></span>
+      <p style="margin:0 0 4px; font-size: 14px;
+      font-weight:bold; color: #3e3e3e;">Get multiple free quotes</p>
+      <span style="font-weight:normal; font-size:13px;
+      color: #3e3e3e;">from verified travel experts</span>
+    </td>
+    <td style="width:2%; display:inline-block; padding: 0;">
+      <img src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/Arrow.png" style="display:block; margin: 0 auto;  width:20px;">
+    </td>
+    <td style="width:29%; display:inline-block; padding: 0;">
+      <span style="display:block; height:70px;">
+      <img src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/travelers.png" style="display:block;
+      margin: 0 auto; max-width:100%;"></span>
+      <p style="margin:0 0 4px; font-size: 14px;
+      font-weight:bold; color: #3e3e3e;">Customize & book</p>
+      <span style="font-weight:normal; font-size:13px;
+       color: #3e3e3e;">a perfect holiday experience</span>
+    </td>
+  </tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+<tr style="display:block; width:100%;">
+<td  style="display:block; width:100%;">
+<table style="text-align:center; display:block; padding: 20px 0px 40px 0;
+width: 100%;">
+<tbody style="display:block; width:100%;">
+  <tr style="display:block; width:100%;">
+    <td style="display:block; width:100%; padding: 0;">
+      <h2 style="font-size:20px; color:#20a397;
+      margin-bottom: 30px;">The Largest Holiday Marketplace</h2>
+    </td>
+  </tr>
+  <tr style="display:block; width:100%;">
+    <td style="width:30%; display:inline-block; padding: 0;">
+      <span style="display:block; height:70px;">
+      <img src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/Agents.png" style="display:block;
+      margin: 0 auto; max-width:100%;"></span>
+      <p style="margin:0 0 4px; font-size: 14px;
+      font-weight:bold; color: #3e3e3e;">650+</p>
+      <span style="font-weight:normal; font-size:13px; color: #3e3e3e;">Verified Agents</span>
+    </td>
+    <td style="width:30%; display:inline-block; padding: 0;">
+      <span style="display:block; height:70px;">
+      <img src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/customizebook.png"
+      style="display:block; margin: 0 auto; max-width:100%;"></span>
+      <p style="margin:0 0 4px; font-size: 14px;
+      font-weight:bold; color: #3e3e3e;">22Lacs+</p>
+      <span style="font-weight:normal; font-size:13px;
+      color: #3e3e3e;">Happy Travelers</span>
+    </td>
+    <td style="width:30%; display:inline-block; padding: 0;">
+      <span style="display:block; height:70px;">
+      <img src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/Destinations.png" style="display:block;
+      margin: 0 auto; max-width:100%;"></span>
+      <p style="margin:0 0 4px; font-size: 14px;
+      font-weight:bold; color: #3e3e3e;">65+ Destinations</p>
+      <span style="font-weight:normal; font-size:13px;
+      color: #3e3e3e;">a perfect holiday experience</span>
+    </td>
+  </tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+<tr style="display:block; width:100%;">
+<td style="display:block; width:100%; padding: 0;">
+<table style="text-align:center;padding: 20px 0px 40px 0;
+width: 100%;">
+<tbody style="display:block; width:100%;">
+  <tr style="display:block; width:100%;">
+    <td style="display:block; width:100%; padding: 0;">
+      <h2 style="font-size:20px; color:#20a397;margin-bottom: 30px;">Easy, Secure & Reliable</h2>
+    </td>
+  </tr>
+  <tr style="display:block; width:100%;">
+       <td style="width:30%; display:inline-block; padding: 0;">
+      <span style="display:block; height:70px;">
+      <img src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/freequotes.png" style="display:block;
+      margin: 0 auto; max-width:100%;"></span>
+      <p style="margin:0 0 4px; font-size: 14px;
+      font-weight:bold; color: #3e3e3e;">Stringent</p>
+      <span style="font-weight:normal; font-size:13px;
+      color: #3e3e3e;">Quality Control</span>
+    </td>
+    <td style="width:30%; display:inline-block; padding: 0;">
+      <span style="display:block; height:70px;">
+      <img src="https://s3.amazonaws.com/traveltriangle-assets/service-ns/assets/mail_icons/travelers.png" style="display:block;
+      margin: 0 auto; max-width:100%;"></span>
+      <p style="margin:0 0 4px; font-size: 14px;
+      font-weight:bold; color: #3e3e3e;">24/7</p>
+      <span style="font-weight:normal;
+      font-size:13px; color: #3e3e3e;">Support</span>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<!-- ############################ -->
+</td>
+</tr>
+</tbody>
+</table>
+]]></con:value></con:property><con:property><con:name>tk_1</con:name><con:value>user_calling_name</con:value></con:property><con:property><con:name>tk_2</con:name><con:value>username</con:value></con:property><con:property><con:name>tk_3</con:name><con:value>password</con:value></con:property><con:property><con:name>tk_4</con:name><con:value>login_url</con:value></con:property><con:property><con:name>tk_1_attribute</con:name><con:value>Ashish Tripathi</con:value></con:property><con:property><con:name>tk_2_attribute</con:name><con:value>ashish.tripathi</con:value></con:property><con:property><con:name>tk_3_attribute</con:name><con:value>1234567</con:value></con:property><con:property><con:name>tk_4_attribute</con:name><con:value>google.com</con:value></con:property><con:property><con:name>tokens</con:name><con:value/></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:savedRecentRuns>1</con:savedRecentRuns><con:testSuite id="fdca761a-7dc9-4c44-8551-75593cd9d082" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1966b330-a53d-494b-ba1a-a687afdeabe8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="4afacfac-43d1-4460-8712-12aef9c0477c"><con:settings/><con:config><script>import java.security.MessageDigest;
+import org.codehaus.groovy.runtime.EncodingGroovyMethods;
+
+
+String requestUrl = context.expand('${#TestCase#request_url}');
+String userEmail = context.expand('${#TestCase#user_email}');
+String requestType = context.expand('${#TestCase#request_type}');
+log.info requestUrl;
+String digest;
+
+if( requestType == "get" ){
+  	digest = requestUrl; 
+} else {
+digest = userEmail + requestType;
+}
+
+digest = getUserDigest(digest); //this is final digest
+
+log.info digest;
+testRunner.testCase.setPropertyValue("hash_key",digest);
+
+String getUserDigest(String digest) {
+   String TT_S_KEY = "DAFAC0A55F50A75558B778035E3C9A8BDF03AF1E4C2124D2CD5DD42092EFD32E";
+   try {
+       digest = TT_S_KEY + digest;
+       MessageDigest msgDigest = MessageDigest.getInstance("SHA-256");
+       msgDigest.update(digest.getBytes());
+       EncodingGroovyMethods encodeObj = new EncodingGroovyMethods();
+       //digest = new String(Base64.encode(msgDigest.digest(), Base64.DEFAULT));
+       digest = encodeObj.encodeBase64(msgDigest.digest()).toString();
+       if (digest.length() > 164) {
+           digest = digest.substring(0, 163);
+       }
+       return digest;
+   } catch (Exception e) {
+       log.info e.getMessage();
+   }
+   return null;
+}
+</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>http://notifications-ns.ttdev.in/service-ns/admin/message_templates</con:value></con:property><con:property><con:name>user_email</con:name><con:value>mohit.jain@traveltriangle.com</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>kSVi7j5gq9Bz5YN11l47iZj8Kr0yw6ZqRe+bsao2xNI=</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
+import groovy.util.GroovyScriptEngine;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoDatabase;
+
+////////////////////// Functions /////////////////////////
+
+def filterList(commaSperatedListContent){
+	def list = commaSperatedListContent.split(",");
+	def filteredList = [];
+	list.each(){
+	def entry = it.toLowerCase().replaceAll("^\\s+", "");
+	entry = entry.trim();
+	if(entry != ""){
+	filteredList.add(entry);}	
+	}
+	return filteredList;
+}
+
+def customListCompare(list1,list2){
+	//list1 is the list of tags that are given by user to execute.
+	//list2 is the list of tags for specific test suite.
+	boolean isRunnable = false;
+	for(int l1 in 0 .. list1.size()-1)
+	{
+		def inputTag = list1.get(l1);		
+		for(int l2 in 0 .. list2.size()-1){
+			
+			if(inputTag.toString() == list2.get(l2).toString()){
+				isRunnable =  true;
+				break;
+			}
+		}
+		if(isRunnable){
+			break;
+		}
+	}
+	return isRunnable;
+}
+///////////////////// Function //////////////////////////////////////////////
+
+log.info "Start execution";
+def projDir = context.expand('${projectDir}')
+try{
+File propFile =new File(projDir + "/Configurations/" + project.getName() + "/" + project.getName() + ".properties");
+log.info propFile;
+boolean isDeleted = propFile.delete();
+log.info isDeleted;
+}
+catch(Exception e){log.info e.getMessage();}
+
+
+
+def execution_Tag = project.getPropertyValue("execution_tag");
+
+log.info "Test Execution Base Tag : "+ execution_Tag;
+
+//Fetch the tags to execute the required test suites.
+def filteredTags = filterList(execution_Tag) ;
+
+def Conf_input = "";
+
+log.info "Reading the Configuration file.....";
+
+try{
+
+Conf_input = new File(projDir + "/Configurations/" + project.getName() + "/TestData.xml");
+
+def parser = new XmlParser(); //Get XML Parser.
+
+def Configuration = parser.parse(Conf_input);//Point parser to configration file.
+
+context.Configuration = Configuration;
+
+}
+catch(Exception e){
+		assert false : "Error in reading configuration file -- " + e.getMessage();
+}
+
+def testSuiteListToExecute = [];
+
+log.info "Fetching Test-Scenarios to execute....";
+
+def testSuites = project.getTestSuiteList();
+
+//Enable all TestSuites.
+for(j in 0 .. testSuites.size()-1){
+	//log.info testSuites.get(j).getName();
+	testSuites.get(j).setDisabled(false); 
+}
+//Decide which test suites to execute and eventually disabled the non-relevant test suites.
+		for(i in 0 .. testSuites.size()-1) {
+   			def testSuiteName = testSuites.get(i).getName();
+   			def tags = context.Configuration.TestSuite."${testSuiteName}".tags.text()
+   			def testSuiteTags = filterList(tags);
+   			   			
+   			if(filteredTags == null || filteredTags.empty){
+   				break;
+   			}
+   			else{
+   				if(testSuiteTags == null || testSuiteTags.empty){
+   					testSuites.get(i).setDisabled(true);
+   				}
+   				else{
+   					def isRunnable = customListCompare(filteredTags,testSuiteTags);
+   					log.info testSuiteName+":::"+isRunnable
+   					if(!isRunnable){
+   						testSuites.get(i).setDisabled(true);
+   					}
+   				}
+   			}
+   			
+		}
+
+
+// Load Databases.
+log.info"Loading Databases........";
+
+int index = 1;
+
+String[] db_Names = project.getPropertyValue("dbname").split(",");
+
+for(String db_Name in db_Names){
+
+db_Name = db_Name.trim();
+
+if(db_Name == ""){break;}
+
+context.dbName = db_Name;
+
+String dbConnectionString = "";
+
+String dbDriver = "";
+
+String dbType = "";
+
+try{
+	String databaseCollectionFile_Location = projDir + "/Configurations/" + project.getName() + "/DataBases.csv";
+	
+	BufferedReader reader = new BufferedReader(new FileReader(databaseCollectionFile_Location));
+	
+	String lineInFile = reader.readLine();
+		
+		while(lineInFile != null){
+		
+		String[] lineContents = lineInFile.split(",");
+		
+		if(lineContents[0] == context.dbName){
+			dbType = lineContents[1]
+			dbDriver = lineContents[2];
+			dbConnectionString = lineContents[3];
+			break;
+		}
+		lineInFile = reader.readLine();
+		}
+}
+catch(Exception e){
+	log.info "Couldn't load database from 'Databases' repo.Please review the file again!!" + e.getMessage();
+}
+context.dbDriver = dbDriver
+
+context.dbConnectionString = dbConnectionString
+
+log.info "Connecting to : [" + context.dbName + "] ................";
+
+log.info "DB Connection String --" + dbConnectionString;
+
+if(dbType.toLowerCase().contains("mongo")){
+	try{
+	MongoClient mongoClient = new MongoClient(new MongoClientURI(context.dbConnectionString));
+   	
+     context.dbConnection = mongoClient;
+	if(context.mongoConnection == null){
+     context.mongoConnection = mongoClient;}
+     else{
+     	String mongoConnectionString = "mongoConnection" + index;
+     	log.info mongoConnectionString;
+     	context."${mongoConnectionString}" = mongoClient;
+     }
+	}
+	catch(Exception e){
+		runner.fail("Couldn't connect to application DB -- " + context.dbName + " " + e.getMessage());
+	}
+}
+else if(dbType.toLowerCase().contains("mysql")){
+	if(context.dbName != "" &amp;&amp; context.dbName != null){
+	try{
+		com.eviware.soapui.support.GroovyUtils.registerJdbcDriver(context.dbDriver )
+		
+		def connection = DriverManager.getConnection(context.dbConnectionString);
+		context.dbConnection = connection;
+		if(context.mysqlConnection == null){
+     		context.mysqlConnection = connection;}
+     	else{
+     		String mysqlConnectionString = "mysqlConnection" + index;
+     		context."${mysqlConnectionString}" = connection;
+    		 }
+		context.statement = connection.createStatement();
+	}
+	catch(Exception e){
+			runner.fail("Couldn't connect to application DB -- " + context.dbName + " " + e.getMessage());	
+	}
+}
+}
+index++;
+}
+log.info "Loading utilities......";
+//create an instance of generic utilities.
+try{
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+String path = projDir + "/ext/";
+
+GroovyScriptEngine gse = new GroovyScriptEngine(path) ;
+externalScript = gse.loadScriptByName("Utilities.groovy")
+instance = externalScript.newInstance()
+context.utility = instance ; 
+}
+catch(Exception e){
+	log.info "Unable to initialize framework utility, error being -- " + e.getMessage();
+}
+
+log.info"Preparing test data ..............";
+
+context.Configuration.children().each{
+	if(it.name() == "TestSuite"){
+		it.children().each{
+	String testSuiteNameInConf = it.name();
+	
+	it.children().each{
+		if(it.name() != "tags"){			
+			String testCaseNameInConf = it.name();
+			
+			it.children().each{
+				try{
+					//log.info testSuiteNameInConf+":::"+testCaseNameInConf+":::"+it.name()+":::"+it.text()
+					project.getTestSuiteByName(testSuiteNameInConf).getTestCaseByName(testCaseNameInConf).setPropertyValue(it.name(), it.text());
+					}
+				catch(Exception e){ }
+			}
+		}
+	}
+}
+}
+}</con:beforeRunScript><con:afterRunScript>import com.eviware.soapui.model.testsuite.TestSuiteRunner;
+import com.eviware.soapui.model.testsuite.TestCaseRunner;
+import com.eviware.soapui.model.testsuite.TestRunner.Status;
+
+def projDir = context.expand('${projectDir}')
+// Get the Execution tag.
+String executiontag = project.getPropertyValue("execution_tag");
+
+//Start Time
+def projectstartTime = new Date(runner.getStartTime());
+
+//Time Taken
+def pr_timeTaken = runner.getTimeTaken();
+
+int testcasespassed = 0;
+int testcasesfailed = 0;
+int testcasesexecuted = 0;
+List&lt;String> testCaseNameFailed = new ArrayList&lt;String>();
+//Number Of test cases passed/failed/didn't run.
+def List&lt;TestSuiteRunner> testSuiteRunners = runner.getResults()
+
+for(TestSuiteRunner suiterunner in testSuiteRunners){
+	String testSuiteName = suiterunner.getTestSuite().getName();
+	List&lt;TestCaseRunner> testcaserunners = suiterunner.getResults();
+	for(TestCaseRunner testcaserunner in testcaserunners){
+		Status status = testcaserunner.getStatus();
+		 String testcasename = testcaserunner.getTestCase().getName();
+		if(status == Status.FINISHED){
+			testcasespassed++;
+		}
+		if(status == Status.FAILED){
+			testcasesfailed++;
+			testCaseNameFailed.add(testcasename);
+		}
+		log.info status;
+	}
+}
+testcasesexecuted = testcasespassed + testcasesfailed;
+def percentPassed = (testcasespassed / testcasesexecuted) * 100;
+percentPassed = Math.round(percentPassed * 100) / 100
+String testCaseFailedInStringFormat = "";
+for(String testCaseFailed in testCaseNameFailed){
+	if(testCaseFailedInStringFormat == ""){
+		testCaseFailedInStringFormat = testCaseFailed;
+	}
+	else{
+	testCaseFailedInStringFormat = testCaseFailedInStringFormat + "," + testCaseFailed}
+}
+
+// create a property file.
+try{
+File propFile =new File(projDir + "/Configurations/" + project.getName() + "/" + project.getName() + ".properties");
+propFile.delete();
+boolean isCreated = propFile.createNewFile();
+log.info isCreated;
+Properties props = new Properties();
+props.load(propFile.newDataInputStream());
+props.setProperty("testgroup",executiontag);
+props.setProperty("StartTime",projectstartTime.toString());
+props.setProperty("timetaken",pr_timeTaken.toString());
+props.setProperty("testexecuted",testcasesexecuted.toString());
+props.setProperty("testcasespassed",testcasespassed.toString());
+props.setProperty("testcasesfailed",testcasesfailed.toString());
+props.setProperty("persentpassed",percentPassed.toString());
+props.setProperty("testCaseFailedInStringFormat",testCaseFailedInStringFormat);
+props.store(propFile.newWriter(), null)
+}
+catch(Exception e){
+	log.info "Error in storing test execution data"  + e.getMessage();
+}
+</con:afterRunScript><con:sensitiveInformation/><con:authRepository/><con:tags/></con:soapui-project>
