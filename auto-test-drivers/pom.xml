@@ -11,29 +11,39 @@
 	    <groupId>org.creativelabs.com</groupId>  
 		<version>1.0</version>   
 		<artifactId>auto-test-parent</artifactId>
+		
 	</parent>
 	    <repositories>
         	<repository>
             <id>smartbear-sweden-repository</id>
             <url>http://www.soapui.org/repository/maven2</url>
+            
         	</repository>
+        	
     	</repositories>
 	<dependencies>
+	<dependency>
+  <groupId>xerces</groupId>
+  <artifactId>xercesImpl</artifactId>
+  <version>2.9.1</version>
+  <scope>provided</scope>
+</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.0</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+			<dependency>
 		    <groupId>org.creativelabs</groupId>
 			<artifactId>auto_test_utils</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+	
 		<dependency>
  			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
- 			<version>4.1.2</version>
+ 			<version>6.0.0-BETA4</version>
 		</dependency>
 		<dependency>
 			<groupId>us.codecraft</groupId>
@@ -48,12 +58,12 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>2.53.1</version>
+			<version>3.8.0</version>
 		</dependency>
 		<dependency>
 			<artifactId>selenium-remote-driver</artifactId>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<version>2.53.1</version>
+			<version>3.8.0</version>
 		</dependency>
 		<dependency>
     		<groupId>com.github.detro.ghostdriver</groupId>
@@ -63,12 +73,18 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>18.0</version>
+			<version>23.6-jre</version>
+			<exclusions>
+        <exclusion>
+            <artifactId>xml-apis</artifactId>
+            <groupId>xml-apis</groupId>
+        </exclusion>
+        </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
-			<version>2.53.1</version>
+			<version>3.8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
@@ -79,6 +95,12 @@
 			<groupId>net.sf.opencsv</groupId>
 			<artifactId>opencsv</artifactId>
 			<version>2.3</version>
+			<exclusions>
+        <exclusion>
+            <artifactId>xml-apis</artifactId>
+            <groupId>xml-apis</groupId>
+        </exclusion>        
+    </exclusions>
 		</dependency>
 		<dependency>
                 <groupId>com.smartbear.soapui</groupId>
@@ -93,8 +115,20 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.10-FINAL</version>
+			<version>3.16</version>
+			<exclusions>
+        <exclusion>
+            <artifactId>xml-apis</artifactId>
+            <groupId>xml-apis</groupId>
+        </exclusion>        
+    </exclusions>
 		</dependency>
+		<dependency>
+        <groupId>xml-apis</groupId>
+        <artifactId>xml-apis</artifactId>
+        <version>1.4.01</version>
+    </dependency>
+
 		<dependency>
     		<groupId>org.apache.httpcomponents</groupId>
     		<artifactId>httpclient</artifactId>
@@ -106,6 +140,10 @@
    			<version>1.9.12</version>
 		</dependency>		
 	</dependencies>
+	<properties>
+   <maven.compiler.source>1.8</maven.compiler.source>
+   <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
 	<build>
 		<directory>${project.basedir}/${targetname}</directory>
 		<resources>
