@@ -1,34 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="Notifications" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" lastOpened="2016-09-23T17:40:06.494+05:30" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="434c13b9-2626-4f42-b474-48449fd196b4" wadlVersion="http://wadl.dev.java.net/2009/02" name="getNotifications" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://${#TestCase#apiendpoint}</con:endpoint></con:endpoints><con:resource name="user_notifications" path="/user_notifications" id="b5e9dc36-a40a-424d-a03b-93fb09621831"><con:settings/><con:parameters><con:parameter><con:name>email</con:name><con:value>mayankraj55@gmail.com</con:value><con:style>QUERY</con:style><con:default>mayankraj55@gmail.com</con:default></con:parameter><con:parameter><con:name>msg_type</con:name><con:value>email</con:value><con:style>QUERY</con:style><con:default>email</con:default></con:parameter><con:parameter><con:name>item</con:name><con:value>2</con:value><con:style>QUERY</con:style><con:default>2</con:default></con:parameter><con:parameter><con:name>event_name</con:name><con:value>quote_#added</con:value><con:style>QUERY</con:style><con:default>quote_#added</con:default></con:parameter></con:parameters><con:method name="Method 1" id="bcec115a-c0a8-47c1-8225-2a2cd301d865" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="71c01694-0dc7-4380-a94d-b810688e58ec" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${#TestCase#apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-individual.ttdev.in/user_notifications</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="email" value="tt1489058962@mailinator.com"/>
-  <con:entry key="msg_type" value="sms"/>
+<con:soapui-project id="6c6fb9a9-5dc3-4a2a-83e3-c252e3b49272" activeEnvironment="Default" name="Notifications" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" lastOpened="2016-09-23T17:40:06.494+05:30" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="434c13b9-2626-4f42-b474-48449fd196b4" wadlVersion="http://wadl.dev.java.net/2009/02" name="getNotifications" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://${#TestCase#apiendpoint}</con:endpoint></con:endpoints><con:resource name="user_notifications" path="/user_notifications" id="b5e9dc36-a40a-424d-a03b-93fb09621831"><con:settings/><con:parameters><con:parameter><con:name>email</con:name><con:value>mayankraj55@gmail.com</con:value><con:style>QUERY</con:style><con:default>mayankraj55@gmail.com</con:default></con:parameter><con:parameter><con:name>msg_type</con:name><con:value>email</con:value><con:style>QUERY</con:style><con:default>email</con:default></con:parameter><con:parameter><con:name>item</con:name><con:value>2</con:value><con:style>QUERY</con:style><con:default>2</con:default></con:parameter><con:parameter><con:name>event_name</con:name><con:value>quote_#added</con:value><con:style>QUERY</con:style><con:default>quote_#added</con:default></con:parameter><con:parameter><con:name>security_auth_token</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="bcec115a-c0a8-47c1-8225-2a2cd301d865" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="71c01694-0dc7-4380-a94d-b810688e58ec" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${#TestCase#apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-individual.ttdev.in/user_notifications</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
   <con:entry key="item" value="1"/>
+  <con:entry key="security_auth_token" value="ekxnfvoxefmpelbvzuerofqmtcffxxcuwengpdrvwwgrbajkrk"/>
+  <con:entry key="msg_type" value="sms"/>
   <con:entry key="event_name" value="user_#registered"/>
-</con:parameters></con:request></con:method></con:resource></con:interface><con:savedRecentRuns>1</con:savedRecentRuns><con:testSuite id="6403d57a-240d-45d0-9e5c-9f05dd38ffe2" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a2125bc0-b5e1-4d28-818b-48303b517ae0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="REST Request" id="5b218e71-c583-438e-8120-2cd77c71a9ac"><con:settings/><con:config service="getNotifications" methodName="Method 1" resourcePath="/user_notifications" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request" id="14f2fae7-5186-450f-903e-1d00b34704b2" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://${#TestCase#apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-individual.ttdev.in/user_notifications</con:originalUri><con:assertion type="GroovyScriptAssertion" id="2774839b-81f1-42bb-8dbc-c3cfd2c6219b" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
-import java.util.regex.*;
+  <con:entry key="email" value="tt1489058962@mailinator.com"/>
+</con:parameters><con:parameterOrder><con:entry>email</con:entry><con:entry>msg_type</con:entry><con:entry>item</con:entry><con:entry>event_name</con:entry><con:entry>security_auth_token</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:savedRecentRuns>1</con:savedRecentRuns><con:testSuite id="6403d57a-240d-45d0-9e5c-9f05dd38ffe2" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a2125bc0-b5e1-4d28-818b-48303b517ae0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="REST Request" id="5b218e71-c583-438e-8120-2cd77c71a9ac"><con:settings/><con:config service="getNotifications" methodName="Method 1" resourcePath="/user_notifications" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request" id="14f2fae7-5186-450f-903e-1d00b34704b2" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://${#TestCase#apiendpoint}</con:endpoint><con:request/><con:originalUri>http://traveler-individual.ttdev.in/user_notifications</con:originalUri><con:assertion type="GroovyScriptAssertion" id="2774839b-81f1-42bb-8dbc-c3cfd2c6219b" name="Script Assertion" disabled="true"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+   	import java.util.Random;
+    	import java.util.regex.Pattern;
+   	import java.util.regex.Matcher;
+   
+String s= messageExchange.modelItem.testCase.getPropertyValue("jsonn");
+log.info s;
+	
+   	String response = messageExchange.getResponseContent();
+   	def json_response_holder = new JsonSlurper().parseText(response);
+	String  template_body= json_response_holder.sms.template_body.toString();
+	log.info template_body;
+	String  actual_msg= json_response_holder.sms.actual_msg.toString();
 
-String response = messageExchange.getResponseContent();
-def json_response_holder = new JsonSlurper().parseText(response);
 
-def status = json_response_holder.status;
-assert(status == true) : "API status is false";
 
-int totalcount = json_response_holder.total_count;
-assert(totalcount == 1);
+	
+	String signup_actual_msg= actual_msg.substring(actual_msg.indexOf("st5"), actual_msg.length()-1);
+	messageExchange.modelItem.testCase.setPropertyValue("form1_url",signup_actual_msg);
+	
+	String [] token_name= ["form1_url","rtrip_status","requested_trip_id","to_loc","agent_first_name","agent_rating","currency","price","hotels","quote_url","agent_last_name","days","invoice_due_date","invoice_url","agent_phone_no"];
 
-String msg_type = context.expand('${#TestCase#message_type}');
-String messagebody = json_response_holder."${msg_type}".actual_msg[0];
-log.info messagebody;
-String pattern = context.expand('${#TestCase#pattern}');
-if(!Pattern.matches(pattern,messagebody)){
-	assert false : "Pattern -["+ pattern + "] didn't match with message -["+messagebody + "]."; 
+		for(int i=0;i&lt;token_name.length;i++){
+	
+		String regex = "\\{\\{"+token_name[i]+"\\}\\}";
+   		Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+    		String string = template_body;
+    		Matcher matcher = pattern.matcher(string);
+			template_body= matcher.replaceAll(messageExchange.modelItem.testCase.getPropertyValue(token_name[i]));
+	}
+	log.info template_body;
+
+
+//log.info signup_actual_msg;
+	//assert (actual_msg==template_body);
+
+	
+	//log.info template_body;
+	
+	//messageExchange.modelItem.testCase.setPropertyValue("templateContent",template_content);</scriptText></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="b1865719-0baf-4a63-b791-f699c27ed67e" name="Script Assertion 2"><con:configuration><scriptText> import groovy.json.JsonSlurper;
+ import java.util.Random;
+ import java.util.regex.Pattern;
+ import java.util.regex.Matcher;
+ 
+ 	String response = messageExchange.getResponseContent();
+ 	def json_response_holder = new JsonSlurper().parseText(response);
+   	String s= messageExchange.modelItem.testCase.getPropertyValue("jsonn");
+	String  template_body= json_response_holder.sms.template_body.toString();
+	String  actual_msg= json_response_holder.sms.actual_msg.toString();
+	String [] token_name= ["form1_url","rtrip_status","requested_trip_id","to_loc ","agent_first_name","agent_rating","currency","price","hotels","quote_url","agent_last_name","days","invoice_due_date","invoice_url","agent_phone_no"];
+	String changedvalue="";
+	def jsonParser = new JsonSlurper().parseText(s);
+	for(int i = 0; i &lt; token_name.length; i++){
+    	if(jsonParser.get(token_name[i])!=null){
+	log.info token_name[i] + "   "  +   jsonParser.get(token_name[i]);    
+	if(token_name[i] == "days"){
+	int days = jsonParser.get(token_name[i]).toString() as Integer;
+	log.info "dddddddddddddd" + days;
+	template_body=template_body.replaceAll(token_name[i], jsonParser.get(token_name[i]).toString() + ( days > 1 ? " days" : " day"));
+	}else{
+	template_body=template_body.replaceAll(token_name[i], jsonParser.get(token_name[i]).toString());	
+	}
+
 }
-</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
-  <con:entry key="email" value="${#TestCase#user_email}"/>
+template_body=template_body.replaceAll("\\{","").replaceAll("\\}","");
+log.info template_body;
+log.info actual_msg;
+
+}
+assert (actual_msg==template_body);
+
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
   <con:entry key="item" value="${#TestCase#items}"/>
+  <con:entry key="security_auth_token" value="ekxnfvoxefmpelbvzuerofqmtcffxxcuwengpdrvwwgrbajkrk"/>
   <con:entry key="msg_type" value="${#TestCase#message_type}"/>
   <con:entry key="event_name" value="${#TestCase#event_name}"/>
-</con:parameters></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>apiendpoint</con:name><con:value>traveler-individual.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>bheb777923@gmail.com</con:value></con:property><con:property><con:name>message_type</con:name><con:value>sms</con:value></con:property><con:property><con:name>event_name</con:name><con:value>user_#registered</con:value></con:property><con:property><con:name>items</con:name><con:value>1</con:value></con:property><con:property><con:name>pattern</con:name><con:value>Hi, TravelTriangle welcomes you onboard. To plan, customize and book your perfect holiday, click.*</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
+  <con:entry key="email" value="${#TestCase#user_email}"/>
+</con:parameters><con:parameterOrder><con:entry>email</con:entry><con:entry>msg_type</con:entry><con:entry>item</con:entry><con:entry>event_name</con:entry><con:entry>security_auth_token</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>apiendpoint</con:name><con:value>bookings-qa1.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>wqjdowiqjdo@oij3eo.com</con:value></con:property><con:property><con:name>message_type</con:name><con:value>sms</con:value></con:property><con:property><con:name>event_name</con:name><con:value>quote_#added</con:value></con:property><con:property><con:name>items</con:name><con:value>1</con:value></con:property><con:property><con:name>pattern</con:name><con:value>Hi, TravelTriangle welcomes you onboard. To plan, customize and book your perfect holiday, click.*</con:value></con:property><con:property><con:name>form1_url</con:name><con:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">st5.ttdev.in/FbqPd7B3z</con:value></con:property><con:property><con:name>Actual_Msg</con:name><con:value/></con:property><con:property><con:name>template_Body</con:name><con:value>{{form1_url}}</con:value></con:property><con:property><con:name>jsonn</con:name><con:value>{"price":10500,"currency":"Rupee","hotel":"Night 1,2, Snow Lotus Shimla, Shimla,  Deluxe , \r\n\r\nSame Price Option - Night 1,2, Sukhsagar Regency, Shimla,  Deluxe , ","days":3,"to_loc":"Himachal","agent_first_name":"Travel Vichar (A unit of Travel Bank)","agent_last_name":"","agent_rating":3.5,"quote_url":"http://st5.ttdev.in/bt1ebMkbE"}</con:value></con:property><con:property><con:name>price</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property><con:property><con:name>rtrip_status</con:name><con:value xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:beforeRunScript>import groovy.lang.Binding;
 import groovy.util.GroovyScriptEngine;
 import java.sql.DriverManager;
 import java.sql.Connection;
