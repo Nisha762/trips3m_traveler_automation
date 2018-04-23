@@ -1,4 +1,5 @@
 package com.auto.solution.Common;
+
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 
@@ -46,7 +47,8 @@ public class Utility {
 	private static HashMap<String,String> tempMap = new HashMap<String, String>();
 	
 	ResourceManager rManager = null;
-	
+
+
 	public Utility(ResourceManager rm){
 		this.rManager = rm;
 	}
@@ -191,6 +193,7 @@ public class Utility {
 			if(!Key.contains(Property.DRIVER_CAPABILITY_KEYWORD)){
 			Key = Key.toLowerCase();
 			}
+			
 			return Property.globalVarMap.get(Key);
 			
 		} catch (Exception e) {
@@ -736,6 +739,47 @@ public class Utility {
 	      return FilenameUtils.getPrefixLength(path) != 0;
 	   }
 
-	
+	public static HashMap<String, String> getPropertiesFromTestData(String[] testDataContents) throws Exception
+	{
+		if(testDataContents.length < 1){
+				throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+			}
+			HashMap<String, String> propertiesMap = new HashMap<String, String>();
+			String key_value=testDataContents[0];
+			String apiendpoint=Property.globalVarMap.get("apiendpoint");
+			propertiesMap.put("api_endpoint",apiendpoint);
+			if(testDataContents.length > 1){
+				try{
+				    //key=value || key=value.
+				
+					String[] key_value_pairs = key_value.split(Pattern.quote("||"));
+					for (String key_value_pair : key_value_pairs) {
+						String keyValue = key_value_pair.trim();
+						int index = key_value_pair.indexOf("=");
+						String key = keyValue.substring(0, index);
+						String value = keyValue.substring(index+1,keyValue.length());
+						System.out.println(value);
+						propertiesMap.put(key, value);
+						
+						}
+					}
+				catch(Exception e){
+					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage() + "--"  + e.getMessage());
+				}
+				
+			}
+			return propertiesMap;
+	}
+			public static List<String> setOutputProperties(String[] testDataContents) throws Exception
+			{
+				List <String> outProp = new ArrayList<String>();	
+				if(testDataContents.length == 2){
+				String[] out_key_value_pairs = testDataContents[1].split(Pattern.quote("||"));
+				for (String prop : out_key_value_pairs) {
+					outProp.add(prop);
+					}
+			}
+			return outProp;
+	}
 }	
 	

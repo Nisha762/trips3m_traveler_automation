@@ -1,0 +1,4 @@
+Name,DB_Type,Driver,Connection String
+dummymongoDB,mongodb,NULL,mongodb://43.252.89.64:27017
+dummymysqlDB,mysql,com.mysql.jdbc.Driver,jdbc:mysql://43.252.89.34:3306/bob_live?user=qa&password=qa@123
+dummysqlserver,sql,com.microsoft.sqlserver.jdbc.SQLServerDriver,jdbc:sqlserver://172.18.0.247

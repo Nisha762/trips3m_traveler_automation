@@ -373,9 +373,24 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 			
             	//	driver.navigate().to(updated_url);			
 			//driver.navigate().to(endPoint);
+		
 			
-			if(!Property.BrowserName.equals(Property.CHROME_KEYWORD))
+			if(!Property.BrowserName.equals(Property.CHROME_KEYWORD))	
 			driver.manage().window().maximize();
+			
+			String resizewindow = Property.globalVarMap.get("resizewindow");
+			
+			
+			if(resizewindow != null && resizewindow.split("\\|")[0].equalsIgnoreCase("yes")) {
+				String [] sizeParameters = resizewindow.split("\\|");
+				int parameterSize = sizeParameters.length;
+				if(parameterSize!=3)
+					throw new Exception(Property.ERROR_MESSAGES.ERR_IN_RESIZE_WINDOW_FORMATE.getErrorMessage().replace("{PARAMETER_FORMATE}", "yes|width|height"));
+				String width = sizeParameters[1];
+				String height = sizeParameters[2];
+				Dimension dimension = new Dimension(Integer.parseInt(width), Integer.parseInt(height));
+				driver.manage().window().setSize(dimension);
+			}
 		}
 		catch(Exception e){
 			throw e;
@@ -745,11 +760,11 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 						DesiredCapabilities executionCapabilities = new DesiredCapabilities();
 						ChromeOptions options = new ChromeOptions();
 						//options.setJavascriptEnabled(true);
-						options.setCapability("chrome.switches", Arrays.asList("--enable-javascript"));
+//						options.setCapability("chrome.switches", Arrays.asList("--enable-javascript"));
 						//options.setPlatform(Platform.ANY);
 						options.setCapability("platform", Platform.ANY);
-						
-						
+						String enableAgentSwitch = Property.globalVarMap.get("enable_agent_switch");
+						String agentName = Property.globalVarMap.get("agent_name");
 										
 						if(isRemoteExecution){
 								String remoteUrl = this.remoteURL + "/wd/hub";
@@ -775,11 +790,14 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 											"text/csv,application/x-msexcel,application/excel,application/x-excel,"
 											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,"
 											+ "application/xml");
+									if(enableAgentSwitch!=null && enableAgentSwitch.equalsIgnoreCase("true")) {
+										remoteoptions.addPreference("general.useragent.override",agentName);
+									}
 									// We can also add extension to firefox profile if needed in future.
 									//executionCapabilities.setBrowserName("firefox");
-									remoteoptions.setCapability("BROWSER_NAME", "firefox");
+									remoteoptions.addPreference("BROWSER_NAME", "firefox");
 									//executionCapabilities.setCapability("firefox_profile", remoteProfile.toString());	
-									remoteoptions.setCapability("firefox_profile", remoteoptions.toString());
+//									remoteoptions.setCapability("firefox_profile", remoteoptions.toString());
 									driver = new RemoteWebDriver(uri, remoteoptions);
 								}
 								else if(this.browserName.contains(Property.INTERNET_EXPLORER_KEYWORD)){
@@ -798,12 +816,18 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									//ChromeOptions options = new ChromeOptions();
 									options.addArguments("--disable-extensions");
 									options.addArguments("start-maximized");
+									options.addArguments("disable-infobars");
 									options.setExperimentalOption("prefs", profile);
-									options.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
-									options.setCapability(ChromeOptions.CAPABILITY, options);
-									LoggingPreferences loggingprefs = new LoggingPreferences();
-									loggingprefs.enable(LogType.BROWSER, Level.WARNING);
-									options.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
+									options.addArguments("--ignore-certificate-errors");
+//									options.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
+//									options.setCapability(ChromeOptions.CAPABILITY, options);
+									options.addArguments("--enable-javascript");
+									if(enableAgentSwitch!=null && enableAgentSwitch.equalsIgnoreCase("true")) {
+										options.addArguments("--user-agent="+agentName);
+									}
+//									LoggingPreferences loggingprefs = new LoggingPreferences();
+//									loggingprefs.enable(LogType.BROWSER, Level.WARNING);
+//									options.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
 									driver = new RemoteWebDriver(uri, options);
 								}
 								else{
@@ -843,10 +867,13 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 											"text/csv,application/x-msexcel,application/excel,application/x-excel,"
 											+ "application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,"
 											+ "application/xml");
+									if(enableAgentSwitch!=null && enableAgentSwitch.equalsIgnoreCase("true")) {
+										ffprofile.addPreference("general.useragent.override",agentName);
+									}
+									
 									// We can also add extension to firefox profile if needed in future.
-									executionCapabilities.setBrowserName("firefox");
 									//executionCapabilities.setCapability("firefox_profile", ffProfile.toString());
-									ffprofile.setCapability("firefox_profile", ffprofile.toString());
+									ffprofile.addPreference("firefox_profile", ffprofile.toString());
 									
 									
 									GeckoDriverService geckoservice=new GeckoDriverService.Builder().usingAnyFreePort().usingDriverExecutable(new File(rManager.getgeckoDriverExecutibleLocation())).build();
@@ -874,6 +901,12 @@ public class DesktopWebTestDriverImpl implements TestDrivers{
 									options.addArguments("--disable-extensions");
 									options.addArguments("start-maximized");
 									options.setExperimentalOption("prefs", profile);
+									options.addArguments("disable-infobars");
+									
+									if(enableAgentSwitch!=null && enableAgentSwitch.equalsIgnoreCase("true")) {
+										options.addArguments("--user-agent="+agentName);
+									}
+									
 									options.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
 									options.setCapability(ChromeOptions.CAPABILITY, options);
 									
