@@ -152,10 +152,12 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 		
 		if(swipeType.trim().toLowerCase().contains("up")){
 			//driver.swipe(screenWidth, (2*screenHight)-240, screenWidth, screenHight, 2000);	
+
 			action.press(PointOption.point(screenWidth,  (2*screenHight)-240)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(screenWidth, screenHight)).release().perform();
 		}else if(swipeType.trim().toLowerCase().contains("down")){
 			//driver.swipe(screenWidth, screenHight, screenWidth, (2*screenHight)-100, 2000);
 			action.press(PointOption.point(screenWidth, screenHight)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).moveTo(PointOption.point(screenWidth, (2*screenHight)-100)).release().perform();;
+
 		}
 		else if(swipeType.trim().toLowerCase().contains("left")){
 			
@@ -480,6 +482,7 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 		
 		String deepLinkURL=Property.ApplicationURL+URL;
 		try {
+
 			System.out.println(Property.globalVarMap.get("drivercapability.appActivity"));
 			System.out.println(Property.globalVarMap.get("drivercapability.appPackage"));
 			
@@ -499,6 +502,7 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 		
 			driver.startActivity(activity);;
 //		driver.startActivity(Property.APP_PACKAGE, Property.APP_ACTIVITY, Property.APP_PACKAGE, Property.APP_ACTIVITY_LIST, "", "", "", " -a android.intent.action.VIEW -d "+deepLinkURL );
+
 		} 
 		catch (Exception e) {
 		throw new Exception(Property.ERROR_MESSAGES.ERR_STARTING_ACTIVITY.getErrorMessage() + e.getMessage());
