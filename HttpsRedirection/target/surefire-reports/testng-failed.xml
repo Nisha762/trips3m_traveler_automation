@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [Suite]" data-provider-thread-count="20">
+  <test name="Test(failed)" preserve-order="true">
+    <classes>
+      <class name="redirection.TestClass">
+        <methods>
+          <include name="createReport"/>
+          <include name="test" invocation-numbers="2 0"/>
+        </methods>
+      </class> <!-- redirection.TestClass -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

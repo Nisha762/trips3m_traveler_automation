@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="47824" started-at="2018-04-09T05:56:47Z" finished-at="2018-04-09T05:57:34Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="47824" started-at="2018-04-09T05:56:47Z" finished-at="2018-04-09T05:57:34Z">
+      <class name="redirection.TestClass">
+        <test-method status="PASS" signature="test(java.lang.String)[pri:0, instance:redirection.TestClass@3f3afe78]" name="test" duration-ms="37542" started-at="2018-04-09T11:26:47Z" data-provider="urls" finished-at="2018-04-09T11:27:24Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[/sri-lanka-tourism]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test -->
+        <test-method status="PASS" signature="test(java.lang.String)[pri:0, instance:redirection.TestClass@3f3afe78]" name="test" duration-ms="46703" started-at="2018-04-09T11:26:47Z" data-provider="urls" finished-at="2018-04-09T11:27:33Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[/honeymoon-packages]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test -->
+        <test-method status="PASS" signature="test(java.lang.String)[pri:0, instance:redirection.TestClass@3f3afe78]" name="test" duration-ms="1241" started-at="2018-04-09T11:26:47Z" data-provider="urls" finished-at="2018-04-09T11:26:48Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[/weekend-getaway-packages]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test -->
+        <test-method status="PASS" signature="createReport()[pri:0, instance:redirection.TestClass@3f3afe78]" name="createReport" is-config="true" duration-ms="983" started-at="2018-04-09T11:27:33Z" finished-at="2018-04-09T11:27:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createReport -->
+      </class> <!-- redirection.TestClass -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
