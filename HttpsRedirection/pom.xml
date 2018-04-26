@@ -13,6 +13,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <environment_url>${application_url}</environment_url>
+	<remote_url>${remotesys_url}</remote_url>
   </properties>
   <build>
 		<plugins>
