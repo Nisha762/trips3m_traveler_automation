@@ -1,7 +1,6 @@
 package com.auto.solution.DatabaseManager;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,7 +11,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import com.auto.solution.Common.Property;
 import com.auto.solution.Common.ResourceManager;
@@ -60,7 +58,7 @@ public class ConnectDatabase {
 					Utility.getValueForKeyFromGlobalVarMap("dbconnectionrequired").equalsIgnoreCase("false")){
 				throw new IOException(Property.ERROR_MESSAGES.ER_CONNECT_TO_DB_NOT_OPTED.getErrorMessage());
 			}
-			if(conn.isClosed() || conn==null){
+			if(conn == null||conn.isClosed()){
 				connectToDatabase(dbName);
 			}
 		}
