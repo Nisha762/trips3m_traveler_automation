@@ -30,8 +30,8 @@ public class TestClass {
 	
   @Test(dataProvider="urls")
   public void test(String endpoint) throws URISyntaxException, MalformedURLException {
-	  //String hostname="http://"+System.getProperty("environment_url")+".ttdev.in";
-	 String hostname="http://browsing-qa1.ttdev.in";
+	  String hostname="http://"+System.getProperty("environment_url")+".ttdev.in";
+	 //String hostname="http://browsing-qa1.ttdev.in";
 	  String uri=hostname+endpoint;
 	  int st=helper.getRequest(uri);
 	  
