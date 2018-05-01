@@ -477,34 +477,22 @@ public class MobileAndriodTestDriverImpl implements TestDrivers{
 
 	@Override
 	public void navigateURL(String URL) throws Exception {
-		
-		String deepLinkURL=Property.ApplicationURL+URL;
-		try {
-			System.out.println(Property.globalVarMap.get("drivercapability.appActivity"));
-			System.out.println(Property.globalVarMap.get("drivercapability.appPackage"));
-			
-			
-			Activity activity=new Activity(Property.globalVarMap.get("drivercapability.appPackage"), Property.globalVarMap.get("drivercapability.appActivity"));
-		
-			activity.setAppWaitPackage(Property.globalVarMap.get("drivercapability.appPackage"));
-			activity.setAppWaitActivity(Property.APP_ACTIVITY_LIST);
-			activity.setIntentAction("-a android.intent.action.VIEW -d"+deepLinkURL);
-			
-			activity.setIntentCategory("");
-			activity.setIntentFlags("");
-			activity.setOptionalIntentArguments("");
-			activity.setStopApp(true);
-			
-			
-		
-			driver.startActivity(activity);;
-//		driver.startActivity(Property.APP_PACKAGE, Property.APP_ACTIVITY, Property.APP_PACKAGE, Property.APP_ACTIVITY_LIST, "", "", "", " -a android.intent.action.VIEW -d "+deepLinkURL );
-		} 
-		catch (Exception e) {
-		throw new Exception(Property.ERROR_MESSAGES.ERR_STARTING_ACTIVITY.getErrorMessage() + e.getMessage());
-		}
-		
-	}
+
+        String deepLinkURL = Property.ApplicationURL+URL;
+
+        try {
+
+            Activity activity = new Activity(Property.APP_PACKAGE, Property.APP_ACTIVITY);
+                
+            activity. setAppWaitPackage(Property.APP_PACKAGE).setAppWaitActivity(Property.APP_ACTIVITY_LIST).setIntentCategory("").setIntentFlags("").setOptionalIntentArguments("").setIntentAction(" android.intent.action.VIEW -d " + deepLinkURL);
+                
+            driver.startActivity(activity);
+
+            } catch (Exception e) {
+            throw new Exception(Property.ERROR_MESSAGES.ERR_STARTING_ACTIVITY.getErrorMessage() + e.getMessage());
+        }
+
+    }
 
 	@Override
 	public void isResourceLoaded() throws Exception {
