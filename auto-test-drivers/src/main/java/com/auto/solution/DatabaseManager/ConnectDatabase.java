@@ -15,6 +15,7 @@ import java.util.List;
 import com.auto.solution.Common.Property;
 import com.auto.solution.Common.ResourceManager;
 import com.auto.solution.Common.Utility;
+import com.auto.solution.Common.Property.ERROR_MESSAGES;
 
 
 
@@ -74,6 +75,9 @@ public class ConnectDatabase {
 	public static void connectToAllDatabase() throws Exception{
 		try{
 			String  dbNameList= Property.globalVarMap.get("dbname");
+			if(dbNameList == null) {
+					throw new Exception(ERROR_MESSAGES.ER_DB_NAME_NOT_PROVIDED.getErrorMessage());
+			}
 			String[] dbNames = dbNameList.split(",");
 			for(String key:dbNames){
 					makeDBConnection(key);
@@ -93,7 +97,7 @@ public class ConnectDatabase {
 	private static void makeDBConnection(String dbName) throws Exception{
 		Connection conn = null;
 		
-		try{			
+		try{		
 			String connectionDriver = dbConnectionStrings.get(dbName).get("driver");
 			String connectionStringUrlNameAndPassword = dbConnectionStrings.get(dbName).get("connectionstring");
 			Class.forName(connectionDriver);
@@ -103,7 +107,7 @@ public class ConnectDatabase {
 				Utility.addObjectToGlobalObjectCollection(dbName, conn);
 			} 
 			catch (Exception e) {
-				e.printStackTrace();
+				e.printStackTrace();;
 			}
 		
 		}
