@@ -1,5 +1,7 @@
 package com.auto.solution.DatabaseManager;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,14 +11,46 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import com.auto.solution.Common.Property;
+import com.auto.solution.Common.ResourceManager;
 import com.auto.solution.Common.Utility;
+import com.auto.solution.Common.Property.ERROR_MESSAGES;
 
 
 
 public class ConnectDatabase {
+	
+	ResourceManager rManager = null;
+	public static HashMap <String,HashMap<String,String>> dbConnectionStrings = null;
+
+
+	public ConnectDatabase(ResourceManager rm){
+		this.rManager = rm;
+		
+	}
+	
+	public void loadDBFile() throws Exception {
+		try {
+			dbConnectionStrings = new HashMap <String,HashMap<String,String>>();
+			BufferedReader br = null;
+			String line = "";
+			String dbFile =rManager.getDBFileLocation();
+			br = new BufferedReader(new FileReader(dbFile));
+	            while ((line = br.readLine()) != null) {
+	            	String[] dbConnectionLine = line.split(",");
+	            	HashMap<String,String> dbDetails =  new HashMap<String,String>();
+	            	dbDetails.put("dbtype", dbConnectionLine[1]);
+	            	dbDetails.put("driver", dbConnectionLine[2]);
+	            	dbDetails.put("connectionstring", dbConnectionLine[3]);
+	            	dbConnectionStrings.put(dbConnectionLine[0], dbDetails);
+	            }
+	            if(br!=null)
+	            	br.close();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 	
 	public static Connection connectionVerificationAndEstablishment(String dbName) throws Exception{
 		Connection conn = (Connection) Utility.getObjectFromGlobalObjectCollection(dbName);
@@ -25,7 +59,7 @@ public class ConnectDatabase {
 					Utility.getValueForKeyFromGlobalVarMap("dbconnectionrequired").equalsIgnoreCase("false")){
 				throw new IOException(Property.ERROR_MESSAGES.ER_CONNECT_TO_DB_NOT_OPTED.getErrorMessage());
 			}
-			if(conn.isClosed() || conn==null){
+			if(conn == null||conn.isClosed()){
 				connectToDatabase(dbName);
 			}
 		}
@@ -40,12 +74,13 @@ public class ConnectDatabase {
 	
 	public static void connectToAllDatabase() throws Exception{
 		try{
-			Set<String> globalVarKeySet = Property.globalVarMap.keySet();
-			for(String key:globalVarKeySet){
-				if(key.contains("application.db")){
-					String connectionString = Property.globalVarMap.get(key);
-					makeDBConnection(key, connectionString);
-				}
+			String  dbNameList= Property.globalVarMap.get("dbname");
+			if(dbNameList == null) {
+					throw new Exception(ERROR_MESSAGES.ER_DB_NAME_NOT_PROVIDED.getErrorMessage());
+			}
+			String[] dbNames = dbNameList.split(",");
+			for(String key:dbNames){
+					makeDBConnection(key);
 			}
 		}
 		catch(Exception ex){
@@ -56,25 +91,23 @@ public class ConnectDatabase {
 	}
 	
 	public static void connectToDatabase(String dbName) throws Exception{
-		String connectionString = Property.globalVarMap.get("application.db."+dbName);
-		makeDBConnection("application.db."+dbName, connectionString);
+		makeDBConnection(dbName);
 	}
 	
-	private static void makeDBConnection(String key, String connectionString) throws Exception{
+	private static void makeDBConnection(String dbName) throws Exception{
 		Connection conn = null;
 		
-		try{
-			String[] variablesInConectionString = fetchDriverAndconnectionDetailFromConnectionString(connectionString);
-			String connectionDriver = variablesInConectionString[0];
-			String connectionStringUrlNameAndPassword = variablesInConectionString[1];
+		try{		
+			String connectionDriver = dbConnectionStrings.get(dbName).get("driver");
+			String connectionStringUrlNameAndPassword = dbConnectionStrings.get(dbName).get("connectionstring");
 			Class.forName(connectionDriver);
 			conn = DriverManager.getConnection(connectionStringUrlNameAndPassword);
 			
 			try {
-				Utility.addObjectToGlobalObjectCollection(key.replace("application.db.", ""), conn);
+				Utility.addObjectToGlobalObjectCollection(dbName, conn);
 			} 
 			catch (Exception e) {
-				e.printStackTrace();
+				e.printStackTrace();;
 			}
 		
 		}
@@ -84,11 +117,10 @@ public class ConnectDatabase {
 		}
 	}
 	
-	public static String[] fetchDriverAndconnectionDetailFromConnectionString(String driverUrl){
-		String[] identifierValues = driverUrl.split("###");
-		return identifierValues;
-	}
-	
+//	public static String[] fetchDriverAndconnectionDetailFromConnectionString(String driverUrl){
+//		String[] identifierValues = driverUrl.split("###");
+//		return identifierValues;
+//	}
 	
 	/**
 	 * This method executes the query provided by user on given database. Data
@@ -108,16 +140,6 @@ public class ConnectDatabase {
 		int totalColumns;
 		List<HashMap<String, Object>> queryResult = new ArrayList<HashMap<String, Object>>();
 
-		if(dbName==null)
-		{
-			Set<String> globalVarKeySet = Property.globalVarMap.keySet();
-			for(String key:globalVarKeySet){
-				if(key.contains("application.db")){
-					dbName = key.replace("application.db.", "");
-					break;
-				}
-			}
-		}
 		connectionVerificationAndEstablishment(dbName);
 		conn = (Connection) Utility.getObjectFromGlobalObjectCollection(dbName);
 	

@@ -255,6 +255,8 @@ public class Property {
 	
 	public static String Filter_Project_Name = "PackageSearch";
 	
+	public static String DBFileName = "DataBase.csv";
+	
 	public static String TEST_STEP_LOG_ENTRY = "------------------------------------------------------------------------------------\n" + 
 	 "Test Step Description : {TEST_STEP_NAME} \n" + "Test Step Action : {TEST_STEP_ACTION} \n" + "Test object : {TEST_OBJECT} \n" + 
 	 "Test Data used -- '{TEST_DATA}' \n" + "Status : {STATUS} \n" + "Remarks : {REMARKS} \n" + "Execution Time : {EXECUTION_TIME} \n" +
@@ -343,6 +345,7 @@ public class Property {
 		ER_EMPTY_RESULTSET("Query result set is empty."),
 		ER_IN_SPECIFYING_RESULTSET_INDEX("Result set index is not specified clearly"),
 		ER_CONNECT_TO_DB_NOT_OPTED("User not opted for connect to database. Please set the flag 'dbconnectionrequired=true' in uiautomation.properties file."),
+		ER_DB_NAME_NOT_PROVIDED("User not provide dbaname. Please set the property 'dbname' in uiautomation.properties file."),
 		ERR_INCORRECT_COMPARISION_STRATEGY("Cannot understand the comparing strategy , Actual Value {ACTUAL_STRING}"),
 		ERR_TESTDATA_MATCH("Cannot find any preferrable match , Actual Value {ACTUAL_STRING}"),
 		ERR_CSV_MATCH("Mentioned CSV is not present in the folder"),
