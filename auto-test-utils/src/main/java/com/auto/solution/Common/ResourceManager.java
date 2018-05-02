@@ -93,4 +93,9 @@ public class ResourceManager {
 		String testGroup_file_location = this.resourceBasePath + FileSeperator +"{PROJECT_NAME}" + FileSeperator+ Property.TEST_GROUP_FILENAME;
 		return testGroup_file_location;
 	}
+	
+	public String getDBFileLocation(){
+		String uiAutomationPropertyFileLocation = this.resourceBasePath + FileSeperator + Property.DBFileName;
+		return uiAutomationPropertyFileLocation;
+	}
 }

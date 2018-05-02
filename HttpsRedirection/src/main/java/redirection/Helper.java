@@ -5,9 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,8 +42,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import com.google.common.util.concurrent.Service;
 
@@ -124,7 +131,7 @@ public class Helper {
 		return failedurls;
 	}
 	
-	public WebDriver launchchrome(){
+	public WebDriver launchchrome() throws MalformedURLException{/*
 		String path=System.getProperty("user.dir") + File.separator + "src"
 				+ File.separator + "main" + File.separator + "Resource"
 				+ File.separator + "chromedriver" + ".exe";
@@ -132,11 +139,38 @@ public class Helper {
 		System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 		if(driver==null){
 		 driver= new ChromeDriver();
-		}
+		}*/
+		DesiredCapabilities executionCapabilities = new DesiredCapabilities();
+		String remoteUrl = System.getProperty("remote_url") + "/wd/hub";
+		
+		URL uri = new URL(remoteUrl);
+		executionCapabilities.setCapability("webdriver.remote.quietExceptions", true);
+		executionCapabilities = DesiredCapabilities.chrome();
+		Map<String,Object> profile=new HashMap<String,Object>();
+		profile.put("disable-popup-blocking", "true");
+		
+		profile.put("download.directory_upgrade", "true");
+		profile.put("download.prompt_for_download", "false");
+		profile.put("plugins.plugins_disabled", Arrays.asList("Chrome PDF Viewer"));
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--disable-extensions");
+		options.addArguments("start-maximized");
+		options.addArguments("disable-infobars");
+		options.setExperimentalOption("prefs", profile);
+		options.addArguments("--ignore-certificate-errors");
+//		options.setCapability("chrome.switches", Arrays.asList("--start-maximized","--ignore-certificate-errors"));
+//		options.setCapability(ChromeOptions.CAPABILITY, options);
+		options.addArguments("--enable-javascript");
+		
+//		LoggingPreferences loggingprefs = new LoggingPreferences();
+//		loggingprefs.enable(LogType.BROWSER, Level.WARNING);
+//		options.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
+		driver = new RemoteWebDriver(uri, options);
+	
 		return driver;
 		 
 	}
-	public List<String> navigatetourl(String url){
+	public List<String> navigatetourl(String url) throws MalformedURLException{
 		launchchrome().get(url);
 		//launchchrome().manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 		

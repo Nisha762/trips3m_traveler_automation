@@ -446,9 +446,17 @@ public class TestSimulator {
  			}
  			
  			else if(stepAction.equalsIgnoreCase("executequery")){
+ 				
  				if(testDataContents.length == 1){
- 					String query = testDataContents[0].trim();
- 					ConnectDatabase.executeQuery(query,null);
+ 					String  dbNameList= Property.globalVarMap.get("dbname");
+ 					if(dbNameList != null) {
+ 						String[] dbNames = dbNameList.split(",");
+ 	 					String dbName = dbNames[0];
+ 	 					String query = testDataContents[0].trim();
+ 	 					ConnectDatabase.executeQuery(query,dbName);
+ 					}else {
+ 						throw new Exception(ERROR_MESSAGES.ER_DB_NAME_NOT_PROVIDED.getErrorMessage());
+ 					}
  				}
  				else if(testDataContents.length == 2){
  					String query = testDataContents[0].trim();
