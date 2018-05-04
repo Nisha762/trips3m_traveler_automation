@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="f2c0cc0b-3c7c-4ba3-bed6-0001aa5394c2" activeEnvironment="Default" name="Agent_Comment_On_Quote" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="31b2d6c1-7fdd-49d9-8684-63e0e442c730" wadlVersion="http://wadl.dev.java.net/2009/02" name="SIGNIN" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>http://${#Project#traveler_apiendpoint}}</con:endpoint></con:endpoints><con:resource name="sign_in" path="/browsing/v1/users/sign_in" id="aa14b496-179a-4d0c-a570-bdd346ea0f41"><con:settings/><con:parameters/><con:method name="Method 1" id="3fe908cf-5f16-4f6e-a15d-bfa4dc8dc162" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="bca37d84-005e-45f0-96ae-fdd990381f89" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  <con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  <con:entry key="TT-Mobile-Post" value="testing1112015a@rediffmail.compost"/>
+  <con:entry key="TT-Mobile" value=""/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="Content-Type" value="application/json; charset=UTF-8"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>https://${#Project#traveler_apiendpoint}</con:endpoint><con:request>{"login_type":"json","user":{"email":"testing1112015a@rediffmail.com","password":"testing00000007"}}</con:request><con:originalUri>http://traveler-api.ttdev.in/users/sign_in</con:originalUri><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="e8960b2f-1ae6-4f7a-81ad-7fa1126a8e5b" wadlVersion="http://wadl.dev.java.net/2009/02" name="AgentPostComment" type="rest" basePath="" definitionUrl="C:\Users\TTLAPTOP0620\Desktop\dll\AgentPostComment_1.wadl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/TTLAPTOP0620/Desktop/dll/AgentPostComment_1.wadl"><con:part><con:url>file:/C:/Users/TTLAPTOP0620/Desktop/dll/AgentPostComment_1.wadl</con:url><con:content><![CDATA[<application xmlns="http://wadl.dev.java.net/2009/02">
+  <doc xml:lang="en" title="AgentPostComment"/>
+  <resources base="">
+    <resource path="api/v1/requested_trips/{request_id}/quotes/{quote_id}/comments" id="comments">
+      <doc xml:lang="en" title="comments"/>
+      <param name="request_id" default="request_id" type="xs:string" required="false" style="template" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
+      <param name="quote_id" default="quoteid" type="xs:string" required="false" style="template" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
+      <param name="security_auth_token" type="xs:string" required="false" default="" style="query" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
+      <method name="POST" id="Method 1">
+        <doc xml:lang="en" title="Method 1"/>
+        <request/>
+      </method>
+    </resource>
+  </resources>
+</application>]]></con:content><con:type>http://wadl.dev.java.net/2009/02</con:type></con:part></con:definitionCache><con:endpoints/><con:resource name="comments" path="api/v1/requested_trips/{request_id}/quotes/{quote_id}/comments" id="40826268-d9cf-4467-9f00-b48e26d115f2"><con:settings/><con:parameters><con:parameter><con:name>request_id</con:name><con:value>request_id</con:value><con:style>TEMPLATE</con:style><con:default>request_id</con:default></con:parameter><con:parameter><con:name>quote_id</con:name><con:value>quoteid</con:value><con:style>TEMPLATE</con:style><con:default>quoteid</con:default></con:parameter><con:parameter><con:name>security_auth_token</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter></con:parameters><con:method name="Method 1" id="63bc7b7e-1622-4ab0-a6fe-e43ac8a1f7b6" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="df8c79f3-61fc-4e22-a7b8-89da92ef02fb" mediaType="application/json"><con:settings/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="301276e2-5707-4db7-8b1a-068a6e0b918b" name="Agent Comment On Quote"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="868afcc5-da01-41b3-ad8b-40a8bbb4fc85" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Traveller Received Comment On Quote From Agent" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Given user gets the hash key" id="cd15dcb2-e731-4dd5-8eb9-61481098f3d2"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>ec1f31e3-d431-48ba-b943-7622f3fd5312</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#traveler_apiendpoint}/users/sign_in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>moebPtN2nZl9eM39PpWrKKv70v5s0VEQ/wk0h1VNY48=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user logged in with correct credentials" id="8f53d026-3a3f-49e6-ad76-b5d9514fa85c"><con:settings/><con:config service="SIGNIN" methodName="Method 1" resourcePath="/browsing/v1/users/sign_in" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user logged in with correct credentials" id="92adcda0-aa7e-4e62-8955-07a8e112025c" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  <con:entry key="TT-Mobile" value="${Given user gets the hash key#hash_key}"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  <con:entry key="Content-Type" value="application/json"/>
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request>{"login_type":"json","user":{"email":"${#TestCase#user_email}","password":"${#TestCase#user_password}"}}</con:request><con:originalUri>http://traveltriangle.com/users/sign_in</con:originalUri><con:assertion type="Simple Contains" id="30720fd6-5852-4816-95db-835bda8cd5ee" name="EmailExistsInResponse"><con:configuration><token>${#TestCase#user_email}</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="64530aec-6185-4dd1-8e26-fc05f38974ad" name="Get user details"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+String user_id = json_response_holder.metadata.id.toString();
+
+//String auth_key = json_response_holder.current_user.pubnub_auth.auth_key;
+
+messageExchange.modelItem.testCase.setPropertyValue("user_id",user_id);
+
+//messageExchange.modelItem.testCase.setPropertyValue("auth_key",auth_key);</scriptText></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="657dca54-7dbe-4e4f-8f91-cbbffb9522e0" name="Get the response cookie"><con:configuration><scriptText>for(String cookie in messageExchange.getResponseHeaders()["Set-Cookie"]){
+	if(cookie.contains("_trips3m_session")){
+		messageExchange.modelItem.testCase.setPropertyValue("Cookie",cookie);
+	}
+}</scriptText></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="9b45a882-1c4d-4006-a970-ecd7203d183d" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Then agent post comment" id="5a43b0cf-d31d-4881-8139-2566d668aa30"><con:settings/><con:config service="AgentPostComment" resourcePath="/api/v1/requested_trips/{request_id}/quotes/{quote_id}/comments" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then agent post comment" id="df18ec76-6980-4ad0-b4db-1d51856b1a97" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  &lt;con:entry key="Accept" value="application/json;"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>https://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request> [{
+ 	"comment": "${#TestCase#input_agentcomment}",
+ 	"commentable_id": "${#TestCase#quoteid}",
+ 	"commentable_type": "Quote",
+ 	"email": "${#TestCase#user_email}",
+ 	"role": "agent",
+ 	"title": "${#TestCase#agenttitle}",
+ 	"user_id": "${#TestCase#user_id}"
+ }]</con:request><con:originalUri>http://bookings-qa2.ttdev.in/api/v1/requested_trips/2247838/quotes/4117194/comments</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="59d0bfe4-c2b7-49f5-91c7-520363a8e753" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="bfad7c10-dfb0-438d-9f59-6bc65654ddd1" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+String commentId = json_response_holder[0].id.toString();
+messageExchange.modelItem.testCase.setPropertyValue("commentId",commentId);</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="security_auth_token" value="ekxnfvoxefmpelbvzuerofqmtcffxxcuwengpdrvwwgrbajkrk"/>
+  <con:entry key="quote_id" value="${#TestCase#quoteid}"/>
+  <con:entry key="request_id" value="${#TestCase#RequestID}"/>
+</con:parameters><con:parameterOrder><con:entry>request_id</con:entry><con:entry>security_auth_token</con:entry><con:entry>quote_id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>user_email</con:name><con:value>ttprodagent@gmail.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value>ttprodagent123</con:value></con:property><con:property><con:name>input_agentcomment</con:name><con:value>quotecomment</con:value></con:property><con:property><con:name>quoteid</con:name><con:value>4935278</con:value></con:property><con:property><con:name>agenttitle</con:name><con:value>commenttitle</con:value></con:property><con:property><con:name>user_id</con:name><con:value/></con:property><con:property><con:name>traveler_apiendpoint</con:name><con:value>master.ttdev.in</con:value></con:property><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTJjMzNiYzc5Y2Q5Zjk0OTcyNDg1ZWU1YjEzYzViZmY0BjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA02VC0kiIiQyYSQxMCQ3SnF4bnlGeVVPcFQvMlFxZmJ1bTRlBjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVA%3D%3D--6e95bdbd3bb6fa8dd9895696e1748b4ea5141995; path=/; HttpOnly</con:value></con:property><con:property><con:name>RequestID</con:name><con:value>2681412</con:value></con:property><con:property><con:name>commentId</con:name><con:value>7702473</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="d8b1081b-b1b1-4bad-9f53-3bca8a35de1f" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="ec1f31e3-d431-48ba-b943-7622f3fd5312" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="f0ca93be-f5c3-4d24-b51e-17b68fd41e5c"><con:settings/><con:config><script>import java.security.MessageDigest;
+import org.codehaus.groovy.runtime.EncodingGroovyMethods;
+
+
+String requestUrl = context.expand('${#TestCase#request_url}');
+String userEmail = context.expand('${#TestCase#user_email}');
+String requestType = context.expand('${#TestCase#request_type}');
+log.info requestUrl;
+String digest;
+
+if( requestType == "get" ){
+  	digest = requestUrl; 
+} else {
+digest = userEmail + requestType;
+}
+
+digest = getUserDigest(digest); //this is final digest
+
+log.info digest;
+testRunner.testCase.setPropertyValue("hash_key",digest);
+
+String getUserDigest(String digest) {
+   String TT_S_KEY = "DAFAC0A55F50A75558B778035E3C9A8BDF03AF1E4C2124D2CD5DD42092EFD32E";
+   try {
+       digest = TT_S_KEY + digest;
+       MessageDigest msgDigest = MessageDigest.getInstance("SHA-256");
+       msgDigest.update(digest.getBytes());
+       EncodingGroovyMethods encodeObj = new EncodingGroovyMethods();
+       //digest = new String(Base64.encode(msgDigest.digest(), Base64.DEFAULT));
+       digest = encodeObj.encodeBase64(msgDigest.digest()).toString();
+       if (digest.length() > 164) {
+           digest = digest.substring(0, 163);
+       }
+       return digest;
+   } catch (Exception e) {
+       log.info e.getMessage();
+   }
+   return null;
+}
+</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>http://master.ttdev.in/users/sign_in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>ttprodagent@gmail.com</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>moebPtN2nZl9eM39PpWrKKv70v5s0VEQ/wk0h1VNY48=</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

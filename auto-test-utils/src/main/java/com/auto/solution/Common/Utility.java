@@ -2,6 +2,7 @@ package com.auto.solution.Common;
 
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
+import liqp.Template;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -9,6 +10,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,6 +42,10 @@ import org.codehaus.jackson.JsonGenerator;
 
 import com.auto.solution.Common.Property.ERROR_MESSAGES;
 import com.auto.solution.Common.Property.STRATEGY_KEYWORD;
+
+import difflib.Delta;
+import difflib.DiffUtils;
+import difflib.Patch;
 
 public class Utility {
 		
@@ -241,7 +248,114 @@ public class Utility {
 		}
 			return datacount;
 	}
-
+	/**
+	 * 
+	 * @param originalFile path to original file
+	 * @param revisedFile path to revised file
+	 * @return return true if original and revised file matched else return false
+	 */
+	@SuppressWarnings("unchecked")
+	public static HashMap<Boolean,String> verifyDiffInTwoFile(String originalFile,String revisedFile)throws Exception {
+		System.out.println("-----------------------------------------------------------");
+		boolean isMatched = false;
+		String differences = "";
+		HashMap<Boolean,String> result =  new HashMap<Boolean,String>();
+		try {	
+			List<String> original = Files.readAllLines(new File(originalFile).toPath());
+			List<String> revised = Files.readAllLines(new File(revisedFile).toPath());
+			//compute the patch: this is the diffutils part
+			Patch patch = DiffUtils.diff(original, revised);
+			if(patch.getDeltas().isEmpty()){
+				isMatched =  true;
+			}
+			for (Delta delta : patch.getDeltas()) {
+				  differences =differences+"\n [Delta : ] \n"+ delta.toString();
+			   System.out.println(delta);
+			   System.out.println(delta.getType());		    
+			  List<String> originalDelta =   (List<String>) delta.getOriginal().getLines();
+			  List<String> revisedDelta =   (List<String>) delta.getRevised().getLines();
+			  
+			  if(delta.getType()==Delta.TYPE.CHANGE) {
+				  System.out.println(originalDelta);
+				  System.out.println(revisedDelta);
+				  for(int i=0;i<originalDelta.size()&& i<revisedDelta.size();i++) {
+					  System.out.println(originalDelta.get(i));
+					  System.out.println(revisedDelta.get(i)); 
+					  Pattern p =  Pattern.compile(revisedDelta.get(i));
+					  Matcher m = p.matcher(originalDelta.get(i));
+					  if(!m.matches()) {
+						  isMatched=false;
+						  differences =  differences + "\n" + "MISS-MATCHED :["+originalDelta.get(i)+" --> "+ revisedDelta.get(i)+"]"; 
+					  }
+				  }
+			   }else {
+					isMatched =  false;	
+				}
+			}
+		}
+		catch (Exception e) {
+			throw e;
+		}
+		result.put(isMatched, differences);
+		return result;
+		
+	}
+	
+	/**
+	 * 
+	 * @param templateContent
+	 * @param jsonMap
+	 * @return
+	 */
+	public static String templateParser(String templateContentVariable,String jsonMapVariable) throws Exception{
+		String parsedTemplate = null;
+		Template template = null;		
+		try {
+			String templateContent = Utility.getValueForKeyFromGlobalVarMap(templateContentVariable);
+			String jsonMap = Utility.getValueForKeyFromGlobalVarMap(jsonMapVariable);
+			jsonMap = Utility.replaceAllOccurancesOfStringInVariableFormatIntoItsRunTimeValue(jsonMap);
+			templateContent = templateContent.replaceAll("\\<img src=\\\"\\{\\{..\\/star_img\\}\\}\\\" alt=\\\"\\\" \\/\\>", "");
+System.out.println(templateContent);
+			template = Template.parse(templateContent);
+	    	parsedTemplate = 	template.render(jsonMap);;
+	    	
+		} catch (Exception e) {
+			throw e;		
+		}
+		return parsedTemplate;
+	}
+	
+	/**
+	 * 
+	 * @param filepath
+	 * @return
+	 */
+	public static String readFile(String filepath) {
+   	 StringBuilder sb = new StringBuilder();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(filepath));
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (sb.length() > 0) {
+                    sb.append("\n");
+                }
+                sb.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        String contents = sb.toString();
+        return contents;
+   }
 	
 	/**
 	 * Replace all the occurrences of string like '{$KeyVar}' to its actual value stored in global map.
@@ -781,5 +895,16 @@ public class Utility {
 			}
 			return outProp;
 	}
+			
+			public static Object [] reverseObjectArray(Object [] array) {
+				Object temp;
+				int msgSize =  array.length;
+				for (int i = 0; i < msgSize/2; i++){
+				     temp = array[i];
+				     array[i] = array[msgSize-1 - i];
+				     array[msgSize-1 - i] = temp;
+				}
+				return array;
+			}
 }	
 	

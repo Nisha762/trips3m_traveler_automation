@@ -679,8 +679,9 @@ public class TestSimulator {
  				String email_id = Utility.getValueForKeyFromGlobalVarMap("email_server_name"); 				
  				String email_password = Utility.getValueForKeyFromGlobalVarMap("email_server_password"); 				
  				mailHandler.connectToMailServerInbox(email_id, email_password); 				
- 				String email_subject_pattern = testDataContents[0]; 				
- 				boolean emailReceived = mailHandler.isEmailSentToIndox(email_subject_pattern); 				
+ 				String email_subject_pattern = testDataContents[1]; 
+ 				String recipientEmailId = testDataContents[0];
+ 				boolean emailReceived = mailHandler.isEmailSentToIndox(email_subject_pattern,recipientEmailId); 				
  				if(!emailReceived){
  					throw new Exception(Property.ERROR_MESSAGES.ERR_IN_GETTING_EMAIL_CONTENTS_BY_SUBJECT.getErrorMessage() + email_subject_pattern);
  				}
@@ -693,6 +694,24 @@ public class TestSimulator {
  				if(!isElementInMail){
  					throw new Exception(Property.ERROR_MESSAGES.ERR_IN_FINIDING_CONTENT_IN_MAIL.getErrorMessage().replace("{CSS_QUERY}",cssQuery));
  				}
+ 			}
+ 			else if(stepAction.toLowerCase().equalsIgnoreCase("verifytwofilechanges")) {
+ 				if(testDataContents.length != 2){
+ 					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+ 				}
+ 				String originalContentVaribale = testDataContents[0];
+ 				String revisedContentVaribale = testDataContents[1];
+ 				mailHandler.verifyChangesInTwoFile(originalContentVaribale, revisedContentVaribale);
+ 			}
+ 			else if(stepAction.toLowerCase().equalsIgnoreCase("parseTemplate")) {
+ 				if(testDataContents.length != 3){
+ 					throw new Exception(ERROR_MESSAGES.ER_SPECIFYING_TESTDATA.getErrorMessage());
+ 				}
+ 				String outputVariable =  testDataContents[0];
+ 				String unparsedTemplateContentContentVaribale = testDataContents[1];
+ 				String jsonMap = testDataContents[2];
+ 				String output = Utility.templateParser(unparsedTemplateContentContentVaribale, jsonMap);
+ 				Utility.setKeyValueToGlobalVarMap(outputVariable, output);
  			}
  			else if(stepAction.toLowerCase().equalsIgnoreCase("extractjserrors")){
  				if(testDataContents.length < 1){
@@ -711,7 +730,7 @@ public class TestSimulator {
  			else{
  				throw new NoSuchMethodException(Property.ERROR_MESSAGES.ER_NO_STEP_ACTION.getErrorMessage());
  			}
- 			Property.StepStatus = Property.PASS;
+ 			Property.StepStatus = Property.PASS;;
  		}
  		catch(Exception e){
  			if(Property.LIST_STRATEGY_KEYWORD.contains(Property.STRATEGY_KEYWORD.OPTIONAL.toString())){
@@ -719,7 +738,7 @@ public class TestSimulator {
  				Property.Remarks = Property.ERROR_MESSAGES.STEP_MARKED_OPTIONAL.getErrorMessage();
  			}
  			else{
- 			Property.Remarks = e.getMessage();
+ 			Property.Remarks = e.getMessage();;
  			Property.StepStatus = Property.FAIL;
  			}
  		}
