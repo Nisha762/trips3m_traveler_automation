@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="404c3a6e-7c3c-4e35-ab41-5ae83b747ba2" activeEnvironment="Default" name="Email_Template" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="781678e8-fc77-487f-a8b4-5df80f4469c4" wadlVersion="http://wadl.dev.java.net/2009/02" name="GetTemplateFromNS" type="rest" definitionUrl="http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="GetTemplateFromNS.wadl"><con:part><con:url>GetTemplateFromNS.wadl</con:url><con:content><![CDATA[<application xmlns="http://wadl.dev.java.net/2009/02">
+  <doc xml:lang="en" title="GetTemplateFromNS"/>
+  <resources base="http://${#Project#traveler_apiendpoint}}">
+    <resource path="service-ns/api/v1/message_templates/{event_id}" id="NotificationServices">
+      <doc xml:lang="en" title="NotificationServices"/>
+      <param name="event_id" default="49" type="xs:string" required="false" style="template" xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
+      <method name="GET" id="Method to get template">
+        <doc xml:lang="en" title="Method to get template"/>
+        <request/>
+      </method>
+    </resource>
+  </resources>
+</application>]]></con:content><con:type>http://wadl.dev.java.net/2009/02</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://${#Project#traveler_apiendpoint}}</con:endpoint></con:endpoints><con:resource name="NotificationServices" path="/service-ns/api/v1/message_templates/{event_id}" id="99d6f68e-6009-4075-abc3-57541675ee61"><con:settings/><con:parameters><con:parameter><con:name>event_id</con:name><con:value>49</con:value><con:style>TEMPLATE</con:style><con:default>49</con:default></con:parameter></con:parameters><con:method name="Method to get template" id="514cecd2-20db-4f7c-9668-8e2af65e5fc2" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="b79e123a-7168-4041-966d-b9586cf74a58" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  <con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="Content-Type" value="application/json; charset=UTF-8"/>
+</xml-fragment>]]></con:setting><con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@follow-redirects">true</con:setting></con:settings><con:endpoint>http://${#Project#traveler_apiendpoint}}</con:endpoint><con:request>{"login_type":"json","user":{"admin_user[email]":"mohit.jain@traveltriangle.com","admin_user[password]":"mohitjain@A1"}}</con:request><con:originalUri>http://traveler-api.ttdev.in/users/sign_in</con:originalUri><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="event_id" value="49" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>event_id</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:testSuite id="2cb00510-9bd4-4312-ac88-d24156dd6b23" name="GetNotificationTemplate"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="ca3ca812-983d-451e-8076-5c3f73700bb3" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="GetTemplate" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="User fetch the raw email contents from CMS and replace tokens" id="de5fa9a8-1ff9-4c40-a2db-377f6e966740"><con:settings/><con:config service="GetTemplateFromNS" methodName="Method to get template" resourcePath="/service-ns/api/v1/message_templates/{event_id}" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User fetch the raw email contents from CMS and replace tokens" id="55632a5e-ad0a-4e8b-ae12-9dd447c981db" mediaType="application/json" postQueryString="false" sslKeystore=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Authorization" value="${#TestCase#auth_key}"/>
+  <con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  <con:entry key="AuthorizationCode" value="12333"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  <con:entry key="Content-Type" value="application/json; charset=utf-8"/>
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://${#TestCase#endpoint}</con:endpoint><con:request>{"login_type":"json","admin_user[email]":"${#TestCase#user_email}","admin_user[password]":"${#TestCase#user_password}"}</con:request><con:originalUri>http://traveler-api.ttdev.in/users/sign_in</con:originalUri><con:assertion type="Simple Contains" id="dcd47f93-5282-4b7f-a6bf-743b2a7e0455" name="success status is true"><con:configuration><token>true</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="e7d7bd92-1d43-400b-8111-eca1329e2326" name="Get the response cookie"><con:configuration><scriptText>for(String cookie in messageExchange.getResponseHeaders()["Set-Cookie"]){
+	if(cookie.contains("_trips3m_session")){
+		messageExchange.modelItem.testCase.setPropertyValue("Cookie",cookie);
+	}
+}</scriptText></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="e82e5c34-ea46-4a38-a619-eb6b38d59a51" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="62d0a48c-a693-4775-a02a-1f9c8ec99f74" name="FetchRawContent"><con:configuration><scriptText>import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import groovy.json.JsonSlurper;
+import groovy.transform.Field;
+import groovy.json.*;
+import org.apache.commons.io.FileUtils;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+def mail_content_edit = json_response_holder.data.message_template.raw_template;
+
+messageExchange.modelItem.testCase.setPropertyValue("template",mail_content_edit);</scriptText></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:preemptive>false</con:preemptive><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="event_id" value="${#TestCase#event_id}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>event_id</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJWNjOWNjNzBiMjg4MTdmYmU5OTU4NTJhOGIwMzdkNDQyBjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA06VC0kiIiQyYSQxMCQ3a2dhQTZJc2Z1UXVYYzRsQzFiQXNlBjsAVEkiDHJlZmVyZXIGOwBUSSIABjsAVA%3D%3D--6e2ea47234c43b7535add83ebc6c3b5efe809815; path=/; HttpOnly</con:value></con:property><con:property><con:name>endpoint</con:name><con:value>notifications-ns.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>mohit.jain@traveltriangle.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value>mohitjain@A1</con:value></con:property><con:property><con:name>auth_key</con:name><con:value>8c880e30388b11e78aec1273ca74b26e</con:value></con:property><con:property><con:name>event_id</con:name><con:value>50</con:value></con:property><con:property><con:name>mail_contents</con:name><con:value/></con:property><con:property><con:name>mail_content_edit</con:name><con:value><![CDATA[<table style="width: 100%; padding-top: 1px; padding-bottom: 0px;">
+	<tbody>
+	<tr>
+	<td style="padding: 5px 5%;">
+	<p style="color: #3b3e4a; font-size: 14px; margin: 0; padding-top: 10px; padding-bottom: 5px;">Hi {{name}},</p>
+	<p style="color: #3b3e4a; font-size: 14px; margin: 0; padding-top: 10px; padding-bottom: 5px;">Greetings from TravelTriangle!&nbsp;</p>
+	<p style="color: #3b3e4a; font-size: 14px; margin: 0;"><span style="color: #3b3e4a;">Based on your preferences, our travel agent&nbsp;<strong>{{agent_name}}</strong>{{create_update_text}} </span></p>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	<p>{% comment %} Do not delete this. Please ! {{weekend_gateway_marketing_trip_flag}} {{condition_2}} {{type_of_trip_cond}} {{hotel_condition}} {{inclusion_condition}} {{trip_days_condition}} {{trip_day_loop}} {{compare_quote_cond}} {{other_quotes_present}} {{compare_quote_array}} {% endcomment %}</p>
+	<p>{% unless weekend_gateway_marketing_trip_flag %}{% endunless %}</p>
+	<table style="background: #f1f1f1; padding: 2%; width: 90%; border: 1px solid #e3e4e4; border-bottom: 0 none; margin: 20px 5% 0px 5%;">
+	<tbody>
+	<tr>
+	<td><img style="width: 51px; height: 28px; margin-bottom: 12px; display: block; float: left; margin-right: 10px;" src="{{ img_src }}" alt="" />
+	<p style="color: #666; font-size: 13px; margin: 0;"><strong> {{agent_name}} </strong> {% for rating in rating_loop %} <img src="{{../star_img}}" alt="" /> {% endfor %}</p>
+	<p style="color: #333; font-size: 13px; margin: 0;">{% if condition_2 %}{{ converted_trip }} Trips sold |{% endif %}{% if condition_2 %} {{review_info}} Reviews {% endif %} | {{ pos_rating_percentage }}% Superb Reviews</p>
+	</td>
+	</tr>
+	<tr>
+	<td style="display: block; width: 100%;">
+	<p style="color: #666; font-size: 13px; margin: 0; padding-bottom: 5px;">Summary of Quote <a style="color: #2f7fc2; font-size: 13px; text-decoration: none; line-height: 24px;" href="{{complete_detail_url}}" target="_blank">(View complete details)</a></p>
+	<p style="color: #333; font-size: 13px; margin: 0;"><strong>{{amount}}( {{ perperson }}) | {{days}} {% if type_of_trip_cond %} | {{type_of_trip}} {% endif %} </strong></p>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	<table style="border: 1px solid #ccc; border-top: 0 none; background: #fff; padding: 2% 2% 0 2%; width: 90%; margin: 0 5% 0px 5%;">
+	<tbody>
+	<tr>
+	<td style="padding-bottom: 10px; padding-top: 10px;">
+	<h6 style="margin: 0; padding-bottom: 15px; font-size: 14px; font-weight: normal;"><strong>Hotels</strong>{% if hotel_condition %} <a style="color: #2f7fc2; font-size: 13px; text-decoration: none;" href="{{url_for_hotels}}" target="_blank">(View all hotels)</a>{% endif %}</h6>
+	{% if hotel_condition %}
+	<pre style="word-wrap: break-word; color: #666; font-family: Arial, Helvetica, sans-serif; font-size: 13px;">{{current_hotel}}</pre>
+	{% else %}
+	<p style="color: #666; font-size: 13px; margin: 0;">Not Included.</p>
+	{% endif %}</td>
+	</tr>
+	<tr>
+	<td style="padding-bottom: 10px; padding-top: 10px;">
+	<h6 style="margin: 0; padding-bottom: 15px; font-size: 14px; font-weight: normal;"><strong>Inclusions</strong> {% if inclusion_condition %} <a style="color: #2f7fc2; font-size: 13px; text-decoration: none;" href="{{inclusion_url}}" target="_blank">(View all inclusions)</a>{% endif %}</h6>
+	{% if inclusion_condition %}
+	<p style="word-wrap: break-word !important; width: 492px; color: #666; font-family: Arial, Helvetica, sans-serif; font-size: 13px; margin: 0;">{{current_inclusion}}</p>
+	{% else %}
+	<p style="color: #666; font-size: 13px; margin: 0;">Not Included.</p>
+	{% endif %}</td>
+	</tr>
+	<tr>
+	<td style="padding-bottom: 10px; padding-top: 10px;">
+	<h6 style="margin: 0; padding-bottom: 15px; font-size: 14px; font-weight: normal;"><strong>Itinerary </strong> {% if trip_days_condition %} <a style="color: #2f7fc2; font-size: 13px; text-decoration: none;" href="{{itinerary_url}}" target="_blank">(View complete itinerary)</a>{% endif %}</h6>
+	{% for trip_day in trip_day_loop %}{% if trip_day["description"] %}
+	<p style="color: #333; font-size: 14px; margin: 0; text-transform: uppercase;"><strong>Day {{trip_day["day_of_itinerary"]}} </strong></p>
+	<p style="word-wrap: break-word; color: #666; font-size: 13px; margin: 0; padding-bottom: 1td5px; text-overflow: ellipsis;">{{trip_day["description"]}}</p>
+	<br /> {% else %}
+	<p style="color: #666; font-size: 13px; margin: 0; padding-bottom: 15px;">Not Included.</p>
+	{% endif %} {% endfor %}</td>
+	</tr>
+	</tbody>
+	</table>
+	<table style="width: 90%; background: #fff; font-family: Arial, Helvetica, sans-serif; margin-left: 5%; margin-right: 5%; padding-top: 10px; padding-bottom: 0px;">
+	<tbody>
+	<tr>
+	<td style="display: inline-block; vertical-align: middle;" align="center" valign="middle">
+	<a href="{{ask_for_customization_url}}" style="text-decoration: none;">
+	<table style="padding: 0 8px; width: 230px; margin-bottom: 5px;" border="0" width="100%" cellspacing="0" cellpadding="0" align="center">
+	<tbody>
+	<tr>
+	<td align="center" valign="middle">
+	<p style="margin: 0; color: #fb8902; padding: 10px 0; border: 1px solid #fb8902;"><span style="margin-top: 20px; color: #fb8902;">{{quote_cta_right}}</span></p>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</a>
+	</td>
+	<td style="display: inline-block; vertical-align: middle;" align="center" valign="middle">
+	 <a href="{{detail_url}}" style="text-decoration: none;">
+	<table style="padding: 0 8px; width: 230px; margin-bottom: 5px;" border="0" width="100%" cellspacing="0" cellpadding="0" align="center">
+	<tbody>
+	<tr>
+	<td align="center" valign="middle">
+	<p style="margin-top: 20px; color: #ffffff; padding: 10px 0; background-color: #fb8902; border: 1px solid #fb8902;">View Complete Details</p>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</a>
+	<table style="width: 100%;">
+	<tbody>
+	<tr>
+	<td style="padding: 0px 5% 35px 5%;">
+	<p style="color: #666; font-size: 13px; font-style: oblique; margin: 0;"><span style="color: #666;">Cancel your trip request </span> <a style="color: #2f7fc2;" href="{{reject_quote}}">here</a>.</p>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	<p>{% if compare_quote_cond %} {% unless weekend_gateway_marketing_trip_flag %}</p>
+	<table style="display: block; background: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 13; width: 90%; padding: 0 0; margin: 0px 5%;">
+	<tbody style="display: block; width: 100%;">
+	{% if other_quotes_present %}
+	<tr style="background: #f6f6f6; border: 1px solid #ccc; padding: 20px 20px 5px 20px; display: block; border-radius: 2px 2px 2px 2px;">
+	<td>
+	<p style="color: #666; font-size: 14px; margin: 0; padding-bottom: 10px;"><span style="font-weight: bold;">Tip:</span> You might as well want to check out these quotes from other agents</p>
+	<ul style="padding: 0 0 20px 20px; margin: 0; font-size: 14px; color: #1781d5; text-decoration: underline;">{% for quote in compare_quote_array %}
+	<li style="list-style: none; margin-bottom: 7px; line-height: 25px;"><a href="{{ quote[0] }}"> {{quote[1]}}</a></li>
+	{% endfor %}</ul>
+	</td>
+	</tr>
+	{% endif %}
+	</tbody>
+	</table>
+	<table style="width: 90%; background: #fff; font-family: Arial, Helvetica, sans-serif; margin-left: 5%; margin-right: 5%; padding-top: 5px; padding-bottom: 10px;">
+	<tbody>
+	<tr>
+	<td><a style="display: block; float: left; padding: 14px 25px; width: auto; text-align: center; background: #24a39f; color: #fff; font-size: 14px; text-transform: uppercase; border-radius: 4px 4px 4px 4px; text-decoration: none;" href="{{compare_quote_link}}" target="_blank">Compare Quotes</a></td>
+	</tr>
+	</tbody>
+	</table>
+	<p>{% endunless %} {% endif %}</p>
+	<table style="border-bottom: 6px solid #f1f2f2; color: #666000; background: #ffffff;" border="0" width="100%" cellspacing="0" cellpadding="0" align="center">
+	<tbody>
+	<tr style="margin: 10px 0 10px; display: block;">
+	<td style="font-size: 14px; line-height: 23px; margin: 0px; display: block; padding-top: 15px;" align="left" valign="middle">&nbsp;<strong style="padding: 0  15px 20px;">Happy Travelling,</strong></td>
+	</tr>
+	<tr style="color: #666000;">
+	<td align="left" valign="middle">
+	<table style="text-align: left;" border="0" width="100%" cellspacing="0" cellpadding="0" align="left">
+	<tbody>
+	<tr>
+	<td style="width: 60px;" align="left" valign="middle"><img style="border-radius: 50px; margin: 10px 0 20px 15px; height: 63px; width: 63px;" src="{{signature_pic}}" /></td>
+	<td style="font-size: 14px; padding: 0  15px 20px;" align="left" valign="middle"><strong>{{signature_name}}</strong>(Travel Triangle Holiday Expert)<br /><a style="color: #2f7fc2; text-decoration: none;" href="#">{{signature_contact}}</a><br /><a style="color: #666000;" href="mailto:{{signature_email}}">{{signature_email}}</a></td>
+	</tr>
+	</tbody>
+	</table>
+	</td>
+	</tr>
+	</tbody>
+	</table>]]></con:value></con:property><con:property><con:name>tk_1</con:name><con:value>user_calling_name</con:value></con:property><con:property><con:name>tk_2</con:name><con:value>username</con:value></con:property><con:property><con:name>tk_3</con:name><con:value>password</con:value></con:property><con:property><con:name>tk_4</con:name><con:value>login_url</con:value></con:property><con:property><con:name>tk_1_attribute</con:name><con:value>Ashish Tripathi</con:value></con:property><con:property><con:name>tk_2_attribute</con:name><con:value>ashish.tripathi</con:value></con:property><con:property><con:name>tk_3_attribute</con:name><con:value>1234567</con:value></con:property><con:property><con:name>tk_4_attribute</con:name><con:value>google.com</con:value></con:property><con:property><con:name>tokens</con:name><con:value>{"user_calling_name":"Testamvauip","username":"test1a4mvauip@mail.com","password":"_PYFPJ"}</con:value></con:property><con:property><con:name>template</con:name><con:value><![CDATA[<table style="width: 100%; padding-top: 1px; padding-bottom: 0px;">
+	<tbody>
+	<tr>
+	<td style="padding: 5px 5%;">
+	<p style="color: #3b3e4a; font-size: 14px; margin: 0; padding-top: 10px; padding-bottom: 5px;">Hi {{name}},</p>
+	<p style="color: #3b3e4a; font-size: 14px; margin: 0; padding-top: 10px; padding-bottom: 5px;">Greetings from TravelTriangle!&nbsp;</p>
+	<p style="color: #3b3e4a; font-size: 14px; margin: 0;"><span style="color: #3b3e4a;">Based on your preferences, our travel agent&nbsp;<strong>{{agent_name}}</strong>{{create_update_text}} </span></p>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	<p>{% comment %} Do not delete this. Please ! {{weekend_gateway_marketing_trip_flag}} {{condition_2}} {{type_of_trip_cond}} {{hotel_condition}} {{inclusion_condition}} {{trip_days_condition}} {{trip_day_loop}} {{compare_quote_cond}} {{other_quotes_present}} {{compare_quote_array}} {% endcomment %}</p>
+	<p>{% unless weekend_gateway_marketing_trip_flag %}{% endunless %}</p>
+	<table style="background: #f1f1f1; padding: 2%; width: 90%; border: 1px solid #e3e4e4; border-bottom: 0 none; margin: 20px 5% 0px 5%;">
+	<tbody>
+	<tr>
+	<td><img style="width: 51px; height: 28px; margin-bottom: 12px; display: block; float: left; margin-right: 10px;" src="{{ img_src }}" alt="" />
+	<p style="color: #666; font-size: 13px; margin: 0;"><strong> {{agent_name}} </strong> {% for rating in rating_loop %} <img src="{{../star_img}}" alt="" /> {% endfor %}</p>
+	<p style="color: #333; font-size: 13px; margin: 0;">{% if condition_2 %}{{ converted_trip }} Trips sold |{% endif %}{% if condition_2 %} {{review_info}} Reviews {% endif %} | {{ pos_rating_percentage }}% Superb Reviews</p>
+	</td>
+	</tr>
+	<tr>
+	<td style="display: block; width: 100%;">
+	<p style="color: #666; font-size: 13px; margin: 0; padding-bottom: 5px;">Summary of Quote <a style="color: #2f7fc2; font-size: 13px; text-decoration: none; line-height: 24px;" href="{{complete_detail_url}}" target="_blank">(View complete details)</a></p>
+	<p style="color: #333; font-size: 13px; margin: 0;"><strong>{{amount}}( {{ perperson }}) | {{days}} {% if type_of_trip_cond %} | {{type_of_trip}} {% endif %} </strong></p>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	<table style="border: 1px solid #ccc; border-top: 0 none; background: #fff; padding: 2% 2% 0 2%; width: 90%; margin: 0 5% 0px 5%;">
+	<tbody>
+	<tr>
+	<td style="padding-bottom: 10px; padding-top: 10px;">
+	<h6 style="margin: 0; padding-bottom: 15px; font-size: 14px; font-weight: normal;"><strong>Hotels</strong>{% if hotel_condition %} <a style="color: #2f7fc2; font-size: 13px; text-decoration: none;" href="{{url_for_hotels}}" target="_blank">(View all hotels)</a>{% endif %}</h6>
+	{% if hotel_condition %}
+	<pre style="word-wrap: break-word; color: #666; font-family: Arial, Helvetica, sans-serif; font-size: 13px;">{{current_hotel}}</pre>
+	{% else %}
+	<p style="color: #666; font-size: 13px; margin: 0;">Not Included.</p>
+	{% endif %}</td>
+	</tr>
+	<tr>
+	<td style="padding-bottom: 10px; padding-top: 10px;">
+	<h6 style="margin: 0; padding-bottom: 15px; font-size: 14px; font-weight: normal;"><strong>Inclusions</strong> {% if inclusion_condition %} <a style="color: #2f7fc2; font-size: 13px; text-decoration: none;" href="{{inclusion_url}}" target="_blank">(View all inclusions)</a>{% endif %}</h6>
+	{% if inclusion_condition %}
+	<p style="word-wrap: break-word !important; width: 492px; color: #666; font-family: Arial, Helvetica, sans-serif; font-size: 13px; margin: 0;">{{current_inclusion}}</p>
+	{% else %}
+	<p style="color: #666; font-size: 13px; margin: 0;">Not Included.</p>
+	{% endif %}</td>
+	</tr>
+	<tr>
+	<td style="padding-bottom: 10px; padding-top: 10px;">
+	<h6 style="margin: 0; padding-bottom: 15px; font-size: 14px; font-weight: normal;"><strong>Itinerary </strong> {% if trip_days_condition %} <a style="color: #2f7fc2; font-size: 13px; text-decoration: none;" href="{{itinerary_url}}" target="_blank">(View complete itinerary)</a>{% endif %}</h6>
+	{% for trip_day in trip_day_loop %}{% if trip_day["description"] %}
+	<p style="color: #333; font-size: 14px; margin: 0; text-transform: uppercase;"><strong>Day {{trip_day["day_of_itinerary"]}} </strong></p>
+	<p style="word-wrap: break-word; color: #666; font-size: 13px; margin: 0; padding-bottom: 1td5px; text-overflow: ellipsis;">{{trip_day["description"]}}</p>
+	<br /> {% else %}
+	<p style="color: #666; font-size: 13px; margin: 0; padding-bottom: 15px;">Not Included.</p>
+	{% endif %} {% endfor %}</td>
+	</tr>
+	</tbody>
+	</table>
+	<table style="width: 90%; background: #fff; font-family: Arial, Helvetica, sans-serif; margin-left: 5%; margin-right: 5%; padding-top: 10px; padding-bottom: 0px;">
+	<tbody>
+	<tr>
+	<td style="display: inline-block; vertical-align: middle;" align="center" valign="middle">
+	<a href="{{ask_for_customization_url}}" style="text-decoration: none;">
+	<table style="padding: 0 8px; width: 230px; margin-bottom: 5px;" border="0" width="100%" cellspacing="0" cellpadding="0" align="center">
+	<tbody>
+	<tr>
+	<td align="center" valign="middle">
+	<p style="margin: 0; color: #fb8902; padding: 10px 0; border: 1px solid #fb8902;"><span style="margin-top: 20px; color: #fb8902;">{{quote_cta_right}}</span></p>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</a>
+	</td>
+	<td style="display: inline-block; vertical-align: middle;" align="center" valign="middle">
+	 <a href="{{detail_url}}" style="text-decoration: none;">
+	<table style="padding: 0 8px; width: 230px; margin-bottom: 5px;" border="0" width="100%" cellspacing="0" cellpadding="0" align="center">
+	<tbody>
+	<tr>
+	<td align="center" valign="middle">
+	<p style="margin-top: 20px; color: #ffffff; padding: 10px 0; background-color: #fb8902; border: 1px solid #fb8902;">View Complete Details</p>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</a>
+	<table style="width: 100%;">
+	<tbody>
+	<tr>
+	<td style="padding: 0px 5% 35px 5%;">
+	<p style="color: #666; font-size: 13px; font-style: oblique; margin: 0;"><span style="color: #666;">Cancel your trip request </span> <a style="color: #2f7fc2;" href="{{reject_quote}}">here</a>.</p>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	<p>{% if compare_quote_cond %} {% unless weekend_gateway_marketing_trip_flag %}</p>
+	<table style="display: block; background: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 13; width: 90%; padding: 0 0; margin: 0px 5%;">
+	<tbody style="display: block; width: 100%;">
+	{% if other_quotes_present %}
+	<tr style="background: #f6f6f6; border: 1px solid #ccc; padding: 20px 20px 5px 20px; display: block; border-radius: 2px 2px 2px 2px;">
+	<td>
+	<p style="color: #666; font-size: 14px; margin: 0; padding-bottom: 10px;"><span style="font-weight: bold;">Tip:</span> You might as well want to check out these quotes from other agents</p>
+	<ul style="padding: 0 0 20px 20px; margin: 0; font-size: 14px; color: #1781d5; text-decoration: underline;">{% for quote in compare_quote_array %}
+	<li style="list-style: none; margin-bottom: 7px; line-height: 25px;"><a href="{{ quote[0] }}"> {{quote[1]}}</a></li>
+	{% endfor %}</ul>
+	</td>
+	</tr>
+	{% endif %}
+	</tbody>
+	</table>
+	<table style="width: 90%; background: #fff; font-family: Arial, Helvetica, sans-serif; margin-left: 5%; margin-right: 5%; padding-top: 5px; padding-bottom: 10px;">
+	<tbody>
+	<tr>
+	<td><a style="display: block; float: left; padding: 14px 25px; width: auto; text-align: center; background: #24a39f; color: #fff; font-size: 14px; text-transform: uppercase; border-radius: 4px 4px 4px 4px; text-decoration: none;" href="{{compare_quote_link}}" target="_blank">Compare Quotes</a></td>
+	</tr>
+	</tbody>
+	</table>
+	<p>{% endunless %} {% endif %}</p>
+	<table style="border-bottom: 6px solid #f1f2f2; color: #666000; background: #ffffff;" border="0" width="100%" cellspacing="0" cellpadding="0" align="center">
+	<tbody>
+	<tr style="margin: 10px 0 10px; display: block;">
+	<td style="font-size: 14px; line-height: 23px; margin: 0px; display: block; padding-top: 15px;" align="left" valign="middle">&nbsp;<strong style="padding: 0  15px 20px;">Happy Travelling,</strong></td>
+	</tr>
+	<tr style="color: #666000;">
+	<td align="left" valign="middle">
+	<table style="text-align: left;" border="0" width="100%" cellspacing="0" cellpadding="0" align="left">
+	<tbody>
+	<tr>
+	<td style="width: 60px;" align="left" valign="middle"><img style="border-radius: 50px; margin: 10px 0 20px 15px; height: 63px; width: 63px;" src="{{signature_pic}}" /></td>
+	<td style="font-size: 14px; padding: 0  15px 20px;" align="left" valign="middle"><strong>{{signature_name}}</strong>(Travel Triangle Holiday Expert)<br /><a style="color: #2f7fc2; text-decoration: none;" href="#">{{signature_contact}}</a><br /><a style="color: #666000;" href="mailto:{{signature_email}}">{{signature_email}}</a></td>
+	</tr>
+	</tbody>
+	</table>
+	</td>
+	</tr>
+	</tbody>
+	</table>]]></con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

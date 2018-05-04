@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="4fcff020-682a-43fb-9073-7f28f37c78bc" activeEnvironment="Default" name="User_SignUp" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="50208ad9-1593-4fa7-981b-ef77e672f24b" wadlVersion="http://wadl.dev.java.net/2009/02" name="SignUp" type="rest" definitionUrl="Signup" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="users" path="/browsing/{api_version}/users" id="a2a27b3b-aba5-4852-9be0-9e6a19965650"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter></con:parameters><con:method name="Method 1" id="931a2f16-ec00-405f-8e0d-0ed4dd576996" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="b7546356-546b-4a69-937e-e3b1a02b81f1" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://${Project#traveler_apiendpoint}</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:testSuite id="92b9c2f0-bfdb-44fd-b7aa-0d77574a86e1" name="SignUp" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="dfd07b8c-81d9-4a50-bc8d-8a18e39e74cc" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="User_Signup_With_Application" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="31fa0c4d-2ebb-4171-84c1-0bc643390fe5"><con:settings/><con:config><script>String timestamp =  System.currentTimeMillis();
+
+String user_email = "lorem_tt_test_ipsum" + timestamp + "@gmail.com";
+testRunner.testCase.setPropertyValue("username","Test"+timestamp);
+
+String phone = timestamp.substring(3,13);
+
+testRunner.testCase.setPropertyValue("timestamp",timestamp);
+testRunner.testCase.setPropertyValue("emails",user_email);
+testRunner.testCase.setPropertyValue("phone",phone);
+testRunner.testCase.setPropertyValue("password","tt12345");
+testRunner.testCase.setPropertyValue("confirmpassword","tt12345");
+</script></con:config></con:testStep><con:testStep type="restrequest" name="Given new traveler signup" id="f4ce6b0d-371f-4408-a3c1-e7f88973c79f"><con:settings/><con:config service="SignUp" methodName="Method 1" resourcePath="/browsing/{api_version}/users" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Given new traveler signup" id="9146bce2-e152-4a26-91b3-ff5cf38e8aa3" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  &lt;con:entry key="Accept" value="application/json;"/>
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request>{
+	"user": {
+		"name": "${#TestCase#username}",
+		"email": "${#TestCase#emails}",
+		"password": "${#TestCase#password}",
+		"password_confirmation": "${#TestCase#confirmpassword}",
+		"tnc": "1",
+		"phone_no": "${#TestCase#phone}",
+		"next_url": "true"
+	}
+}</con:request><con:originalUri>http://bookings-qa1.ttdev.in/browsing/api_version/users</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="75e10aa0-2b63-474d-9b5e-bc8cf7ec706f" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="06c0ac1d-04cf-4682-be51-9bffe01e8c4e" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def jsonHolder = new JsonSlurper().parseText(response);
+
+String userid = jsonHolder.data.user_id;
+String message = jsonHolder.data.message;
+
+messageExchange.modelItem.testCase.setPropertyValue("UserID", userid);
+assert message == "User created successfully";
+
+HashMap&lt;String> dataCollection = new HashMap&lt;String>();
+String email = context.expand('${#TestCase#emails}');
+String phone = context.expand('${#TestCase#phone}');
+String password = context.expand('${#TestCase#password}');
+String encyriptpwd = "";
+for(char ch: password){
+	encyriptpwd=encyriptpwd+"*";
+}
+messageExchange.modelItem.testCase.setPropertyValue("encyriptpwd", encyriptpwd);
+String confirmpassword = context.expand('${#TestCase#confirmpassword}');
+dataCollection.put("email",email);
+dataCollection.put("phone",phone);
+dataCollection.put("password",password);
+dataCollection.put("confirmpassword",confirmpassword);
+messageExchange.modelItem.testCase.setPropertyValue("dataCollection", dataCollection.toString());</scriptText></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>timestamp</con:name><con:value>1524807078804</con:value></con:property><con:property><con:name>email</con:name><con:value>lorem_tt_test_ipsum1514706834780@gmail.com</con:value></con:property><con:property><con:name>phone</con:name><con:value>4807078804</con:value></con:property><con:property><con:name>password</con:name><con:value>tt12345</con:value></con:property><con:property><con:name>confirmpassword</con:name><con:value>tt12345</con:value></con:property><con:property><con:name>UserID</con:name><con:value>1773569</con:value></con:property><con:property><con:name>emails</con:name><con:value>lorem_tt_test_ipsum1524807078804@gmail.com</con:value></con:property><con:property><con:name>traveler_apiendpoint</con:name><con:value>master.ttdev.in</con:value></con:property><con:property><con:name>dataCollection</con:name><con:value>[password:tt12345, phone:4807078804, confirmpassword:tt12345, email:lorem_tt_test_ipsum1524807078804@gmail.com]</con:value></con:property><con:property><con:name>encyriptpwd</con:name><con:value>*******</con:value></con:property><con:property><con:name>username</con:name><con:value>Test1524807078804</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

@@ -25,6 +25,7 @@
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<directory>${project.basedir}/${targetname}</directory>
 		<resources>

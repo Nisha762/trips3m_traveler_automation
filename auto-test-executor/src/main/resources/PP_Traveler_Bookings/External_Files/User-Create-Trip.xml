@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="8e13c45f-7c5f-46b9-92f3-3f561be270ae" activeEnvironment="Default" name="User_Create_Trip" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="f7c2ae3b-0dba-4638-8084-ac91a5c5d52d" wadlVersion="http://wadl.dev.java.net/2009/02" name="RtripCreation" type="rest" basePath="" definitionUrl="C:\Users\TTLAPTOP0620\Desktop\dll\RtripCreation_1.wadl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints/><con:resource name="requested_trips" path="browsing/{api_version}/requested_trips" id="47907b6d-2704-4b7c-96c3-2d28fec55f9b"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter></con:parameters><con:method name="Method 1" id="52ed2ba2-677b-4f35-b182-0da6fef8e383" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="8ae54eae-6474-4ab9-8dc7-e31cbbf4c142" mediaType="application/json"><con:settings/><con:parameters/></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="3e3997a4-6c14-4875-97fb-4682c8bb1284" wadlVersion="http://wadl.dev.java.net/2009/02" name="SignUp" type="rest" definitionUrl="Signup" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="users" path="/browsing/{api_version}/users" id="77b2e5c3-79ef-4ba7-9616-fed6fa49a26c"><con:settings/><con:parameters><con:parameter><con:name>api_version</con:name><con:value>api_version</con:value><con:style>TEMPLATE</con:style><con:default>api_version</con:default></con:parameter></con:parameters><con:method name="Method 1" id="22567fc0-39ed-40c1-a85e-39fce4d86379" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="187a3d34-2b86-48d0-99d3-003231227156" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://${Project#traveler_apiendpoint}</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>api_version</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:testSuite id="c74fd482-73fc-495c-9a5e-300a49c81e2e" name="RtripCreation"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="185def15-b20f-420f-acc1-e0a6bfa2ddc8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TripCreated" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="3591ae08-7ced-4e43-86bf-54cd987a7cd2"><con:settings/><con:config><script>import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Random;
+import com.eviware.soapui.model.testsuite.TestStep;
+
+String isEmailIdProvided = context.expand('${#TestCase#IsEmailIdProvided}')
+log.info "isEmailIdProvided "+isEmailIdProvided
+if(isEmailIdProvided=="no"){
+	String timestamp =  System.currentTimeMillis();
+	String user_email = "lorem_tt_test_ipsum" + timestamp + "@gmail.com";
+	testRunner.testCase.setPropertyValue("user_email",user_email);
+}
+Calendar cal = Calendar.getInstance();
+cal.add(Calendar.DATE, 15);
+
+SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+String formatted = format1.format(cal.getTime());
+testRunner.testCase.setPropertyValue("start_date",formatted);
+testRunner.testCase.setPropertyValue("budgets","26500..28500");
+testRunner.testCase.setPropertyValue("trip_day","5");
+testRunner.testCase.setPropertyValue("from_loc","Noida, Uttar Pradesh 201301, India");
+testRunner.testCase.setPropertyValue("addinfos","test");
+testRunner.testCase.setPropertyValue("infos","test1");
+
+
+Random rand = new Random();
+String[] arr_toloc = ["Europe","Himachal","Kerala"];
+int arr_sizetoloc = arr_toloc.size();
+int toloc_random_index = rand.nextInt((arr_sizetoloc - 0)) + 0;
+testRunner.testCase.setPropertyValue("to_loc", arr_toloc[toloc_random_index]);</script></con:config></con:testStep><con:testStep type="restrequest" name="User create the trip" id="c5b4386b-a152-4d1d-a5dd-32c3a8a53453"><con:settings/><con:config service="RtripCreation" resourcePath="/browsing/{api_version}/requested_trips" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="User create the trip" id="68eaa52b-6d31-4a91-af54-f8bc242b55dd" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  &lt;con:entry key="Accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://${#TestCase#traveler_apiendpoint}</con:endpoint><con:request>{
+        "requested_trip": {
+       "to_loc": "${#TestCase#to_loc}",
+       "from_loc": "${#TestCase#from_loc}",
+       "trip_days": "${#TestCase#trip_day}",
+       "start_date": "${#TestCase#start_date}",
+       "email": "${#TestCase#user_email}",
+       "budget": "${#TestCase#budgets}",
+       "info": "${#TestCase#infos}",
+       "addtl_info": "${#TestCase#addinfos}",
+       "phone_no": "",
+       "isd_code": "",
+       "adminComments": "#slider_organic #Form_filled_on http  ",
+       "trip_stage": "",
+       "flight": "",
+       "hotels": "",
+       "cab": "",
+       "from_complete": "",
+       "to_complete": ""
+
+   }
+}</con:request><con:originalUri>https://frontend.ttdev.in/browsing/v1/requested_trips</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="41627682-71e2-421e-b0a8-111b1c00da8e" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="f71907c1-3f9d-40cf-918e-95d6f704077b" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+
+
+//Get the request ID created.
+String request_id = json_response_holder.data.requested_trip.id;
+messageExchange.modelItem.testCase.setPropertyValue("RequestID",request_id);
+messageExchange.modelItem.testCase.setPropertyValue("RequestID",request_id)
+
+//Get the redirect url.
+String redirect_url = json_response_holder.data.redirect_url;
+messageExchange.modelItem.testCase.setPropertyValue("request_redirectUrl",redirect_url);
+assert request_id != null;
+
+String userid = json_response_holder.data.user_id;
+messageExchange.modelItem.testCase.setPropertyValue("UserID" , userid);</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="api_version" value="v1" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>traveler_apiendpoint</con:name><con:value>master.ttdev.in</con:value></con:property><con:property><con:name>IsEmailIdProvided</con:name><con:value>yes</con:value></con:property><con:property><con:name>start_date</con:name><con:value>2018-05-12</con:value></con:property><con:property><con:name>budgets</con:name><con:value>26500..28500</con:value></con:property><con:property><con:name>trip_day</con:name><con:value>5</con:value></con:property><con:property><con:name>from_loc</con:name><con:value>Noida, Uttar Pradesh 201301, India</con:value></con:property><con:property><con:name>addinfos</con:name><con:value>test</con:value></con:property><con:property><con:name>infos</con:name><con:value>test1</con:value></con:property><con:property><con:name>to_loc</con:name><con:value>Kerala</con:value></con:property><con:property><con:name>user_email</con:name><con:value>lorem_tt_test_ipsum1524768909610@gmail.com</con:value></con:property><con:property><con:name>RequestID</con:name><con:value>2681374</con:value></con:property><con:property><con:name>request_redirectUrl</con:name><con:value>/requested_trips/2681374-Lorem-Tt-Test-Ipsum/customize?flight=&amp;hotels=</con:value></con:property><con:property><con:name>UserID</con:name><con:value>1773566</con:value></con:property></con:properties></con:testCase><con:properties><con:property><con:name>execution_tag</con:name><con:value>kanu</con:value></con:property></con:properties></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

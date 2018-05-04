@@ -256,6 +256,8 @@ public class Property {
 	public static String Filter_Project_Name = "PackageSearch";
 	
 	public static String DBFileName = "DataBase.csv";
+
+	public static String Html_Content = "mail_html_content";
 	
 	public static String TEST_STEP_LOG_ENTRY = "------------------------------------------------------------------------------------\n" + 
 	 "Test Step Description : {TEST_STEP_NAME} \n" + "Test Step Action : {TEST_STEP_ACTION} \n" + "Test object : {TEST_OBJECT} \n" + 
@@ -360,6 +362,7 @@ public class Property {
 		ERR_IN_GETTING_EMAIL_CONTENTS_BY_SUBJECT("Couldn't find message with given subject pattern - "),
 		ERR_IN_FINIDING_CONTENT_IN_MAIL("Couldn't find element with query - '{CSS_QUERY}' in mail content"),
 		ERR_GETTING_MAIL_CONTENT("Unable to parse Email Content, contact admin!"),
+		ERR_FILE_CONTENT_NOT_MATCHED("ERROR FILE CONTENT NOT MATCHED"),
 		ERR_STARTING_ACTIVITY("Error in starting app activity - "),
 		ERR_FILTER_PROJECT_NAME_IS_NULL("The project name is empty.Please specify project name in Property"), 
 		ERR_IN_RESIZE_WINDOW_FORMATE("resize window format is worng -  resize window parameter format is {PARAMETER_FORMATE}");
