@@ -101,25 +101,26 @@ public class EmailNotificationHandler {
 			String originalHtmlContent = Utility.getValueForKeyFromGlobalVarMap(originalHtmlContentVariableName);
 			String templateContent = Utility.getValueForKeyFromGlobalVarMap(templateContentVariableName);
 		
-			String htmlFileName = rm.getTestExecutionLogFileLocation().replace("{0}", "htmlContent.html");
-			String templateFileName = rm.getTestExecutionLogFileLocation().replace("{0}", "template.html");
+			String timeStemp = String.valueOf(System.currentTimeMillis());
+			String mailContentFilePath = rm.getTestExecutionLogFileLocation().replace("{0}", "mailContent"+timeStemp+".html");
+			String templateFilePath = rm.getTestExecutionLogFileLocation().replace("{0}", "template"+timeStemp+".html");
 			
-			FileUtils.writeStringToFile(new File(htmlFileName), originalHtmlContent.replaceAll("tracked_email_id=[0-9]*&", "").replaceAll("tracked_email_id=[0-9]*&amp;", ""));
-			FileUtils.writeStringToFile(new File(templateFileName), templateContent);
+			FileUtils.writeStringToFile(new File(mailContentFilePath), originalHtmlContent.replaceAll("tracked_email_id=[0-9]*&", "").replaceAll("tracked_email_id=[0-9]*&amp;", ""));
+			FileUtils.writeStringToFile(new File(templateFilePath), templateContent);
 
-			Document temp = Jsoup.parse(new File(templateFileName), "UTF-8", "http://example.com/");		
-			Document doc = Jsoup.parse(new File(htmlFileName), "UTF-8", "http://example.com/");
+			Document temp = Jsoup.parse(new File(templateFilePath), "UTF-8", "http://example.com/");		
+			Document doc = Jsoup.parse(new File(mailContentFilePath), "UTF-8", "http://example.com/");
 			
 			Elements msgElement = doc.getElementsByAttributeValueContaining("class", "message_body");
 			Elements tempElement = temp.getElementsByTag("body");
 			
-			FileUtils.writeStringToFile(new File(htmlFileName), msgElement.html());
-			FileUtils.writeStringToFile(new File(templateFileName), tempElement.html());
+			FileUtils.writeStringToFile(new File(mailContentFilePath), msgElement.html());
+			FileUtils.writeStringToFile(new File(templateFilePath), tempElement.html());
 
-			 HashMap<Boolean, String> matchedMap= Utility.verifyDiffInTwoFile(htmlFileName, templateFileName);
+			 HashMap<Boolean, String> matchedMap= Utility.verifyDiffInTwoFile(mailContentFilePath, templateFilePath);
 			 for(boolean isMatched : matchedMap.keySet()) {
 				 if(!isMatched) {
-						throw new Exception(Property.ERROR_MESSAGES.ERR_FILE_CONTENT_NOT_MATCHED.getErrorMessage()+matchedMap.get(isMatched));
+						throw new Exception(Property.ERROR_MESSAGES.ERR_FILE_CONTENT_NOT_MATCHED.getErrorMessage()+" [Mail content file path] : "+mailContentFilePath+ " and [template file path] : " +templateFilePath +matchedMap.get(isMatched));
 				 }
 				 break;
 			 }
