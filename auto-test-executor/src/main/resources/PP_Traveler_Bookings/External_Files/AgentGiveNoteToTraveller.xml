@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="39e328e1-2157-46b8-ab11-d38e264864d0" activeEnvironment="Default" name="AgentGiveNoteToTraveller" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="02ff011d-b158-41b7-890a-ff1f2864e2ab" wadlVersion="http://wadl.dev.java.net/2009/02" name="AgentGiveNoteToTraveller" type="rest" definitionUrl="note" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/><con:resource name="agent_remark" path="/requested_trips/{rid}/quotes/{qid}/agent_remark" id="93f13653-853e-431d-b6c5-8f5df472b273"><con:settings/><con:parameters><con:parameter><con:name>authenticity_token</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>remark[followup_status]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>radio-not-reachable</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>agent_remark</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>task_scheduler[run_at]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>task_scheduler[requested_trip_id]</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>set_reminder</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>limit_comments</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>created_reminder</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>latest_quote_id</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>reminder_date</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>rid</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/></con:parameter><con:parameter><con:name>qid</con:name><con:value/><con:style>TEMPLATE</con:style><con:default/></con:parameter></con:parameters><con:method name="Method 1" id="4b957586-39d3-46db-9826-28ac042872f8" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="cf08ddcd-5a93-42e2-9d47-8f288f66c894" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value="_trips3m_session=BAh7CUkiD3Nlc3Npb25faWQGOgZFVEkiJWIwMTEwOGNiODE2MTI1NmRjZjg3N2E3YTFmMjc4NWZmBjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA02VC0kiIiQyYSQxMCQ3SnF4bnlGeVVPcFQvMlFxZmJ1bTRlBjsAVEkiFWF0dHJpYnV0aW9uX2luZm8GOwBUewBJIgxyZWZlcmVyBjsAVEkiAAY7AFQ%3D--f98632b49e864b37699a5cc676eec94436b622dd; path=/; HttpOnly"/>
+  &lt;con:entry key="accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://master.ttdev.in</con:endpoint><con:request/><con:originalUri>http://master.ttdev.in/requested_trips/2700768/quotes/4969501/agent_remark</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="created_reminder" value="off"/>
+  <con:entry key="remark[followup_status]" value="7.2"/>
+  <con:entry key="radio-not-reachable" value="7.2"/>
+  <con:entry key="task_scheduler[requested_trip_id]" value="2700941"/>
+  <con:entry key="latest_quote_id" value="4969615"/>
+  <con:entry key="rid" value="2700941"/>
+  <con:entry key="agent_remark" value="Agent provide note to traveler"/>
+  <con:entry key="qid" value="4969615"/>
+  <con:entry key="authenticity_token" value="h+f6zn+W8vQpLrI35pimzuAPeCThOXGXs60obn4S7oo="/>
+</con:parameters><con:parameterOrder><con:entry>remark[followup_status]</con:entry><con:entry>radio-not-reachable</con:entry><con:entry>agent_remark</con:entry><con:entry>task_scheduler[run_at]</con:entry><con:entry>task_scheduler[requested_trip_id]</con:entry><con:entry>set_reminder</con:entry><con:entry>limit_comments</con:entry><con:entry>created_reminder</con:entry><con:entry>latest_quote_id</con:entry><con:entry>reminder_date</con:entry><con:entry>authenticity_token</con:entry><con:entry>rid</con:entry><con:entry>qid</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="d4b035c6-adb6-468e-a677-9465e9eb1b47" wadlVersion="http://wadl.dev.java.net/2009/02" name="SIGNIN" type="rest" basePath="" definitionUrl="C:\Users\TTLAPTOP0620\Desktop\dll\SIGNIN_1.wadl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://}</con:endpoint></con:endpoints><con:resource name="sign_in" path="browsing/v1/users/sign_in" id="1166179d-e0e8-4f03-8b8c-fa0e2f37aacb"><con:settings/><con:parameters/><con:method name="Method 1" id="215719aa-fa27-4bf8-983a-faeccb27f623" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="06483c18-47c6-4745-9d83-3f635ac1aba3" mediaType="application/json"><con:settings/><con:endpoint>http://}</con:endpoint><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="289a8c50-bcae-44be-87cd-163055d8e7e2" name="Agent_Give_Note_To_Traveler"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1d4cf6e2-4e94-4c36-95f0-d7eca55cbc02" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Agent_Give_Note_To_Traveler" searchProperties="true"><con:settings/><con:testStep type="calltestcase" name="Given user gets the hash key" id="3d0d95d5-9e37-4b1d-a662-533f6d9460ec"><con:settings/><con:config xsi:type="con:RunTestCaseStep" copyHttpSession="true" copyLoadTestProperties="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:targetTestCase>a644af23-59be-496f-bb05-173d7f9f404a</con:targetTestCase><con:properties><con:property><con:name>request_url</con:name><con:value>http://${#TestCase#endpoint}/users/sign_in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>${#TestCase#user_email}</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>moebPtN2nZl9eM39PpWrKKv70v5s0VEQ/wk0h1VNY48=</con:value></con:property></con:properties><con:returnProperties><con:entry>hash_key</con:entry></con:returnProperties><con:runMode>SINGLETON_AND_WAIT</con:runMode></con:config></con:testStep><con:testStep type="restrequest" name="Then user logged in with correct credentials" id="5eee5c62-8af4-4dd6-b4d4-0bdcd56eee52"><con:settings/><con:config service="SIGNIN" methodName="Method 1" resourcePath="/browsing/v1/users/sign_in" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Then user logged in with correct credentials" id="92adcda0-aa7e-4e62-8955-07a8e112025c" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="X-CLIENT-API-TOKEN" value="93f67dbdacf3906955b5c529bb692fb11ac13dc3015c87f25c22fae51a5d79290841127492e312f2"/>
+  <con:entry key="TT-Mobile" value="${Given user gets the hash key#hash_key}"/>
+  <con:entry key="Accept" value="application/json"/>
+  <con:entry key="X-CLIENT-DEBUG-TOKEN" value="a704f2fcc8d69618997259d65da7bf17678970d51d680d6d0edc03872f0a9b712f882b6bec1829ee"/>
+  <con:entry key="Content-Type" value="application/json"/>
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://${#TestCase#endpoint}</con:endpoint><con:request>{"login_type":"json","user":{"email":"${#TestCase#user_email}","password":"${#TestCase#user_password}"}}</con:request><con:originalUri>http://traveltriangle.com/users/sign_in</con:originalUri><con:assertion type="Simple Contains" id="30720fd6-5852-4816-95db-835bda8cd5ee" name="EmailExistsInResponse"><con:configuration><token>${#TestCase#user_email}</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="64530aec-6185-4dd1-8e26-fc05f38974ad" name="Get user details"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+String user_id = json_response_holder.metadata.id.toString();
+
+//String auth_key = json_response_holder.current_user.pubnub_auth.auth_key;
+
+messageExchange.modelItem.testCase.setPropertyValue("user_id",user_id);
+
+//messageExchange.modelItem.testCase.setPropertyValue("auth_key",auth_key);</scriptText></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="657dca54-7dbe-4e4f-8f91-cbbffb9522e0" name="Get the response cookie"><con:configuration><scriptText>for(String cookie in messageExchange.getResponseHeaders()["Set-Cookie"]){
+	if(cookie.contains("_trips3m_session")){
+		messageExchange.modelItem.testCase.setPropertyValue("Cookie",cookie);
+	}
+}</scriptText></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="9b45a882-1c4d-4006-a970-ecd7203d183d" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:username>ttuser</con:username><con:password>ttuser</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="user give note to traveller" id="ad5abb63-b042-4f80-be58-c24c5afa694b"><con:settings/><con:config service="AgentGiveNoteToTraveller" methodName="Method 1" resourcePath="/requested_trips/{rid}/quotes/{qid}/agent_remark" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="user give note to traveller" id="0fbff82e-3d88-4c5a-80e0-1635119f1db7" mediaType="application/x-www-form-urlencoded" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Cookie" value="${#TestCase#Cookie}"/>
+  &lt;con:entry key="accept" value="application/json"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://${#TestCase#endpoint}</con:endpoint><con:request/><con:originalUri>https://master.ttdev.in/requested_trips/2700940/quotes/%24%7B%23TestCase%23quoteid/agent_remark</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="a63b57c5-114b-4653-9f9c-068ec397a049" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="0c3ae9a2-60be-47d4-b505-2402026ea51e" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper;
+
+String response = messageExchange.getResponseContent();
+def json_response_holder = new JsonSlurper().parseText(response);
+
+String success = json_response_holder.success;
+assert success=="true":"sucess should be true but it is "+ success</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="created_reminder" value="off"/>
+  <con:entry key="remark[followup_status]" value="7.2"/>
+  <con:entry key="radio-not-reachable" value="7.2"/>
+  <con:entry key="task_scheduler[requested_trip_id]" value="${#TestCase#request_id}"/>
+  <con:entry key="latest_quote_id" value="${#TestCase#quoteid}"/>
+  <con:entry key="rid" value="${#TestCase#request_id}"/>
+  <con:entry key="agent_remark" value="AgentGiveNoteToTraveller"/>
+  <con:entry key="qid" value="${#TestCase#quoteid}"/>
+  <con:entry key="authenticity_token" value="h+f6zn+W8vQpLrI35pimzuAPeCThOXGXs60obn4S7oo="/>
+</con:parameters><con:parameterOrder><con:entry>remark[followup_status]</con:entry><con:entry>radio-not-reachable</con:entry><con:entry>agent_remark</con:entry><con:entry>task_scheduler[run_at]</con:entry><con:entry>task_scheduler[requested_trip_id]</con:entry><con:entry>set_reminder</con:entry><con:entry>limit_comments</con:entry><con:entry>created_reminder</con:entry><con:entry>latest_quote_id</con:entry><con:entry>reminder_date</con:entry><con:entry>authenticity_token</con:entry><con:entry>rid</con:entry><con:entry>qid</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>request_id</con:name><con:value>2712939</con:value></con:property><con:property><con:name>endpoint</con:name><con:value>bookings-qa2.ttdev.in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>ttprodagent@gmail.com</con:value></con:property><con:property><con:name>user_password</con:name><con:value>ttprodagent123</con:value></con:property><con:property><con:name>quoteid</con:name><con:value>4991717</con:value></con:property><con:property><con:name>user_id</con:name><con:value>759117</con:value></con:property><con:property><con:name>Cookie</con:name><con:value>_trips3m_session=BAh7CUkiD3Nlc3Npb25faWQGOgZFVEkiJTZlYTk4OWRlYjNlMGZhMmI3M2NmMDA1NmEyOGUyMzgxBjsAVEkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsHWwZpA02VC0kiIiQyYSQxMCQ3SnF4bnlGeVVPcFQvMlFxZmJ1bTRlBjsAVEkiFWF0dHJpYnV0aW9uX2luZm8GOwBUewBJIgxyZWZlcmVyBjsAVEkiAAY7AFQ%3D--8811dca726df83b89aa97396123639aca2ac1107; path=/; HttpOnly</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="94e10ec1-9476-4f29-8ad5-582a08bf59a3" name="ReusableTests" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a644af23-59be-496f-bb05-173d7f9f404a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateToken" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="2e0d1e28-b456-4182-9d6b-933a2b6c4269"><con:settings/><con:config><script>import java.security.MessageDigest;
+import org.codehaus.groovy.runtime.EncodingGroovyMethods;
+
+
+String requestUrl = context.expand('${#TestCase#request_url}');
+String userEmail = context.expand('${#TestCase#user_email}');
+String requestType = context.expand('${#TestCase#request_type}');
+log.info requestUrl;
+String digest;
+
+if( requestType == "get" ){
+  	digest = requestUrl; 
+} else {
+digest = userEmail + requestType;
+}
+
+digest = getUserDigest(digest); //this is final digest
+
+log.info digest;
+testRunner.testCase.setPropertyValue("hash_key",digest);
+
+String getUserDigest(String digest) {
+   String TT_S_KEY = "DAFAC0A55F50A75558B778035E3C9A8BDF03AF1E4C2124D2CD5DD42092EFD32E";
+   try {
+       digest = TT_S_KEY + digest;
+       MessageDigest msgDigest = MessageDigest.getInstance("SHA-256");
+       msgDigest.update(digest.getBytes());
+       EncodingGroovyMethods encodeObj = new EncodingGroovyMethods();
+       //digest = new String(Base64.encode(msgDigest.digest(), Base64.DEFAULT));
+       digest = encodeObj.encodeBase64(msgDigest.digest()).toString();
+       if (digest.length() > 164) {
+           digest = digest.substring(0, 163);
+       }
+       return digest;
+   } catch (Exception e) {
+       log.info e.getMessage();
+   }
+   return null;
+}
+</script></con:config></con:testStep><con:properties><con:property><con:name>request_url</con:name><con:value>http://bookings-qa2.ttdev.in/users/sign_in</con:value></con:property><con:property><con:name>user_email</con:name><con:value>ttprodagent@gmail.com</con:value></con:property><con:property><con:name>request_type</con:name><con:value>post</con:value></con:property><con:property><con:name>hash_key</con:name><con:value>moebPtN2nZl9eM39PpWrKKv70v5s0VEQ/wk0h1VNY48=</con:value></con:property></con:properties><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
