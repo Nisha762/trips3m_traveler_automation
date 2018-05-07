@@ -173,8 +173,9 @@ public class EmailNotificationHandler {
 			
 			messages = (Message[]) Utility.reverseObjectArray(messages);
 			
+			matched_msg = null;
+			
 			for (Message message : messages) {
-				boolean isMailFound = false;
 				String msg_subject = message.getSubject();
 				System.out.println(msg_subject);
 				if(msg_subject == null){continue;}
@@ -185,13 +186,12 @@ public class EmailNotificationHandler {
 						System.out.println(recipent);
 						if(recipent.toString().equalsIgnoreCase(recipientEmailId)) {
 							matched_msg = message;
-							isMailFound = true;
 						}
 						
 					}
 					
 				}
-				if (isMailFound)
+				if (matched_msg!=null)
 					break;
 			}
 			if(matched_msg == null){
